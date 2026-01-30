@@ -23,7 +23,7 @@ Hoy, muchos ciudadanos eligen no participar por temor a quedar expuestos políti
 Este repositorio contiene la documentación inicial y la visión estratégica del proyecto:
 
 * **`/docs`**: Documentación principal dirigida a decisores y asesores técnicos.
-    * [`01_Propuesta_General.md`](./docs/1_Propuesta_General.md): El resumen ejecutivo y visión del proyecto.
+    * [`01_Propuesta_General.md`](./docs/01_Propuesta_General.md): El resumen ejecutivo y visión del proyecto.
     * [`02_Fundamentos_y_Logica.md`](./docs/02_Fundamentos_y_Logica.md): Marco conceptual que profundiza en los pilares y la lógica estratégica de la propuesta.
     * [`03_Narrativa_de_Uso.md`](./docs/03_Narrativa_de_Uso.md): Descripción del flujo de usuario e interfaz.
 * **`/notas`**: Ideas en desarrollo, analogías y repositorio de trabajo colaborativo.
