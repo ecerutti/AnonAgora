@@ -49,7 +49,7 @@ Este mensaje refuerza la responsabilidad individual sin imponer barreras técnic
 
 ### 4. Forma y lenguaje de la propuesta
 
-La plataforma incorpora un Revisor Automático de Lenguaje basado en IA. Este revisor analiza el texto al presionar el botón de "Publicar propuesta" (o "Envíar propuesta") en busca de lenguaje ofensivo, discriminatorio o insultante, y si detecta lenguaje "no apropiado", le solicita al ciudadano adecuar su redacción antes de continuar. Pudiendo mostrar un mensaje como el siguiente:
+La plataforma incorpora un revisor automático de lenguaje basado en IA. Este revisor analiza el texto al presionar el botón de "Publicar propuesta" (o "Enviar propuesta") en busca de lenguaje ofensivo, discriminatorio o insultante, y si detecta lenguaje "no apropiado", le solicita al ciudadano adecuar su redacción antes de continuar. Pudiendo mostrar un mensaje como el siguiente:
 
 > "Tu propuesta es importante. Para que pueda ser publicada y leída correctamente por otros ciudadanos y autoridades, por favor revisa y corrige el uso de lenguaje ofensivo o inapropiado detectado."
 
