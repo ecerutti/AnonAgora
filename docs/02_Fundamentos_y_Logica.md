@@ -1,4 +1,4 @@
-# Documento Ampliatorio
+# Fundamentos y Lógica del Sistema
 
 ## Funcionamiento del sistema y mitigación de riesgos
 
@@ -78,15 +78,15 @@ Esta penalización existe para desalentar **abusos sistemáticos del mecanismo**
 
 El diseño del sistema incorpora mecanismos preventivos que buscan desalentar el uso deliberado de la plataforma para generar ruido político, sin recurrir a censura de contenido ni moderación ideológica.
 
-En primer lugar, cada ciudadano cuenta con un **cupo límitado de propuestas anuales** (por ejemplo, una o dos por año). Este límite introduce un costo simbólico a la acción de proponer, incentivando a:
+En primer lugar, cada ciudadano cuenta con un **límite anual de propuestas** (por ejemplo, una o dos por año). Este límite introduce un costo simbólico a la acción de proponer, incentivando a:
 
 - buscar si una propuesta similar ya existe antes de crear una nueva,
 - reducir la duplicidad innecesaria de iniciativas,
 - y desalentar el uso impulsivo o provocador del sistema (spam, trolls).
 
-Como mecanismo de refuerzo, el sistema contempla que aquellas propuestas que alcancen niveles extraordinarios de apoyo ciudadano (votos de la propuesta) puedan "recompensar" al autor con la posibilidad de realizar una propuesta adicional fuera de su cupo anual (propuesta anual extra), premiando así la capacidad de representar el interés común.
+Como mecanismo de refuerzo, el sistema contempla que aquellas propuestas que alcancen niveles extraordinarios de apoyo ciudadano (acumulación de votos) puedan "recompensar" al autor con la posibilidad de realizar una propuesta adicional fuera de su límite anual (propuesta anual extra), premiando así la capacidad de representar el interés común.
 
-En segundo lugar, el sistema incorpora un **filtro automático de lenguaje**, apoyado en tecnología actual, que actúa exclusivamente sobre la forma y no sobre el contenido de las ideas. Este filtro evita insultos, calificativos ofensivos o expresiones violentas, pero **no evalúa ni bloquea posturas ideológicas, críticas al gobierno ni propuestas incómodas para el poder**.
+En segundo lugar, el sistema incorpora un **revisor automático de lenguaje**, apoyado en tecnología actual, que actúa exclusivamente sobre la forma y no sobre el contenido de las ideas. Este revisor evita insultos, calificativos ofensivos o expresiones violentas, pero **no evalúa ni bloquea posturas ideológicas, críticas al gobierno ni propuestas incómodas para el poder**.
 
 De este modo, se preserva la libertad de expresión política, al mismo tiempo que se mantiene un marco mínimo de lenguaje institucional que favorece la lectura, la participación y la convivencia democrática.
 
