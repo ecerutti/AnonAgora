@@ -57,7 +57,7 @@ Esto reconoce que las personas pueden informarse más, cambiar de perspectiva o 
 
 ### **5. Penalización por abuso**
 
-La identidad anónima se basa en una palabra o frase clave que solo el ciudadano conoce.
+La identidad anónima se basa en una frase o palabra clave que solo el ciudadano conoce.
 
 Si esta credencial se pierde u olvida, el ciudadano puede solicitar una nueva, pero con una **penalización temporal** (por ejemplo, 6 meses) antes de poder hacerlo, para evitar **abusos sistemáticos del mecanismo (por ejemplo, simular olvidar su clave para obtener una nueva identidad anónimas y votar más de una vez)**.
 
