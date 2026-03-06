@@ -1,6 +1,6 @@
 # AnonAgora 🏛️
 
-Bienvenido a la documentación oficial. Selecciona un documento para leer los detalles:
+Bienvenido a la sección de documentación. La idea completa está explicada acá, por si te interesa chusmearla:
 
 ## 📂 Documentación
 
