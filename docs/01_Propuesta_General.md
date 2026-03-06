@@ -1,6 +1,6 @@
 # **Propuesta de Plataforma de Participación Ciudadana Digital con Identidad Anónima Persistente**
 
-## **Resumen Ejecutivo**
+## **Introducción**
 
 La tecnología actual abre la posibilidad de **nuevas formas de participación ciudadana**, complementarias a la democracia representativa tradicional. Hoy es posible contar con herramientas digitales que permitan escuchar de manera directa, continua y segura la voz de los ciudadanos, fortaleciendo a las instituciones existentes.
 
