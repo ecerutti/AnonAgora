@@ -1,14 +1,6 @@
-# AnonAgora 🏛️
-
 Bienvenido a la sección de documentación. La idea completa está explicada acá, por si te interesa chusmearla:
 
 ## 📂 Documentación
 
-*   **[01. Propuesta General](01_Propuesta_General.html)**  
-    *Visión general del sistema y objetivos principales.*
-
-*   **[02. Fundamentos y Lógica](02_Fundamentos_y_Logica.html)**  
-    *Bases conceptuales y funcionamiento interno.*
-
-*   **[03. Narrativa de Uso](03_Narrativa_de_Uso.html)**  
-    *Experiencia de usuario y flujo detallado de la plataforma.*
+*   **[01. El Problema y la Idea](01_El_Problema_y_la_Idea.html)**  
+    *La idea: escuchar a la sociedad sin exponer a las personas*
