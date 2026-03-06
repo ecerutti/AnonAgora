@@ -1,4 +1,4 @@
-# 🦞 AnonAgora 🏛️
+# AnonAgora 🏛️
 
 **Plataforma de Participación Ciudadana Digital con Identidad Anónima Persistente.**
 
