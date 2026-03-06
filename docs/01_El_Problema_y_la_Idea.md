@@ -20,13 +20,11 @@ La propuesta consiste en una plataforma digital de participación ciudadana basa
 
 **verificación de identidad + anonimato persistente.**
 
-El funcionamiento sería el siguiente:
+Para comprender cómo funcionaría, puede pensarse al sistema como el ingreso a un edificio público. En la puerta hay un guardia, para pasar, te pide el DNI y verifica que realmente sos un ciudadano habilitado para entrar.
 
-1. El ciudadano valida su identidad utilizando mecanismos oficiales existentes de identificación digital.
-2. Una vez verificada su condición de ciudadano, el sistema genera una **identidad anónima persistente**.
-3. A partir de ese momento, todas sus acciones dentro de la plataforma se realizan utilizando esa identidad anónima.
+Una vez verificada esa condición, la persona atraviesa la puerta y el guardia se queda afuera. La identidad real **no** vuelve a circular dentro del edificio. Ya en el interior, al ciudadano se le entrega una identificación anónima —como una pulsera numerada— que **no** contiene datos personales y que es la única referencia utilizada por el sistema.
 
-La verificación inicial garantiza que cada persona participa **una sola vez**.
+Desde ese momento, dentro del edificio todos te ven solo como ese número. Nadie sabe quién sos realmente, pero el sistema puede reconocer que sos el mismo participante cada vez que volvés.
 
 El anonimato posterior garantiza que **nadie puede vincular las acciones dentro de la plataforma con la identidad real del ciudadano**.
 
@@ -72,7 +70,7 @@ El valor del sistema no está en que cada propuesta se convierta automáticament
 
 La plataforma también permitiría que las ideas evolucionen.
 
-Si un ciudadano encuentra una propuesta con la que está de acuerdo pero considera que puede mejorarse, podría:
+Si un ciudadano encuentra una propuesta con la que está de acuerdo, pero considera que puede mejorarse, podría:
 
 - apoyar la propuesta original, o
 - crear una nueva propuesta basada en ella, incorporando cambios o mejoras.
@@ -89,6 +87,6 @@ Las sociedades poseen innumerables voces, pero pocas herramientas para percibir 
 
 A lo largo de la historia, muchas transformaciones sociales comenzaron como ideas dispersas que lentamente fueron encontrando eco en otras personas.
 
-Un sistema capaz de hacer visible ese proceso —mostrando cuándo una preocupación o propuesta empieza a reunir apoyo amplio— podría funcionar como un nuevo tipo de **termómetro social**.
+Un sistema capaz de hacer visible ese proceso —mostrando cuando una preocupación o propuesta empieza a reunir apoyo amplio— podría funcionar como un nuevo tipo de **termómetro social**.
 
 Una herramienta simple para observar cómo empiezan a formarse los consensos dentro de una comunidad.
