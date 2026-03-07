@@ -4,18 +4,18 @@ Este espacio funciona como un cuaderno de notas del proceso. No es un documento 
 
 ## Analogías útiles
 
-**Analogía del guardia y la pulsera numerada**
+~~**Analogía del guardia y la pulsera numerada**~~
 
-La validación de identidad puede explicarse mediante la imagen de un guardia en la puerta que verifica que la persona tenga un DNI válido (ANSES, AFIP/ARCA, MiArgentina u otros). Una vez que la persona atraviesa la puerta, nadie dentro del sistema sabe quién es realmente; solo el guardia que quedó del otro lado con esa información.
+~~La validación de identidad puede explicarse mediante la imagen de un guardia en la puerta que verifica que la persona tenga un DNI válido (ANSES, AFIP/ARCA, MiArgentina u otros). Una vez que la persona atraviesa la puerta, nadie dentro del sistema sabe quién es realmente; solo el guardia que quedó del otro lado con esa información.~~
 
-Dentro del sistema, otro actor le entrega una identificación anónima (por ejemplo, una pulsera numerada) que permite llevar registro de sus votaciones y acciones sin revelar su identidad.
+~~Dentro del sistema, otro actor le entrega una identificación anónima (por ejemplo, una pulsera numerada) que permite llevar registro de sus votaciones y acciones sin revelar su identidad.~~
 
-Esta analogía puede ser útil para:
+~~Esta analogía puede ser útil para:~~
 
-- Documentos no técnicos dirigidos a políticos o decisores.
-- Material explicativo general sobre privacidad y anonimato.
+~~- Documentos no técnicos dirigidos a políticos o decisores.~~
+~~- Material explicativo general sobre privacidad y anonimato.~~
 
-Evaluar si conviene usarla también en el futuro documento técnico, o reservarla solo para piezas de divulgación.
+~~Evaluar si conviene usarla también en el futuro documento técnico, o reservarla solo para piezas de divulgación.~~
 
 ## Revisión cruzada de documentos
 
@@ -36,5 +36,5 @@ Esto ayuda a que el conjunto funcione como un sistema coherente y navegable, no 
 
 - Evaluar la idea y utilidad (pros  y contras) de obligar al ciudadano a realizar al menos una votación antes de habilitarle la creación de una propuesta, como medio de asegurar que entendió como funciona la plataforma y de evitar que malgaste las pocas oportunidades anuales, pero quizás también confunda y genere una traba. 
 - revisores: Juancho, Nico, Diego, Colo, Picon
-- Infografía
-- Mencionar los mecanismos de mitigación de trolleo y ruido político, sin moderación.
+- Infografía al final?
+- ~~Mencionar los mecanismos de mitigación de trolleo y ruido político, sin moderación.~~
