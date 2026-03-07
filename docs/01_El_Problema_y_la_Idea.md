@@ -6,7 +6,7 @@ Las democracias modernas poseen millones de voces, pero muy pocas herramientas e
 
 Las elecciones permiten elegir representantes, pero ocurren cada varios años.  
 Las encuestas capturan opiniones momentáneas, pero dependen de muestras limitadas.  
-Las redes sociales amplifican algunas voces, pero también introducen ruido, polarización y dinámicas de exposición pública que muchas personas prefieren evitar.
+Las redes sociales amplifican algunas voces, pero también introducen ruido, polarización y dinámicas de exposición pública que muchas personas prefieren evitar cuando se trata de opiniones políticas.
 
 Esto plantea una pregunta simple:
 
