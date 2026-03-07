@@ -39,7 +39,7 @@ Ese temor puede surgir por múltiples razones:
 
 Para reducir esa barrera, el sistema separa completamente la identidad real del comportamiento dentro de la plataforma.
 
-Después de la verificación inicial, el ciudadano recibe una identidad anónima persistente que utiliza para todas sus acciones.
+Después de la verificación inicial, el ciudadano recibe una **identidad anónima persistente** que utiliza para todas sus acciones.
 
 Esto significa que puede:
 
