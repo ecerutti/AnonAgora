@@ -20,7 +20,7 @@ La propuesta consiste en una plataforma digital de participación ciudadana basa
 
 **verificación de identidad + anonimato persistente.**
 
-Para comprender cómo funcionaría, puede pensarse al sistema como el ingreso a un edificio público. En la puerta hay un guardia, para pasar, te pide el DNI y verifica que realmente sos un ciudadano habilitado para entrar.
+Para comprender cómo funcionaría, puede pensarse al sistema como el ingreso a un edificio público. En la puerta hay un guardia, para pasar, te pide el DNI y verifica que realmente seas un ciudadano habilitado para entrar.
 
 Una vez verificada esa condición, la persona atraviesa la puerta y el guardia se queda afuera. La identidad real **no** vuelve a circular dentro del edificio. Ya en el interior, al ciudadano se le entrega una identificación anónima —como una pulsera numerada— que **no** contiene datos personales y que es la única referencia utilizada por el sistema.
 
@@ -75,7 +75,7 @@ Si un ciudadano encuentra una propuesta con la que está de acuerdo, pero consid
 - apoyar la propuesta original, o
 - crear una nueva propuesta basada en ella, incorporando cambios o mejoras.
 
-Las nuevas propuestas podrían incluso **referenciar a propuestas previas**, permitiendo que las ideas evolucionen de forma abierta.
+Las nuevas propuestas podrían incluso **hacer referencia a propuestas previas**, permitiendo que las ideas evolucionen de forma abierta.
 
 Con el tiempo, los ciudadanos tenderán naturalmente a apoyar aquellas versiones que resulten más claras, completas o representativas.
 
@@ -87,6 +87,6 @@ Las sociedades poseen innumerables voces, pero pocas herramientas para percibir 
 
 A lo largo de la historia, muchas transformaciones sociales comenzaron como ideas dispersas que lentamente fueron encontrando eco en otras personas.
 
-Un sistema capaz de hacer visible ese proceso —mostrando cuando una preocupación o propuesta empieza a reunir apoyo amplio— podría funcionar como un nuevo tipo de **termómetro social**.
+Un sistema capaz de hacer visible ese proceso —mostrando cuando una preocupación o propuesta empieza a reunir un amplio apoyo— podría funcionar como un nuevo tipo de **termómetro social**.
 
 Una herramienta simple para observar cómo empiezan a formarse los consensos dentro de una comunidad.
