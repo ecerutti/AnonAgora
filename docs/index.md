@@ -8,7 +8,7 @@ Bienvenido a la sección de documentación. La idea completa está explicada ac�
     *Por qué el sistema podría funcionar sin perder anonimato ni orden*
 *   **[03. Cómo se usaría](03_Cómo_se_usaría.html)**  
     *Una historia cotidiana de participación con identidad anónima*
-*   **[04. Qué problema resuelve y qué problema no intenta resolver](04_Qué_problema_resuelve_y_qué_problema_no_intenta_resolver.html)**  
+*   **[04. Riesgos, límites y preocupaciones razonables](04_Riesgos_límites_y_preocupaciones_razonables.html)**  
     *Alcances reales de la propuesta y sus límites*
 *   **[05. Cómo podría implementarse](05_Cómo_podría_implementarse.html)**  
     *Por qué la idea es técnicamente viable con herramientas actuales*
