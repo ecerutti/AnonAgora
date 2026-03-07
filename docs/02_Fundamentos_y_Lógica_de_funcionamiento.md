@@ -1,4 +1,4 @@
-# Fundamentos y decisiones de diseño
+# 02 — Fundamentos y Lógica de funcionamiento
 
 ## Introducción
 
