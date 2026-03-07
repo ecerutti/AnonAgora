@@ -35,5 +35,6 @@ Esto ayuda a que el conjunto funcione como un sistema coherente y navegable, no 
 (Espacio abierto para futuras anotaciones)
 
 - Evaluar la idea y utilidad (pros  y contras) de obligar al ciudadano a realizar al menos una votación antes de habilitarle la creación de una propuesta, como medio de asegurar que entendió como funciona la plataforma y de evitar que malgaste las pocas oportunidades anuales, pero quizás también confunda y genere una traba. 
--
--
+- revisores: Juancho, Nico, Diego, Colo, Picon
+- Infografía
+- Mencionar los mecanismos de mitigación de trolleo y ruido político, sin moderación.
