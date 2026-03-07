@@ -52,6 +52,14 @@ sin que nadie pueda vincular esas acciones con su identidad real.
 
 La persistencia de esa identidad anónima también permite observar cómo evolucionan las opiniones con el tiempo, algo que las encuestas tradicionales rara vez capturan.
 
+### Opinión política sin identidad política
+
+Buena parte de la conversación pública digital actual está condicionada por la identidad visible de quien habla. Antes de evaluar una idea, muchas veces se evalúa a la persona, su grupo, su pertenencia o su posicionamiento previo.
+
+La plataforma propone invertir esa lógica. En lugar de exponer una identidad política pública y luego opinar, el ciudadano participa mediante una identidad anónima persistente. Eso permite que las propuestas circulen con mayor independencia de la tribu, el cargo, el prestigio o el rechazo que suele despertar quien las enuncia.
+
+El resultado buscado es simple: que las ideas puedan reunir apoyo o rechazo más por su contenido que por la identidad pública de quien las impulsa.
+
 ## Límite anual de propuestas: evitar abuso y ruido político
 
 La plataforma establece un límite anual de propuestas por ciudadano (por ejemplo, **2 por año**).
