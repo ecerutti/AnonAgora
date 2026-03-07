@@ -26,11 +26,9 @@ Una vez verificada esa condición, la persona atraviesa la puerta y el guardia s
 
 Desde ese momento, dentro del edificio todos te ven solo como ese número. Nadie sabe quién sos realmente, pero el sistema puede reconocer que sos el mismo participante cada vez que volvés.
 
-El anonimato posterior garantiza que **nadie puede vincular las acciones dentro de la plataforma con la identidad real del ciudadano**.
+El anonimato posterior busca garantizar **que las acciones realizadas dentro de la plataforma no puedan asociarse con la identidad real del ciudadano.**
 
-Ni el gobierno.  
-Ni los administradores del sistema.  
-Ni quienes desarrollaron la plataforma.
+Para lograrlo, la arquitectura del sistema deberá diseñarse de forma tal que esa vinculación no esté disponible públicamente ni resulte accesible para los operadores habituales de la plataforma, apoyándose en mecanismos criptográficos y en una clara separación de funciones dentro de la infraestructura.
 
 ## Qué permitiría hacer
 
