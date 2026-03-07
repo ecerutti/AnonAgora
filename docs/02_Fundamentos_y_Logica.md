@@ -1,141 +1,137 @@
-# Fundamentos y Lógica del Sistema
+# Fundamentos y decisiones de diseño
 
-## Funcionamiento del sistema y mitigación de riesgos
+## Introducción
 
-(Este documento amplía la propuesta introductoria. Está orientado a decisores políticos y asesores no técnicos que desean comprender con mayor profundidad cómo funciona el sistema, qué riesgos existen y cómo se mitigan, sin entrar en detalles criptográficos complejos.)
+Este documento explica las decisiones que dan forma al sistema.
 
-## 1. Propósito de este documento
+Cada una de ellas responde a problemas habituales en plataformas de participación ciudadana: falta de confianza, manipulación mediante cuentas falsas, saturación de propuestas o miedo a expresar opiniones políticas.
 
-Este texto tiene como objetivo profundizar la propuesta de Plataforma de Participación Ciudadana Digital con Identidad Anónima Persistente, explicando:
+El objetivo no fue diseñar una plataforma perfecta, sino un sistema que encuentre equilibrios razonables entre participación abierta, anonimato, responsabilidad cívica y claridad en las señales sociales.
 
-- cómo funciona el mecanismo de participación,
-- cómo se protege el anonimato de los ciudadanos,
-- qué riesgos o críticas pueden surgir,
-- y cómo esos riesgos se mitigan desde el diseño.
+Las decisiones que se describen a continuación forman parte de esa lógica.
 
-No busca reemplazar el documento introductorio, sino complementarlo para quienes desean una comprensión más completa antes de avanzar.
+## Identidad verificada: evitar el problema de las cuentas falsas
 
-## 2. Principio central: identidad verificada, participación anónima
+Uno de los mayores problemas de cualquier plataforma participativa es la facilidad con la que pueden crearse cuentas falsas.
 
-El sistema se apoya en un principio simple pero clave:
+Si una persona puede registrarse muchas veces, también puede:
 
-> **El Estado verifica que una persona es un ciudadano real, pero luego pierde toda capacidad de saber qué hace ese ciudadano dentro de la plataforma.**
+- votar múltiples veces  
+- manipular rankings  
+- simular apoyo social inexistente  
 
-La verificación de identidad y la participación posterior están deliberadamente desacopladas.
+Por esa razón, el sistema requiere una verificación inicial de identidad mediante sistemas oficiales (por ejemplo ANSES, AFIP/ARCA, MiArgentina u otros mecanismos equivalentes).
 
-Esto permite:
+Esta verificación cumple una única función: confirmar que detrás de cada cuenta hay un ciudadano real y único.
 
-- evitar votos múltiples,
-- garantizar igualdad (una persona, una identidad),
-- y al mismo tiempo proteger completamente la identidad política del ciudadano.
+Una vez completado ese paso, la identidad queda desacoplada del resto de la plataforma.
 
-## 3. Cómo se garantiza el anonimato (explicado sin tecnicismos)
+## Anonimato persistente: eliminar el miedo a participar
 
-Para comprender cómo se garantiza el anonimato, puede pensarse el sistema como el ingreso a un edificio público. En la puerta hay un guardia que pide el DNI: no para verificar que la persona existe —eso ya es evidente— sino para confirmar que se trata de un ciudadano habilitado a participar, y no de un turista de paso u otra persona sin derecho a intervenir. En términos digitales, este paso equivale a identificarse mediante sistemas oficiales del Estado (ANSES, AFIP/ARCA, MiArgentina u otros).
+Muchas personas evitan expresar opiniones políticas cuando saben que sus decisiones quedan registradas con su nombre.
 
-Una vez verificada esa condición, la persona atraviesa la puerta y el guardia se queda afuera. La identidad real no vuelve a circular dentro del edificio. Ya en el interior, al ciudadano se le entrega una identificación anónima —como una pulsera numerada— que **no** contiene datos personales y que es la única referencia utilizada por el sistema.
+Ese temor puede surgir por múltiples razones:
 
-Esa identificación anónima permite registrar votaciones, acompañar propuestas y volver a ingresar en el tiempo para revisar o modificar decisiones, sin que sea posible conocer quién está detrás de cada acción. De este modo, el sistema garantiza que cada participación corresponde a un ciudadano real y único, pero sin que administradores, desarrolladores del sistema o autoridades puedan asociar acciones concretas con identidades reales.\
-\
-Esa credencial anónima:
+- presiones sociales  
+- entornos laborales  
+- conflictos personales o comunitarios  
+- desconfianza hacia el gobierno de turno  
 
-- no contiene nombre, DNI ni datos personales,
-- no puede ser revertida para identificar al ciudadano,
-- es la única forma de interactuar con la plataforma.
+Para reducir esa barrera, el sistema separa completamente la identidad real del comportamiento dentro de la plataforma.
 
-Desde ese momento:
+Después de la verificación inicial, el ciudadano recibe una identidad anónima persistente que utiliza para todas sus acciones.
 
-- el sistema ya “no sabe” quién es la persona,
-- solo reconoce una identidad anónima válida.
+Esto significa que puede:
 
-Incluso quienes diseñaron, administran o poseen control total del sistema **no pueden reconstruir la identidad real** del participante.
+- votar propuestas  
+- apoyar ideas  
+- cambiar su opinión con el tiempo  
+- proponer nuevas iniciativas  
 
-## 4. Persistencia y cambio de opinión
+sin que nadie pueda vincular esas acciones con su identidad real.
 
-A diferencia de votaciones anónimas tradicionales (que son únicas y estáticas), este sistema permite:
+La persistencia de esa identidad anónima también permite observar cómo evolucionan las opiniones con el tiempo, algo que las encuestas tradicionales rara vez capturan.
 
-- que el ciudadano vea sus participaciones pasadas,
-- que cambie su voto o apoyo con el tiempo,
-- que acompañe la evolución de una propuesta.
+## Límite anual de propuestas: evitar abuso y ruido político
 
-Esto refleja mejor la realidad social: las opiniones no son fijas y pueden cambiar ante nueva información o contextos distintos.
+La plataforma establece un límite anual de propuestas por ciudadano (por ejemplo, **2 por año**).
 
-## 5. Pérdida de credencial y prevención de abusos
+Este límite cumple un objetivo central: **evitar el abuso del sistema para generar ruido político, spam o campañas de provocación (trolls)**.
 
-La credencial anónima se basa en una frase o palabra clave conocida solo por el ciudadano.
+En un entorno abierto y anónimo, permitir la creación ilimitada de propuestas facilitaría que algunos actores utilicen la plataforma para inundarla con consignas partidarias, ataques políticos o contenido diseñado únicamente para generar confrontación. Ese tipo de comportamiento degradaría rápidamente el valor del sistema y desalentaría la participación de ciudadanos que desean aportar ideas genuinas.
 
-Si esa credencial se pierde:
+El límite anual introduce un **costo de oportunidad**.  
+Cada ciudadano dispone de pocas oportunidades para proponer ideas, por lo que se vuelve natural utilizarlas con cuidado y reservarlas para iniciativas que realmente considere importantes.
 
-- la identidad anónima se considera irrecuperable,
-- los votos asociados permanecen, pero ya no pueden modificarse,
-- el ciudadano puede solicitar una nueva identidad, pero con una penalización temporal (por ejemplo, 6 meses).
+Este mecanismo también incentiva una conducta saludable dentro de la plataforma: antes de crear una propuesta nueva, el ciudadano tiene un incentivo real para **buscar si su idea ya existe y simplemente apoyarla**, reduciendo así la duplicación innecesaria.
 
-Esta penalización existe para desalentar **abusos sistemáticos del mecanismo**, como intentar crear múltiples identidades para votar más de una vez.
+De esta forma, el límite anual no busca restringir la participación, sino **proteger el espacio común** para que las propuestas que circulen tengan mayor probabilidad de representar inquietudes genuinas de la ciudadanía.
 
-## 6. Riesgos y críticas habituales (y cómo se mitigan)
+## Buscador de propuestas: facilitar la convergencia de ideas
 
-### Uso malicioso, ruido político o propuestas provocativas
+Antes de crear una propuesta, el ciudadano puede utilizar un buscador basado en palabras clave para revisar si su idea ya fue planteada por otra persona.
 
-El diseño del sistema incorpora mecanismos preventivos que buscan desalentar el uso deliberado de la plataforma para generar ruido político, sin recurrir a censura de contenido ni moderación ideológica.
+Esto ayuda a:
 
-En primer lugar, cada ciudadano cuenta con un **límite anual de propuestas** (por ejemplo, una o dos por año). Este límite introduce un costo simbólico a la acción de proponer, incentivando a:
+- reducir duplicaciones innecesarias  
+- concentrar apoyos en propuestas existentes  
+- mejorar la calidad del debate  
 
-- buscar si una propuesta similar ya existe antes de crear una nueva,
-- reducir la duplicidad innecesaria de iniciativas,
-- y desalentar el uso impulsivo o provocador del sistema (spam, trolls).
+Sin embargo, la plataforma no bloquea la creación de propuestas similares.
 
-Como mecanismo de refuerzo, el sistema contempla que aquellas propuestas que alcancen niveles extraordinarios de apoyo ciudadano (acumulación de votos) puedan "recompensar" al autor con la posibilidad de realizar una propuesta adicional fuera de su límite anual (propuesta anual extra), premiando así la capacidad de representar el interés común.
+Si alguien considera que una idea existente está incompleta o mal redactada, puede crear una nueva versión con mejoras.
 
-En segundo lugar, el sistema incorpora un **revisor automático de lenguaje**, apoyado en tecnología actual, que actúa exclusivamente sobre la forma y no sobre el contenido de las ideas. Este revisor evita insultos, calificativos ofensivos o expresiones violentas, pero **no evalúa ni bloquea posturas ideológicas, críticas al gobierno ni propuestas incómodas para el poder**.
+Incluso puede referenciar la propuesta original en la que se inspiró.
 
-De este modo, se preserva la libertad de expresión política, al mismo tiempo que se mantiene un marco mínimo de lenguaje institucional que favorece la lectura, la participación y la convivencia democrática.
+Con el tiempo, las distintas versiones compiten entre sí y la comunidad termina impulsando la que considera más clara o más convincente.
 
-### “La gente puede mentir, manipular o coordinarse”
+## Duplicidad de propuestas y competencia natural
 
-Como en cualquier sistema democrático, la coordinación de ideas es inevitable.
+La plataforma no impide que existan propuestas similares o incluso duplicadas. Esta decisión es deliberada.
 
-Lo que se evita es:
+Si un ciudadano encuentra una propuesta cercana a su idea pero considera que puede expresarse mejor o incorporar mejoras, puede crear una nueva versión. Incluso puede referenciar la propuesta original como punto de partida.
 
-- la suplantación de identidad,
-- el voto múltiple no autorizado,
-- la presión directa sobre individuos identificables.
+A partir de ese momento ambas propuestas **compiten naturalmente por el apoyo de la ciudadanía**. Con el tiempo, las versiones que resulten más claras, razonables o representativas tenderán a concentrar la mayor cantidad de votos.
 
-### “Esto reemplaza al Congreso o al sistema representativo”
+Este mismo mecanismo actúa como **filtro natural frente al ruido político**. Propuestas creadas únicamente para provocar, trolear o introducir consignas partidarias suelen recibir poco acompañamiento ciudadano y, al depender su visibilidad del nivel de apoyo, **terminan perdiendo relevancia de forma orgánica**, sin necesidad de moderación editorial.
 
-No. La plataforma **no legisla ni decide**.
+El límite anual de propuestas (por ejemplo, **2 por ciudadano al año**) refuerza este comportamiento: al no poder crear propuestas ilimitadas, se reduce fuertemente el incentivo para inundar el sistema con contenido de baja calidad o provocaciones.
 
-Funciona como:
+## Ausencia de moderación editorial
 
-- un canal de escucha estructurado,
-- un termómetro social continuo,
-- una herramienta de feedback directo.
+La plataforma no incorpora mecanismos formales de moderación editorial sobre las propuestas publicadas.
 
-Las decisiones siguen estando en manos de las instituciones democráticas existentes.
+Es decir, el sistema no contempla perfiles de administradores o moderadores con facultades institucionales para eliminar propuestas, ocultarlas o decidir cuáles pueden permanecer visibles y cuáles no.
 
-## 7. Valor estratégico para el Poder Ejecutivo y Legislativo
+Esta decisión de diseño busca evitar que exista un punto central de control capaz de influir en la conversación pública dentro de la plataforma. Cuando una autoridad tiene la capacidad de decidir qué contenido permanece y cuál se elimina, inevitablemente aparece la sospecha de que esa facultad podría utilizarse con criterios políticos o ideológicos.
 
-La plataforma permitiría:
+En cambio, la plataforma se apoya en un principio más simple: las propuestas compiten por la atención y el apoyo de los ciudadanos. Aquellas que reciben mayor acompañamiento tienden a ganar visibilidad, mientras que las que generan poco interés o son percibidas como ruido terminan perdiendo relevancia con el tiempo.
 
-- conocer con mayor precisión qué reformas generan apoyo real,
-- detectar prioridades sociales emergentes,
-- validar o corregir agendas políticas antes de avanzar.
+Desde luego, como en cualquier sistema informático, siempre existirán administradores con acceso técnico a la infraestructura. Sin embargo, el diseño de la plataforma evita institucionalizar ese poder dentro de la lógica del sistema, de modo que la visibilidad de las propuestas dependa principalmente de la participación ciudadana y no de decisiones editoriales.
 
-En determinados contextos, puede funcionar como un **mecanismo de consulta ciudadana orientativa**, brindando una señal clara de tendencia y legitimidad social adicional a iniciativas clave, sin pretender representar a la totalidad del electorado.
+## Decantación natural de propuestas
 
-## 8. Por qué este enfoque es distinto a experiencias previas
+El ranking de propuestas se organiza principalmente según el nivel de apoyo recibido.
 
-A diferencia de encuestas, foros o plataformas abiertas:
+Esto genera un fenómeno natural:
 
-- la identidad está validada (no hay bots),
-- el anonimato es real y persistente,
-- la participación no es un evento aislado, sino continua.
+- las propuestas con mayor interés social se vuelven más visibles  
+- las propuestas irrelevantes, duplicadas o poco claras quedan progresivamente más abajo  
 
-Esto genera datos más confiables y una participación más honesta.
+Con el paso del tiempo, el sistema tiende a ordenar las ideas según el nivel real de apoyo ciudadano.
 
-## 9. Cierre
+## Incentivos a la participación constructiva
 
-Esta plataforma no promete soluciones mágicas.
+En el futuro, el sistema podría incorporar mecanismos simples de incentivo.
 
-Propone algo más simple y poderoso: **escuchar mejor**, sin miedo, sin exposición y sin intermediarios innecesarios.
+Por ejemplo, si una propuesta alcanza un nivel significativo de apoyo ciudadano, su autor podría recibir **una propuesta extra ese mismo año**, ampliando su cupo anual como reconocimiento al impacto de su iniciativa.
 
-Es una herramienta moderna para una democracia que necesita adaptarse a una sociedad más informada, más exigente y también más desconfiada.
+Este tipo de incentivos busca reconocer la participación constructiva y estimular la elaboración de ideas que generen consenso.
+
+## Conclusión
+
+Todas estas decisiones forman parte de una misma lógica: crear un espacio donde los ciudadanos puedan participar con libertad, pero donde las ideas compitan de manera abierta y transparente.
+
+El resultado no pretende ser una medición perfecta de la opinión pública.
+
+Más bien funciona como un **termómetro social**: una forma de observar qué temas despiertan interés real, qué propuestas logran reunir apoyo y qué preocupaciones comienzan a emerger dentro de la sociedad.
