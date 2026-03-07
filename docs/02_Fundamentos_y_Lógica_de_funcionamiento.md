@@ -107,7 +107,7 @@ El límite anual de propuestas (por ejemplo, **2 por ciudadano al año**) refuer
 
 ## Ausencia de moderación editorial
 
-La plataforma no incorpora mecanismos formales de moderación editorial sobre las propuestas publicadas.
+La plataforma **no** incorpora mecanismos formales de moderación editorial sobre las propuestas publicadas.
 
 Es decir, el sistema no contempla perfiles de administradores o moderadores con facultades institucionales para eliminar propuestas, ocultarlas o decidir cuáles pueden permanecer visibles y cuáles no.
 
