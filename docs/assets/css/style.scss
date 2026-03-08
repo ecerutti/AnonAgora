@@ -1,0 +1,11 @@
+@import "{{ site.theme }}";
+
+/* Ocultar banner superior del tema Slate */
+.page-header {
+  display: none;
+}
+
+/* Ajustar margen superior del contenido */
+.main-content {
+  margin-top: 40px;
+}
