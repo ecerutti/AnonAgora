@@ -20,12 +20,19 @@ Muchos países ya cuentan con infraestructura de identidad digital utilizada en 
 - ANSES  
 - AFIP / ARCA  
 - MiArgentina  
-
-Muchos de estos sistemas se apoyan en la infraestructura del **Registro Nacional de las Personas (ReNaPer)**, que permite validar información de sus ciudadanos.
+- ReNaPer  
 
 En términos tecnológicos, mecanismos de autenticación ampliamente utilizados como **OAuth** u **OpenID Connect** permiten integrar servicios de verificación de identidad sin que la plataforma de destino tenga que almacenar directamente credenciales o datos sensibles del usuario.
 
 La plataforma propuesta podría utilizar estos sistemas únicamente para la **verificación inicial del ciudadano**, evitando que la identidad real de la persona circule dentro del sistema participativo.
+
+### Uso de la plataforma estatal de autenticación (AUTENTICAR)
+
+En el caso argentino, una implementación real de este sistema podría integrarse con la **Plataforma de Autenticación Electrónica Central del Estado (AUTENTICAR)**, gestionada por la Jefatura de Gabinete de Ministros.
+
+AUTENTICAR funciona como un intermediario que permite a las aplicaciones validar la identidad de una persona utilizando distintos proveedores de identidad del Estado, como ANSES, AFIP/ARCA, MiArgentina o el Registro Nacional de las Personas (ReNaPer).
+
+De esta forma, la plataforma de participación no necesitaría manejar directamente credenciales de los ciudadanos ni integrarse individualmente con cada organismo, sino que delegaría la autenticación a esta infraestructura estatal ya existente.
 
 ## Emisión de identidades anónimas persistentes
 
