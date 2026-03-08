@@ -121,6 +121,18 @@ Este mismo mecanismo actúa como **filtro natural frente al ruido político**. P
 
 El límite anual de propuestas (por ejemplo, **2 por ciudadano al año**) refuerza este comportamiento: al no poder crear propuestas ilimitadas, se reduce fuertemente el incentivo para inundar el sistema con contenido de baja calidad o provocaciones.
 
+## Vinculación de propuestas
+
+Los ciudadanos pueden vincular su propuesta con otras propuestas existentes dentro de la plataforma.
+
+Estos vínculos permiten indicar que una propuesta mejora, amplía o integra ideas previamente publicadas. De esta manera, las propuestas no existen como elementos aislados, sino que pueden formar parte de una red de ideas relacionadas que evoluciona con el tiempo.
+
+Por ejemplo, un ciudadano puede presentar una propuesta que refine o mejore una propuesta anterior, o bien una propuesta que busque resolver conjuntamente problemas planteados en varias propuestas existentes.
+
+Este mecanismo facilita la evolución colectiva de ideas sin necesidad de intervención editorial por parte de la plataforma.
+
+En el caso particular de las **propuestas derivadas**, la vinculación se genera automáticamente. Cuando un ciudadano crea una propuesta derivada de otra existente, el sistema registra esa relación de forma explícita, permitiendo a los ciudadanos identificar fácilmente el origen de la nueva propuesta y compararla con la versión anterior.
+
 ## Ausencia de moderación editorial
 
 La plataforma **no** incorpora mecanismos formales de moderación editorial sobre las propuestas publicadas.
