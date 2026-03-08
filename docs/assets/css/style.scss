@@ -1,9 +1,9 @@
 ---
 ---
-@import "jekyll-theme-slate";
+@import "{{ site.theme }}";
 
 .page-header {
-  display: none !important;
+  display: none;
 }
 
 .main-content {
