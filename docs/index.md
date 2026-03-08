@@ -31,10 +31,6 @@ Funciona más como un **termómetro social**: una forma de ver qué temas empiez
 
 Si te da curiosidad ver la idea un poco más desarrollada, a continuación te dejo la documentación.
 
----
-
-Bienvenido a la sección de documentación. La idea completa está explicada acá:
-
 ## 📂 Documentación
 
 *   **[01. El Problema y la Idea](01_El_Problema_y_la_Idea.html)**  
