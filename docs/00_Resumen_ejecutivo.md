@@ -58,6 +58,12 @@ Esto podría resultar útil para:
 - organismos públicos  
 - investigadores sociales  
 
+## Esquema general del sistema
+
+El siguiente diagrama resume de forma simplificada cómo funciona la plataforma.
+
+![Arquitectura conceptual](img/arquitectura_conceptual.svg)
+
 ## Qué problema intenta resolver
 
 La propuesta intenta abordar un dilema que aparece una y otra vez en la participación política digital.
