@@ -75,6 +75,22 @@ Este mecanismo también incentiva una conducta saludable dentro de la plataforma
 
 De esta forma, el límite anual no busca restringir la participación, sino **proteger el espacio común** para que las propuestas que circulen tengan mayor probabilidad de representar inquietudes genuinas de la ciudadanía.
 
+## Inmutabilidad de las propuestas
+
+Una vez publicada, una propuesta no puede ser modificada.
+
+Este criterio responde a un principio fundamental del sistema: preservar la integridad de la señal social generada por el apoyo ciudadano.
+
+Si el contenido de una propuesta pudiera modificarse después de haber recibido apoyo, existiría la posibilidad de manipulación. Por ejemplo, una propuesta podría acumular apoyo bajo una idea determinada y luego cambiar su contenido por otro distinto.
+
+Para evitar este tipo de situaciones, el texto de una propuesta que ha sido publicada permanece inmutable.
+
+Sin embargo, esto no impide que las ideas evolucionen o se mejoren. Si el autor desea corregir la redacción, ampliar la propuesta o reformular su contenido, puede crear una **propuesta derivada** vinculada a la original.
+
+Las propuestas derivadas comienzan sin apoyos, pero mantienen una referencia visible a la propuesta anterior. De esta manera, los ciudadanos pueden decidir si desean apoyar la nueva versión.
+
+Este mecanismo permite mejorar las ideas sin comprometer la integridad de los apoyos ya emitidos.
+
 ## Buscador de propuestas: facilitar la convergencia de ideas
 
 Antes de crear una propuesta, el ciudadano puede utilizar un buscador basado en palabras clave para revisar si su idea ya fue planteada por otra persona.
