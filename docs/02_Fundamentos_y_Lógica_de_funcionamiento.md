@@ -20,7 +20,7 @@ Si una persona puede registrarse muchas veces, también puede:
 - manipular rankings  
 - simular apoyo social inexistente  
 
-Por esa razón, el sistema requiere una verificación inicial de identidad mediante sistemas oficiales (por ejemplo ANSES, AFIP/ARCA, MiArgentina u otros mecanismos equivalentes).
+Por esa razón, el sistema requiere una verificación inicial de identidad. En un contexto como el argentino, esta verificación podría realizarse utilizando la **Plataforma de Autenticación Electrónica Central del Estado (AUTENTICAR)**, que actúa como intermediario entre los sistemas que necesitan validar la identidad de una persona y los proveedores de identidad del Estado, como ANSES, AFIP/ARCA, MiArgentina o RENAPER.
 
 Esta verificación cumple una única función: confirmar que detrás de cada cuenta hay un ciudadano real y único.
 
