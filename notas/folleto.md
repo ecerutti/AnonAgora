@@ -5,20 +5,20 @@ pero sin que nadie tenga que decirlo con su nombre?
 
 La idea es simple:
 
-Una plataforma digital donde cada ciudadano puede participar de forma anónima, pero previamente verificada para evitar el spam, trolls, o los abusos.
+Una plataforma digital donde cada ciudadano puede participar de forma anónima, pero previamente verificada para evitar el spam, trolls, o cuentas falsas.
 
-Es decir:
+En otras palabras:
 
-Mostrás tu DNI para entrar (como si un guardia en la puerta verificara que sos ciudadano).
+Mostrás tu DNI para entrar
+(como si un guardia en la puerta verificara que sos ciudadano).
 
-Pero una vez adentro recibís una identidad anónima, nadie sabe quien sos.
+Pero una vez adentro recibís una identidad anónima. Nadie sabe quien sos.
 
 Desde ese momento:
 
-- podés votar propuestas
-- apoyar ideas
+- apoyar propuestas
+- proponer ideas
 - cambiar tu opinión con el tiempo
-- incluso proponer nuevas iniciativas
 
 Y nadie puede saber qué hiciste dentro.
 
@@ -26,7 +26,7 @@ Ni el gobierno.
 Ni los administradores.
 Ni quienes desarrollaron el sistema.
 
-Funciona más como un **termómetro social**: una forma de ver qué temas preocupan, qué ideas generan apoyo real y qué cambios empieza a pedir la sociedad.
+Funciona más como un **termómetro social**: una forma de ver qué temas empiezan a preocupar a la sociedad y qué ideas empiezan a reunir apoyo real.
 
 Si en algún momento te da curiosidad ver la idea un poco más desarrollada, la dejé explicada acá:
 
