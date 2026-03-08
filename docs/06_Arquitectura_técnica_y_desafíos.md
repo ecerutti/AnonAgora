@@ -105,6 +105,20 @@ Entre los mecanismos que podrían utilizarse se encuentran:
 
 Estos mecanismos permiten aumentar la transparencia y facilitar la detección de intervenciones indebidas.
 
+## Inmutabilidad del contenido y versiones derivadas
+
+Para preservar la integridad del sistema, el contenido de una propuesta publicada se considera inmutable.
+
+Esta decisión de diseño evita un tipo de manipulación conocido en plataformas participativas: modificar el contenido de una propuesta después de haber acumulado apoyo ciudadano.
+
+En este sistema, los votos o apoyos siempre se asocian a un contenido específico que no puede alterarse posteriormente.
+
+Si un ciudadano desea mejorar la redacción de su propuesta, ampliar sus fundamentos o modificar su planteo original, el sistema permite crear una **propuesta derivada** vinculada a la propuesta inicial.
+
+Las propuestas derivadas constituyen nuevas entidades dentro del sistema y comienzan sin apoyos, aunque mantienen una referencia explícita a la propuesta de la cual se originan.
+
+Este modelo permite la evolución de ideas dentro de la plataforma sin comprometer la confiabilidad de las señales de apoyo ciudadano.
+
 ## Protección de la frase secreta de recuperación
 
 La frase secreta definida por el ciudadano durante el registro constituye el único mecanismo de acceso y recuperación de su identidad anónima.
