@@ -1,0 +1,57 @@
+<svg width="1100" height="600" viewBox="0 0 1100 600" xmlns="http://www.w3.org/2000/svg">
+
+<style>
+.title { font: bold 34px Arial, sans-serif; fill:#222; }
+.subtitle { font: 18px Arial, sans-serif; fill:#666; }
+.blockTitle { font: bold 20px Arial, sans-serif; fill:#222; }
+.text { font: 16px Arial, sans-serif; fill:#333; }
+.small { font: 14px Arial, sans-serif; fill:#666; }
+</style>
+
+<!-- Title -->
+<text x="550" y="60" text-anchor="middle" class="title">Cómo funciona la plataforma</text>
+<text x="550" y="90" text-anchor="middle" class="subtitle">Verificación de identidad + anonimato persistente</text>
+
+<!-- Block 1 -->
+<rect x="100" y="200" width="260" height="160" rx="14" fill="#f7f7f7" stroke="#d9d9d9"/>
+<text x="230" y="240" text-anchor="middle" class="blockTitle">Ciudadano</text>
+<text x="230" y="275" text-anchor="middle" class="text">Verificación</text>
+<text x="230" y="295" text-anchor="middle" class="text">de identidad</text>
+<text x="230" y="325" text-anchor="middle" class="small">ANSES / MiArgentina</text>
+
+<!-- Arrow 1 -->
+<line x1="360" y1="280" x2="450" y2="280" stroke="#999" stroke-width="2"/>
+<polygon points="450,280 440,274 440,286" fill="#999"/>
+
+<!-- Block 2 -->
+<rect x="450" y="180" width="260" height="200" rx="14" fill="#eef5ff" stroke="#cfe2ff"/>
+<text x="580" y="220" text-anchor="middle" class="blockTitle">Identidad anónima</text>
+<text x="580" y="240" text-anchor="middle" class="blockTitle">persistente</text>
+
+<text x="580" y="280" text-anchor="middle" class="text">• apoyar propuestas</text>
+<text x="580" y="305" text-anchor="middle" class="text">• proponer ideas</text>
+<text x="580" y="330" text-anchor="middle" class="text">• cambiar opinión</text>
+
+<text x="580" y="360" text-anchor="middle" class="small">
+La identidad real no es visible
+</text>
+
+<!-- Arrow 2 -->
+<line x1="710" y1="280" x2="800" y2="280" stroke="#999" stroke-width="2"/>
+<polygon points="800,280 790,274 790,286" fill="#999"/>
+
+<!-- Block 3 -->
+<rect x="800" y="200" width="260" height="160" rx="14" fill="#eefaf2" stroke="#cfe8d5"/>
+<text x="930" y="240" text-anchor="middle" class="blockTitle">Termómetro social</text>
+<text x="930" y="280" text-anchor="middle" class="text">Señales sobre qué ideas</text>
+<text x="930" y="305" text-anchor="middle" class="text">empiezan a reunir apoyo</text>
+<text x="930" y="330" text-anchor="middle" class="text">en la sociedad</text>
+
+<!-- Divider -->
+<line x1="150" y1="450" x2="950" y2="450" stroke="#ddd" stroke-width="1"/>
+
+<text x="550" y="490" text-anchor="middle" class="small">
+La verificación de identidad y la participación están separadas
+</text>
+
+</svg>
