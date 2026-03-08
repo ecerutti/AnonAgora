@@ -156,6 +156,8 @@ María corrige la redacción y vuelve a enviar la propuesta.
 
 Esta vez, el sistema la publica.
 
+(A partir de ese momento, el texto de la propuesta queda fijado.)
+
 ## La propuesta empieza a recibir apoyo
 
 Una vez publicada, la iniciativa de María queda visible dentro de la plataforma.
@@ -167,6 +169,12 @@ Con el tiempo, algunas personas que también pasan por esa intersección comienz
 Poco a poco, la propuesta empieza a acumular acompañamientos.
 
 María puede ver cómo el contador de apoyo crece lentamente.
+
+## Cambios y mejoras de la propuesta 
+
+Semanas después, María vuelve a leer su propuesta y se da cuenta de que podría explicarla mejor. La plataforma le ofrece entonces la opción de **crear una propuesta derivada** basada en la original.
+
+La nueva propuesta comienza sin apoyos, pero muestra claramente que se trata de una revisión de la anterior, permitiendo que los ciudadanos comparen ambas versiones y decidan cuál apoyar.
 
 ## Cierre
 
