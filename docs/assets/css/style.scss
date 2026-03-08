@@ -1,11 +1,11 @@
-@import "{{ site.theme }}";
+---
+---
+@import "jekyll-theme-slate";
 
-/* Ocultar banner superior del tema Slate */
 .page-header {
-  display: none;
+  display: none !important;
 }
 
-/* Ajustar margen superior del contenido */
 .main-content {
-  margin-top: 40px;
+  padding-top: 2rem;
 }
