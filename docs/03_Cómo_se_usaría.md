@@ -25,7 +25,9 @@ Durante el registro, la plataforma le explica algo importante.
 
 Para evitar cuentas falsas o manipulaciones mediante múltiples identidades, cada persona debe verificar primero que es un ciudadano real. Para hacerlo, el sistema utiliza mecanismos oficiales de verificación de identidad, como los que ya se emplean en distintos servicios estatales.
 
-María realiza esa verificación utilizando su identificación a través de ANSES.
+María decide registrarse utilizando uno de los métodos de autenticación disponibles.
+
+La plataforma la redirige al sistema de autenticación del Estado, donde puede validar su identidad utilizando los mecanismos habituales —por ejemplo su cuenta de MiArgentina, su clave de seguridad social de ANSES o su clave fiscal de AFIP.
 
 Una vez confirmada su condición de ciudadana habilitada, ocurre algo importante: la identidad real de María ya no vuelve a circular dentro de la plataforma.
 
