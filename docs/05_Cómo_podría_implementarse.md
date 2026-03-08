@@ -81,6 +81,14 @@ La innovación de la propuesta presentada en este documento no reside en el meca
 
 La plataforma también incorpora reglas de funcionamiento diseñadas para mantener la calidad del sistema, como el límite anual de propuestas por ciudadano y el incentivo a apoyar propuestas existentes antes de crear nuevas iniciativas.
 
+### Vinculación entre propuestas
+
+El sistema permite que las propuestas mantengan referencias explícitas a otras propuestas existentes.
+
+Estas vinculaciones pueden ser declaradas por los ciudadanos al crear una nueva propuesta, indicando por ejemplo que una propuesta amplía, mejora o integra otras previamente publicadas.
+
+Técnicamente, esto puede implementarse mediante referencias entre identificadores de propuestas dentro de la base de datos, permitiendo que la interfaz muestre las relaciones entre ideas sin necesidad de moderación editorial.
+
 ## Revisión automática del lenguaje
 
 Las herramientas modernas de procesamiento de lenguaje natural permiten analizar automáticamente grandes volúmenes de texto y detectar patrones asociados a insultos, lenguaje ofensivo o expresiones discriminatorias.
