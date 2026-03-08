@@ -16,7 +16,7 @@ Un principio importante a tener en cuenta es que la privacidad de un sistema no 
 
 El principio central de la arquitectura propuesta es la separación entre el proceso de verificación de identidad y el funcionamiento cotidiano de la plataforma participativa.
 
-La verificación de identidad tiene como único objetivo confirmar que una persona es un ciudadano real y habilitado para participar. Una vez realizada esa verificación, el sistema genera una identidad anónima persistente que será utilizada dentro de la plataforma.
+La verificación de identidad tiene como único objetivo confirmar que una persona es un ciudadano real y habilitado para participar. Esta verificación de identidad podría realizarse mediante plataformas de autenticación centralizadas del Estado, como AUTENTICAR en Argentina, que actúan como intermediarios entre aplicaciones y proveedores de identidad oficiales. Una vez realizada esa verificación, el sistema genera una identidad anónima persistente que será utilizada dentro de la plataforma.
 
 A partir de ese momento, la identidad real del ciudadano no debería formar parte del funcionamiento normal del sistema participativo.
 
