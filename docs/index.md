@@ -45,5 +45,5 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
     *Por qué la idea es técnicamente viable con herramientas actuales*
 *   **[06. Arquitectura técnica y desafíos](propuesta/06_Arquitectura_técnica_y_desafíos.html)**  
     *Riesgos, componentes críticos y cuidados de implementación*
-*   **[00. Resumen ejecutivo](00_Resumen_ejecutivo.html)**  
+*   **[00. Resumen ejecutivo](propuesta/00_Resumen_ejecutivo.html)**  
     *La propuesta en pocas páginas para decisores públicos*
