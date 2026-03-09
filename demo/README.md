@@ -1,1 +1,1 @@
-Demo conceptual de la plataforma
+Aquí se guarda el código de la "demo conceptual" de la plataforma
