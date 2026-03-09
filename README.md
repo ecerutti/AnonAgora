@@ -41,23 +41,6 @@ El objetivo es crear un **termómetro social confiable**, capaz de mostrar qué 
 
 * **Debate Constructivo:** Un asistente de redacción basado en IA ayuda a mantener un lenguaje institucional y respetuoso sin intervenir en el contenido ideológico de las propuestas.
 
-## 🛠️ Estructura del repositorio
-
-Este repositorio contiene la documentación conceptual y estratégica del proyecto.
-
-`/docs` – Documentación principal  
-- [`01_El_Problema_y_la_Idea.md`](./docs/01_El_Problema_y_la_Idea.md) – problema y visión
-- [`02_Fundamentos_y_Lógica_de_funcionamiento.md`](./docs/02_Fundamentos_y_Lógica_de_funcionamiento.md) – lógica del sistema
-- [`03_Cómo_se_usaría.md`](./docs/03_Cómo_se_usaría.md) – experiencia de uso
-- [`04_Riesgos_límites_y_preocupaciones_razonables.md`](./docs/04_Riesgos_límites_y_preocupaciones_razonables.md) – objeciones políticas
-- [`05_Cómo_podría_implementarse.md`](./docs/05_Cómo_podría_implementarse.md) – plausibilidad técnica
-- [`06_Arquitectura_técnica_y_desafíos.md`](./docs/06_Arquitectura_técnica_y_desafíos.md) – arquitectura y riesgos técnicos
-- [`00_Resumen_ejecutivo.md`](./docs/00_Resumen_ejecutivo.md)
-
-`/notas` – ideas en desarrollo, analogías y material de trabajo.
-
-En el futuro este repositorio podría incluir también **prototipos o implementaciones de referencia** de la plataforma.
-
 ## Contribuir
 
 AnonAgora es un proyecto abierto a colaboración interdisciplinaria.
