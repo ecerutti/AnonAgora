@@ -23,9 +23,9 @@ En este modelo, cada ciudadano recibe un alias pseudónimo visible públicamente
 
 Ejemplos de alias posibles:
 
+*Anon#1729*  
+*User-8F3A91*  
 *Lobo Azul 714*  
-*Halcón Plateado 203*  
-*Puma Silencioso 981*
 
 Todas las propuestas y participaciones del usuario quedarían asociadas a ese alias.
 
