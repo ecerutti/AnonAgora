@@ -33,7 +33,7 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
 
 ## 📂 Documentación
 
-*   **[01. El Problema y la Idea](01_El_Problema_y_la_Idea.html)**  
+*   **[01. El Problema y la Idea](propuesta/01_El_Problema_y_la_Idea.html)**  
     *La idea: escuchar a la sociedad sin exponer a las personas*
 *   **[02. Fundamentos y Lógica de funcionamiento](02_Fundamentos_y_Lógica_de_funcionamiento.html)**  
     *Por qué el sistema podría funcionar sin perder anonimato ni orden*
