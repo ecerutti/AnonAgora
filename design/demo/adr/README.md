@@ -1,3 +1,7 @@
-Los ADR de la demo siguen la convención definida en:
+# ADR de la demo
 
-../../adr/README.md
+Los ADR de la demo siguen la misma convención definida para los ADR de la plataforma.
+
+Ver:
+
+[Convención de ADR](../../adr/README.md)
