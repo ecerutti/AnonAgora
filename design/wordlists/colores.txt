@@ -1,0 +1,13 @@
+Blanco
+Negro
+Gris
+Dorado
+Rojo
+Carmesí
+Azul
+Azulino
+Celeste
+Verde
+Ámbar
+Naranja
+Violeta
