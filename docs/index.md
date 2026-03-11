@@ -21,12 +21,6 @@ Desde ese momento podés:
 - cambiar tu opinión con el tiempo
 - incluso proponer nuevas iniciativas
 
-Y nadie puede saber qué hiciste dentro.
-
-Ni el gobierno.
-Ni los administradores.
-Ni quienes desarrollaron el sistema.
-
 Funciona más como un **termómetro social**: una forma de ver qué temas empiezan a preocupar a la sociedad y qué ideas empiezan a reunir apoyo real.
 
 Si te da curiosidad ver la idea un poco más desarrollada, a continuación te dejo la documentación.
