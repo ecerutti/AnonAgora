@@ -191,3 +191,13 @@ En caso de contradicción entre documentos:
 1. Los ADR prevalecen sobre otros documentos.
 2. Las decisiones más recientes prevalecen sobre las anteriores.
 3. La documentación conceptual en `docs/propuesta/` describe la intención del sistema, pero las decisiones técnicas se definen en `design/`.
+
+# Promesas de anonimato
+
+La documentación pública del proyecto no debe prometer anonimato absoluto.
+
+El sistema está diseñado para minimizar la posibilidad de vincular identidad real con actividad dentro de la plataforma, pero debe evitar afirmaciones del tipo:
+
+- "nadie puede saber"
+- "imposible identificar"
+- "anonimato total garantizado"
