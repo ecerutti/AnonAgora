@@ -22,7 +22,7 @@ La propuesta consiste en una plataforma digital de participación ciudadana basa
 
 Para comprender cómo funcionaría, puede pensarse al sistema como el ingreso a un edificio público. En la puerta hay un guardia, para pasar, te pide el DNI y verifica que realmente seas un ciudadano habilitado para entrar.
 
-Una vez verificada esa condición, la persona atraviesa la puerta y el guardia se queda afuera. La identidad real **no** vuelve a circular dentro del edificio. Ya en el interior, al ciudadano se le entrega una identificación anónima —como una pulsera numerada— que **no** contiene datos personales y que es la única referencia utilizada por el sistema.
+Una vez verificada esa condición, la persona atraviesa la puerta y el guardia se queda afuera. La identidad real **no** vuelve a circular una vez dentro del edificio. Ya en el interior, al ciudadano se le entrega una identificación anónima —como una pulsera numerada— que **no** contiene datos personales y que es la única referencia utilizada por el sistema.
 
 Desde ese momento, dentro del edificio todos te ven solo como ese número. Nadie sabe quién sos realmente, pero el sistema puede reconocer que sos el mismo participante cada vez que volvés.
 
