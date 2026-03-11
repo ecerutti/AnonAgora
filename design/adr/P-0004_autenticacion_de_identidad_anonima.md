@@ -105,29 +105,13 @@ El reingreso a la plataforma se realiza mediante:
 
 La frase secreta funciona como prueba de posesión de dicha identidad.
 
-## Sesiones
+# Diseño de la identidad anónima
 
-Durante el uso normal, la plataforma mantiene una sesión web.
-
-Si la sesión expira por inactividad, el usuario debe volver a ingresar introduciendo nuevamente su identidad anónima y frase secreta.
-
-El sistema **no debe mostrar información que sugiera recordar la identidad del usuario después de que la sesión haya expirado**.
-
-## Consecuencias
-
-- la identidad anónima se convierte también en identificador de acceso
-- su diseño debe priorizar simplicidad y facilidad de escritura
-- el sistema no depende de identificadores técnicos adicionales
-- el acceso permanece desacoplado de la identidad real del ciudadano
-
-# Diseño de pseudónimos
-
-Dado que el pseudónimo también funciona como identificador de acceso,
-su diseño debe cumplir ciertas condiciones.
+Dado que la identidad anónima también funciona como identificador de acceso, su diseño debe cumplir ciertas condiciones.
 
 ## Estructura
 
-Los pseudónimos se generan automáticamente mediante una combinación de:
+La identidad anónima se generan automáticamente mediante una combinación de:
 
 ```
 animal + color/adjetivo + número
@@ -156,8 +140,7 @@ Las listas de animales, colores y adjetivos deben cumplir los siguientes criteri
 - sin caracteres especiales
 - preferentemente sin tildes ni acentos
 
-El objetivo es evitar problemas de escritura y facilitar el uso del pseudónimo
-como identificador de acceso.
+El objetivo es evitar problemas de escritura y facilitar el uso d la identidad anónima como identificador de acceso.
 
 ## Curaduría del vocabulario
 
