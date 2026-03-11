@@ -192,6 +192,8 @@ En caso de contradicción entre documentos:
 2. Las decisiones más recientes prevalecen sobre las anteriores.
 3. La documentación conceptual en `docs/propuesta/` describe la intención del sistema, pero las decisiones técnicas se definen en `design/`.
 
+---
+
 # Promesas de anonimato
 
 La documentación pública del proyecto no debe prometer anonimato absoluto.
