@@ -62,3 +62,14 @@ El pseudónimo es visible únicamente para el propio usuario y funciona como rep
 - una mejora o reformulación se expresa mediante una propuesta derivada
 - las propuestas compiten por apoyo ciudadano
 - el sistema no busca construir reputación pública de autores
+
+## Verificación de identidad como servicio externo
+
+La plataforma debe asumir que cualquier servicio externo de verificación de identidad puede registrar información sobre los usuarios que se autentican.
+
+Por esta razón:
+
+- el sistema solicita únicamente los datos mínimos necesarios para verificar elegibilidad
+- los identificadores del proveedor externo no deben utilizarse como identidad interna
+- no se deben almacenar tokens o respuestas completas de autenticación
+- la identidad anónima utilizada dentro de la plataforma debe generarse de forma independiente
