@@ -38,7 +38,7 @@ De esta forma, la plataforma de participación no necesitaría manejar directame
 
 Una vez completada la verificación de identidad, el sistema genera una **identidad anónima persistente** que será utilizada para todas las acciones dentro de la plataforma.
 
-Esta identidad no contiene información personal ni permite identificar directamente al ciudadano que la utiliza. Su función es simplemente representar a un participante único dentro del sistema.
+Esta identidad no contiene información personal y está diseñada para no incluir datos que identifiquen directamente al ciudadano. Su función es simplemente representar a un participante único dentro del sistema.
 
 Existen diversas tecnologías desarrolladas en el ámbito de la identidad digital y la criptografía que permiten separar la identidad real de la identidad operativa utilizada en un sistema. Algunos ejemplos incluyen:
 
