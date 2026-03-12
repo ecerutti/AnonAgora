@@ -48,7 +48,7 @@ Esto significa que puede:
 - cambiar su opinión con el tiempo  
 - proponer nuevas iniciativas  
 
-sin que las acciones dentro del sistema estén asociadas públicamente con su identidad real.
+sin que su identidad real sea visible o necesaria para participar dentro del sistema.
 
 La persistencia de esa identidad anónima también permite observar cómo evolucionan las opiniones con el tiempo, algo que las encuestas tradicionales rara vez capturan.
 
