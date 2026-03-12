@@ -35,7 +35,7 @@ El funcionamiento puede entenderse con una analogía sencilla.
 
 Es como entrar a un edificio donde, en la puerta, un guardia verifica el DNI antes de dejar pasar a las personas. Una vez dentro, el guardia se queda afuera y a cada participante se le entrega una pulsera numerada que no contiene su nombre ni sus datos personales.
 
-Dentro del edificio todos ven la pulsera, pero nadie sabe quién es realmente la persona que la lleva.
+Dentro del edificio todos ven la pulsera, pero no la identidad real de quien la lleva.
 
 La plataforma funciona de forma similar.
 
