@@ -80,16 +80,6 @@ Este proceso permite sostener una regla básica del sistema:
 
 Una vez emitida la identidad anónima persistente, el ciudadano puede participar libremente sin exponer su identidad real, pero sin posibilidad de multiplicar artificialmente su presencia dentro del sistema.
 
-## Coerción y presión externa
-
-En sistemas de participación política puede existir presión externa sobre los participantes para revelar o demostrar su comportamiento dentro del sistema.
-
-Una de las características de esta plataforma es que las acciones de participación no están asociadas públicamente a la identidad real del ciudadano.
-
-Además, el sistema permite modificar decisiones con el tiempo, lo que reduce la posibilidad de demostrar de forma permanente el comportamiento pasado de un usuario.
-
-Aunque ningún sistema puede eliminar completamente el riesgo de coerción externa, estas características ayudan a reducir su impacto potencial.
-
 ## Auditoría y detección de manipulación
 
 Como en cualquier sistema informático, existe la posibilidad de que operadores con acceso privilegiado intenten manipular datos internos, por ejemplo alterando contadores de votación o modificando registros.
