@@ -25,7 +25,7 @@ Antes de participar, cada ciudadano verifica su identidad utilizando mecanismos 
 
 Una vez verificada, la persona recibe una **identidad anónima persistente** dentro de la plataforma.
 
-Esa identidad funciona como su identidad pública dentro del sistema: permite participar, proponer ideas y expresar apoyo a propuestas, pero no revela quién es la persona detrás.
+Esa identidad funciona como su identidad pública dentro del sistema: permite participar, proponer ideas y expresar apoyo a propuestas, sin exponer públicamente quién es la persona detrás de esa identidad.
 
 De esta manera:
 
