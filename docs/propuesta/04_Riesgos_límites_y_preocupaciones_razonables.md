@@ -57,7 +57,7 @@ Uno de los problemas más conocidos de las plataformas abiertas es el llamado pr
 
 La plataforma aborda este problema desde el inicio mediante la verificación de identidad.
 
-Antes de poder participar, cada ciudadano debe confirmar su condición de persona real mediante mecanismos oficiales de identificación. Una vez completada esa verificación, el sistema crea una única identidad anónima persistente para ese ciudadano.
+Antes de poder participar, cada ciudadano debe confirmar su condición de persona real mediante mecanismos oficiales de identificación. Una vez completada esa verificación, el sistema emite una única identidad anónima persistente asociada a ese ciudadano.
 
 De este modo se busca garantizar una regla simple: **una persona, una identidad dentro de la plataforma**.
 
