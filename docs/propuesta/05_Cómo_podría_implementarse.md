@@ -111,7 +111,7 @@ El carácter abierto del software permite auditorías independientes y reduce el
 
 A nivel de datos, los mecanismos de auditoría también pueden diseñarse para detectar inconsistencias. Por ejemplo, podrían identificarse votos que no estén asociados a identidades anónimas válidas o patrones de comportamiento que sugieran manipulaciones.
 
-Estos mecanismos no eliminan completamente el riesgo de intervención indebida, pero ayudan a que cualquier intento de manipulación resulte detectable.
+Estos mecanismos no eliminan completamente el riesgo de intervención indebida, pero ayudan a que cualquier intento de manipulación resulte detectable. El principio que guía este aspecto del diseño no es la confianza ciega en operadores o administradores, sino la búsqueda de una integridad verificable del sistema.
 
 ## Escalabilidad
 
