@@ -93,7 +93,7 @@ Entre los mecanismos que podrían utilizarse se encuentran:
 - verificación periódica de integridad de datos  
 - identidades *canario* diseñadas para detectar alteraciones del sistema  
 
-Estos mecanismos permiten aumentar la transparencia y facilitar la detección de intervenciones indebidas.
+Estos mecanismos permiten aumentar la transparencia y facilitar la detección de intervenciones indebidas. El principio de diseño no es la confianza ciega en la administración del sistema, sino la búsqueda de integridad verificable.
 
 ## Inmutabilidad del contenido y versiones derivadas
 
