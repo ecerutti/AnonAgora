@@ -24,7 +24,7 @@ Por esa razón, el sistema requiere una verificación inicial de identidad. En u
 
 Esta verificación cumple una única función: confirmar que detrás de cada cuenta hay un ciudadano real y único.
 
-Una vez completado ese paso, la identidad queda desacoplada del resto de la plataforma.
+Una vez completado ese paso, la identidad real queda desacoplada del resto de la plataforma y deja de participar en el funcionamiento cotidiano del sistema.
 
 ## Anonimato persistente: eliminar el miedo a participar
 
