@@ -41,3 +41,9 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
     *Riesgos, componentes críticos y cuidados de implementación*
 *   **[00. Resumen ejecutivo](propuesta/00_Resumen_ejecutivo.html)**  
     *La propuesta en pocas páginas para decisores públicos*
+
+## 🚀 Muy pronto: demo interactiva
+
+Estamos construyendo una **demo interactiva** de la propuesta para mostrar como sería la experiencia de participación ciudadana.
+
+👉 Seguimiento público del avance: **[anonagora.cloud](http://anonagora.cloud)**
