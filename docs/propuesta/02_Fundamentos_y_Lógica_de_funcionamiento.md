@@ -60,6 +60,22 @@ La plataforma propone invertir esa lógica. En lugar de exponer una identidad po
 
 El resultado buscado es simple: que las ideas puedan reunir apoyo o rechazo más por su contenido que por la identidad pública de quien las impulsa.
 
+## Apoyo sin voto negativo
+
+La plataforma permite a los ciudadanos apoyar propuestas, pero no ofrece ningún mecanismo para rechazarlas, votarlas en contra ni expresar oposición.
+
+Esta decisión es deliberada y responde a una preocupación concreta sobre las dinámicas sociales que habilitan los espacios de discusión pública digitales.
+
+Cuando un sistema permite el voto negativo, rápidamente aparecen comportamientos que degradan la señal social que el sistema busca capturar. El voto bronca, el rechazo por afinidad partidaria y las campañas organizadas de descalificación ideológica son fenómenos bien conocidos en plataformas que ofrecen mecánicas de oposición explícita. En esos espacios, las propuestas dejan de competir por atraer apoyo y empiezan a competir por evitar rechazo, lo que favorece ideas blandas y desincentiva la expresión de posiciones originales o minoritarias.
+
+La plataforma propone una lógica distinta. Cada ciudadano puede expresar apoyo a las ideas que le resultan valiosas, y nada más. Si una propuesta no le interesa o no está de acuerdo con ella, simplemente no la apoya. Esa falta de apoyo es, en sí misma, toda la oposición que el sistema necesita registrar.
+
+El resultado es una señal social más limpia. El termómetro social mide qué ideas están reuniendo interés ciudadano, no qué ideas generan rechazo. Las propuestas que nadie apoya pierden visibilidad de forma natural gracias al ranking, sin necesidad de un mecanismo explícito de rechazo.
+
+Esta lógica también refuerza el principio de que las propuestas deben evaluarse por su contenido y no por la identidad o alineamiento político de quien las impulsa. Sin voto negativo, desaparece la posibilidad de usar la plataforma como herramienta de castigo hacia determinadas ideas o sectores.
+
+Los apoyos, además, son reversibles. Si un ciudadano cambia de opinión con el tiempo, puede retirar un apoyo previamente dado. Esta posibilidad es coherente con uno de los objetivos del sistema: permitir que las opiniones evolucionen naturalmente a lo largo del tiempo, algo que las encuestas tradicionales rara vez logran capturar.
+
 ## Límite anual de propuestas: evitar abuso y ruido político
 
 La plataforma establece un límite anual de propuestas por ciudadano (por ejemplo, **2 por año**).
