@@ -77,6 +77,7 @@ El diseño debe minimizar:
 | `design/demo/` | Documentos de diseño específicos de la versión demo. La demo puede utilizar soluciones simplificadas que no representen la arquitectura final del sistema. | Decisiones de la plataforma general. |
 | `design/demo/adr/` | ADRs específicos de la demo, con prefijo `D-XXXX`. | ADRs de la plataforma general. |
 | `demo/` | Código fuente de la implementación demo. | Documentación. |
+| `notas/` | Material de trabajo del proyecto: estado del trabajo en curso, recordatorios, ideas pendientes de evaluación, borradores conceptuales que todavía no son documentos oficiales. Mantenido por el humano con apoyo de los agentes. | Decisiones ya tomadas (van a `design/adr/`), descripciones de componentes (van a `design/`), scratchpads del agente durante una conversación. |
 
 La convención de nombres, estructura y formato de los ADR está definida en `design/adr/README.md`, incluyendo el criterio para determinar cuándo una decisión requiere un ADR y cuándo corresponde un documento de diseño.
 
@@ -93,17 +94,17 @@ Solo deben guardarse en el repositorio:
 - ADR
 - código fuente
 
-No deben guardarse archivos de trabajo internos del agente, incluyendo:
+No deben guardarse en el repositorio los archivos de trabajo internos que el agente genera para sí mismo durante una conversación:
 
-- planes de trabajo
-- notas internas
+- planes de trabajo propios
+- notas de razonamiento
 - scratchpads
 - logs
-- documentos de razonamiento
-- archivos temporales
-- documentación generada únicamente para ayudar al agente a pensar
+- documentos temporales de análisis
 
-Estos elementos deben permanecer en el workspace interno del agente.
+Estos elementos deben permanecer en el workspace interno del agente y no pertenecen al repo.
+
+Esto es distinto del material de trabajo del proyecto, que vive en `notas/` y sí forma parte del repo. La diferencia es quién lo mantiene y para qué sirve: `notas/` contiene material de gestión del proyecto mantenido por el humano (con apoyo del agente cuando corresponda), cuyo valor trasciende cualquier conversación individual. Los scratchpads del agente, en cambio, son insumo efímero de una sola conversación.
 
 ---
 
@@ -111,12 +112,13 @@ Estos elementos deben permanecer en el workspace interno del agente.
 
 Antes de modificar el repositorio, el agente debe:
 
-1. leer la documentación relevante del repositorio
-2. identificar decisiones de diseño existentes
-3. evitar duplicar decisiones ya registradas
-4. proponer nuevos ADR cuando corresponda
-5. distinguir claramente entre diseño conceptual y simplificaciones de la demo
-6. mantener cambios mínimos, coherentes y trazables
+1. leer `notas/estado_del_trabajo.md` para conocer el estado actual del trabajo, las decisiones pendientes y los recordatorios activos 
+2. leer la documentación relevante del repositorio
+3. identificar decisiones de diseño existentes
+4. evitar duplicar decisiones ya registradas
+5. proponer nuevos ADR cuando corresponda
+6. distinguir claramente entre diseño conceptual y simplificaciones de la demo
+7. mantener cambios mínimos, coherentes y trazables
 
 ---
 
