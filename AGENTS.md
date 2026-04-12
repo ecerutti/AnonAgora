@@ -68,81 +68,17 @@ El diseño debe minimizar:
 
 # Estructura del repositorio
 
-## Documentación de la propuesta
+| Carpeta | Contenido | Qué NO va acá |
+|---|---|---|
+| `docs/propuesta/` | Documentación conceptual de la idea, orientada a lectores no técnicos (responsables institucionales, personas interesadas en comprender el objetivo del proyecto). | Decisiones técnicas, especificaciones de implementación. |
+| `docs/` | Documentación técnica del desarrollo: arquitectura general, overviews, especificaciones, material de apoyo para el desarrollo. | Decisiones de diseño con alternativas evaluadas. |
+| `design/` | Documentos de diseño de la plataforma que no requieren ADR: modelos conceptuales, glosarios, especificaciones que no surgen de elegir entre alternativas. | ADRs, decisiones entre alternativas. |
+| `design/adr/` | ADRs de la plataforma general, con prefijo `P-XXXX`. | Documentos descriptivos sin decisión entre alternativas, ADRs específicos de la demo. |
+| `design/demo/` | Documentos de diseño específicos de la versión demo. La demo puede utilizar soluciones simplificadas que no representen la arquitectura final del sistema. | Decisiones de la plataforma general. |
+| `design/demo/adr/` | ADRs específicos de la demo, con prefijo `D-XXXX`. | ADRs de la plataforma general. |
+| `demo/` | Código fuente de la implementación demo. | Documentación. |
 
-```
-docs/propuesta/
-```
-
-Contiene la documentación que describe la idea y la lógica conceptual del sistema.
-
-Estos documentos están orientados principalmente a explicar la propuesta a lectores no técnicos, como responsables institucionales o personas interesadas en comprender el objetivo del proyecto.
-
----
-
-## Documentación del desarrollo
-
-```
-docs/
-```
-
-Contiene documentación relacionada con el desarrollo técnico del sistema.
-
-Aquí pueden encontrarse documentos de arquitectura, especificaciones técnicas, análisis de implementación y material de apoyo para el desarrollo de la plataforma.
-
----
-
-## Diseño del sistema
-
-```
-design/
-design/adr/
-```
-
-Contiene decisiones de diseño que aplican a la plataforma general.
-
-Las decisiones arquitectónicas importantes deben registrarse mediante **Architecture Decision Records (ADR)**.
-
-La convención de nombres, estructura y formato de los ADR está definida en:
-
-```
-design/adr/README.md
-```
-
----
-
-## Diseño específico de la demo
-
-```
-design/demo/
-design/demo/adr/
-```
-
-Contiene decisiones exclusivas de la versión demo.
-
-La demo puede utilizar soluciones simplificadas que no representen la arquitectura final del sistema.
-
----
-
-## Código de la demo
-
-```
-demo/
-```
-
-Contiene únicamente el código fuente de la implementación demo.
-
----
-
-# Decisiones de arquitectura
-
-Las decisiones de arquitectura deben registrarse mediante
-Architecture Decision Records (ADR).
-
-La convención de nombres, estructura y formato de los ADR
-está definida en:
-
-design/adr/README.md
+La convención de nombres, estructura y formato de los ADR está definida en `design/adr/README.md`, incluyendo el criterio para determinar cuándo una decisión requiere un ADR y cuándo corresponde un documento de diseño.
 
 ---
 
