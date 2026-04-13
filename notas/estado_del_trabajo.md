@@ -47,18 +47,31 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 
 ## Últimas decisiones cerradas
 
-- **Ciclo de vida de identidades anónimas** — decisiones de fondo cerradas, pendiente redacción de ADR (la próxima conversación decide si va uno o dos documentos). Decisiones:
-  - El emisor guarda únicamente la tupla `{anon_seed, fecha_emision}` por ciudadano. Sin pseudónimo, sin historial, sin estado, sin contador.
-  - Cool-down de 6 meses contado desde `fecha_emision`. Cuando llega un pedido de nueva identidad, el emisor compara la fecha guardada contra el momento actual; si pasaron 6 meses o más, emite nueva identidad y reemplaza la fila con la nueva fecha. Valor configurable por el operador, default 6 meses.
-  - No se establece límite a la cantidad de veces que un ciudadano puede obtener nuevas identidades a lo largo de su vida. Se podría haber implementado con un campo extra en la tupla; se decidió explícitamente no hacerlo. El cool-down es el único freno.
-  - Pérdida de frase secreta y revocación voluntaria comparten el mismo mecanismo técnico. Un único flujo en el emisor, aunque la UX pueda diferenciarlos.
+- **ADR de integración con AUTENTICAR (P-0013)** — pendiente de redacción. Es el próximo ADR a trabajar (en conversación nueva).
+  El documento `notas/autenticacion_autenticar.md` está maduro y listo para migrar. Decisiones clave a formalizar en ese ADR:
+  - Restringir proveedores aceptados a ARCA y ANSES únicamente. La razón es que ambos entregan CUIT/CUIL, que es el mismo espacio de identificadores: la misma persona tiene el mismo número en ambos proveedores. Esto permite construir un `anon_seed` estable e independiente del proveedor usado en cada autenticación.
+  - Fórmula del `anon_seed`: `HASH(salt_del_sistema + CUIT/CUIL)`. El proveedor no entra al hash porque el identificador resultante es el mismo independientemente de si el ciudadano usó ARCA o ANSES.Usar cualquier otro proveedor (ReNaPer con DNI, MiArgentina con pasaporte) rompería la unicidad porque sus identificadores son distintos al CUIT/CUIL.
+  - No usar el `sub` del token como base del `anon_seed`: el `sub` varía entre reinos de Keycloak y no es confiable como identificador universal entre proveedores.
+  - Registrar el `jti` del token de AUTENTICAR en el emisor para auditoría: permite correlacionar cada identidad emitida con un evento de autenticación real sin almacenar identidad real.
+  - Verificación offline de firmas mediante JWKS público de AUTENTICAR (endpoint por reino confirmado en producción).
+  Al redactar P-0013, migrar `notas/autenticacion_autenticar.md` dividiéndolo en dos destinos: la parte descriptiva (qué es AUTENTICAR, endpoints, claims, JWKS, flujo OAuth2/OIDC) va a `docs/autenticar.md`; las decisiones van al cuerpo del ADR. El archivo en `notas/` se elimina una vez migrado.
 
-  Consecuencias (a documentar en la sección correspondiente del ADR):
-  - No hay recuperación del pseudónimo olvidado. Perder frase o pseudónimo deja la identidad irrecuperable (simetría con P-0008).
-  - Propuestas y apoyos de identidades anteriores quedan huérfanos: permanecen, cuentan, no pueden modificarse ni retirarse.
-  - Los contadores del límite anual se reinician de facto con cada nueva identidad.
-  - La plataforma participativa no puede distinguir identidades activas de huérfanas.
-  
-- P-0012 — Mecanismo de apoyo a propuestas (apoyo binario retractable, apoyo automático del autor, conteo público).
-- README de `design/adr/` actualizado con criterio claro para determinar cuándo corresponde un ADR.
-- `AGENTS.md` actualizado con tabla consolidada de carpetas y reconocimiento de `notas/` como material de trabajo del proyecto.
+- **Modelo de datos del emisor y ciclo de vida de identidades anónimas
+  (P-0014)** — pendiente de redacción. Se trabaja después de P-0013, ya que se apoya en decisiones que ese ADR formaliza.
+
+  Decisiones cerradas:
+  - Cool-down de 6 meses contado desde la fecha de emisión de la identidad anónima. Valor configurable por el operador, default 6 meses.
+  - No se establece límite a la cantidad de renovaciones de por vida. El cool-down es el único freno.
+  - El secuestro de identidad queda fuera del modelo de amenazas: el impacto es acotado (el ladrón solo puede hacer lo que haría
+    cualquier ciudadano) y la mitigación técnica completa requeriría complejidad criptográfica incompatible con el modelo de amenazas
+    intermedio de P-0006.
+
+  Decisiones abiertas a discutir en la conversación de P-0014:
+  - **Tupla del emisor.** La tupla mínima `{anon_seed, fecha_emision}` fue considerada inicialmente por sus ventajas: máxima minimización de datos (coherente con el principio de minimización de P-0006), superficie de correlación mínima en el emisor si es comprometido de forma aislada, y simplicidad de implementación. Fue descartada porque no resuelve auditoría de legitimidad de identidades, no permite detectar identidades falsas generadas por un admin malicioso, y no permite recuperar el pseudónimo olvidado. Candidato a evaluar: `{anon_seed, anon_id, fecha_emision}` más, a evaluar, información de las firmas entregadas por AUTENTICAR (por ejemplo el `jti`) para habilitar auditoría sin cruzar sistemas. Definir exactamente qué campos entran y por qué, resolviendo explícitamente: auditoría de legitimidad, detección de identidades falsas, y recuperación de pseudónimo olvidado.
+  - **Pérdida de frase secreta vs. revocación voluntaria.** Evaluar si comparten el mismo mecanismo técnico en el emisor o si requieren flujos diferenciados. Discutir las alternativas de UX y sus implicaciones técnicas antes de cerrar.
+
+  Consecuencias dependientes de la tupla final (a confirmar en P-0014):
+  - Con tupla extendida `{anon_seed, anon_id, fecha_emision}`: el emisor puede devolver la `anon_id` actual al ciudadano que olvidó su pseudónimo, autenticándose nuevamente vía AUTENTICAR. La identidad anónima es recuperable; la frase secreta no lo es.
+  - La trazabilidad `anon_seed → anon_id` permite que la plataforma mantenga el historial completo de la identidad: propuestas, apoyos y contadores del límite anual no se pierden ni se resetean con una renovación.
+  - Propuestas y apoyos de identidades anteriores no quedan huérfanos si la trazabilidad se preserva.
+  - A confirmar: si la plataforma puede o no distinguir identidades activas de renovadas, y qué implicaciones tiene eso.
