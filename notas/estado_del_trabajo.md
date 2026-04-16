@@ -12,30 +12,19 @@ Diseño de la plataforma: cierre de decisiones de diseño previas al desarrollo 
 
 Orden sugerido de abordaje:
 
-1. **Modelo de datos del emisor y ciclo de vida de identidades anónimas (P-0015).** Decisiones cerradas que esperan ser formalizadas en este ADR:
-   - Cool-down de 6 meses contado desde la fecha de emisión de la identidad anónima. Valor configurable por el operador, default 6 meses.
-   - No se establece límite a la cantidad de renovaciones de por vida. El cool-down es el único freno.
-   - El secuestro de identidad queda fuera del modelo de amenazas: el impacto es acotado y la mitigación técnica completa requeriría complejidad criptográfica incompatible con el modelo de amenazas intermedio de P-0006.
-   - Firma del emisor sobre cada `anon_id` para habilitar auditoría de legitimidad en la plataforma participativa de forma independiente al emisor.
+1. **Límite anual de propuestas por ciudadano.** Decidir la existencia del límite como propiedad del sistema (configurable, cómo se cuenta el año, qué pasa con propuestas derivadas, posibilidad de configurar 0 o desactivarlo). El valor concreto "2 por año" que aparece en la documentación conceptual es el default sugerido, no la decisión de fondo.
 
-   Decisiones abiertas a discutir en la conversación de P-0015:
-   - **Tupla del emisor.** Candidato a evaluar: `{anon_seed, anon_id, fecha_emision, prueba_zk}` más el mecanismo de firma sobre `anon_id`. Definir exactamente qué campos entran y por qué, resolviendo explícitamente: auditoría de legitimidad, detección de identidades falsas en la plataforma participativa, y recuperación de pseudónimo olvidado. La prueba ZK (P-0014) se almacena asociada al `anon_seed`; su relación con la `anon_id` debe quedar explícita.
-   - **Pérdida de frase secreta vs. revocación voluntaria.** Evaluar si comparten el mismo mecanismo técnico en el emisor o si requieren flujos diferenciados.
+2. **Modelo de datos de propuestas.** Qué campos tiene una propuesta, longitud máxima, formato del cuerpo, si admite imágenes o links.
 
-   Consecuencias dependientes de la tupla final (a confirmar en P-0015):
-   - Con tupla `{anon_seed, anon_id, fecha_emision}`: el emisor puede devolver la `anon_id` actual al ciudadano que olvidó su pseudónimo, autenticándose nuevamente vía AUTENTICAR. La identidad anónima es recuperable; la frase secreta no lo es.
-   - La trazabilidad `anon_seed → anon_id` permite que la plataforma mantenga el historial completo de la identidad: propuestas, apoyos y contadores del límite anual no se pierden ni se resetean con una renovación.
-   - A confirmar: si la plataforma puede o no distinguir identidades activas de renovadas, y qué implicaciones tiene eso.
+3. **Búsqueda de propuestas.** Tipo de búsqueda (texto plano, tags, categorías), si hay categorización temática.
 
-2. **Límite anual de propuestas por ciudadano.** Decidir la existencia del límite como propiedad del sistema (configurable, cómo se cuenta el año, qué pasa con propuestas derivadas, posibilidad de configurar 0 o desactivarlo). El valor concreto "2 por año" que aparece en la documentación conceptual es el default sugerido, no la decisión de fondo.
+4. **Vinculación entre propuestas.** Tipos de vínculo (deriva de, mejora a, integra a), direccionalidad, si requieren aceptación del autor original.
 
-3. **Modelo de datos de propuestas.** Qué campos tiene una propuesta, longitud máxima, formato del cuerpo, si admite imágenes o links.
+5. **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
 
-4. **Búsqueda de propuestas.** Tipo de búsqueda (texto plano, tags, categorías), si hay categorización temática.
+6. **Corrección de P-0009 por cambio de flujo de frase secreta.** P-0015 cambió el flujo: la plataforma nunca recibe la frase secreta en texto plano sino un verificador calculado por el emisor. P-0009 debe ser corregido formalmente mediante un nuevo ADR que documente este cambio y su justificación.
 
-5. **Vinculación entre propuestas.** Tipos de vínculo (deriva de, mejora a, integra a), direccionalidad, si requieren aceptación del autor original.
-
-6. **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
+7. **Invalidación de anon_id en la plataforma participativa.** La decisión de si la plataforma puede marcar `anon_ids` como inactivos quedó fuera del alcance de P-0015. Corresponde resolverla en el ADR del modelo de datos de la plataforma participativa.
 
 ## Decisiones de diseño específicas de la demo
 
@@ -59,6 +48,18 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **ADR P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas.** Cerrado. Decisiones formalizadas:
+  - Cool-down de 6 meses configurable por el operador como mecanismo de control de abuso. Contado desde `fecha_emision` de la identidad activa. Sin límite de renovaciones de por vida.
+  - El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena `anon_id` ni ninguna asociación entre ambos.
+  - El `anon_id` se deriva como `HASH(anon_seed + HASH(frase_secreta))`. La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el secreto del ciudadano.
+  - El flujo de emisión ocurre en dos fases: primero el emisor verifica unicidad y cool-down usando solo el `anon_seed`; recién entonces el ciudadano envía `HASH(frase_secreta)` para que el emisor calcule el `anon_id` y genere la prueba ZK.
+  - ZK cubre únicamente el `anon_id`. La certificación del `anon_seed` mediante ZK queda descartada. P-0015 superseda parcialmente P-0014 en ese punto.
+  - La infraestructura de JWKS histórico y revocación por `kid` comprometido de P-0014 se mantienen vigentes.
+  - La pérdida de credenciales (pseudónimo, frase secreta o ambos) hace la identidad irrecuperable. El ciudadano espera el cool-down y solicita una nueva identidad completa. Este comportamiento refuerza la percepción de anonimato.
+  - La plataforma no puede invalidar `anon_ids`. No existe revocación técnica. Esa decisión queda fuera del alcance del emisor y corresponde al modelo de datos de la plataforma participativa.
+  - El historial de identidades inactivas permanece visible y sigue contando. El sistema no distingue identidades abandonadas de inactivas.
+  - P-0009 asumió que la plataforma recibe la frase secreta en texto plano. Con P-0015 ese flujo cambia: la plataforma recibe el verificador ya calculado por el emisor y nunca ve la frase. Corrección formal pendiente en ADR posterior.
 
 - **ADR P-0014 — Auditoría criptográfica de legitimidad del emisor mediante pruebas de conocimiento cero.** Cerrado. Decisiones formalizadas:
   - Se adopta ZK como mecanismo de auditoría de legitimidad del emisor. Superseda P-0013 Decisión 4 (que era temporal y procedimental).
