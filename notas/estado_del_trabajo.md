@@ -70,7 +70,6 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
   - El emisor debe implementar un servicio de JWKS histórico para mantener verificabilidad de pruebas tras rotaciones de clave de AUTENTICAR.
   - El emisor debe implementar un mecanismo de revocación por `kid` comprometido.
   - Requiere ceremonia de trusted setup Phase 2 antes del despliegue en producción. Phase 1 puede reutilizarse de la ceremonia pública de Hermez/Polygon.
-  - `design/adr/README.md` tiene un agregado pendiente de aplicar: una regla explícita sobre separación entre ADRs de plataforma y decisiones de implementaciones específicas.
 
 - **ADR P-0013 — Integración con AUTENTICAR.** Cerrado. Decisiones formalizadas:
   - Se usa AUTENTICAR como proveedor de verificación de identidad.
