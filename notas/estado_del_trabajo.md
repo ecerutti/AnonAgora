@@ -49,6 +49,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 
 ## Últimas decisiones cerradas
 
+- **ADR P-0016 — Invalidación de identidades anónimas en la plataforma participativa.** Cerrado. La plataforma no implementa ningún mecanismo de invalidación de `anon_ids`. Las identidades no tienen estado de inactivación. Una identidad robada no puede ser revocada, pero el daño está acotado por los límites del sistema. El mecanismo de invalidación fue descartado porque introduce un vector de ataque de denegación de servicio sin contramedida técnica posible.
+
 - **ADR P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas.** Cerrado. Decisiones formalizadas:
   - Cool-down de 6 meses configurable por el operador como mecanismo de control de abuso. Contado desde `fecha_emision` de la identidad activa. Sin límite de renovaciones de por vida.
   - El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena `anon_id` ni ninguna asociación entre ambos.
