@@ -39,6 +39,8 @@ Donde:
 
 Los números deben asignarse en orden incremental y no deben reordenarse a posteriori.
 
+Al proponer un nuevo ADR, siempre incluir el nombre sugerido del archivo siguiendo esta convención.
+
 # Estructura de un ADR
 
 Cada ADR debe seguir la siguiente estructura.
@@ -135,7 +137,7 @@ Puede incluir:
 
 Este apartado ayuda a comprender qué impacto tiene la decisión en el sistema.
 
-# Reglas de formato
+# Reglas de formato y redacción
 
 Para mantener consistencia entre los ADR del proyecto:
 
@@ -144,6 +146,7 @@ Para mantener consistencia entre los ADR del proyecto:
 - Cada ADR debe documentar **una sola decisión**.
 - El lenguaje debe ser **claro y explicativo**.
 - Cuando sea posible, incluir **ejemplos concretos**.
+- Los párrafos no deben contener saltos de línea manuales. El line-wrap lo maneja cada visualizador.
 
 # Alcance
 
