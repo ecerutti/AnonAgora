@@ -186,6 +186,21 @@ Ejemplo: no existe reputación pública de usuarios (ver `P-0001`).
 
 Si una decisión de diseño no cumple ninguna de estas condiciones, probablemente no necesita ADR y basta con documentarla como parte del diseño general en `design/`.
 
+### Separación entre decisiones de plataforma y decisiones de implementación
+
+Los ADRs con prefijo `P-XXXX` registran decisiones sobre el diseño de la plataforma general: propiedades del sistema, algoritmos, protocolos, estructura de datos, flujos funcionales. No registran decisiones sobre cómo se implementa concretamente la plataforma en un despliegue específico: lenguaje de programación, framework, motor de base de datos, biblioteca concreta para un algoritmo ya decidido, infraestructura de despliegue, o versión de una dependencia.
+
+La distinción está en si la decisión determina **qué hace el sistema** o **con qué piezas concretas se construye**. Un ADR responde la primera pregunta; las segundas corresponden a la documentación de implementación.
+
+Ejemplos:
+
+- **Decisión de plataforma (P-XXXX):** elegir Argon2id como algoritmo de derivación para la frase secreta. La decisión es sobre qué garantía ofrece el sistema, independientemente del lenguaje en que se implemente.
+- **Decisión de implementación (no ADR de plataforma):** elegir la biblioteca `argon2` v0.31 en Rust como implementación concreta. Eso es un detalle del despliegue, no una decisión del diseño de la plataforma.
+- **Decisión de plataforma (P-XXXX):** que el ranking de propuestas aplique decaimiento temporal exponencial con parámetros configurables. La decisión es sobre el comportamiento observable del sistema.
+- **Decisión de implementación (no ADR de plataforma):** que el cálculo del ranking se realice en un job programado cada 10 minutos o en tiempo real al consultar. Eso depende del contexto operativo de cada despliegue.
+
+Las decisiones específicas de la implementación demo tienen su propia carpeta de ADRs (`design/demo/adr/`, prefijo `D-XXXX`) porque la demo sí elige piezas concretas. Esos ADRs documentan decisiones que son legítimamente decisiones de implementación pero que tienen alternativas evaluadas y merecen registro dentro del alcance de la demo.
+
 ### Regla rápida
 
 Si el documento puede escribirse sin una sección "Opciones consideradas", probablemente sea un documento de diseño, no un ADR.
