@@ -45,44 +45,46 @@ Ventajas
 
 Desventajas
 
-- Un ciudadano que pierde sus credenciales debe esperar el cool-down aunque no haya tenido intención de acumular identidades.
+- Si el ciudadano pierde sus credenciales, debe esperar el período mínimo para obtener una nueva identidad. Este costo es aceptable porque es precisamente lo que desincentiva el abuso.
 
-### Decisión 2 — Qué almacena el emisor
+### Decisión 2 — Datos almacenados por el emisor
 
-El emisor necesita cumplir exactamente dos funciones después de la emisión: detectar si un ciudadano ya tiene una identidad activa, y verificar si expiró el período de cool-down definido en la Decisión 1. La pregunta es qué datos mínimos son necesarios para eso.
+El emisor necesita almacenar información suficiente para verificar unicidad y aplicar el cool-down, pero cualquier dato adicional aumenta la superficie de correlación ante un atacante con acceso al emisor. La pregunta es cuál es el conjunto mínimo.
 
-#### Opción A — Almacenar la asociación anon_seed → anon_id
+#### Opción A — Tupla extendida
 
-El emisor almacena `{anon_seed, anon_id, fecha_emision}`, manteniendo la trazabilidad completa entre el identificador derivado del CUIT y la identidad anónima emitida.
+El emisor almacena `{anon_seed, anon_id, pseudonimo, fecha_emision}` y mantiene la asociación entre `anon_seed` y `anon_id` para permitir operaciones posteriores sobre la identidad.
 
 Ventajas
 
-- Permite recuperar el `anon_id` de un ciudadano que olvidó su pseudónimo, re-autenticándose vía AUTENTICAR.
+- Permite al emisor responder consultas sobre identidades emitidas.
+- Facilita auditorías retrospectivas en el propio emisor.
 
 Desventajas
 
-- La asociación `anon_seed → anon_id` almacenada es un vínculo directo entre el identificador derivado del CUIT y la identidad usada en la plataforma. Un atacante con acceso al emisor tiene acceso a esa tabla completa.
-- La recuperación de identidad ante pérdida de credenciales transmite al ciudadano la percepción de que el sistema sabe quién es, erosionando la confianza en el anonimato aunque técnicamente no lo comprometa más que la emisión original.
+- Un atacante con acceso al emisor puede vincular `anon_seed` con `anon_id`, colapsando la separación entre las dos capas de identificadores.
+- Contradice el principio de minimización de datos de P-0006.
 
-#### Opción B — Almacenar solo anon_seed y fecha_emision
+#### Opción B — Tupla mínima
 
 El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena el `anon_id` ni ninguna asociación entre ambos identificadores.
 
 Ventajas
 
-- Minimización de datos: el emisor almacena estrictamente lo necesario para sus dos funciones operativas.
-- Un atacante con acceso al emisor obtiene `anon_seeds` y fechas, pero no puede determinar qué `anon_id` corresponde a cada uno sin la frase secreta del ciudadano.
-- La irrecuperabilidad de credenciales es coherente con la percepción del ciudadano de que el sistema no sabe quién es.
+- Minimiza la información disponible ante un atacante con acceso al emisor.
+- Elimina la posibilidad de recuperación de identidad desde el emisor, lo cual refuerza la percepción del ciudadano de que el sistema no puede identificarlo.
+- Coherente con el principio de minimización de datos de P-0006.
 
 Desventajas
 
-- Si el ciudadano pierde su pseudónimo o su frase secreta, la identidad es irrecuperable. Debe esperar el cool-down para solicitar una nueva.
+- El emisor no puede responder consultas sobre identidades emitidas después del momento de emisión.
+- Si un ciudadano pierde sus credenciales, la identidad queda irrecuperable incluso con ayuda del emisor.
 
 ### Decisión 3 — Derivación del anon_id y auditoría de legitimidad
 
 El `anon_id` es el identificador que el ciudadano usa dentro de la plataforma. La pregunta es cómo derivarlo de forma que sea auditable —demostrable que corresponde a un ciudadano real— sin que esa demostración permita vincular el `anon_id` con el `anon_seed` ni con el CUIT.
 
-Durante el diseño se evaluaron tres familias de solución.
+Durante el diseño se evaluaron cuatro familias de solución.
 
 #### Opción A — anon_id aleatorio sin auditoría criptográfica
 
@@ -113,7 +115,7 @@ Desventajas
 
 #### Opción C — anon_id derivado determinísticamente del CUIT
 
-El `anon_id` interno se calcula como `HASH(salt + CUIT)`, colapsando `anon_seed` y `anon_id` en un único identificador. La prueba ZK certifica directamente ese identificador.
+El `anon_id` interno se calcula como `HASH(salt_del_sistema + CUIT)`, colapsando `anon_seed` y `anon_id` en un único identificador. La prueba ZK certifica directamente ese identificador.
 
 Ventajas
 
@@ -125,24 +127,23 @@ Desventajas
 - El identificador que vive en la plataforma es función directa del CUIT. Un atacante con acceso a la base de datos de la plataforma, al salt del sistema y a una lista de CUITs puede ejecutar un ataque de diccionario para identificar ciudadanos, dado que el espacio de CUITs es finito y semi-público.
 - Incompatible con el principio de minimización de correlaciones de P-0006.
 
-#### Opción D — anon_id derivado del anon_seed y la frase secreta del ciudadano
+#### Opción D — anon_id derivado del anon_seed y un nonce aleatorio generado por el emisor
 
-El `anon_id` se calcula como `HASH(anon_seed + HASH(frase_secreta))`, donde `anon_seed = HASH(salt + CUIT)` según P-0013. La frase secreta actúa como ingrediente que el emisor nunca almacena.
+El `anon_id` se calcula como `HASH(anon_seed + nonce)`, donde `anon_seed = HASH(salt_del_sistema + CUIT)` según P-0013 y `nonce` es un valor aleatorio generado por el emisor en el momento de la emisión. El nonce es el ingrediente que rompe la relación determinista entre `anon_seed` y `anon_id`, evitando que un atacante con acceso al emisor pueda calcular el `anon_id` de un ciudadano a partir de su `anon_seed`.
 
-Durante la emisión el flujo ocurre en dos fases secuenciales. En la primera, el emisor calcula el `anon_seed` a partir del token de AUTENTICAR, verifica unicidad y cool-down, y decide si procede. Si el `anon_seed` ya existe y no expiró el cool-down, rechaza la solicitud sin procesar ningún dato adicional. En la segunda fase, el ciudadano envía `HASH(frase_secreta)` al emisor. El emisor lo usa para calcular el `anon_id = HASH(anon_seed + HASH(frase_secreta))` y para derivar el verificador de frase secreta, que es un valor separado calculado a partir del `HASH(frase_secreta)` y que la plataforma usará en el login para verificar que el ciudadano conoce la frase sin que la plataforma necesite el `anon_seed`. El `HASH(frase_secreta)` se descarta inmediatamente una vez calculados el `anon_id` y el verificador.
+El flujo de emisión ocurre en una única interacción del ciudadano con el emisor. El ciudadano presenta su JWT de AUTENTICAR. El emisor calcula el `anon_seed`, verifica unicidad y cool-down; si el `anon_seed` ya existe y no expiró el cool-down, rechaza la solicitud. Si procede, el emisor genera un `nonce` aleatorio, calcula el `anon_id`, genera la prueba ZK, y descarta el `nonce` inmediatamente sin almacenarlo.
 
-La prueba ZK demuestra: "existe un JWT válido de AUTENTICAR cuyo CUIT produce este `anon_seed`, y existe un `HASH(frase_secreta)` que combinado con ese `anon_seed` produce este `anon_id`", sin revelar ninguno de los dos valores privados. El `anon_id` es el único output público de la prueba.
+La prueba ZK demuestra: "existe un JWT válido de AUTENTICAR cuyo CUIT produce este `anon_seed`, y existe un `nonce` que combinado con ese `anon_seed` produce este `anon_id`", sin revelar ninguno de los dos valores privados. El `anon_id` es el único output público de la prueba.
 
 Ventajas
 
-- La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el secreto del ciudadano, no solo organizacional. Un atacante con acceso al emisor obtiene `anon_seeds` pero no puede derivar `anon_ids` sin las frases secretas. Un atacante con acceso a la plataforma obtiene `anon_ids` pero no puede derivar `anon_seeds`.
+- La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el nonce desconocido fuera del momento de emisión. Un atacante con acceso al emisor obtiene `anon_seeds` pero no puede derivar los `anon_ids` correspondientes porque los nonces no se almacenan. Un atacante con acceso a la plataforma obtiene `anon_ids` pero no puede derivar `anon_seeds`.
 - La prueba ZK permite a la plataforma verificar de forma autónoma que cualquier `anon_id` tiene un ciudadano real detrás, sin cruzar datos con el emisor.
-- La irrecuperabilidad ante pérdida de credenciales refuerza la percepción del ciudadano de que el sistema no puede identificarlo, coherente con los principios declarados del sistema.
+- El emisor no participa del manejo de la frase secreta del ciudadano. La frase secreta es asunto exclusivo de la plataforma, lo que preserva la separación de funciones.
 
 Desventajas
 
-- El circuito ZK requiere constraints adicionales respecto al diseño de P-0014, al incluir la derivación `anon_seed + HASH(frase_secreta) → anon_id`.
-- Si el ciudadano pierde su pseudónimo o su frase secreta, la identidad es irrecuperable.
+- El circuito ZK requiere constraints adicionales respecto al diseño de P-0014, al incluir la derivación `anon_seed + nonce → anon_id`.
 
 ### Decisión 4 — Alcance de ZK respecto a P-0014
 
@@ -164,7 +165,7 @@ Desventajas
 
 #### Opción B — ZK cubre solo el anon_id
 
-El circuito certifica únicamente que el `anon_id` fue generado a partir de un ciudadano real de AUTENTICAR y una frase secreta conocida por ese ciudadano. El `anon_seed` queda protegido por los controles de acceso al emisor.
+El circuito certifica únicamente que el `anon_id` fue generado a partir de un ciudadano real de AUTENTICAR y un nonce generado por el emisor. El `anon_seed` queda protegido por los controles de acceso al emisor.
 
 Ventajas
 
@@ -181,7 +182,7 @@ Desventajas
 
 **Decisión 2:** Se adopta la **Opción B**. El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena el `anon_id` ni ninguna asociación entre ambos identificadores.
 
-**Decisión 3:** Se adopta la **Opción D**. El `anon_id` se deriva como `HASH(anon_seed + HASH(frase_secreta))`. Durante la emisión el ciudadano envía `HASH(frase_secreta)` al emisor en la segunda fase del flujo, una vez que el emisor verificó unicidad y cool-down. El emisor calcula el `anon_id`, genera la prueba ZK y deriva el verificador de frase secreta, descartando el `HASH(frase_secreta)` inmediatamente. La plataforma recibe el pseudónimo amigable, el `anon_id`, la prueba ZK y el verificador de frase secreta.
+**Decisión 3:** Se adopta la **Opción D**. El `anon_id` se deriva como `HASH(anon_seed + nonce)`, donde `nonce` es un valor aleatorio generado por el emisor para cada emisión. Durante la emisión, el emisor verifica unicidad y cool-down sobre el `anon_seed`; si procede, genera el `nonce`, calcula el `anon_id`, genera la prueba ZK, y descarta el `nonce` inmediatamente. La plataforma recibe del emisor el pseudónimo amigable, el `anon_id` y la prueba ZK. La frase secreta del ciudadano no interviene en este flujo y es asunto exclusivo de la plataforma.
 
 **Decisión 4:** Se adopta la **Opción B**. ZK cubre únicamente el `anon_id`. Este ADR superseda parcialmente P-0014 en lo relativo al alcance del circuito ZK: la certificación del `anon_seed` mediante ZK queda descartada. La infraestructura de JWKS histórico y el mecanismo de revocación por `kid` comprometido definidos en P-0014 se mantienen vigentes, ya que son necesarios para la verificabilidad de las pruebas sobre el `anon_id`.
 
@@ -191,7 +192,9 @@ El cool-down de 6 meses es el mecanismo central de control de abuso. Sin él, un
 
 La tupla mínima `{anon_seed, fecha_emision}` en el emisor es consecuencia directa del principio de minimización de datos de P-0006: el emisor almacena estrictamente lo necesario para sus dos funciones operativas. No almacenar la asociación `anon_seed → anon_id` reduce la información disponible para un atacante con acceso al emisor y elimina la posibilidad de recuperación de identidad, lo cual es un beneficio de diseño: la irrecuperabilidad refuerza la percepción del ciudadano de que el sistema no puede identificarlo.
 
-La derivación `anon_id = HASH(anon_seed + HASH(frase_secreta))` resuelve la tensión central de este ADR. Al incorporar la frase secreta como ingrediente que el emisor nunca almacena, la separación entre `anon_seed` y `anon_id` pasa de ser organizacional a ser criptográficamente forzada. La estructura en dos fases del flujo de emisión garantiza que el `HASH(frase_secreta)` solo se procesa si la emisión va a proceder, minimizando la exposición.
+La derivación `anon_id = HASH(anon_seed + nonce)` resuelve la tensión central de este ADR. El nonce es generado por el emisor, consumido para calcular el `anon_id` y la prueba ZK, y descartado inmediatamente sin almacenarse. Con el nonce descartado, la separación entre `anon_seed` y `anon_id` deja de ser organizacional y pasa a ser criptográficamente forzada: aunque un atacante obtenga el `anon_seed` desde el emisor, no puede derivar el `anon_id` correspondiente sin el nonce, que ya no existe en ningún lado.
+
+Se consideró usar `HASH(frase_secreta)` del ciudadano como segundo componente en lugar de un nonce aleatorio. Esa alternativa quedó descartada porque involucraría al emisor en el manejo de la frase secreta, que es credencial de acceso a la plataforma y no pertenece al alcance de responsabilidades del emisor. La frase secreta es asunto exclusivo de la plataforma; el emisor no necesita conocerla, ni siquiera como hash, para cumplir su función. Un nonce aleatorio generado por el emisor cumple el mismo rol criptográfico en la derivación del `anon_id` sin violar la separación de funciones.
 
 La firma independiente del emisor sobre el `anon_id` fue evaluada como mecanismo de auditoría más simple que ZK. Se descartó porque en el escenario de despliegue habitual del sistema, emisor y plataforma comparten infraestructura y administrador. En ese contexto, la clave privada del emisor es accesible para el mismo actor que podría fabricar identidades falsas, lo que hace que la firma no agregue protección real frente a la amenaza que intenta mitigar.
 
@@ -199,16 +202,16 @@ ZK se concentra en el `anon_id` porque es el único identificador que sale del e
 
 ## Consecuencias
 
-- El emisor almacena `{anon_seed, fecha_emision}` por cada ciudadano registrado. No almacena `anon_id`, pseudónimo amigable, frase secreta ni ningún derivado de ella.
-- El flujo de emisión ocurre en dos fases. En la primera el emisor calcula el `anon_seed`, verifica unicidad y cool-down, y decide si procede. En la segunda el ciudadano envía `HASH(frase_secreta)`, el emisor calcula el `anon_id`, genera la prueba ZK y deriva el verificador de frase secreta. El `HASH(frase_secreta)` no debe almacenarse ni loguearse en ningún punto.
-- La plataforma recibe del emisor en el momento de la emisión: el pseudónimo amigable, el `anon_id`, la prueba ZK y el verificador de frase secreta. A partir de ese momento opera de forma completamente independiente del emisor.
-- El login del ciudadano en la plataforma se realiza con pseudónimo amigable y frase secreta según P-0004. La plataforma verifica la frase secreta contra el verificador almacenado sin necesitar el `anon_seed` ni contactar al emisor.
+- El emisor almacena `{anon_seed, fecha_emision}` por cada ciudadano registrado. No almacena `anon_id`, pseudónimo amigable, nonce, frase secreta ni ningún derivado de ella.
+- El flujo de emisión ocurre en una única interacción. El emisor verifica el JWT de AUTENTICAR, calcula el `anon_seed`, verifica unicidad y cool-down, y si procede genera un `nonce` aleatorio, calcula el `anon_id` y genera la prueba ZK. El `nonce` se descarta inmediatamente; no debe almacenarse ni loguearse en ningún punto.
+- La plataforma recibe del emisor en el momento de la emisión: el pseudónimo amigable, el `anon_id` y la prueba ZK. A partir de ese momento opera de forma completamente independiente del emisor.
+- La frase secreta del ciudadano no interviene en el flujo de emisión. Su definición, almacenamiento y verificación son responsabilidad exclusiva de la plataforma, según P-0008 y P-0009.
+- El login del ciudadano en la plataforma se realiza con pseudónimo amigable y frase secreta según P-0004, contra el material que la plataforma haya almacenado al momento del registro del ciudadano en la plataforma.
 - La pérdida del pseudónimo amigable, de la frase secreta, o de ambos, hace la identidad irrecuperable. El ciudadano debe esperar el cool-down para solicitar una nueva identidad completa.
 - El historial de una identidad inactiva —propuestas publicadas, apoyos dados— permanece visible en la plataforma y sigue contando. El sistema no puede distinguir una identidad abandonada de una simplemente inactiva. La decisión sobre si la plataforma puede marcar `anon_ids` como inactivos queda fuera del alcance de este ADR y corresponde al modelo de datos de la plataforma participativa.
 - El robo de credenciales no tiene mitigación técnica en este nivel. Su impacto es acotado: el ladrón opera dentro de los mismos límites que el ciudadano legítimo.
-- El circuito ZK de P-0014 debe adaptarse para certificar la relación `anon_seed + HASH(frase_secreta) → anon_id`, con el `anon_id` como output público y el `anon_seed` y el `HASH(frase_secreta)` como witnesses privados. El constraint de certificación del `anon_seed` definido en P-0014 queda descartado.
+- El circuito ZK de P-0014 debe adaptarse para certificar la relación `anon_seed + nonce → anon_id`, con el `anon_id` como output público y el `anon_seed` y el `nonce` como witnesses privados. El constraint de certificación del `anon_seed` definido en P-0014 queda descartado.
 - La infraestructura de JWKS histórico y el mecanismo de revocación por `kid` comprometido definidos en P-0014 se mantienen vigentes.
-- P-0009 asumió un flujo donde la plataforma recibe la frase secreta en texto plano para almacenarla. Con la Decisión 3 de este ADR ese flujo cambia: la plataforma recibe el verificador ya calculado por el emisor y nunca ve la frase en texto plano. La corrección formal de P-0009 queda pendiente en un ADR posterior.
 
 ## Referencias
 
@@ -216,7 +219,8 @@ ZK se concentra en el `anon_id` porque es el único identificador que sale del e
 - P-0003 — Selección del pseudónimo de identidad anónima
 - P-0004 — Autenticación de identidad anónima
 - P-0006 — Modelo de amenazas y supuestos de confianza
-- P-0009 — Algoritmo de almacenamiento de la frase secreta (pendiente de corrección formal en ADR posterior)
+- P-0008 — Mecanismo de credencial de acceso: passphrase vs password
+- P-0009 — Algoritmo de almacenamiento de la frase secreta
 - P-0013 — Integración con AUTENTICAR
 - P-0014 — Auditoría criptográfica de legitimidad del emisor mediante pruebas de conocimiento cero (parcialmente supersedado por este ADR en lo relativo al alcance del circuito ZK)
 - `design/identity_model.md` — Modelo de identidad
