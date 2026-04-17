@@ -22,10 +22,6 @@ Orden sugerido de abordaje:
 
 5. **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
 
-6. **Corrección de P-0009 por cambio de flujo de frase secreta.** P-0015 cambió el flujo: la plataforma nunca recibe la frase secreta en texto plano sino un verificador calculado por el emisor. P-0009 debe ser corregido formalmente mediante un nuevo ADR que documente este cambio y su justificación.
-
-7. **Invalidación de anon_id en la plataforma participativa.** La decisión de si la plataforma puede marcar `anon_ids` como inactivos quedó fuera del alcance de P-0015. Corresponde resolverla en el ADR del modelo de datos de la plataforma participativa.
-
 ## Decisiones de diseño específicas de la demo
 
 Estas se abordan después de cerrar las decisiones de plataforma. Incluye una decisión pendiente surgida durante el diseño de P-0014:
@@ -53,26 +49,27 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 
 - **ADR P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas.** Cerrado. Decisiones formalizadas:
   - Cool-down de 6 meses configurable por el operador como mecanismo de control de abuso. Contado desde `fecha_emision` de la identidad activa. Sin límite de renovaciones de por vida.
-  - El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena `anon_id` ni ninguna asociación entre ambos.
-  - El `anon_id` se deriva como `HASH(anon_seed + HASH(frase_secreta))`. La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el secreto del ciudadano.
-  - El flujo de emisión ocurre en dos fases: primero el emisor verifica unicidad y cool-down usando solo el `anon_seed`; recién entonces el ciudadano envía `HASH(frase_secreta)` para que el emisor calcule el `anon_id` y genere la prueba ZK.
-  - ZK cubre únicamente el `anon_id`. La certificación del `anon_seed` mediante ZK queda descartada. P-0015 superseda parcialmente P-0014 en ese punto.
+  - El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena `anon_id`, pseudónimo amigable, nonce, ni ningún dato relacionado con la frase secreta del ciudadano.
+  - El `anon_id` se deriva como `HASH(anon_seed + nonce)`, donde `nonce` es un valor aleatorio generado por el emisor en cada emisión y descartado inmediatamente sin almacenarse. La separación entre `anon_seed` y `anon_id` es criptográficamente forzada porque el nonce no existe fuera del momento de emisión.
+  - El flujo de emisión ocurre en una única interacción. El emisor verifica el JWT de AUTENTICAR, calcula el `anon_seed`, verifica unicidad y cool-down, y si procede genera el nonce, calcula el `anon_id`, genera la prueba ZK, y descarta el nonce.
+  - La frase secreta del ciudadano no interviene en el flujo de emisión. Es asunto exclusivo de la plataforma.
+  - La plataforma recibe del emisor `{pseudónimo amigable, anon_id, prueba ZK}` y opera de forma completamente independiente a partir de ese momento.
+  - ZK cubre únicamente el `anon_id`. La certificación del `anon_seed` mediante ZK queda descartada. P-0015 superseda parcialmente P-0014 en el alcance del circuito ZK, que pasa a certificar la cadena completa hasta el `anon_id`.
   - La infraestructura de JWKS histórico y revocación por `kid` comprometido de P-0014 se mantienen vigentes.
   - La pérdida de credenciales (pseudónimo, frase secreta o ambos) hace la identidad irrecuperable. El ciudadano espera el cool-down y solicita una nueva identidad completa. Este comportamiento refuerza la percepción de anonimato.
   - La plataforma no puede invalidar `anon_ids`. No existe revocación técnica. Esa decisión queda fuera del alcance del emisor y corresponde al modelo de datos de la plataforma participativa.
   - El historial de identidades inactivas permanece visible y sigue contando. El sistema no distingue identidades abandonadas de inactivas.
-  - P-0009 asumió que la plataforma recibe la frase secreta en texto plano. Con P-0015 ese flujo cambia: la plataforma recibe el verificador ya calculado por el emisor y nunca ve la frase. Corrección formal pendiente en ADR posterior.
 
 - **ADR P-0014 — Auditoría criptográfica de legitimidad del emisor mediante pruebas de conocimiento cero.** Cerrado. Decisiones formalizadas:
   - Se adopta ZK como mecanismo de auditoría de legitimidad del emisor. Superseda P-0013 Decisión 4 (que era temporal y procedimental).
   - La generación de la prueba se realiza en el servidor (emisor), no en el cliente. La generación en cliente fue descartada por tiempos de proving de 60-180 segundos en dispositivos de gama media-baja y requisitos de RAM incompatibles con smartphones del segmento objetivo.
   - Stack adoptado: circom + snarkjs con el circuito RSA de `zkemail/zk-email-verify` (auditado) como base. Esquema Groth16 sobre BN254. Pruebas de ~256 bytes, verificación en 1-5 ms en servidor.
-  - La adaptación del circuito (extracción del claim `cuit`, cálculo de `anon_seed`, separación de dominios en hash Poseidon) no está auditada y requiere auditoría especializada en ZK antes de cualquier despliegue en producción. Costo estimado: USD 30.000–150.000.
+  - El circuito certifica la cadena completa hasta el `anon_id`: existe un JWT válido de AUTENTICAR cuyo CUIT produce el `anon_seed`, y existe un nonce generado por el emisor que combinado con el `anon_seed` produce el `anon_id`. Witnesses privados: CUIT, `anon_seed`, nonce. Outputs públicos: `anon_id`, `publicKeyHash`, `kid`.
+  - La adaptación del circuito (extracción del claim `cuit`, cálculo de `anon_seed`, derivación de `anon_id`, separación de dominios en hash Poseidon) no está auditada y requiere auditoría especializada en ZK antes de cualquier despliegue en producción. Costo estimado: USD 30.000–150.000.
   - `zkemail/zk-jwt` no debe usarse como dependencia directa (autodeclarado no apto para producción, sin auditoría). Puede consultarse como referencia de implementación.
   - El emisor debe implementar un servicio de JWKS histórico para mantener verificabilidad de pruebas tras rotaciones de clave de AUTENTICAR.
   - El emisor debe implementar un mecanismo de revocación por `kid` comprometido.
   - Requiere ceremonia de trusted setup Phase 2 antes del despliegue en producción. Phase 1 puede reutilizarse de la ceremonia pública de Hermez/Polygon.
-  - La prueba ZK certifica legitimidad del `anon_seed`. La auditoría de legitimidad en la plataforma participativa (que trabaja con `anon_id`) es un problema separado que se resuelve en P-0015.
   - `design/adr/README.md` tiene un agregado pendiente de aplicar: una regla explícita sobre separación entre ADRs de plataforma y decisiones de implementaciones específicas.
 
 - **ADR P-0013 — Integración con AUTENTICAR.** Cerrado. Decisiones formalizadas:
@@ -81,6 +78,13 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
   - Fórmula del `anon_seed`: `HASH(salt_del_sistema + CUIT/CUIL)`. El claim a extraer es `cuit`. No se usa `sub` (varía entre reinos) ni `preferred_username` (inestable entre proveedores).
   - Nivel mínimo requerido: nivel 2. El criterio es el nivel mínimo que garantice verificación de persona real con credenciales estatales activas.
   - La Decisión 4 de P-0013 (auditoría procedimental) fue temporal y queda supersedada por P-0014.
-  - La auditoría de legitimidad en la plataforma participativa se resuelve en P-0015 mediante firma del emisor sobre cada `anon_id`.
+  - La auditoría de legitimidad en la plataforma participativa se resuelve en P-0014 mediante ZK sobre la cadena completa hasta el `anon_id`, según P-0015.
   - `notas/autenticacion_autenticar.md` fue migrado y debe eliminarse: la parte descriptiva migró a `docs/autenticar.md` y las decisiones al ADR.
   - `docs/autenticar.md` está pendiente de completar con información de implementación (estructura real del JWT, ejemplos de requests/responses, manejo de errores, scopes, ambiente de testing) mediante investigación con el plugin de Chrome.
+
+- **ADR P-0009 — Recepción y almacenamiento de la frase secreta en la plataforma.** Cerrado. Decisiones formalizadas:
+  - El cliente calcula `HASH(frase_secreta)` localmente antes de enviar cualquier valor a la plataforma, tanto en el registro inicial del ciudadano en la plataforma como en cada login posterior. La plataforma nunca recibe la frase en texto plano.
+  - La función hash del cliente debe ser una función criptográfica estándar (por ejemplo SHA-256), fija para todo el sistema, y forma parte de la especificación del protocolo entre cliente y plataforma.
+  - La plataforma aplica Argon2id al `HASH(frase_secreta)` recibido, con salt único generado aleatoriamente por registro. Almacena el hash Argon2id, el salt y los parámetros de costo. Descarta el `HASH(frase_secreta)` inmediatamente.
+  - Los parámetros de costo de Argon2id (memoria, iteraciones, paralelismo) son configurables por el operador y deben documentarse en la guía de instalación y operación.
+  - La decisión de hashear en el cliente responde al mismo principio que P-0015 aplicó entre ciudadano y emisor: ningún componente servidor ve la frase en claro. Las dos decisiones son independientes pero coinciden por enfrentar la misma amenaza (exposición ante administradores locales, logs, infraestructura compartida).
