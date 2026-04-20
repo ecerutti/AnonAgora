@@ -140,7 +140,7 @@ Las listas de animales, colores y adjetivos deben cumplir los siguientes criteri
 - sin caracteres especiales
 - preferentemente sin tildes ni acentos
 
-El objetivo es evitar problemas de escritura y facilitar el uso d la identidad anónima como identificador de acceso.
+El objetivo es evitar problemas de escritura y facilitar el uso de la identidad anónima como identificador de acceso.
 
 ## Curaduría del vocabulario
 
