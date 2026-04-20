@@ -73,7 +73,7 @@ Descartado.
 
 El ciudadano utiliza:
 
-- su identiad anónima
+- su identidad anónima
 - su frase secreta
 
 para volver a ingresar a la plataforma.
