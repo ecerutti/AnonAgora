@@ -110,7 +110,7 @@ Vibora Rastrera
 Cerdo Asqueroso
 ```
 
-Esto se logra mediante curación cuidadosa de las listas de animles y adjetivos.
+Esto se logra mediante curación cuidadosa de las listas de animales y adjetivos.
 
 ### Concordancia gramatical
 
