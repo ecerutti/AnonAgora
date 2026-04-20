@@ -1,8 +1,10 @@
 # AGENTS.md
 
+# AGENTS.md
+
 ## Propósito del proyecto
 
-AnonAgora explora el diseño de una **Plataforma de Participación Ciudadana con Identidad Verificada y Anonimato Persistente**.
+Este proyecto explora el diseño de una **Plataforma de Participación Ciudadana con Identidad Verificada y Anonimato Persistente**.
 
 El objetivo del sistema es permitir que ciudadanos reales participen en propuestas y debates públicos sin exponer su identidad real ni crear perfiles públicos rastreables.
 
@@ -13,6 +15,12 @@ Este repositorio contiene:
 - la propuesta conceptual del sistema
 - decisiones de diseño de la plataforma
 - una futura implementación demo
+
+## Sobre el nombre del proyecto
+
+El proyecto todavía no tiene un nombre definitivo. El repositorio se llama `AnonAgora` y el dominio del despliegue público es `anonagora.cloud`, pero ambos son circunstanciales: surgen de la necesidad de tener un identificador para alojar el repositorio en GitHub y de contar con un dominio para la futura demo.
+
+Dentro de la documentación del proyecto debe usarse terminología genérica ("la plataforma", "el sistema", "el proyecto"). El nombre `AnonAgora` solo debe aparecer cuando sea inevitable hacer referencia al repositorio o al dominio como tales — principalmente en `docs/index.md`, que es la página de recepción del sitio público.
 
 ---
 
