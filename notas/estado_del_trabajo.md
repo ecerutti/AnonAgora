@@ -20,7 +20,7 @@ Estas se abordan después de cerrar las decisiones de plataforma. Incluye una de
 2. Alcance funcional del MVP (qué features entran y cuáles no).
 3. Persistencia y deployment.
 4. Datos de prueba o seed inicial.
-5. Manejo de la identidad anónima en la demo (simulación de la verificación de unicidad). La demo no usa AUTENTICAR real ni implementa ZK; ambas omisiones deben quedar documentadas en un ADR de demo (D-XXXX) que explique por qué no aplican en ese contexto.
+5. Manejo de la identidad anónima en la demo (simulación de la verificación de unicidad). La demo no usa AUTENTICAR real ni implementa ZK; ambas omisiones deben quedar documentadas en un ADR de demo (DP-XXXX) que explique por qué no aplican en ese contexto.
 6. Revisor de lenguaje en la demo: ¿API real de OpenAI o mock local?
 7. Autenticación administrativa para gestión técnica de la demo.
 8. Look and feel, guía visual.
