@@ -186,20 +186,27 @@ Ejemplo: no existe reputación pública de usuarios (ver `P-0001`).
 
 Si una decisión de diseño no cumple ninguna de estas condiciones, probablemente no necesita ADR y basta con documentarla como parte del diseño general en `design/`.
 
-### Separación entre decisiones de plataforma y decisiones de implementación
+### Los cuatro tipos de ADR del proyecto
 
-Los ADRs con prefijo `P-XXXX` registran decisiones sobre el diseño de la plataforma general: propiedades del sistema, algoritmos, protocolos, estructura de datos, flujos funcionales. No registran decisiones sobre cómo se implementa concretamente la plataforma en un despliegue específico: lenguaje de programación, framework, motor de base de datos, biblioteca concreta para un algoritmo ya decidido, infraestructura de despliegue, o versión de una dependencia.
+Los ADRs del proyecto se clasifican en dos ejes: el tipo de decisión que registran (diseño vs implementación) y el alcance al que aplican (plataforma general vs demo).
 
-La distinción está en si la decisión determina **qué hace el sistema** o **con qué piezas concretas se construye**. Un ADR responde la primera pregunta; las segundas corresponden a la documentación de implementación.
+- **Diseño** responde a la pregunta *"¿qué hace el sistema?"*: propiedades, algoritmos, protocolos, estructura de datos, flujos funcionales. Ejemplo: elegir Argon2id como algoritmo de derivación para la frase secreta.
+- **Implementación** responde a la pregunta *"¿con qué piezas concretas se construye?"*: lenguaje, framework, motor de base de datos, biblioteca concreta para un algoritmo ya decidido, infraestructura de despliegue. Ejemplo: elegir la biblioteca `argon2` v0.31 en Rust como implementación concreta.
+- **Plataforma general** son decisiones que aplican al sistema como tal, independientemente del despliegue concreto.
+- **Demo** son decisiones específicas de la implementación demostrativa del proyecto, que puede adoptar simplificaciones que no apliquen a un despliegue productivo (ver `DP-0001` como ejemplo).
 
-Ejemplos:
+La combinación de ambos ejes define cuatro categorías de ADR, cada una con su propio prefijo y carpeta:
 
-- **Decisión de plataforma (P-XXXX):** elegir Argon2id como algoritmo de derivación para la frase secreta. La decisión es sobre qué garantía ofrece el sistema, independientemente del lenguaje en que se implemente.
-- **Decisión de implementación (no ADR de plataforma):** elegir la biblioteca `argon2` v0.31 en Rust como implementación concreta. Eso es un detalle del despliegue, no una decisión del diseño de la plataforma.
-- **Decisión de plataforma (P-XXXX):** que el ranking de propuestas aplique decaimiento temporal exponencial con parámetros configurables. La decisión es sobre el comportamiento observable del sistema.
-- **Decisión de implementación (no ADR de plataforma):** que el cálculo del ranking se realice en un job programado cada 10 minutos o en tiempo real al consultar. Eso depende del contexto operativo de cada despliegue.
+| Prefijo | Carpeta | Alcance |
+|---|---|---|
+| `P-XXXX` | `design/adr/` | Diseño de la plataforma general. |
+| `I-XXXX` | `implementation/adr/` | Implementación de la plataforma general. |
+| `DP-XXXX` | `design/demo/adr/` | Diseño específico de la demo. |
+| `DI-XXXX` | `implementation/demo/adr/` | Implementación específica de la demo. |
 
-Las decisiones específicas de la implementación demo tienen su propia carpeta de ADRs (`design/demo/adr/`, prefijo `D-XXXX`) porque la demo sí elige piezas concretas. Esos ADRs documentan decisiones que son legítimamente decisiones de implementación pero que tienen alternativas evaluadas y merecen registro dentro del alcance de la demo.
+**Cuándo registrar una decisión como ADR.** El criterio *"merece ADR si pudo haber sido distinta"* aplica por igual a los cuatro tipos. No toda decisión de implementación amerita un ADR: la elección de una biblioteca concreta merece registro solo cuando había alternativas razonables y hubo que elegir justificadamente (por ejemplo, `argon2` v0.31 madura vs v0.32 nueva). La adopción trivial de una dependencia sin alternativas a evaluar no necesita ADR y se documenta directamente en el documento de implementación correspondiente de `implementation/` o `implementation/demo/`.
+
+**Qué va fuera de los ADRs.** Las decisiones de diseño que no surgen de elegir entre alternativas (un modelo conceptual, un glosario, una especificación unívoca) se documentan directamente en `design/` o `design/demo/`. Análogamente, la documentación descriptiva de implementación sin alternativas a evaluar vive en `implementation/` o `implementation/demo/`, no en ADRs.
 
 ### Regla rápida
 
