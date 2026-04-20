@@ -1,7 +1,5 @@
 # AGENTS.md
 
-# AGENTS.md
-
 ## Propósito del proyecto
 
 Este proyecto explora el diseño de una **Plataforma de Participación Ciudadana con Identidad Verificada y Anonimato Persistente**.
