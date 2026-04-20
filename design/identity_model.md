@@ -47,7 +47,7 @@ Cuando estas propiedades no están disponibles, el sistema puede seguir operando
 
 Algunos proveedores de identidad pueden entregar identificadores sensibles del usuario. 
 
-Por ejemplo, en Argentina los verficadores externos (ANSES, AFIP/ARCA, MiArgentina, ReNaPer, etc.) podrían entregar identifcadores como:
+Por ejemplo, en Argentina los verificadores externos (ANSES, AFIP/ARCA, MiArgentina, ReNaPer, etc.) podrían entregar identificadores como:
 
 - DNI
 - CUIL/CUIT
