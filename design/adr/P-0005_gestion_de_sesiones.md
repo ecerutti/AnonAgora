@@ -17,7 +17,7 @@ Por lo tanto, ciertas decisiones de experiencia de usuario pueden afectar la **p
 
 ### 1. Sesión persistente indefinida
 
-Mientras el usuario no cierre explícitamente su sessión, el sistema recuerda la identidad del usuario entre visitas, permitiendo el ingreso automático sin necesidad de autenticación adicional.
+Mientras el usuario no cierre explícitamente su sesión, el sistema recuerda la identidad del usuario entre visitas, permitiendo el ingreso automático sin necesidad de autenticación adicional.
 
 **Ventajas**
 
