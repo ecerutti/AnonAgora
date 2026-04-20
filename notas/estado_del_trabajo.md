@@ -78,8 +78,6 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
   - Nivel mínimo requerido: nivel 2. El criterio es el nivel mínimo que garantice verificación de persona real con credenciales estatales activas.
   - La Decisión 4 de P-0013 (auditoría procedimental) fue temporal y queda supersedada por P-0014.
   - La auditoría de legitimidad en la plataforma participativa se resuelve en P-0014 mediante ZK sobre la cadena completa hasta el `anon_id`, según P-0015.
-  - `notas/autenticacion_autenticar.md` fue migrado y debe eliminarse: la parte descriptiva migró a `docs/autenticar.md` y las decisiones al ADR.
-  - `docs/autenticar.md` está pendiente de completar con información de implementación (estructura real del JWT, ejemplos de requests/responses, manejo de errores, scopes, ambiente de testing) mediante investigación con el plugin de Chrome.
 
 - **ADR P-0009 — Recepción y almacenamiento de la frase secreta en la plataforma.** Cerrado. Decisiones formalizadas:
   - El cliente calcula `HASH(frase_secreta)` localmente antes de enviar cualquier valor a la plataforma, tanto en el registro inicial del ciudadano en la plataforma como en cada login posterior. La plataforma nunca recibe la frase en texto plano.
