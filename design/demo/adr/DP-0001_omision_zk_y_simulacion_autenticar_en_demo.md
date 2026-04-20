@@ -1,4 +1,4 @@
-# D-0001 — Omisión de ZK y simulación de AUTENTICAR en la demo
+# DP-0001 — Omisión de ZK y simulación de AUTENTICAR en la demo
 
 ## Contexto
 
