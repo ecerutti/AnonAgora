@@ -2,7 +2,7 @@
 
 ## Propósito
 
-AnonAgora es una plataforma de participación ciudadana con identidad verificada y anonimato persistente.
+Este proyecto desarrolla una plataforma de participación ciudadana con identidad verificada y anonimato persistente.
 
 Su objetivo no es tomar decisiones vinculantes, sino funcionar como un termómetro social que permita observar qué propuestas e ideas comienzan a reunir apoyo dentro de la ciudadanía.
 
