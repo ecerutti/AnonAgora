@@ -16,6 +16,6 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 ## En cualquier momento del proyecto
 
-- **Revisar documentos en gestación en `notas/`.** Los documentos de gestación (como `autenticacion_autenticar.md`) deben revisarse periódicamente para evaluar si ya están maduros para migrar a su lugar definitivo en `design/` o `design/adr/`. Ver `estado_del_trabajo.md` para la lista actual.
+- **Revisar documentos en gestación en `notas/`.** Los documentos de gestación deben revisarse periódicamente para evaluar si ya están maduros para migrar a su lugar definitivo en `design/`, `design/adr/`, `docs/` o `implementation/`. Ver `notas/README.md` y `estado_del_trabajo.md` para la lista actual.
 
 - **Diseño UX del modo debug.** El modo debug requiere una advertencia prominente en todas las interfaces y una confirmación explícita antes de cualquier acción que modifique estado o genere eventos logueables (login, publicar propuesta, dar apoyo, emitir identidad anónima, renovar identidad). La especificación visual y de flujo de estas confirmaciones corresponde a la capa de UX y debe implementarse en cualquier despliegue de la plataforma. Ver P-0020.
