@@ -1,11 +1,14 @@
-# ADR de la demo
+# ADR de diseño de la demo
 
-Esta carpeta contiene Architecture Decision Records (ADR) específicos
-de la implementación demo.
+Esta carpeta contiene Architecture Decision Records (ADR) de **diseño** específicos de la implementación demo.
 
-Los ADR de la demo utilizan el prefijo:
+Los ADR de esta carpeta utilizan el prefijo:
 
-D-XXXX
+DP-XXXX
+
+(donde `D` indica *demo* y `P` indica *diseño de la demo*)
+
+Para decisiones de implementación específicas de la demo, ver `implementation/demo/adr/` (prefijo `DI-XXXX`).
 
 La convención general de ADR del proyecto está definida en:
 
