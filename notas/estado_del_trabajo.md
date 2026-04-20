@@ -10,17 +10,7 @@ Diseño de la plataforma: cierre de decisiones de diseño previas al desarrollo 
 
 ## Decisiones de diseño pendientes
 
-Orden sugerido de abordaje:
-
-1. **Límite anual de propuestas por ciudadano.** Decidir la existencia del límite como propiedad del sistema (configurable, cómo se cuenta el año, qué pasa con propuestas derivadas, posibilidad de configurar 0 o desactivarlo). El valor concreto "2 por año" que aparece en la documentación conceptual es el default sugerido, no la decisión de fondo.
-
-2. **Modelo de datos de propuestas.** Qué campos tiene una propuesta, longitud máxima, formato del cuerpo, si admite imágenes o links.
-
-3. **Búsqueda de propuestas.** Tipo de búsqueda (texto plano, tags, categorías), si hay categorización temática.
-
-4. **Vinculación entre propuestas.** Tipos de vínculo (deriva de, mejora a, integra a), direccionalidad, si requieren aceptación del autor original.
-
-5. **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
+- **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
 
 ## Decisiones de diseño específicas de la demo
 
@@ -44,6 +34,14 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **ADR P-0019 — Búsqueda y filtrado de propuestas.** Cerrado. Búsqueda full-text con morfología y stopwords en español sobre título y cuerpo, ponderada a favor del título. Filtros: emergente, tendencia, cantidad de vínculos, vínculos a propuestas específicas (AND), rango de fechas, rango de apoyos, apoyadas/no apoyadas por el ciudadano (requiere sesión).
+
+- **ADR P-0018 — Modelo de datos de propuestas.** Cerrado. Campos: id, titulo (texto plano, default 200 caracteres configurable), cuerpo (Markdown, default 20.000 caracteres configurable), fecha_publicacion, conteo_apoyos, score, vinculos. Sin autoría almacenada en la propuesta. Sin imágenes. Links externos permitidos como texto plano no clickeable.
+
+- **ADR P-0017 — Límite anual de propuestas por ciudadano.** Cerrado. Límite configurable con default 2, valor 0 válido (sin límite). Año móvil de 365 días por slot. Las propuestas derivadas consumen cupo. El rechazo del revisor de lenguaje no consume cupo.
+
+- **Documento de diseño — Vinculación entre propuestas.** Cerrado. Vínculos genéricos sin tipo, múltiples por propuesta (default 10, configurable), inmutables, sin aceptación del autor referenciado. Propuesta derivada es una propuesta común con vínculo, sin entidad ni nomenclatura especial.
 
 - **ADR P-0016 — Invalidación de identidades anónimas en la plataforma participativa.** Cerrado. La plataforma no implementa ningún mecanismo de invalidación de `anon_ids`. Las identidades no tienen estado de inactivación. Una identidad robada no puede ser revocada, pero el daño está acotado por los límites del sistema. El mecanismo de invalidación fue descartado porque introduce un vector de ataque de denegación de servicio sin contramedida técnica posible.
 
