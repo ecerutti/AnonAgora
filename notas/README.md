@@ -36,7 +36,6 @@ Acompañan el trabajo del proyecto a lo largo del tiempo y se van actualizando. 
 
 Borradores conceptuales de documentos que eventualmente migrarán a su lugar definitivo en el repo (`design/`, `design/adr/`, `docs/`, etc.) cuando estén maduros. Cuando un documento de gestación migra, deja de existir en `notas/`.
 
-- `autenticacion_autenticar.md` — borrador técnico sobre integración con AUTENTICAR para verificación de identidad. Su destino probable es un documento de diseño en `design/` o un insumo para un ADR futuro.
 - `propuesta_guia_de_instalacion.md` — material en gestación para una futura guía de instalación y operación dirigida a administradores de despliegues de la plataforma.
 
 ## Regla práctica
