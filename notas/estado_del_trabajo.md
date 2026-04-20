@@ -10,7 +10,7 @@ Diseño de la plataforma: cierre de decisiones de diseño previas al desarrollo 
 
 ## Decisiones de diseño pendientes
 
-- **Política de logs y retención de metadatos.** Concretar lo que P-0006 exige pero no fija: qué se registra, con qué granularidad temporal, por cuánto tiempo.
+No hay decisiones de plataforma pendientes.
 
 ## Decisiones de diseño específicas de la demo
 
@@ -34,6 +34,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **ADR P-0020 — Política de logs y retención de metadatos.** Cerrado. Granularidad mínima por tipo de evento en modo operativo. Campos prohibidos diferenciados por componente. Modo debug activable explícitamente con visibilidad obligatoria. Gestión interna de retención por cada componente (default 7 días operativo, 1 día debug). Limitaciones conocidas documentadas: backups a nivel de sistema, copia manual de logs, logs de infraestructura fuera del alcance de la plataforma.
 
 - **ADR P-0019 — Búsqueda y filtrado de propuestas.** Cerrado. Búsqueda full-text con morfología y stopwords en español sobre título y cuerpo, ponderada a favor del título. Filtros: emergente, tendencia, cantidad de vínculos, vínculos a propuestas específicas (AND), rango de fechas, rango de apoyos, apoyadas/no apoyadas por el ciudadano (requiere sesión).
 
