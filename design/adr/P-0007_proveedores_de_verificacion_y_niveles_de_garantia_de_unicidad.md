@@ -1,5 +1,7 @@
 # P-0007 — Proveedores de verificación y niveles de garantía de unicidad
 
+**Estado:** Activo
+
 ## Contexto
 
 El sistema busca garantizar que cada persona real pueda participar mediante una única identidad anónima activa.
