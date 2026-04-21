@@ -1,5 +1,7 @@
 # P-0012 — Mecanismo de apoyo a propuestas
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma permite a los ciudadanos expresar su posición respecto de las propuestas publicadas por otros. Este mecanismo es el núcleo del sistema: es la señal que alimenta el termómetro social y la que determina la visibilidad de las propuestas a través del ranking definido en `P-0010`.
