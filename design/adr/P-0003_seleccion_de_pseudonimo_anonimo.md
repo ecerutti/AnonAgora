@@ -1,5 +1,7 @@
 # P-0003 — Selección del pseudónimo de identidad anónima
 
+**Estado:** Activo
+
 ## Contexto
 
 Cada ciudadano que se registra en la plataforma recibe una **identidad anónima persistente**.  
