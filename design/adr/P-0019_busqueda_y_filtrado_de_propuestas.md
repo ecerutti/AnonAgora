@@ -1,5 +1,7 @@
 # P-0019 — Búsqueda y filtrado de propuestas
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma permite a cualquier ciudadano explorar el conjunto de propuestas publicadas. A medida que el volumen de propuestas crece, navegar la lista principal ordenada por relevancia puede ser insuficiente para encontrar propuestas específicas. El ciudadano necesita poder buscar por contenido y filtrar por características estructurales de las propuestas.
