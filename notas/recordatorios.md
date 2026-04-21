@@ -16,6 +16,8 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
   Cualquier otra ocurrencia es un error a corregir (el proyecto utiliza terminología genérica: "la plataforma", "el sistema", "el proyecto").
 
+- **Formalizar el rol del operador.** Crear un documento en `design/` (propuesta: `modelo_operativo.md` o `roles_y_responsabilidades.md`) que describa los actores institucionales del sistema y sus relaciones: qué es un "operador", si puede haber más de uno, qué separación de poderes hay entre ellos, qué diferencia hay entre quien hosta la plataforma y quien la administra. Esto concreta afirmaciones del modelo de amenazas P-0006 sobre operadores y configuración del sistema. No es ADR, es diseño descriptivo. Tarea post Gap 5.
+
 ## Luego de desarrollar la plataforma
 
 - **Guía de instalación y operación.** Desarrollar una guía para administradores que incluya buenas prácticas, cuidados, recomendaciones y advertencias para minimizar los riesgos de revelar la identidad real del participante (por ejemplo: correlacionando logs, persistiendo información sensible, etc.). El material en gestación para esta guía vive en `notas/propuesta_guia_de_instalacion.md`.
