@@ -183,4 +183,5 @@ Los links se permiten como texto plano porque citar fuentes es una práctica leg
 ## Consecuencias
 
 - La base de datos de propuestas no contiene información sobre autoría. No es posible responder consultas del tipo "¿qué propuestas publicó este ciudadano?" a partir de la tabla de propuestas.
+- El campo `conteo_apoyos` se mantiene desnormalizado por razones de performance. La política concreta de mantenimiento de su consistencia con el registro de apoyos individuales (actualización transaccional, reconciliación periódica, tolerancia al desfase) es decisión de implementación y corresponde documentarla en `implementation/` cuando se aborde esa etapa.
 - Los valores por defecto de longitud máxima de título y cuerpo deben documentarse en la guía de operación junto con los criterios para ajustarlos.
