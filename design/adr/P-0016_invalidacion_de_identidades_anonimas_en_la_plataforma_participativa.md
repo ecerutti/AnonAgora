@@ -1,5 +1,7 @@
 # P-0016 — Invalidación de identidades anónimas en la plataforma participativa
 
+**Estado:** Activo
+
 ## Contexto
 
 Durante el diseño del ciclo de vida de identidades anónimas (P-0015) quedó pendiente una decisión que corresponde exclusivamente al modelo de datos de la plataforma participativa: si un ciudadano sospecha que sus credenciales fueron robadas y su identidad anónima está siendo usada por un tercero, ¿puede solicitar la invalidación de ese `anon_id`?
