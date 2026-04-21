@@ -139,20 +139,20 @@ Con las listas actuales:
 
 ```
 animales: 45
-colores: 13
-adjetivos: 14
+colores: 14
+adjetivos: 15
 ```
 
 El número total de combinaciones posibles es:
 
 ```
-45 × (13 + 14) × 999
+45 × (14 + 15) × 999
 ```
 
 Resultado:
 
 ```
-1.213.785 identidades únicas
+1.303.695 identidades únicas
 ```
 
 Este tamaño se considera **suficiente para una implementación conceptual o piloto**.
