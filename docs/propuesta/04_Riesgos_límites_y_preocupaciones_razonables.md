@@ -35,7 +35,7 @@ Su única función es mejorar la forma del lenguaje para mantener un estándar m
 
 El sistema establece un límite anual de propuestas por ciudadano.
 
-Cada persona puede crear un máximo de **dos propuestas por año**. Este límite introduce un costo de oportunidad: al tener pocas oportunidades disponibles, los ciudadanos tienden a utilizarlas con mayor cuidado.
+Cada persona puede crear, por defecto, un **máximo de dos propuestas por año**. Este valor es configurable por el operador de cada despliegue. Este límite introduce un costo de oportunidad: al tener pocas oportunidades disponibles, los ciudadanos tienden a utilizarlas con mayor cuidado.
 
 Además, antes de crear una nueva propuesta, la plataforma recomienda buscar si la idea ya fue planteada por otra persona. En muchos casos, acompañar una propuesta existente resulta más útil que crear una nueva versión de la misma idea.
 
