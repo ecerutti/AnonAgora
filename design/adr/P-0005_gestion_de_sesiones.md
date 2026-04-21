@@ -1,5 +1,7 @@
 # P-0005 — Gestión de sesiones de usuario
 
+**Estado:** Activo
+
 ## Contexto
 
 Una vez que un ciudadano ha ingresado a la plataforma utilizando su identidad anónima y frase secreta, el sistema necesita gestionar su acceso durante la navegación.
