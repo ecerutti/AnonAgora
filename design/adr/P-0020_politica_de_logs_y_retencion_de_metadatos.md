@@ -1,5 +1,7 @@
 # P-0020 — Política de logs y retención de metadatos
 
+**Estado:** Activo
+
 ## Contexto
 
 P-0006 establece que el sistema debe adoptar retención limitada de metadatos operativos y minimización de datos almacenados en cada componente, pero no fija qué eventos se registran, con qué granularidad temporal, ni por cuánto tiempo se retienen.
