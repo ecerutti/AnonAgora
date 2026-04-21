@@ -1,5 +1,7 @@
 # P-0013 — Integración con AUTENTICAR como proveedor de verificación de identidad
 
+**Estado:** Parcialmente supersedido por P-0014
+
 ## Contexto
 
 El sistema requiere verificar que cada ciudadano que solicita una identidad anónima es una persona real y única. Esta verificación es la base de la propiedad fundamental del sistema:
