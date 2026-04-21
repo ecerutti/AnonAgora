@@ -8,7 +8,13 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 - **Revisión final de la documentación conceptual.** Revisar `docs/propuesta/` completo para evaluar si las nuevas decisiones surgidas durante el diseño requieren ajustes, aclaraciones o referencias cruzadas. Posibles puntos a revisar en ese momento: sección "Apoyo sin voto negativo" (ya agregada en esta etapa), coherencia con los ADRs nuevos, actualización del SVG de arquitectura si corresponde.
 
-- **Revisión final de documentación de diseño** Revisar `design/` completo con todas sus sub carpetas para evaluar sin la documentación de diseño quedó coherente, si no se contradice, y si las posibles contradicciones fueron subsanadas en documentos posteriores. Por ejemplo, el ADR P-0006 decide aceptar un riesgo de amenaza intermedio el cual no justifica el uso de ZK pero luego en P-0014 se decide usar ZK, entonces debe quedar documentado el cambió de decisión y existir una referencia al documento que supercede o redefine. 
+- **Revisión final de documentación de diseño** Revisar `design/` completo con todas sus sub carpetas para evaluar sin la documentación de diseño quedó coherente, si no se contradice, y si las posibles contradicciones fueron subsanadas en documentos posteriores. Por ejemplo, el ADR P-0006 decide aceptar un riesgo de amenaza intermedio el cual no justifica el uso de ZK pero luego en P-0014 se decide usar ZK, entonces debe quedar documentado el cambió de decisión y existir una referencia al documento que supercede o redefine.
+
+- **Verificación final del uso del nombre "AnonAgora".** Ejecutar `grep -i "anonagora"` sobre todo el repositorio. Los únicos resultados legítimos deben estar en:
+  - `AGENTS.md`, sección "Sobre el nombre del proyecto"
+  - `docs/index.md`
+
+  Cualquier otra ocurrencia es un error a corregir (el proyecto utiliza terminología genérica: "la plataforma", "el sistema", "el proyecto").
 
 ## Luego de desarrollar la plataforma
 
