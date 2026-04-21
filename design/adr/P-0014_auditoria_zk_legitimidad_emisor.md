@@ -1,5 +1,7 @@
 # P-0014 — Auditoría criptográfica de legitimidad del emisor mediante pruebas de conocimiento cero
 
+**Estado:** Parcialmente supersedido por P-0015
+
 ## Contexto
 
 El emisor es el componente responsable de verificar que un ciudadano corresponde a una persona real —mediante un token JWT firmado por AUTENTICAR— y de emitir la identidad anónima (`anon_id`) correspondiente. Una vez completado ese proceso, el token se descarta sin retener ningún metadato, por decisión de P-0013.
