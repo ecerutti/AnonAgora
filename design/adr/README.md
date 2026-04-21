@@ -174,7 +174,7 @@ Este apartado ayuda a comprender qué impacto tiene la decisión en el sistema.
 Para mantener consistencia entre los ADR del proyecto:
 
 - Los documentos deben escribirse en **Markdown**.
-- No utilizar separadores horizontales (`---`).
+- No utilizar separadores horizontales (`---`) dentro de un ADR. La estructura con encabezados `##` ya divide visualmente el documento.
 - Cada ADR debe documentar **una sola decisión**.
 - El lenguaje debe ser **claro y explicativo**.
 - Cuando sea posible, incluir **ejemplos concretos**.
