@@ -41,7 +41,7 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 
 - **ADR P-0018 — Modelo de datos de propuestas.** Cerrado. Campos: id, titulo (texto plano, default 200 caracteres configurable), cuerpo (Markdown, default 20.000 caracteres configurable), fecha_publicacion, conteo_apoyos, score, vinculos. Sin autoría almacenada en la propuesta. Sin imágenes. Links externos permitidos como texto plano no clickeable.
 
-- **ADR P-0017 — Límite anual de propuestas por ciudadano.** Cerrado. Límite configurable con default 2, valor 0 válido (sin límite). Año móvil de 365 días por slot. Las propuestas derivadas consumen cupo. El rechazo del revisor de lenguaje no consume cupo.
+- **ADR P-0017 — Límite anual de propuestas por ciudadano.** Cerrado. Límite configurable con default 2, valor 0 válido (sin límite). Año móvil de 365 días por slot. Las propuestas derivadas consumen cupo.
 
 - **Documento de diseño — Vinculación entre propuestas.** Cerrado. Vínculos genéricos sin tipo, múltiples por propuesta (default 10, configurable), inmutables, sin aceptación del autor referenciado. Propuesta derivada es una propuesta común con vínculo, sin entidad ni nomenclatura especial.
 
