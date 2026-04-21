@@ -1,5 +1,7 @@
 # P-0002 — Representación de identidades anónimas mediante pseudónimos amigables
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma asigna a cada ciudadano una **identidad anónima persistente** que le permite participar en el sistema sin revelar su identidad real.
