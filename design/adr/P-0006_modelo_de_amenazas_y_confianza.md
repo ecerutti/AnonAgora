@@ -1,5 +1,7 @@
 # P-0006 — Modelo de amenazas y supuestos de confianza
 
+**Estado:** Activo
+
 ## Contexto
 
 El sistema busca permitir participación ciudadana digital bajo identidades anónimas persistentes, manteniendo al mismo tiempo la garantía de que cada participación corresponde a una persona real verificada.
