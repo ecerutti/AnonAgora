@@ -105,7 +105,7 @@ En este sistema, los votos o apoyos siempre se asocian a un contenido específic
 
 Si un ciudadano desea mejorar la redacción de su propuesta, ampliar sus fundamentos o modificar su planteo original, el sistema permite crear una **propuesta derivada** vinculada a la propuesta inicial.
 
-Las propuestas derivadas constituyen nuevas entidades dentro del sistema y comienzan sin apoyos, aunque mantienen una referencia explícita a la propuesta de la cual se originan.
+Las propuestas derivadas son propuestas nuevas con un vínculo declarado a la propuesta de origen. Comienzan sin apoyos aunque mantienen una referencia explícita a la propuesta de la cual se originan.
 
 Este modelo permite la evolución de ideas dentro de la plataforma sin comprometer la confiabilidad de las señales de apoyo ciudadano.
 
