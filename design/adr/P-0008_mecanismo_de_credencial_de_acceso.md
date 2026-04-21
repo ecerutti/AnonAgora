@@ -1,5 +1,7 @@
 # P-0008 — Mecanismo de credencial de acceso: passphrase vs password
 
+**Estado:** Activo
+
 ## Contexto
 
 Una vez creada la identidad anónima, el ciudadano necesita un mecanismo para volver a acceder a la plataforma en visitas posteriores. Según lo definido en P-0004, ese mecanismo es la combinación de identidad anónima (pseudónimo) más una credencial secreta definida por el propio ciudadano durante el registro.
