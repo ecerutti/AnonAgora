@@ -1,5 +1,7 @@
 # P-0001 — Visibilidad pública de la identidad anónima
 
+**Estado:** Activo
+
 ## Contexto
 
 Uno de los principios centrales de la plataforma es que cada ciudadano recibe una **identidad anónima persistente** que le permite participar en el sistema sin revelar su identidad real.
