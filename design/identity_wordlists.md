@@ -22,7 +22,7 @@ animal + color/adjetivo + número
 Ejemplos:
 
 ```
-Lobo Azul 712
+Lobo Azul 714
 Puma Sereno 84
 ```
 
@@ -49,10 +49,10 @@ Se ignoran:
 Por ejemplo, todas las siguientes entradas deben ser consideradas equivalentes:
 
 ```
-Lobo Azul 712
-lobo azul 712
-loboazul712
-lobo_azul-712
+Lobo Azul 714
+lobo azul 714
+loboazul714
+lobo_azul-714
 ```
 
 ## Criterios de curación del vocabulario
