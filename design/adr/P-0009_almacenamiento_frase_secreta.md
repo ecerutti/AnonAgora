@@ -1,5 +1,7 @@
 # P-0009 — Recepción y almacenamiento de la frase secreta en la plataforma
 
+**Estado:** Activo
+
 ## Contexto
 
 La frase secreta definida por el ciudadano durante el registro en la plataforma es el único mecanismo de acceso y recuperación de su identidad anónima dentro de ella. Por esta razón, tanto el canal por el que la frase llega a la plataforma como el formato en que se almacena requieren protección especial.
