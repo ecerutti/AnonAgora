@@ -21,7 +21,7 @@ El sistema combina dos elementos que normalmente aparecen separados:
 - verificación de identidad  
 - anonimato persistente  
 
-Antes de participar, cada ciudadano verifica su identidad utilizando mecanismos existentes (por ejemplo, sistemas de identidad digital del Estado como ANSES, AFIP/ARCA, MiArgentina).
+Antes de participar, cada ciudadano verifica su identidad utilizando mecanismos existentes de identidad digital del Estado (por ejemplo, ANSES o AFIP/ARCA en Argentina).
 
 Una vez verificada, la persona recibe una **identidad anónima persistente** dentro de la plataforma.
 
