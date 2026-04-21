@@ -1,5 +1,7 @@
 # P-0010 — Ranking y visualización de propuestas
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma necesita determinar en qué orden se presentan las propuestas
