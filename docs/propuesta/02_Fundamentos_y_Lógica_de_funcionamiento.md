@@ -147,7 +147,7 @@ Por ejemplo, un ciudadano puede presentar una propuesta que refine o mejore una 
 
 Este mecanismo facilita la evolución colectiva de ideas sin necesidad de intervención editorial por parte de la plataforma.
 
-En el caso particular de las **propuestas derivadas**, la vinculación se genera automáticamente. Cuando un ciudadano crea una propuesta derivada de otra existente, el sistema registra esa relación de forma explícita, permitiendo a los ciudadanos identificar fácilmente el origen de la nueva propuesta y compararla con la versión anterior.
+En el caso particular de las **propuestas derivadas**, la vinculación se declara al publicarlas. Cuando un ciudadano crea una propuesta a partir de otra existente, puede indicar esa relación y el sistema la registra de forma explícita, permitiendo a los ciudadanos identificar fácilmente el origen de la nueva propuesta y compararla con la versión anterior.
 
 ## Ausencia de moderación editorial
 
