@@ -1,5 +1,7 @@
 # DP-0001 — Omisión de ZK y simulación de AUTENTICAR en la demo
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma adopta en P-0014 pruebas de conocimiento cero (ZK) como mecanismo de auditoría criptográfica de legitimidad del emisor, y en P-0013 la integración con AUTENTICAR como proveedor de verificación de identidad. Ambas decisiones aplican al sistema en producción.
