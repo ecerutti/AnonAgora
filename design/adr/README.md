@@ -55,6 +55,38 @@ Ejemplo:
 # P-0003 — Selección del pseudónimo de identidad anónima
 ```
 
+## Estado
+
+La segunda línea del documento (después del título) debe indicar el estado vigente del ADR.
+
+Ejemplo:
+
+```
+# P-0013 — Integración con AUTENTICAR
+
+**Estado:** Parcialmente supersedido por P-0014
+```
+
+Los valores posibles del campo son:
+
+- **Activo** — el ADR está vigente y aplica tal como fue redactado.
+- **Supersedido por P-XXXX** — otro ADR reemplaza completamente las decisiones de este.
+- **Parcialmente supersedido por P-XXXX** — uno o más aspectos del ADR fueron modificados por un ADR posterior, pero el resto sigue vigente.
+- **Obsoleto** — el ADR ya no aplica porque el contexto o el alcance del proyecto cambió, pero no hay un ADR posterior que lo reemplace. Se mantiene por trazabilidad histórica.
+
+### Actualización del estado
+
+El campo "Estado" es la **única** parte de un ADR cerrado que puede modificarse a posteriori. Esta modificación es legítima porque el estado es metadata sobre el ADR, no contenido argumental del ADR. El cuerpo del ADR (Contexto, Opciones, Decisión, Justificación, Consecuencias, Referencias) no se modifica cuando aparece un ADR posterior que lo superseda; la trazabilidad de ese cambio vive además en las "Referencias" del ADR posterior.
+
+### Supersedencia múltiple y transitiva
+
+Cuando un ADR es supersedido o modificado por más de un ADR posterior, el campo "Estado" registra todos los casos:
+
+- Múltiples supersedencias parciales: `Parcialmente supersedido por P-XXXX y P-YYYY`.
+- Supersedencia total parcial mixta: `Supersedido por P-XXXX; parcialmente supersedido por P-YYYY`.
+
+Cuando un ADR que superseda a otro es a su vez supersedido, el ADR original conserva su estado apuntando únicamente al primer eslabón de la cadena (no se actualiza transitivamente). Ejemplo: si P-0013 es supersedido por P-0014, y posteriormente P-0014 es supersedido por P-0017, el estado de P-0013 sigue siendo `Supersedido por P-0014`. El lector navega la cadena a través de cada ADR sucesivo.
+
 ## Contexto
 
 Describe el problema o situación que motivó la decisión.
