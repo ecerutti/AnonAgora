@@ -1,5 +1,7 @@
 # P-0011 — Revisor automático de lenguaje en propuestas
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma permite a cualquier ciudadano verificado publicar propuestas
