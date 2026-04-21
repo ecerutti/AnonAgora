@@ -1,5 +1,7 @@
 # P-0018 — Modelo de datos de propuestas
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma permite a ciudadanos verificados publicar propuestas de participación ciudadana. Este ADR define la estructura de datos de una propuesta, el formato admitido para su contenido, los límites configurables aplicables, y el modelo de registro de autoría compatible con el principio de minimización de datos.
