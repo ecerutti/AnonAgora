@@ -1,5 +1,7 @@
 # P-0017 — Límite anual de propuestas por ciudadano
 
+**Estado:** Activo
+
 ## Contexto
 
 La plataforma permite a cualquier ciudadano verificado crear propuestas. Sin un límite sobre la frecuencia de creación, un ciudadano podría inundar el sistema con propuestas de baja calidad, contenido provocador o consignas partidarias, degradando el valor del espacio común.
