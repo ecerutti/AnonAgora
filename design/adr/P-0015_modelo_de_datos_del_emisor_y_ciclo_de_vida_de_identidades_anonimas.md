@@ -1,5 +1,7 @@
 # P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas
 
+**Estado:** Activo
+
 ## Contexto
 
 El emisor es el componente responsable de verificar que un ciudadano corresponde a una persona real y de emitir la identidad anónima (`anon_id`) que ese ciudadano usará dentro de la plataforma participativa. Las decisiones previas P-0013 y P-0014 definieron cómo se integra el emisor con AUTENTICAR y cómo se audita criptográficamente la legitimidad de las identidades emitidas.
