@@ -1,5 +1,7 @@
 # P-0004 — Autenticación de identidad anónima
 
+**Estado:** Activo
+
 ## Contexto
 
 Después del registro inicial mediante verificación de identidad estatal, el ciudadano obtiene una identidad anónima persistente dentro de la plataforma.
