@@ -14,9 +14,11 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
   - `AGENTS.md`, sección "Sobre el nombre del proyecto"
   - `docs/index.md`
 
+- **Verificación final de coherencia de la arquitectura modular.** Tras completar la refactorización derivada de P-0021, ejecutar grep sobre el repositorio para detectar usos residuales de "la plataforma" donde corresponda "la capa de identidad", "la aplicación de participación ciudadana" o "el sistema". Verificar que las referencias entre ADRs sigan siendo válidas, que las nuevas carpetas tengan READMEs coherentes, y que los documentos descriptivos reflejen el modelo de capas.
+
   Cualquier otra ocurrencia es un error a corregir (el proyecto utiliza terminología genérica: "la plataforma", "el sistema", "el proyecto").
 
-- **Formalizar el rol del operador.** Crear un documento en `design/` (propuesta: `modelo_operativo.md` o `roles_y_responsabilidades.md`) que describa los actores institucionales del sistema y sus relaciones: qué es un "operador", si puede haber más de uno, qué separación de poderes hay entre ellos, qué diferencia hay entre quien hosta la plataforma y quien la administra. Esto concreta afirmaciones del modelo de amenazas P-0006 sobre operadores y configuración del sistema. No es ADR, es diseño descriptivo. Tarea post Gap 5.
+- **Formalizar el rol del operador.** Crear un documento en `design/` (propuesta: `modelo_operativo.md` o `roles_y_responsabilidades.md`) que describa los actores institucionales del sistema y sus relaciones: qué es un "operador", si puede haber más de uno, qué separación de poderes hay entre ellos, qué diferencia hay entre quien hosta la plataforma y quien la administra. Esto concreta afirmaciones del modelo de amenazas P-0006 sobre operadores y configuración del sistema. No es ADR, es diseño descriptivo. No es ADR, es diseño descriptivo. Tarea desbloqueada tras el cierre de P-0021; la distinción entre operador de capa y operador de aplicación destino debe ser uno de los puntos abordados.
 
 ## Luego de desarrollar la plataforma
 
