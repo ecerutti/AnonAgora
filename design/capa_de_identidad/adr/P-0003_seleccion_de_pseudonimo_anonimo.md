@@ -64,7 +64,7 @@ En esta opción, el ciudadano podría elegir libremente su pseudónimo al crear 
 - Introduce riesgo de pseudónimos que revelen información personal.
 - Posibilidad de pseudónimos con contenido político, ofensivo o ideológico.
 - Los usuarios podrían elegir pseudónimos que ya utilizan en otras plataformas o redes sociales.
-- Esto podría facilitar correlaciones entre la identidad anónima dentro de la plataforma y la identidad real del ciudadano.
+- Esto podría facilitar correlaciones entre la identidad anónima dentro de la aplicación destino y la identidad real del ciudadano.
 - Incluso si el pseudónimo solo fuera visible para el propio usuario, un administrador con acceso al sistema podría intentar correlacionar datos utilizando ese alias.
 
 ### Opción 3 — Pseudónimo generado por el sistema con posibilidad de regeneración antes de aceptar
@@ -120,7 +120,7 @@ Esta solución busca equilibrar tres objetivos:
 
 Permitir que los ciudadanos definan libremente su pseudónimo podría introducir referencias personales, ideológicas o incluso aliases utilizados en otras plataformas.
 
-Esto podría facilitar intentos de correlación entre la identidad anónima dentro de la plataforma y la identidad real del ciudadano.
+Esto podría facilitar intentos de correlación entre la identidad anónima dentro de la aplicación destino y la identidad real del ciudadano.
 
 En cambio, permitir que el sistema genere múltiples opciones mantiene el control sobre el formato de los pseudónimos mientras brinda al usuario cierto grado de elección.
 
