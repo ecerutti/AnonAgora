@@ -6,21 +6,13 @@ Se mantiene con apoyo de los agentes pero la autoría final es del humano.
 
 ## Etapa actual
 
-Diseño de la plataforma: cierre de decisiones de diseño previas al desarrollo de la demo con Claude Code. El objetivo de esta etapa es dejar cerradas todas las decisiones importantes para que el desarrollo posterior necesite preguntar lo menos posible.
+Diseño del sistema: cierre de decisiones de diseño previas al desarrollo de la demo con Claude Code. El objetivo de esta etapa es dejar cerradas todas las decisiones importantes para que el desarrollo posterior necesite preguntar lo menos posible.
 
 ## Decisiones de diseño pendientes
 
-Todas las pendientes son consecuencia del checkpoint realizado sobre el repositorio. Deben abordarse en conversaciones dedicadas en este orden:
+1. **P-0022 — Comportamiento ante fallos de servicios externos.** ADR que defina el comportamiento del sistema ante fallos o indisponibilidad de servicios externos: verificador de identidad caído, token vencido en tránsito, componente de proving ZK con demoras o error, API del revisor de lenguaje caída o con error. Debe cubrir principios generales de degradación, reintentos y comunicación al ciudadano.
 
-1. **Refactorización por arquitectura modular (Gap 5 en curso).** El ADR P-0021 está cerrado y formaliza la estructura del sistema en dos capas: capa de identidad (infraestructura de identidad anónima verificada) y aplicación destino. La reestructuración física del repositorio (Bloque 4) está hecha; los ADRs y documentos descriptivos viven en sus nuevas carpetas. Pendientes:
-   - Refactor de vocabulario en ADRs cerrados: aplicar la regla de "vocabulario y marco sí, decisiones no" para distinguir capa, aplicación y sistema. Casos especiales: el principio estructural de P-0005 ("no sugerir memoria entre sesiones") se absorbe en `identity_model.md`; P-0020 se clarifica por capa.
-   - Refactor de documentos descriptivos: `AGENTS.md` (Propósito y tabla de estructura del repo), `docs/architecture_overview.md` (reescritura), `design/README.md`, `design/adr/README.md`, READMEs nuevos creados en Bloque 4, y los READMEs preexistentes en `implementation/` (preservados sin tocar durante Bloque 4). Documentar el contrato capa↔aplicación en `design/capa_de_identidad/README.md`.
-   - Ajustes menores en `docs/propuesta/` para enmarcar la propuesta como descripción de una aplicación destino específica.
-   - Cierre: grep de vocabulario residual, validación de coherencia.
-
-2. **P-0022 — Comportamiento ante fallos de servicios externos.** ADR que defina el comportamiento del sistema ante fallos o indisponibilidad de servicios externos: verificador de identidad caído, token vencido en tránsito, componente de proving ZK con demoras o error, API del revisor de lenguaje caída o con error. Debe cubrir principios generales de degradación, reintentos y comunicación al ciudadano.
-
-3. **P-0023 — Moderación de contenido y retiro de propuestas.** ADR que formalice la ausencia de moderación de contenido más allá del revisor de lenguaje (P-0011), y que defina cómo se maneja el caso de propuestas que deben retirarse por orden judicial, contenido ilegal, o solicitudes de ciudadanos con implicancias legales (derecho al olvido). Debe dejar explícitas las limitaciones derivadas del diseño actual y las implicancias legales para el operador que despliega el sistema.
+2. **P-0023 — Moderación de contenido y retiro de propuestas.** ADR que formalice la ausencia de moderación de contenido más allá del revisor de lenguaje (P-0011), y que defina cómo se maneja el caso de propuestas que deben retirarse por orden judicial, contenido ilegal, o solicitudes de ciudadanos con implicancias legales (derecho al olvido). Debe dejar explícitas las limitaciones derivadas del diseño actual y las implicancias legales para el operador que despliega el sistema.
 
 ## Decisiones de diseño específicas de la demo
 
@@ -45,4 +37,10 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 
 ## Últimas decisiones cerradas
 
-- **P-0021 — Arquitectura modular: capa de identidad y aplicaciones destino.** Cierra Gap 5 a nivel decisión. Reconoce que el sistema está compuesto por una capa de identidad reutilizable y una aplicación destino, con el modelo "una capa ↔ una aplicación por despliegue". La aplicación de participación ciudadana queda como una aplicación destino entre otras posibles. Las consecuencias estructurales (refactor del repositorio, refactor de vocabulario en ADRs y documentos) están pendientes de ejecución (ver decisiones pendientes).
+- **Gap 5 — Refactorización por arquitectura modular.** Cerrado completamente. Tres bloques de trabajo:
+  - **Bloque 4** — reestructuración física del repositorio en subcarpetas por capa (capa de identidad / aplicaciones destino) y por ámbito (transversales / específicos).
+  - **Bloque 4.5** — consolidación de la demo bajo `demo/` (incluyendo `demo/design/` y `demo/implementation/`), eliminando `design/demo/` e `implementation/demo/`. La regla de herencia de la demo respecto del sistema general queda documentada en `demo/README.md`.
+  - **Bloque 5** — refactor de vocabulario en los 21 ADRs cerrados aplicando la regla "vocabulario y marco sí, decisiones no". 15 ADRs editados, 6 sin cambios.
+  - **Bloque 6** — refactor de documentos descriptivos: `AGENTS.md`, `docs/architecture_overview.md`, READMEs de `design/`, `design/adr/`, `design/capa_de_identidad/` (incluyendo el contrato capa↔aplicación), READMEs minimales del Bloque 4 y los del refactor demo, `identity_model.md` (incorporación del principio "no sugerir memoria entre sesiones" y resolución de duplicación con P-0015), eliminación del solapamiento entre P-0004 y `identity_wordlists.md` preservando en P-0004 la decisión sobre normalización del pseudónimo en login. `identity_wordlists.md` movido a `design/capa_de_identidad/` junto con la carpeta `wordlists/`. Se creó `demo/design/adr/` (transversales DP) que faltaba en la estructura. Se saltó intencionalmente la revisión de `docs/propuesta/` por su naturaleza narrativa; cualquier ajuste se hará oportunamente bajo licencia descriptiva.
+
+- **P-0021 — Arquitectura modular: capa de identidad y aplicaciones destino.** Reconoce que el sistema está compuesto por una capa de identidad reutilizable y una aplicación destino, con el modelo "una capa ↔ una aplicación por despliegue". La aplicación de participación ciudadana queda como una aplicación destino entre otras posibles.
