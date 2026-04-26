@@ -20,7 +20,7 @@ Esto plantea la pregunta de diseño:
 
 ### Opción 1 — Requerir un proveedor fuerte de identidad
 
-En esta opción la plataforma solo podría desplegarse en entornos donde exista un proveedor de identidad que ofrezca:
+En esta opción la capa de identidad solo podría desplegarse en entornos donde exista un proveedor de identidad que ofrezca:
 
 - credenciales firmadas
 - identificadores únicos estables
@@ -38,7 +38,7 @@ Desventajas
 
 ### Opción 2 — No depender de proveedores externos
 
-En esta opción la plataforma intentaría garantizar la unicidad internamente.
+En esta opción la capa de identidad intentaría garantizar la unicidad internamente.
 
 Ventajas
 
@@ -50,9 +50,9 @@ Desventajas
 - mayor riesgo de identidades duplicadas
 - mayor exposición a manipulación interna
 
-### Opción 3 — Plataforma agnóstica del proveedor pero no de las garantías
+### Opción 3 — Capa de identidad agnóstica del proveedor pero no de las garantías
 
-En esta opción la plataforma puede operar con distintos proveedores de verificación.
+En esta opción la capa de identidad puede operar con distintos proveedores de verificación.
 
 El nivel de garantía de unicidad dependerá de las propiedades que ofrezca el proveedor.
 
@@ -70,7 +70,7 @@ Desventajas
 
 Se adopta la **opción 3**.
 
-La plataforma se diseña para operar con proveedores externos de verificación de identidad o unicidad.
+La capa de identidad se diseña para operar con proveedores externos de verificación de identidad o unicidad.
 
 Cuando el proveedor entrega credenciales firmadas y asociadas a identificadores únicos estables, el sistema puede sostener una garantía fuerte de unicidad entre personas reales e identidades anónimas activas.
 
