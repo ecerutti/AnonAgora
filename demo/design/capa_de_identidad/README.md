@@ -1,3 +1,3 @@
 # Capa de identidad — diseño específico de la demo
 
-Diseño específico de la versión demo para la capa de identidad. Las simplificaciones de la demo respecto del sistema en producción están documentadas en los ADRs `DP-XXXX` de esta carpeta.
+Diseño específico de la versión demo para la capa de identidad. Las simplificaciones respecto del sistema general (`design/capa_de_identidad/`) están documentadas en los ADRs `DP-XXXX` de esta carpeta.
