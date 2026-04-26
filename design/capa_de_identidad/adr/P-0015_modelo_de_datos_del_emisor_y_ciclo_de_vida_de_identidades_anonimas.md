@@ -4,7 +4,7 @@
 
 ## Contexto
 
-El emisor es el componente responsable de verificar que un ciudadano corresponde a una persona real y de emitir la identidad anónima (`anon_id`) que ese ciudadano usará dentro de la plataforma participativa. Las decisiones previas P-0013 y P-0014 definieron cómo se integra el emisor con AUTENTICAR y cómo se audita criptográficamente la legitimidad de las identidades emitidas.
+El emisor es el componente responsable de verificar que un ciudadano corresponde a una persona real y de emitir la identidad anónima (`anon_id`) que ese ciudadano usará dentro de la aplicación destino. Las decisiones previas P-0013 y P-0014 definieron cómo se integra el emisor con AUTENTICAR y cómo se audita criptográficamente la legitimidad de las identidades emitidas.
 
 Este ADR cierra las decisiones pendientes sobre tres aspectos interrelacionados: qué datos almacena el emisor y con qué propósito, cómo se deriva el `anon_id` y qué garantías ofrece esa derivación, y cuál es el ciclo de vida de una identidad anónima: emisión, renovación y pérdida.
 
@@ -126,7 +126,7 @@ Ventajas
 
 Desventajas
 
-- El identificador que vive en la plataforma es función directa del CUIT. Un atacante con acceso a la base de datos de la plataforma, al salt del sistema y a una lista de CUITs puede ejecutar un ataque de diccionario para identificar ciudadanos, dado que el espacio de CUITs es finito y semi-público.
+- El identificador que vive en la aplicación destino es función directa del CUIT. Un atacante con acceso a la base de datos de la aplicación destino, al salt del sistema y a una lista de CUITs puede ejecutar un ataque de diccionario para identificar ciudadanos, dado que el espacio de CUITs es finito y semi-público.
 - Incompatible con el principio de minimización de correlaciones de P-0006.
 
 #### Opción D — anon_id derivado del anon_seed y un nonce aleatorio generado por el emisor
@@ -184,7 +184,7 @@ Desventajas
 
 **Decisión 2:** Se adopta la **Opción B**. El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena el `anon_id` ni ninguna asociación entre ambos identificadores.
 
-**Decisión 3:** Se adopta la **Opción D**. El `anon_id` se deriva como `HASH(anon_seed + nonce)`, donde `nonce` es un valor aleatorio generado por el emisor para cada emisión. Durante la emisión, el emisor verifica unicidad y cool-down sobre el `anon_seed`; si procede, genera el `nonce`, calcula el `anon_id`, genera la prueba ZK, y descarta el `nonce` inmediatamente. La plataforma recibe del emisor el pseudónimo amigable, el `anon_id` y la prueba ZK. La frase secreta del ciudadano no interviene en este flujo y es asunto exclusivo de la plataforma.
+**Decisión 3:** Se adopta la **Opción D**. El `anon_id` se deriva como `HASH(anon_seed + nonce)`, donde `nonce` es un valor aleatorio generado por el emisor para cada emisión. Durante la emisión, el emisor verifica unicidad y cool-down sobre el `anon_seed`; si procede, genera el `nonce`, calcula el `anon_id`, genera la prueba ZK, y descarta el `nonce` inmediatamente. La aplicación destino recibe del emisor el pseudónimo amigable, el `anon_id` y la prueba ZK. La credencial de acceso del ciudadano (frase secreta en el caso de la aplicación de participación ciudadana, ver P-0008) no interviene en este flujo y es asunto exclusivo de la aplicación destino.
 
 **Decisión 4:** Se adopta la **Opción B**. ZK cubre únicamente el `anon_id`. Este ADR superseda parcialmente P-0014 en lo relativo al alcance del circuito ZK: la certificación del `anon_seed` mediante ZK queda descartada. La infraestructura de JWKS histórico y el mecanismo de revocación por `kid` comprometido definidos en P-0014 se mantienen vigentes, ya que son necesarios para la verificabilidad de las pruebas sobre el `anon_id`.
 
@@ -196,7 +196,7 @@ La tupla mínima `{anon_seed, fecha_emision}` en el emisor es consecuencia direc
 
 La derivación `anon_id = HASH(anon_seed + nonce)` resuelve la tensión central de este ADR. El nonce es generado por el emisor, consumido para calcular el `anon_id` y la prueba ZK, y descartado inmediatamente sin almacenarse. Con el nonce descartado, la separación entre `anon_seed` y `anon_id` deja de ser organizacional y pasa a ser criptográficamente forzada: aunque un atacante obtenga el `anon_seed` desde el emisor, no puede derivar el `anon_id` correspondiente sin el nonce, que ya no existe en ningún lado.
 
-Se consideró usar `HASH(frase_secreta)` del ciudadano como segundo componente en lugar de un nonce aleatorio. Esa alternativa quedó descartada porque involucraría al emisor en el manejo de la frase secreta, que es credencial de acceso a la plataforma y no pertenece al alcance de responsabilidades del emisor. La frase secreta es asunto exclusivo de la plataforma; el emisor no necesita conocerla, ni siquiera como hash, para cumplir su función. Un nonce aleatorio generado por el emisor cumple el mismo rol criptográfico en la derivación del `anon_id` sin violar la separación de funciones.
+Se consideró usar `HASH(frase_secreta)` del ciudadano como segundo componente en lugar de un nonce aleatorio. Esa alternativa quedó descartada porque involucraría al emisor en el manejo de la credencial de acceso del ciudadano, que pertenece al alcance de la aplicación destino y no al del emisor (en la aplicación de participación ciudadana esa credencial es la frase secreta, ver P-0008). La credencial es asunto exclusivo de la aplicación destino; el emisor no necesita conocerla, ni siquiera como hash, para cumplir su función. Un nonce aleatorio generado por el emisor cumple el mismo rol criptográfico en la derivación del `anon_id` sin violar la separación de funciones.
 
 La firma independiente del emisor sobre el `anon_id` fue evaluada como mecanismo de auditoría más simple que ZK. Se descartó porque en el escenario de despliegue habitual del sistema, emisor y plataforma comparten infraestructura y administrador. En ese contexto, la clave privada del emisor es accesible para el mismo actor que podría fabricar identidades falsas, lo que hace que la firma no agregue protección real frente a la amenaza que intenta mitigar.
 
@@ -206,18 +206,18 @@ ZK se concentra en el `anon_id` porque es el único identificador que sale del e
 
 - El emisor almacena `{anon_seed, fecha_emision}` por cada ciudadano registrado. No almacena `anon_id`, pseudónimo amigable, nonce, frase secreta ni ningún derivado de ella.
 - El flujo de emisión ocurre en una única interacción. El emisor verifica el JWT de AUTENTICAR, calcula el `anon_seed`, verifica unicidad y cool-down, y si procede genera un `nonce` aleatorio, calcula el `anon_id` y genera la prueba ZK. El `nonce` se descarta inmediatamente; no debe almacenarse ni loguearse en ningún punto.
-- La plataforma recibe del emisor en el momento de la emisión: el pseudónimo amigable, el `anon_id` y la prueba ZK. A partir de ese momento opera de forma completamente independiente del emisor.
-- La frase secreta del ciudadano no interviene en el flujo de emisión. Su definición, almacenamiento y verificación son responsabilidad exclusiva de la plataforma, según P-0008 y P-0009.
-- El login del ciudadano en la plataforma se realiza con pseudónimo amigable y frase secreta según P-0004, contra el material que la plataforma haya almacenado al momento del registro del ciudadano en la plataforma.
-- La pérdida del pseudónimo amigable, de la frase secreta, o de ambos, hace la identidad irrecuperable. El ciudadano debe esperar el cool-down para solicitar una nueva identidad completa.
-- El historial de una identidad inactiva —propuestas publicadas, apoyos dados— permanece visible en la plataforma y sigue contando. El sistema no puede distinguir una identidad abandonada de una simplemente inactiva. La decisión sobre si la plataforma puede marcar `anon_ids` como inactivos queda fuera del alcance de este ADR y corresponde al modelo de datos de la plataforma participativa.
+- La aplicación destino recibe del emisor en el momento de la emisión: el pseudónimo amigable, el `anon_id` y la prueba ZK. A partir de ese momento opera de forma completamente independiente del emisor.
+- La credencial de acceso del ciudadano no interviene en el flujo de emisión. Su definición, almacenamiento y verificación son responsabilidad exclusiva de la aplicación destino. En la aplicación de participación ciudadana esto se concreta en P-0008 y P-0009.
+- El login del ciudadano en la aplicación destino se realiza contra el material que la aplicación haya almacenado al momento del registro. En la aplicación de participación ciudadana ese material consiste en pseudónimo amigable y frase secreta, según P-0004.
+- La pérdida del pseudónimo amigable, de la credencial de acceso, o de ambos, hace la identidad irrecuperable. El ciudadano debe esperar el cool-down para solicitar una nueva identidad completa.
+- El historial de una identidad inactiva —las acciones que esa identidad realizó en la aplicación destino— permanece visible y sigue contando. El sistema no puede distinguir una identidad abandonada de una simplemente inactiva. La decisión sobre si la aplicación destino puede marcar `anon_ids` como inactivos queda fuera del alcance de este ADR y corresponde al modelo de datos de cada aplicación destino.
 - El robo de credenciales no tiene mitigación técnica en este nivel. Su impacto es acotado: el ladrón opera dentro de los mismos límites que el ciudadano legítimo.
 - El circuito ZK de P-0014 debe adaptarse para certificar la relación `anon_seed + nonce → anon_id`, con el `anon_id` como output público y el `anon_seed` y el `nonce` como witnesses privados. El constraint de certificación del `anon_seed` definido en P-0014 queda descartado.
 - La infraestructura de JWKS histórico y el mecanismo de revocación por `kid` comprometido definidos en P-0014 se mantienen vigentes.
 
 ## Limitaciones conocidas del principio de identidad única
 
-El principio declarado del sistema es "un ciudadano real, una identidad anónima dentro de la plataforma". Las decisiones adoptadas en este ADR y en P-0016 respetan ese principio en el caso esperado: el ciudadano mantiene una única identidad anónima activa y, si la pierde, debe esperar el cool-down antes de obtener una nueva.
+El principio declarado del sistema es "un ciudadano real, una identidad anónima activa por aplicación destino". Las decisiones adoptadas en este ADR y en P-0016 respetan ese principio en el caso esperado: el ciudadano mantiene una única identidad anónima activa y, si la pierde, debe esperar el cool-down antes de obtener una nueva.
 
 Sin embargo, el sistema no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esta limitación es una consecuencia directa de dos decisiones del diseño:
 
