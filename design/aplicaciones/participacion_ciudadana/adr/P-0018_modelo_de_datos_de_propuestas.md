@@ -183,5 +183,5 @@ Los links se permiten como texto plano porque citar fuentes es una práctica leg
 ## Consecuencias
 
 - La base de datos de propuestas no contiene información sobre autoría. No es posible responder consultas del tipo "¿qué propuestas publicó este ciudadano?" a partir de la tabla de propuestas.
-- El campo `conteo_apoyos` se mantiene desnormalizado por razones de performance. El registro de apoyos individuales es la fuente de verdad: ante cualquier desfase detectado entre el contador y el registro, el valor correcto es el derivado del registro. La implementación concreta del mantenimiento de la consistencia (transaccionalidad, reconciliación, mecanismo de detección de desfase) se documenta en `implementation/` cuando se aborde esa etapa.
+- El campo `conteo_apoyos` se mantiene desnormalizado por razones de performance. El registro de apoyos individuales es la fuente de verdad: ante cualquier desfase detectado entre el contador y el registro, el valor correcto es el derivado del registro. La implementación concreta del mantenimiento de la consistencia (transaccionalidad, reconciliación, mecanismo de detección de desfase) se documenta en la carpeta de implementación de la aplicación cuando se aborde esa etapa.
 - Los valores por defecto de longitud máxima de título y cuerpo deben documentarse en la guía de operación junto con los criterios para ajustarlos.
