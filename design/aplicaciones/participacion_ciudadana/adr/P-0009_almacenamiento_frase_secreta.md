@@ -6,7 +6,7 @@
 
 La frase secreta definida por el ciudadano durante el registro en la plataforma es el único mecanismo de acceso y recuperación de su identidad anónima dentro de ella. Por esta razón, tanto el canal por el que la frase llega a la plataforma como el formato en que se almacena requieren protección especial.
 
-La frase es asunto exclusivo de la plataforma participativa: el emisor no participa de su manejo, según P-0015. El ciudadano la define en su primer contacto con la plataforma y la usa en cada login posterior. La plataforma la recibe, la procesa, y almacena un valor derivado que le permita verificar futuros logins sin poder reconstruir la frase original.
+La frase es asunto exclusivo de la plataforma: el emisor no participa de su manejo, según P-0015. El ciudadano la define en su primer contacto con la plataforma y la usa en cada login posterior. La plataforma la recibe, la procesa, y almacena un valor derivado que le permita verificar futuros logins sin poder reconstruir la frase original.
 
 Hay dos preguntas de diseño a resolver.
 
