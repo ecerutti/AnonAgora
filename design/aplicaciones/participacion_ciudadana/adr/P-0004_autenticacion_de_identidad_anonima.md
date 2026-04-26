@@ -4,9 +4,9 @@
 
 ## Contexto
 
-Después del registro inicial mediante verificación de identidad estatal, el ciudadano obtiene una identidad anónima persistente dentro de la plataforma.
+Después del registro inicial mediante verificación de identidad estatal, el ciudadano obtiene una identidad anónima persistente que usa dentro de la aplicación.
 
-A partir de ese momento, el uso cotidiano de la plataforma debe quedar completamente desacoplado de cualquier sistema de identidad real.
+A partir de ese momento, el uso cotidiano de la aplicación debe quedar completamente desacoplado de cualquier sistema de identidad real.
 
 El problema de diseño a resolver es:
 
@@ -25,7 +25,7 @@ El mecanismo de acceso debe cumplir las siguientes condiciones:
 
 ### 1. Reautenticación estatal en cada ingreso
 
-El ciudadano debería autenticarse nuevamente mediante la plataforma AUTENTICAR (ANSES, ARCA/AFIP, MiArgentina, ReNaPer) u otro proveedor estatal cada vez que quisiera ingresar.
+El ciudadano debería autenticarse nuevamente mediante AUTENTICAR (ANSES, ARCA/AFIP, MiArgentina, ReNaPer) u otro proveedor estatal cada vez que quisiera ingresar.
 
 **Problemas**
 
