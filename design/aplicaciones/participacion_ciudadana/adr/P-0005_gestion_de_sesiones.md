@@ -10,9 +10,9 @@ El problema de diseño a resolver es cómo manejar las sesiones de usuario mante
 
 - seguridad
 - experiencia de uso
-- coherencia con el modelo conceptual de anonimato de la plataforma
+- coherencia con el modelo de identidad anónima del sistema
 
-La gestión de sesiones es especialmente sensible en este sistema, ya que la plataforma promueve explícitamente el uso de **identidades anónimas persistentes**.  
+La gestión de sesiones es especialmente sensible porque el sistema se basa en **identidades anónimas persistentes**.  
 Por lo tanto, ciertas decisiones de experiencia de usuario pueden afectar la **percepción de anonimato** por parte del ciudadano.
 
 ## Alternativas consideradas
@@ -56,7 +56,7 @@ Ejemplo de comportamiento:
 
 - la interfaz revela explícitamente que el sistema recuerda la identidad previa
 - puede generar desconfianza respecto al anonimato real del sistema
-- contradice el principio de que la plataforma no mantiene una relación identificable con el ciudadano
+- contradice el principio del sistema de no mantener una relación identificable con el ciudadano
 
 **Resultado**
 
@@ -116,7 +116,7 @@ Esto significa que:
 - no deben precargarse identidades utilizadas anteriormente
 - no deben ofrecerse opciones como "continuar como..."
 
-El objetivo es reforzar la percepción de que el sistema **no mantiene una memoria identificable del ciudadano una vez finalizada la sesión**.
+El objetivo es reforzar la percepción de que el sistema **no mantiene una memoria identificable del ciudadano una vez finalizada la sesión**, en línea con el modelo de identidad anónima del sistema (ver `design/capa_de_identidad/identity_model.md`).
 
 ## Consecuencias
 
