@@ -233,12 +233,12 @@ La combinación de ambos ejes define cuatro categorías de ADR, cada una con su 
 |---|---|---|
 | `P-XXXX` | `design/adr/` | Diseño de la plataforma general. |
 | `I-XXXX` | `implementation/adr/` | Implementación de la plataforma general. |
-| `DP-XXXX` | `design/demo/adr/` | Diseño específico de la demo. |
-| `DI-XXXX` | `implementation/demo/adr/` | Implementación específica de la demo. |
+| `DP-XXXX` | `demo/design/adr/` | Diseño específico de la demo. |
+| `DI-XXXX` | `demo/implementation/adr/` | Implementación específica de la demo. |
 
-**Cuándo registrar una decisión como ADR.** El criterio *"merece ADR si pudo haber sido distinta"* aplica por igual a los cuatro tipos. No toda decisión de implementación amerita un ADR: la elección de una biblioteca concreta merece registro solo cuando había alternativas razonables y hubo que elegir justificadamente (por ejemplo, `argon2` v0.31 madura vs v0.32 nueva). La adopción trivial de una dependencia sin alternativas a evaluar no necesita ADR y se documenta directamente en el documento de implementación correspondiente de `implementation/` o `implementation/demo/`.
+**Cuándo registrar una decisión como ADR.** El criterio *"merece ADR si pudo haber sido distinta"* aplica por igual a los cuatro tipos. No toda decisión de implementación amerita un ADR: la elección de una biblioteca concreta merece registro solo cuando había alternativas razonables y hubo que elegir justificadamente (por ejemplo, `argon2` v0.31 madura vs v0.32 nueva). La adopción trivial de una dependencia sin alternativas a evaluar no necesita ADR y se documenta directamente en el documento de implementación correspondiente de `implementation/` o `demo/implementation/`.
 
-**Qué va fuera de los ADRs.** Las decisiones de diseño que no surgen de elegir entre alternativas (un modelo conceptual, un glosario, una especificación unívoca) se documentan directamente en `design/` o `design/demo/`. Análogamente, la documentación descriptiva de implementación sin alternativas a evaluar vive en `implementation/` o `implementation/demo/`, no en ADRs.
+**Qué va fuera de los ADRs.** Las decisiones de diseño que no surgen de elegir entre alternativas (un modelo conceptual, un glosario, una especificación unívoca) se documentan directamente en `design/` o `demo/design/`. Análogamente, la documentación descriptiva de implementación sin alternativas a evaluar vive en `implementation/` o `demo/implementation/`, no en ADRs.
 
 ### Regla rápida
 
