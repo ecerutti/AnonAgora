@@ -67,4 +67,19 @@ La Opción B introduce un riesgo desproporcionado: cualquier mecanismo de invali
 
 La asimetría de costos es clara: el costo de no tener invalidación es bajo y acotado; el costo de tenerla es un vector de ataque sin contramedida técnica.
 
-La moderación de contenido abusivo, si se considera necesaria, es un problema separado que debe resolverse sobre propuestas y apoyos individuales,
+La moderación de contenido abusivo, si se considera necesaria, es un problema separado que debe resolverse sobre propuestas y apoyos individuales, no sobre identidades. Esa decisión corresponde a un ADR posterior sobre el modelo de moderación.
+
+## Consecuencias
+
+- La plataforma no almacena ningún campo de estado de activación en los `anon_ids`. Toda identidad registrada en la plataforma está activa por definición.
+- El único mecanismo de ciclo de vida de una identidad es la renovación mediante el emisor, según las reglas de cool-down de P-0015.
+- El ciudadano que sospecha que sus credenciales fueron comprometidas debe aguardar el vencimiento del cool-down y solicitar una nueva identidad al emisor. El cupo de propuestas acumulado en la identidad anterior no es transferible a la nueva.
+- Las propuestas y apoyos registrados bajo un `anon_id` permanecen visibles y contabilizan independientemente de si la identidad está siendo usada activamente o fue abandonada.
+- La moderación de contenido abusivo no se aborda en este ADR y corresponde a una decisión futura sobre el modelo de moderación de la plataforma.
+
+## Referencias
+
+- P-0001 — Visibilidad pública de la identidad anónima
+- P-0006 — Modelo de amenazas y supuestos de confianza
+- P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas
+- `design/threat_model.md` — Modelo de amenazas
