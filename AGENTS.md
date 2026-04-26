@@ -2,16 +2,19 @@
 
 ## Propósito del proyecto
 
-Este proyecto explora el diseño de una **Plataforma de Participación Ciudadana con Identidad Verificada y Anonimato Persistente**.
+Este proyecto explora el diseño de un sistema con dos componentes:
 
-El objetivo del sistema es permitir que ciudadanos reales participen en propuestas y debates públicos sin exponer su identidad real ni crear perfiles públicos rastreables.
+- una **capa de identidad anónima verificada** reutilizable, que se encarga de verificar que cada participante es una persona real y de emitir identidades anónimas persistentes; y
+- una **aplicación destino** construida sobre esa capa, que define qué pueden hacer los ciudadanos con sus identidades anónimas.
 
-La plataforma funciona como un **termómetro social**, no como un sistema de decisión política vinculante.
+La modularidad y el modelo "una capa de identidad por aplicación destino" están definidos en P-0021.
+
+La primera aplicación destino diseñada es una **plataforma de participación ciudadana**: permite a ciudadanos reales participar en propuestas y debates públicos sin exponer su identidad real ni crear perfiles públicos rastreables, y funciona como un **termómetro social**, no como un sistema de decisión política vinculante. El modelo permite construir otras aplicaciones destino sobre la misma capa (por ejemplo, un sistema de denuncias anónimas), cada una como despliegue independiente.
 
 Este repositorio contiene:
 
-- la propuesta conceptual del sistema
-- decisiones de diseño de la plataforma
+- la propuesta conceptual de la aplicación de participación ciudadana
+- decisiones de diseño de la capa de identidad y de la aplicación
 - una futura implementación demo
 
 ## Sobre el nombre del proyecto
@@ -54,7 +57,7 @@ El sistema debe mantener separadas tres funciones:
 
 1. verificación de identidad  
 2. emisión de identidad anónima  
-3. plataforma participativa  
+3. aplicación destino  
 
 ## Ausencia de reputación pública
 
@@ -74,22 +77,43 @@ El diseño debe minimizar:
 
 # Estructura del repositorio
 
+El repositorio se organiza en dos árboles paralelos: el del **sistema general** (en la raíz) y el de la **demo** (bajo `demo/`). Cada uno tiene la misma estructura interna: documentación conceptual, diseño, implementación y código fuente. La demo hereda íntegramente las decisiones del sistema general; los documentos bajo `demo/` solo registran las simplificaciones, omisiones o sustituciones específicas de la demo. Esta regla de herencia se documenta en `demo/README.md`.
+
+Dentro de `design/` y `implementation/` (tanto en el sistema general como en la demo), la estructura refleja el modelo de P-0021: una **capa de identidad** y una o más **aplicaciones destino**. Para cada uno, las decisiones se registran en ADRs (en una subcarpeta `adr/`) y los documentos descriptivos viven directamente en la carpeta correspondiente. Las decisiones y documentos **transversales** —los que aplican al sistema completo o a la relación entre capa y aplicación— viven en la raíz de `design/` y `design/adr/` (o sus equivalentes en `implementation/`).
+
+## Árboles principales
+
 | Carpeta | Contenido | Qué NO va acá |
 |---|---|---|
-| `docs/propuesta/` | Documentación conceptual de la idea, orientada a lectores no técnicos (responsables institucionales, personas interesadas en comprender el objetivo del proyecto). | Decisiones técnicas, especificaciones de implementación. |
+| `docs/propuesta/` | Documentación conceptual de la aplicación de participación ciudadana, orientada a lectores no técnicos (responsables institucionales, personas interesadas en comprender el objetivo del proyecto). | Decisiones técnicas, especificaciones de implementación. |
 | `docs/` | Documentación técnica del desarrollo: arquitectura general, overviews, especificaciones, material de apoyo para el desarrollo. | Decisiones de diseño con alternativas evaluadas. |
-| `design/` | Documentos de diseño de la plataforma general que no requieren ADR: modelos conceptuales, glosarios, especificaciones que no surgen de elegir entre alternativas. | ADRs, decisiones entre alternativas, diseño específico de la demo, decisiones de implementación. |
-| `design/adr/` | ADRs de diseño de la plataforma general, con prefijo `P-XXXX`. Decisiones sobre qué hace el sistema. | Documentos descriptivos sin decisión entre alternativas, ADRs de la demo, ADRs de implementación. |
-| `demo/design/` | Documentos de diseño específicos de la versión demo que no requieren ADR. La demo puede adoptar simplificaciones que no representen el diseño final del sistema. | Decisiones de diseño de la plataforma general, decisiones de implementación. |
-| `demo/design/adr/` | ADRs de diseño específicos de la demo, con prefijo `DP-XXXX`. | ADRs de diseño de la plataforma general, ADRs de implementación. |
-| `implementation/` | Documentos de implementación de la plataforma general que no requieren ADR: guías de stack, lineamientos de infraestructura, especificaciones operativas. | ADRs, decisiones de implementación entre alternativas, diseño conceptual, material específico de la demo. |
-| `implementation/adr/` | ADRs de implementación de la plataforma general, con prefijo `I-XXXX`. Decisiones sobre con qué piezas concretas se construye el sistema. | ADRs de diseño, ADRs específicos de la demo. |
-| `demo/implementation/` | Documentos de implementación específicos de la demo que no requieren ADR. | Implementación de la plataforma general, diseño, ADRs. |
-| `demo/implementation/adr/` | ADRs de implementación específicos de la demo, con prefijo `DI-XXXX`. | ADRs de implementación de la plataforma general, ADRs de diseño. |
-| `demo/` | Código fuente de la implementación demo. | Documentación. |
+| `design/` | Documentos de diseño del sistema general que no requieren ADR. La estructura interna se describe abajo. | ADRs, decisiones entre alternativas, decisiones de implementación, material específico de la demo. |
+| `implementation/` | Documentos de implementación del sistema general que no requieren ADR. La estructura interna replica la de `design/`. | ADRs, decisiones de implementación entre alternativas, diseño conceptual, material específico de la demo. |
+| `demo/` | Todo lo referente a la versión demo: documentación, decisiones de diseño, decisiones de implementación y código fuente. La estructura interna replica la del sistema general (`demo/design/`, `demo/implementation/` y eventualmente `demo/src/`). La demo hereda las decisiones del sistema general; aquí solo se registran las simplificaciones específicas. | Decisiones del sistema general, documentación conceptual general. |
 | `notas/` | Material de trabajo del proyecto: estado del trabajo en curso, recordatorios, ideas pendientes de evaluación, borradores conceptuales que todavía no son documentos oficiales. Mantenido por el humano con apoyo de los agentes. | Decisiones ya tomadas (van a las carpetas de ADR correspondientes), descripciones de componentes (van a `design/` o `implementation/`), scratchpads del agente durante una conversación. |
 
-La convención de nombres, estructura y formato de los ADR está definida en `design/adr/README.md`. El criterio aplica a los cuatro tipos de ADR del proyecto: `P-XXXX` (diseño de la plataforma general), `I-XXXX` (implementación de la plataforma general), `DP-XXXX` (diseño específico de la demo) y `DI-XXXX` (implementación específica de la demo).
+## Estructura interna de `design/` (y, simétricamente, de `implementation/` y de `demo/design/` y `demo/implementation/`)
+
+| Carpeta | Contenido | Prefijo de ADRs |
+|---|---|---|
+| `design/` (raíz) | Documentos de diseño transversales al sistema completo: modelos conceptuales y especificaciones que aplican a la capa y a las aplicaciones destino por igual (ej.: `threat_model.md`). | — |
+| `design/adr/` | ADRs transversales: decisiones sobre el sistema completo o sobre la relación entre capa y aplicación (ej.: P-0006, P-0020, P-0021). | `P-XXXX` |
+| `design/capa_de_identidad/` | Documentos de diseño de la capa de identidad (ej.: `identity_model.md`, contrato capa↔aplicación en su `README.md`). | — |
+| `design/capa_de_identidad/adr/` | ADRs de diseño específicos de la capa de identidad. | `P-XXXX` |
+| `design/aplicaciones/<nombre>/` | Documentos de diseño de una aplicación destino concreta (actualmente solo `participacion_ciudadana/`). | — |
+| `design/aplicaciones/<nombre>/adr/` | ADRs de diseño específicos de esa aplicación destino. | `P-XXXX` |
+
+`implementation/` replica la misma estructura. Los ADRs de implementación del sistema general usan prefijo `I-XXXX`.
+
+`demo/design/` y `demo/implementation/` replican la misma estructura interna que sus contrapartes del sistema general. Los ADRs de diseño específicos de la demo usan prefijo `DP-XXXX` y los de implementación de la demo usan prefijo `DI-XXXX`.
+
+## Notas sobre la organización
+
+- El **prefijo del ADR** (`P`, `I`, `DP`, `DI`) indica si es de diseño o implementación, y si aplica al sistema general o solo a la demo. La **carpeta** indica si pertenece a la capa, a una aplicación destino o es transversal. Ambos ejes son independientes (P-0021).
+- Los identificadores de ADRs son únicos y secuenciales **dentro de cada prefijo**, sin repartirse por carpeta. Un `P-XXXX` puede vivir en `design/adr/`, en `design/capa_de_identidad/adr/` o en `design/aplicaciones/<nombre>/adr/` según corresponda, pero su número no se reutiliza.
+- Cuando se diseñe una nueva aplicación destino, se crea una subcarpeta hermana de `participacion_ciudadana/` bajo `design/aplicaciones/` (y simétricamente en `implementation/` y en las contrapartes de la demo).
+
+La convención de nombres, estructura y formato de los ADR está definida en `design/adr/README.md`. El criterio aplica a los cuatro tipos de ADR del proyecto: `P-XXXX` (diseño del sistema general), `I-XXXX` (implementación del sistema general), `DP-XXXX` (diseño específico de la demo) y `DI-XXXX` (implementación específica de la demo).
 
 ---
 
