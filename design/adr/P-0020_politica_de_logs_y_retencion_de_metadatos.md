@@ -8,9 +8,11 @@ P-0006 establece que el sistema debe adoptar retención limitada de metadatos op
 
 Esta omisión es intencional: P-0006 define el principio, este ADR lo concreta.
 
-Los logs operativos son necesarios para diagnosticar errores, detectar comportamiento anómalo y auditar el funcionamiento del sistema. Al mismo tiempo, representan una superficie de correlación real: un atacante con acceso a logs de múltiples componentes podría inferir la relación entre identidad real y actividad dentro de la plataforma, particularmente mediante correlación temporal entre eventos del emisor y la plataforma participativa.
+Los principios de esta política son transversales al sistema. Las listas concretas de eventos y campos hacen referencia a los dos componentes que generan logs hoy: el **emisor**, parte de la capa de identidad; y la **aplicación destino**, que en el despliegue actual es la aplicación de participación ciudadana (P-0021). En las tablas de este ADR se usan los nombres operativos "Emisor" y "Plataforma" para referirse a esos dos componentes.
 
-El emisor y la plataforma participativa pueden correr en infraestructuras completamente separadas y bajo administradores distintos, lo cual es coherente con la separación de funciones de P-0006. La política de logs debe ser compatible con ese escenario.
+Los logs operativos son necesarios para diagnosticar errores, detectar comportamiento anómalo y auditar el funcionamiento del sistema. Al mismo tiempo, representan una superficie de correlación real: un atacante con acceso a logs de múltiples componentes podría inferir la relación entre identidad real y actividad del ciudadano, particularmente mediante correlación temporal entre eventos del emisor y eventos de la aplicación destino.
+
+El emisor y la aplicación destino pueden correr en infraestructuras completamente separadas y bajo administradores distintos, lo cual es coherente con la separación de funciones de P-0006. La política de logs debe ser compatible con ese escenario.
 
 Las preguntas de diseño que motivaron este ADR son:
 
@@ -24,7 +26,7 @@ Las preguntas de diseño que motivaron este ADR son:
 
 ### Decisión 1 — Granularidad temporal en modo operativo
 
-El riesgo principal de los logs en este sistema es la correlación temporal cruzada entre componentes. Un timestamp preciso en el log del emisor y otro en el log de la plataforma participativa, tomados en el mismo momento, permiten inferir que ambos eventos corresponden al mismo ciudadano, colapsando la separación de funciones establecida en P-0006.
+El riesgo principal de los logs en este sistema es la correlación temporal cruzada entre componentes. Un timestamp preciso en el log del emisor y otro en el log de la aplicación destino, tomados en el mismo momento, permiten inferir que ambos eventos corresponden al mismo ciudadano, colapsando la separación de funciones establecida en P-0006.
 
 La pregunta es con qué granularidad registrar los timestamps en modo operativo normal.
 
@@ -228,7 +230,7 @@ Los plazos de retención son configurables por el operador, con los siguientes v
 
 **Logs de modo debug:** se eliminan automáticamente al desactivar el modo debug. Si el modo debug no se desactiva, los logs se eliminan en un plazo máximo de 1 día desde su generación.
 
-Cada componente gestiona la eliminación de sus propios logs de forma independiente. Esta separación es consecuencia directa del modelo de separación de funciones de P-0006: el emisor y la plataforma pueden correr en infraestructuras completamente distintas y bajo administradores diferentes.
+Cada componente gestiona la eliminación de sus propios logs de forma independiente. Esta separación es consecuencia directa del modelo de separación de funciones de P-0006: el emisor y la aplicación destino pueden correr en infraestructuras completamente distintas y bajo administradores diferentes.
 
 ### Limitaciones conocidas
 
@@ -242,7 +244,7 @@ La política de retención define la intención del sistema y su implementación
 
 La granularidad mínima por tipo de evento reduce la superficie de correlación temporal cruzada entre componentes sin sacrificar la utilidad diagnóstica real. Los incidentes técnicos se diagnostican por secuencia de eventos, no por precisión de segundos. La detección de ataques de fuerza bruta se resuelve mejor mediante rate limiting en capa de aplicación que mediante análisis retrospectivo de logs con timestamps precisos.
 
-La lista diferenciada de campos prohibidos por componente refleja el modelo de separación de funciones de P-0006: el riesgo de cada dato depende del contexto en que aparece. Prohibir el `anon_id` en el emisor y el `anon_seed` en la plataforma preserva la separación entre las dos capas de identificadores incluso ante un atacante con acceso a los logs de un único componente.
+La lista diferenciada de campos prohibidos por componente refleja el modelo de separación de funciones de P-0006: el riesgo de cada dato depende del contexto en que aparece. Prohibir el `anon_id` en el emisor y el `anon_seed` en la aplicación destino preserva la separación entre las dos capas de identificadores incluso ante un atacante con acceso a los logs de un único componente.
 
 El modo debug con visibilidad obligatoria es preferible a la alternativa real: cuando los logs operativos no alcanzan para diagnosticar un problema en producción, la alternativa es la intervención ad-hoc del administrador sin ningún control sobre qué datos expone. Un modo debug explícito y visible es más seguro que esa alternativa.
 
