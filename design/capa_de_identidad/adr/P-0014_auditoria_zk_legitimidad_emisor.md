@@ -4,7 +4,7 @@
 
 ## Contexto
 
-El emisor es el componente responsable de verificar que un ciudadano corresponde a una persona real —mediante un token JWT firmado por AUTENTICAR— y de emitir la identidad anónima (`anon_id`) correspondiente. Una vez completado ese proceso, el token se descarta sin retener ningún metadato, por decisión de P-0013.
+El emisor es el componente de la capa de identidad responsable de verificar que un ciudadano corresponde a una persona real —mediante un token JWT firmado por AUTENTICAR— y de emitir la identidad anónima (`anon_id`) correspondiente. Una vez completado ese proceso, el token se descarta sin retener ningún metadato, por decisión de P-0013.
 
 Esta ausencia de retención introduce una limitación conocida: no es posible demostrar retrospectivamente que un `anon_id` específico fue generado a partir de un token real de AUTENTICAR. Un administrador malicioso con acceso al emisor podría fabricar identidades anónimas sin que ningún ciudadano real las respalde, y esa manipulación sería indetectable mediante auditoría forense sobre los datos almacenados. La única defensa disponible bajo P-0013 Decisión 4 es procedimental: revisión del código fuente y del diseño del sistema.
 
@@ -129,9 +129,9 @@ Los witnesses privados del circuito son el CUIT, el `anon_seed` (como valor inte
 
 La adopción de ZK es coherente con el principio de integridad verificable del sistema definido en `design/identity_model.md`: el sistema debe poder demostrar su correcto funcionamiento sin depender de confianza ciega en los operadores. La auditoría procedimental cumple ese objetivo de forma débil —depende de que alguien revise el código y confíe en que lo que ejecuta en producción coincide con lo auditado. ZK lo cumple de forma fuerte: la prueba es verificable matemáticamente por cualquier tercero con información pública, sin cruzar datos con ningún componente del sistema.
 
-El escenario de administrador malicioso con acceso al emisor es plausible en el contexto operativo habitual del sistema, donde emisor y plataforma participativa pueden compartir infraestructura física. ZK elimina la capacidad de ese actor de fabricar identidades anónimas sin ciudadanos reales detrás, que es la amenaza específica que P-0013 Decisión 4 dejaba sin cobertura.
+El escenario de administrador malicioso con acceso al emisor es plausible en el contexto operativo habitual del sistema, donde emisor y aplicación destino pueden compartir infraestructura física. ZK elimina la capacidad de ese actor de fabricar identidades anónimas sin ciudadanos reales detrás, que es la amenaza específica que P-0013 Decisión 4 dejaba sin cobertura.
 
-La prueba cubre la cadena completa hasta el `anon_id` porque ese es el identificador que llega a la plataforma y que un auditor externo puede verificar. Una prueba que certificara solo el `anon_seed` no sería útil para la plataforma: el `anon_seed` no sale del emisor, y la plataforma no puede verificar algo que no ve. Al extender el circuito hasta la derivación del `anon_id` según P-0015, la plataforma y cualquier auditor externo pueden verificar de forma autónoma que cada `anon_id` que aparece en el sistema fue generado a partir de un token real de AUTENTICAR.
+La prueba cubre la cadena completa hasta el `anon_id` porque ese es el identificador que llega a la aplicación destino y que un auditor externo puede verificar. Una prueba que certificara solo el `anon_seed` no sería útil para la aplicación destino: el `anon_seed` no sale del emisor, y la aplicación destino no puede verificar algo que no ve. Al extender el circuito hasta la derivación del `anon_id` según P-0015, la aplicación destino y cualquier auditor externo pueden verificar de forma autónoma que cada `anon_id` que aparece en el sistema fue generado a partir de un token real de AUTENTICAR.
 
 La generación en servidor se elige sobre la generación en cliente porque los tiempos de proving en cliente (60-180 segundos estimados en dispositivos de gama media-baja) son inaceptables para la experiencia del usuario, y los requisitos de RAM del archivo `.zkey` son incompatibles con smartphones del segmento objetivo.
 
@@ -139,9 +139,9 @@ La pila circom + snarkjs sobre `zk-email-verify` se elige sobre zkVMs porque el 
 
 ## Consecuencias
 
-- El emisor debe implementar un componente de proving ZK que, antes de descartar el token de AUTENTICAR y el `nonce`, genere una prueba Groth16 usando el circuito adaptado de `zk-email-verify`. La prueba se entrega a la plataforma junto con el `anon_id` y el pseudónimo amigable, según P-0015.
+- El emisor debe implementar un componente de proving ZK que, antes de descartar el token de AUTENTICAR y el `nonce`, genere una prueba Groth16 usando el circuito adaptado de `zk-email-verify`. La prueba se entrega a la aplicación destino junto con el `anon_id` y el pseudónimo amigable, según P-0015.
 - La prueba tiene un tamaño de ~256 bytes y no contiene datos correlacionables con la identidad real del ciudadano.
-- La prueba ZK certifica la legitimidad del `anon_id` completo: existe un token JWT válido de AUTENTICAR cuyo CUIT deriva en un `anon_seed` que, combinado con el nonce generado por el emisor, produce ese `anon_id`. La plataforma y cualquier auditor externo pueden verificar autónomamente esta cadena sin cruzar datos con el emisor.
+- La prueba ZK certifica la legitimidad del `anon_id` completo: existe un token JWT válido de AUTENTICAR cuyo CUIT deriva en un `anon_seed` que, combinado con el nonce generado por el emisor, produce ese `anon_id`. La aplicación destino y cualquier auditor externo pueden verificar autónomamente esta cadena sin cruzar datos con el emisor.
 - El emisor debe implementar un servicio de JWKS histórico que registre todas las JWKs que AUTENTICAR haya publicado, indexadas por `kid`. Este componente es necesario para que las pruebas generadas bajo claves rotadas sigan siendo verificables. Referencia de implementación: `historical-jwks-zklogin` de MystenLabs.
 - El emisor debe implementar un mecanismo de revocación por `kid` comprometido: si AUTENTICAR reporta una clave privada comprometida, el sistema debe poder marcar ese `kid` como inválido y gestionar las identidades emitidas bajo él. El `kid` es output público de cada prueba, lo que permite esta operación sin revelar datos privados.
 - La adaptación del circuito requiere auditoría de seguridad especializada en ZK antes de cualquier despliegue en producción. El costo estimado es USD 30.000–150.000 según tamaño del circuito y firma auditora.
