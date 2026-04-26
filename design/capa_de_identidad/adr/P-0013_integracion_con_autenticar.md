@@ -10,7 +10,7 @@ El sistema requiere verificar que cada ciudadano que solicita una identidad anó
 
 Sin un mecanismo de verificación confiable, un mismo actor podría obtener múltiples identidades anónimas y manipular los resultados de la plataforma (ataque Sybil). Además, el diseño debe evitar que un administrador con acceso al sistema pueda generar identidades anónimas ficticias sin respaldo en una persona real.
 
-P-0007 define que la plataforma opera con proveedores externos de verificación de identidad y que el nivel de garantía de unicidad depende de las propiedades del proveedor. Este ADR concreta esa decisión para el contexto argentino: qué proveedor se usa, qué proveedores de identidad se aceptan dentro de ese proveedor, y cómo se deriva el identificador interno del sistema a partir de la verificación.
+P-0007 define que la capa de identidad opera con proveedores externos de verificación de identidad y que el nivel de garantía de unicidad depende de las propiedades del proveedor. Este ADR concreta esa decisión para el contexto argentino: qué proveedor se usa, qué proveedores de identidad se aceptan dentro de ese proveedor, y cómo se deriva el identificador interno del sistema a partir de la verificación.
 
 Las preguntas de diseño que motivaron este ADR son:
 
@@ -25,7 +25,7 @@ Las preguntas de diseño que motivaron este ADR son:
 
 #### Opción A — Integración directa con cada organismo estatal
 
-La plataforma se integraría directamente con ARCA (ex-AFIP), ANSES, ReNaPer u otros organismos de forma individual, sin intermediario.
+La capa de identidad se integraría directamente con ARCA (ex-AFIP), ANSES, ReNaPer u otros organismos de forma individual, sin intermediario.
 
 **Ventajas**
 
@@ -39,7 +39,7 @@ La plataforma se integraría directamente con ARCA (ex-AFIP), ANSES, ReNaPer u o
 
 #### Opción B — AUTENTICAR como intermediario
 
-La plataforma se integra con AUTENTICAR, que actúa como nexo entre la plataforma y los proveedores de identidad estatales. AUTENTICAR implementa OIDC sobre Keycloak y expone una interfaz uniforme independientemente del proveedor subyacente.
+La capa de identidad se integra con AUTENTICAR, que actúa como nexo entre la capa y los proveedores de identidad estatales. AUTENTICAR implementa OIDC sobre Keycloak y expone una interfaz uniforme independientemente del proveedor subyacente.
 
 **Ventajas**
 
@@ -202,7 +202,7 @@ Las implicaciones de esta decisión temporal son explícitas y conocidas:
 - La garantía contra identidades ficticias en el emisor es procedimental, no criptográfica. Descansa en la auditabilidad del código fuente y el diseño del sistema, no en datos verificables retrospectivamente.
 - No es posible detectar mediante auditoría forense si un admin malicioso con acceso al emisor fabricó identidades anónimas sin respaldo en ciudadanos reales.
 - Las auditorías del emisor están limitadas a revisión de código, verificación del diseño, y consistencia observable del comportamiento del sistema.
-- La auditoría de legitimidad en la plataforma participativa —verificar que las identidades que participan fueron emitidas por el emisor legítimo— es un problema separado e independiente que se resuelve en P-0014 mediante firma del emisor sobre cada `anon_id`.
+- La auditoría de legitimidad en la capa de identidad —demostrar que cada `anon_id` emitido proviene de un ciudadano real verificado por AUTENTICAR— es un problema separado e independiente que se resuelve en P-0014.
 
 ## Justificación
 
@@ -221,7 +221,7 @@ La decisión de no retener metadatos del token es la consecuencia directa de que
 - El emisor debe extraer el claim `cuit` del token y calcular el `anon_seed` descartando el identificador original inmediatamente después.
 - El emisor no debe almacenar: CUIT, CUIL, DNI, `sub`, `jti`, ni el token completo de AUTENTICAR. Ver P-0006 y `design/identity_model.md`.
 - La auditoría de legitimidad del emisor es procedimental hasta que se evalúe y decida sobre ZK.
-- La auditoría de legitimidad en la plataforma participativa se resuelve de forma independiente en P-0014.
+- La auditoría de legitimidad de los `anon_id` emitidos se resuelve de forma independiente en P-0014.
 - Si en el futuro se evalúa incorporar un nuevo proveedor, debe verificarse compatibilidad de espacio de identificadores y nivel mínimo según el criterio definido en la Decisión 2.
 - Si la evaluación de ZK concluye en su adopción, debe crearse un nuevo ADR que superseda la Decisión 4 de este documento.
 
