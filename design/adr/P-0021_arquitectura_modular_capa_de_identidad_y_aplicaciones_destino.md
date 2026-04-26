@@ -6,7 +6,7 @@
 
 Hasta este ADR, el sistema se diseñó asumiendo una única aplicación destino: la plataforma de participación ciudadana. La documentación, los ADRs existentes y la estructura del repositorio reflejan esa asunción. "La plataforma" se usa para referirse simultáneamente al sistema completo y a la aplicación participativa en particular, sin distinción.
 
-Durante el diseño quedó progresivamente claro que varias decisiones técnicas no son específicas de la participación ciudadana. El emisor de identidad anónima (P-0015), su integración con AUTENTICAR (P-0013), la auditoría criptográfica mediante ZK (P-0014), el mecanismo de passphrase (P-0008, P-0009), el modelo de amenazas (P-0006) y otras decisiones relacionadas con la identidad anónima operan sobre el ciudadano y sus credenciales, sin depender de qué haga la aplicación destino con esas credenciales.
+Durante el diseño quedó progresivamente claro que varias decisiones técnicas no son específicas de la participación ciudadana. El emisor de identidad anónima (P-0015), su integración con AUTENTICAR (P-0013), la auditoría criptográfica mediante ZK (P-0014), el modelo de amenazas (P-0006) y otras decisiones relacionadas con la identidad anónima operan sobre el ciudadano, sin depender de qué haga la aplicación destino con la identidad anónima emitida.
 
 El origen concreto de esta observación fue una conversación informal durante la difusión de la propuesta: una lectora planteó si el mismo mecanismo podría servir para canalizar denuncias anónimas. Al analizar esa pregunta quedó evidente que la respuesta era afirmativa —el sustrato de identidad es idéntico— y que el diseño ya lo permitía técnicamente, pero no estaba reconocido como tal en la documentación.
 
@@ -74,7 +74,7 @@ Desventajas
 
 Se adopta la **Opción B**.
 
-El sistema se estructura como la composición de dos capas:
+El sistema se estructura como la composición de una capa de identidad y una aplicación destino:
 
 - **Capa de identidad** (forma extendida: *infraestructura de identidad anónima verificada*): responsable de la integración con el verificador externo, la emisión de identidades anónimas y la provisión de credenciales que el ciudadano usa para autenticarse en la aplicación destino. La capa encapsula la integración con el verificador externo (AUTENTICAR en el contexto argentino), pero el verificador en sí no forma parte del sistema construido.
 
@@ -84,7 +84,7 @@ Cada despliegue está compuesto por exactamente una capa de identidad y una apli
 
 ## Justificación
 
-La modularidad reconocida por este ADR no es una arquitectura nueva sino el reconocimiento explícito de una modularidad que ya existía en el diseño técnico. El emisor nunca fue parte de la aplicación participativa: opera con anterioridad a cualquier acción dentro de ella y entrega sus resultados sin saber qué se hace con ellos (P-0015). El modelo de amenazas ya separa tres funciones —verificación, emisión y aplicación— como requisito arquitectónico (P-0006). Las decisiones sobre frase secreta, pseudónimos amigables, sesiones y logs tienen sentido con independencia de qué haga la aplicación destino.
+La modularidad reconocida por este ADR no es una arquitectura nueva sino el reconocimiento explícito de una modularidad que ya existía en el diseño técnico. El emisor nunca fue parte de la aplicación participativa: opera con anterioridad a cualquier acción dentro de ella y entrega sus resultados sin saber qué se hace con ellos (P-0015). El modelo de amenazas ya separa tres funciones —verificación, emisión y aplicación— como requisito arquitectónico (P-0006). Las decisiones sobre pseudónimos amigables y logs tienen sentido con independencia de qué haga la aplicación destino.
 
 Lo que este ADR cambia no es el diseño técnico sino el marco conceptual y el vocabulario con el que se presenta ese diseño. El costo es acotado —refactorización documental y estructural del repositorio— y el beneficio es que la puerta a futuras aplicaciones destino queda abierta sin necesidad de rediseño técnico posterior.
 
@@ -96,7 +96,7 @@ Esta decisión se toma tardíamente respecto del inicio del proyecto. El dispara
 
 ## Consecuencias
 
-- La estructura del repositorio se reorganiza para reflejar las dos capas. En `design/` aparecen subcarpetas para la capa de identidad y para cada aplicación destino (inicialmente, una sola: la de participación ciudadana). La misma reorganización aplica en `implementation/` y en las secciones de demo correspondientes. Los ADRs transversales —aquellos que deciden sobre la relación entre capas o sobre el sistema como tal— quedan en la raíz de cada carpeta de ADRs. La estructura concreta se documenta en `AGENTS.md` tras este ADR.
+- La estructura del repositorio se reorganiza para reflejar este modelo. En `design/` aparecen subcarpetas para la capa de identidad y para cada aplicación destino (inicialmente, una sola: la de participación ciudadana). La misma reorganización aplica en `implementation/` y en las secciones de demo correspondientes. Los ADRs transversales —aquellos que deciden sobre la relación entre capa y aplicación o sobre el sistema como tal— quedan en la raíz de cada carpeta de ADRs. La estructura concreta se documenta en `AGENTS.md` tras este ADR.
 - Los identificadores de ADRs existentes (`P-XXXX`, `I-XXXX`, `DP-XXXX`, `DI-XXXX`) se conservan. La capa a la que pertenece cada ADR queda identificada por la carpeta donde vive, no por el prefijo. Las referencias cruzadas existentes no se modifican.
 - La aplicación de participación ciudadana queda reconocida como una aplicación destino entre otras posibles, no como la definición del sistema. Los documentos descriptivos (`AGENTS.md`, `docs/architecture_overview.md`, `design/README.md`, modelos en `design/`) se actualizan para reflejar esto.
 - La documentación conceptual en `docs/propuesta/` mantiene su estructura pero introduce un marco inicial que deja claro que describe una aplicación destino específica, construida sobre una capa de identidad reutilizable.
