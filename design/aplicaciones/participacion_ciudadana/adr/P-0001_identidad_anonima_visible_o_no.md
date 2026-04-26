@@ -4,9 +4,9 @@
 
 ## Contexto
 
-Uno de los principios centrales de la plataforma es que cada ciudadano recibe una **identidad anónima persistente** que le permite participar en el sistema sin revelar su identidad real.
+Uno de los principios centrales del sistema es que cada ciudadano recibe una **identidad anónima persistente** que le permite participar en aplicaciones destino sin revelar su identidad real.
 
-Durante el diseño del sistema surgió una decisión importante: determinar si esa identidad anónima debía ser **visible públicamente dentro de la plataforma** o si debía permanecer **visible únicamente para el propio usuario**.
+Durante el diseño de la aplicación de participación ciudadana surgió una decisión importante: determinar si esa identidad anónima debía ser **visible públicamente dentro de la aplicación** o si debía permanecer **visible únicamente para el propio usuario**.
 
 La decisión afecta varios aspectos del funcionamiento del sistema, entre ellos:
 
