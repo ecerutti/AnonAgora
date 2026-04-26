@@ -4,9 +4,9 @@
 
 ## Contexto
 
-Durante el diseño del ciclo de vida de identidades anónimas (P-0015) quedó pendiente una decisión que corresponde exclusivamente al modelo de datos de la plataforma participativa: si un ciudadano sospecha que sus credenciales fueron robadas y su identidad anónima está siendo usada por un tercero, ¿puede solicitar la invalidación de ese `anon_id`?
+Durante el diseño del ciclo de vida de identidades anónimas (P-0015) quedó pendiente una decisión que corresponde exclusivamente al modelo de datos de la aplicación de participación ciudadana: si un ciudadano sospecha que sus credenciales fueron robadas y su identidad anónima está siendo usada por un tercero, ¿puede solicitar la invalidación de ese `anon_id`?
 
-La pregunta es relevante porque la plataforma es el único componente que puede actuar sobre un `anon_id` activo: el emisor no almacena `anon_ids` y no tiene mecanismo de revocación sobre ellos (P-0015).
+La pregunta es relevante porque la aplicación destino es el único componente que puede actuar sobre un `anon_id` activo: el emisor no almacena `anon_ids` y no tiene mecanismo de revocación sobre ellos (P-0015).
 
 El diseño debe evaluar si el beneficio de permitir la invalidación justifica los riesgos que introduce.
 
