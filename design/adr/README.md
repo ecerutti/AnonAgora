@@ -1,8 +1,8 @@
 # Architecture Decision Records (ADR)
 
-Esta carpeta contiene los **Architecture Decision Records (ADR)** del proyecto.
+Esta carpeta contiene los **Architecture Decision Records (ADR)** transversales del sistema general (P-XXXX). Los ADR de la capa de identidad y de las aplicaciones destino viven en sus respectivas subcarpetas (`design/capa_de_identidad/adr/` y `design/aplicaciones/<nombre>/adr/`).
 
-Un ADR es un documento breve que registra **una decisión de diseño importante** tomada durante el desarrollo de la arquitectura de la plataforma.
+Un ADR es un documento breve que registra **una decisión de diseño importante** tomada durante el desarrollo de la arquitectura del sistema.
 
 El objetivo de estos documentos es preservar el razonamiento detrás de cada decisión para que pueda ser comprendido en el futuro, incluso si las personas que tomaron la decisión original ya no participan del proyecto.
 
@@ -33,7 +33,7 @@ P-0003_seleccion_de_pseudonimo_anonimo.md
 
 Donde:
 
-- `P` indica que la decisión corresponde al **diseño de la plataforma**.
+- `P` indica que la decisión corresponde al **diseño del sistema general** (como opuesto a la implementación o a la demo, según los cuatro tipos de ADR descritos abajo).
 - `XXXX` es un número secuencial de cuatro dígitos.
 - El resto del nombre es una descripción corta del tema de la decisión.
 
@@ -224,17 +224,17 @@ Los ADRs del proyecto se clasifican en dos ejes: el tipo de decisión que regist
 
 - **Diseño** responde a la pregunta *"¿qué hace el sistema?"*: propiedades, algoritmos, protocolos, estructura de datos, flujos funcionales. Ejemplo: elegir Argon2id como algoritmo de derivación para la frase secreta.
 - **Implementación** responde a la pregunta *"¿con qué piezas concretas se construye?"*: lenguaje, framework, motor de base de datos, biblioteca concreta para un algoritmo ya decidido, infraestructura de despliegue. Ejemplo: elegir la biblioteca `argon2` v0.31 en Rust como implementación concreta.
-- **Plataforma general** son decisiones que aplican al sistema como tal, independientemente del despliegue concreto.
+- **Sistema general** son decisiones que aplican al sistema como tal, independientemente del despliegue concreto.
 - **Demo** son decisiones específicas de la implementación demostrativa del proyecto, que puede adoptar simplificaciones que no apliquen a un despliegue productivo (ver `DP-0001` como ejemplo).
 
 La combinación de ambos ejes define cuatro categorías de ADR, cada una con su propio prefijo y carpeta:
 
-| Prefijo | Carpeta | Alcance |
+| Prefijo | Ubicación | Alcance |
 |---|---|---|
-| `P-XXXX` | `design/adr/` | Diseño de la plataforma general. |
-| `I-XXXX` | `implementation/adr/` | Implementación de la plataforma general. |
-| `DP-XXXX` | `demo/design/adr/` | Diseño específico de la demo. |
-| `DI-XXXX` | `demo/implementation/adr/` | Implementación específica de la demo. |
+| `P-XXXX` | `design/adr/` (transversales), `design/capa_de_identidad/adr/`, `design/aplicaciones/<nombre>/adr/` | Diseño del sistema general. |
+| `I-XXXX` | `implementation/adr/` (transversales), `implementation/capa_de_identidad/adr/`, `implementation/aplicaciones/<nombre>/adr/` | Implementación del sistema general. |
+| `DP-XXXX` | `demo/design/adr/` (transversales), `demo/design/capa_de_identidad/adr/`, `demo/design/aplicaciones/<nombre>/adr/` | Diseño específico de la demo. |
+| `DI-XXXX` | `demo/implementation/adr/` (transversales), `demo/implementation/capa_de_identidad/adr/`, `demo/implementation/aplicaciones/<nombre>/adr/` | Implementación específica de la demo. |
 
 **Cuándo registrar una decisión como ADR.** El criterio *"merece ADR si pudo haber sido distinta"* aplica por igual a los cuatro tipos. No toda decisión de implementación amerita un ADR: la elección de una biblioteca concreta merece registro solo cuando había alternativas razonables y hubo que elegir justificadamente (por ejemplo, `argon2` v0.31 madura vs v0.32 nueva). La adopción trivial de una dependencia sin alternativas a evaluar no necesita ADR y se documenta directamente en el documento de implementación correspondiente de `implementation/` o `demo/implementation/`.
 
