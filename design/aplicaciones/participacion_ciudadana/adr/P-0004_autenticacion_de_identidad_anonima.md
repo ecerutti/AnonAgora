@@ -107,64 +107,9 @@ El reingreso a la plataforma se realiza mediante:
 
 La frase secreta funciona como prueba de posesión de dicha identidad.
 
-# Diseño de la identidad anónima
+# Implicancias para el reingreso
 
-Dado que la identidad anónima también funciona como identificador de acceso, su diseño debe cumplir ciertas condiciones.
-
-## Estructura
-
-La identidad anónima se generan automáticamente mediante una combinación de:
-
-```
-animal + color/adjetivo + número
-```
-
-Ejemplos:
-
-```
-Pato Naranja 72
-Tejón Versátil 91
-```
-
-El segundo término puede ser:
-
-- un color
-- un adjetivo corto
-
-Esto permite aumentar el espacio de combinaciones disponibles.
-
-## Restricciones del vocabulario
-
-Las listas de animales, colores y adjetivos deben cumplir los siguientes criterios:
-
-- palabras cortas
-- fáciles de escribir
-- sin caracteres especiales
-- preferentemente sin tildes ni acentos (de existir, el sistema los normaliza durante la autenticación para que su presencia no afecte el ingreso)
-
-El objetivo de estos criterios es evitar problemas de escritura y facilitar el uso de la identidad anónima como identificador de acceso.
-
-## Curaduría del vocabulario
-
-Las listas deben ser cuidadosamente curadas para evitar combinaciones potencialmente ofensivas o desagradables.
-
-Ejemplos de combinaciones a evitar:
-
-```
-Vibora Rastrera
-Rata Asquerosa
-```
-
-## Normalización de entrada
-
-Al momento de autenticarse, el sistema debe aceptar la identidad anónima en forma normalizada.
-
-Esto implica ignorar:
-
-- mayúsculas o minúsculas
-- acentos y tildes
-- espacios adicionales
-- guiones
+Dado que la identidad anónima funciona como identificador de acceso, la aplicación normaliza el pseudónimo ingresado por el ciudadano al momento del login para tolerar variaciones tipográficas. La aplicación ignora mayúsculas/minúsculas, acentos, espacios adicionales y guiones (medios y bajos): el ciudadano puede escribir variantes equivalentes y todas son aceptadas.
 
 Ejemplo:
 
@@ -177,8 +122,6 @@ tejonversatil91
 tejon_versatil-91
 ```
 
-Todas estas variantes deben considerarse equivalentes.
+La estructura del pseudónimo (`animal + color/adjetivo + número`) está decidida en P-0002. La selección y curaduría de las listas de palabras está documentada en `design/capa_de_identidad/identity_wordlists.md`.
 
-## Impacto
-
-Esta decisión simplifica la experiencia de acceso al sistema y refuerza la coherencia conceptual entre identidad anónima y autenticación.
+Esta decisión simplifica la experiencia de acceso a la aplicación y refuerza la coherencia conceptual entre identidad anónima y autenticación.
