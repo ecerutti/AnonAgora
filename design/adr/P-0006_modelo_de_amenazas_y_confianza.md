@@ -4,9 +4,9 @@
 
 ## Contexto
 
-El sistema busca permitir participación ciudadana digital bajo identidades anónimas persistentes, manteniendo al mismo tiempo la garantía de que cada participación corresponde a una persona real verificada.
+El sistema busca permitir que ciudadanos reales actúen dentro de una aplicación destino bajo identidades anónimas persistentes, manteniendo al mismo tiempo la garantía de que cada acción corresponde a una persona real verificada.
 
-Este objetivo introduce un problema de seguridad fundamental: distintos actores podrían intentar reconstruir o inferir la relación entre la identidad real de un ciudadano y su actividad dentro de la plataforma.
+Este objetivo introduce un problema de seguridad fundamental: distintos actores podrían intentar reconstruir o inferir la relación entre la identidad real de un ciudadano y su actividad dentro de la aplicación destino.
 
 Durante el diseño surgió la necesidad de definir explícitamente qué tipo de amenazas se asumen como plausibles y frente a cuáles se diseña el sistema.
 
@@ -88,9 +88,9 @@ En esta opción el sistema asume que:
 
 Sin embargo, la arquitectura se diseña para que:
 
-- ningún componente individual tenga simultáneamente acceso a identidad real y participación
-- la información almacenada en cada sistema sea mínima
-- la correlación entre sistemas requiera acceso simultáneo a múltiples componentes
+- ningún componente individual tenga simultáneamente acceso a la identidad real y a la actividad del ciudadano en la aplicación destino
+- la información almacenada en cada componente sea mínima
+- la correlación entre componentes requiera acceso simultáneo a múltiples de ellos
 
 Este enfoque se basa en principios como:
 
@@ -122,7 +122,7 @@ Por este motivo:
 
 - la verificación de identidad
 - la gestión de identidades anónimas
-- la plataforma de participación
+- la aplicación destino
 
 deben operar como funciones separadas.
 
@@ -144,7 +144,7 @@ El modelo intermedio permite:
 
 La adopción de este modelo de amenazas introduce varios principios obligatorios para el diseño del sistema:
 
-- separación entre verificación de identidad, gestión de identidad anónima y plataforma de participación
+- separación entre verificación de identidad, gestión de identidad anónima y aplicación destino
 - minimización de datos almacenados en cada componente
 - retención limitada de metadatos operativos
 - diseño que permita auditoría externa
