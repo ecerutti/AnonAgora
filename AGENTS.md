@@ -80,12 +80,12 @@ El diseño debe minimizar:
 | `docs/` | Documentación técnica del desarrollo: arquitectura general, overviews, especificaciones, material de apoyo para el desarrollo. | Decisiones de diseño con alternativas evaluadas. |
 | `design/` | Documentos de diseño de la plataforma general que no requieren ADR: modelos conceptuales, glosarios, especificaciones que no surgen de elegir entre alternativas. | ADRs, decisiones entre alternativas, diseño específico de la demo, decisiones de implementación. |
 | `design/adr/` | ADRs de diseño de la plataforma general, con prefijo `P-XXXX`. Decisiones sobre qué hace el sistema. | Documentos descriptivos sin decisión entre alternativas, ADRs de la demo, ADRs de implementación. |
-| `design/demo/` | Documentos de diseño específicos de la versión demo que no requieren ADR. La demo puede adoptar simplificaciones que no representen el diseño final del sistema. | Decisiones de diseño de la plataforma general, decisiones de implementación. |
-| `design/demo/adr/` | ADRs de diseño específicos de la demo, con prefijo `DP-XXXX`. | ADRs de diseño de la plataforma general, ADRs de implementación. |
+| `demo/design/` | Documentos de diseño específicos de la versión demo que no requieren ADR. La demo puede adoptar simplificaciones que no representen el diseño final del sistema. | Decisiones de diseño de la plataforma general, decisiones de implementación. |
+| `demo/design/adr/` | ADRs de diseño específicos de la demo, con prefijo `DP-XXXX`. | ADRs de diseño de la plataforma general, ADRs de implementación. |
 | `implementation/` | Documentos de implementación de la plataforma general que no requieren ADR: guías de stack, lineamientos de infraestructura, especificaciones operativas. | ADRs, decisiones de implementación entre alternativas, diseño conceptual, material específico de la demo. |
 | `implementation/adr/` | ADRs de implementación de la plataforma general, con prefijo `I-XXXX`. Decisiones sobre con qué piezas concretas se construye el sistema. | ADRs de diseño, ADRs específicos de la demo. |
-| `implementation/demo/` | Documentos de implementación específicos de la demo que no requieren ADR. | Implementación de la plataforma general, diseño, ADRs. |
-| `implementation/demo/adr/` | ADRs de implementación específicos de la demo, con prefijo `DI-XXXX`. | ADRs de implementación de la plataforma general, ADRs de diseño. |
+| `demo/implementation/` | Documentos de implementación específicos de la demo que no requieren ADR. | Implementación de la plataforma general, diseño, ADRs. |
+| `demo/implementation/adr/` | ADRs de implementación específicos de la demo, con prefijo `DI-XXXX`. | ADRs de implementación de la plataforma general, ADRs de diseño. |
 | `demo/` | Código fuente de la implementación demo. | Documentación. |
 | `notas/` | Material de trabajo del proyecto: estado del trabajo en curso, recordatorios, ideas pendientes de evaluación, borradores conceptuales que todavía no son documentos oficiales. Mantenido por el humano con apoyo de los agentes. | Decisiones ya tomadas (van a las carpetas de ADR correspondientes), descripciones de componentes (van a `design/` o `implementation/`), scratchpads del agente durante una conversación. |
 

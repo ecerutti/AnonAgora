@@ -8,7 +8,7 @@ DP-XXXX
 
 (donde `D` indica *demo* y `P` indica *diseño de la demo*)
 
-Para decisiones de implementación específicas de la demo, ver `implementation/demo/adr/` (prefijo `DI-XXXX`).
+Para decisiones de implementación específicas de la demo, ver `demo/implementation/adr/` (prefijo `DI-XXXX`).
 
 La convención general de ADR del proyecto está definida en:
 
