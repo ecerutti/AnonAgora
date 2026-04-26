@@ -52,7 +52,7 @@ El número garantiza la unicidad del pseudónimo, mientras que el resto del nomb
 
 - Resulta más amigable y fácil de recordar para los usuarios.
 - Permite que el ciudadano reconozca rápidamente su identidad anónima dentro del sistema.
-- Humaniza la interfaz de la plataforma.
+- Humaniza la interfaz de la aplicación destino.
 - Mantiene la unicidad mediante el componente numérico.
 
 **Desventajas**
