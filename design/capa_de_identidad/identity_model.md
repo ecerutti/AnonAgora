@@ -1,13 +1,13 @@
 # Modelo de identidad
 
-Este documento describe el modelo de identidad utilizado por el sistema y las propiedades que busca garantizar.
+Este documento describe el modelo de identidad utilizado por la capa de identidad y las propiedades que busca garantizar.
 
 ## Identidad real e identidad anónima
 
 El sistema distingue entre dos tipos de identidad:
 
 - identidad real: corresponde a la identidad civil de una persona verificada por un proveedor externo
-- identidad anónima: identidad persistente utilizada por el ciudadano dentro de la plataforma
+- identidad anónima: identidad persistente emitida por la capa de identidad y utilizada por el ciudadano dentro de la aplicación destino
 
 La identidad anónima permite participar sin revelar la identidad real del ciudadano.
 
@@ -15,7 +15,7 @@ La identidad anónima permite participar sin revelar la identidad real del ciuda
 
 El sistema busca garantizar la siguiente propiedad:
 
-**En un momento dado, una persona real puede tener como máximo una identidad anónima activa.**
+**En un momento dado, una persona real puede tener como máximo una identidad anónima activa por aplicación destino.**
 
 Esta propiedad reduce la posibilidad de manipulación mediante múltiples identidades.
 
@@ -29,9 +29,7 @@ Por este motivo, pueden existir identidades anónimas históricas asociadas a un
 
 ## Proveedores de verificación
 
-La plataforma no implementa directamente verificación de identidad.
-
-En su lugar utiliza **proveedores externos de verificación o unicidad**.
+La capa de identidad no implementa directamente verificación. En su lugar integra **proveedores externos de verificación o unicidad**.
 
 Estos proveedores pueden ser, por ejemplo:
 
@@ -53,7 +51,7 @@ Por ejemplo, en Argentina los verificadores externos (ANSES, AFIP/ARCA, MiArgent
 - CUIL/CUIT
 - u otros identificadores institucionales
 
-Estos identificadores **no deben almacenarse bajo ningún concepto** dentro del sistema.
+Estos identificadores **no deben almacenarse bajo ningún concepto** dentro de la capa de identidad ni propagarse a la aplicación destino.
 
 Solo pueden utilizarse temporalmente para generar identificadores derivados irreversibles mediante funciones criptográficas seguras.
 
@@ -61,20 +59,11 @@ Una vez generado el identificador derivado, el identificador original debe desca
 
 Este mecanismo permite detectar duplicaciones sin almacenar información sensible.
 
-## Limitaciones conocidas del principio de identidad única
+## Limitaciones conocidas del principio de unicidad
 
-El principio declarado del modelo es "un ciudadano real, una identidad anónima dentro de la plataforma". Las decisiones adoptadas en P-0015 y P-0016 respetan ese principio en el caso esperado: el ciudadano mantiene una única identidad anónima activa y, si la pierde, debe esperar el cool-down antes de obtener una nueva.
+El principio de unicidad ("una identidad anónima activa por ciudadano por aplicación destino") se respeta en el caso esperado, pero el diseño no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esto deriva de dos decisiones: el emisor no almacena vínculo entre ciudadano e identidad anónima (P-0015), y la aplicación no implementa mecanismos de invalidación de `anon_id` (P-0016 para participación ciudadana). La limitación es aceptada dentro del modelo de amenazas intermedio de P-0006.
 
-Sin embargo, el sistema no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esta limitación es una consecuencia directa de dos decisiones del diseño:
-
-- El emisor no almacena ningún vínculo entre el ciudadano y su identidad anónima.
-- La plataforma no implementa mecanismos de invalidación de identidades anónimas (ver P-0016).
-
-En consecuencia, un ciudadano que conserva acceso a su identidad anónima original y, cumplido el cool-down, solicita una nueva alegando pérdida, puede operar con dos identidades activas de forma simultánea. Esto le permitiría duplicar su cupo anual de propuestas (ver P-0017), apoyar la misma propuesta desde ambas identidades inflando el conteo de apoyos, o participar con dos identidades en propuestas vinculadas de forma que parezca apoyo independiente.
-
-Esta limitación es aceptada dentro del modelo de amenazas intermedio de P-0006. El cool-down (default 6 meses) impone un costo temporal significativo que reduce pero no elimina el incentivo de este comportamiento. El diseño del sistema prioriza la no construcción de mecanismos de invalidación (porque introducirían vectores de ataque de denegación de servicio, ver P-0016) por sobre la eliminación completa de esta posibilidad de abuso.
-
-La limitación debe estar documentada en cualquier material orientado a operadores o asesores técnicos para que el alcance real del principio sea correctamente entendido.
+El análisis completo —escenarios concretos de abuso, justificación del trade-off frente a alternativas con mecanismo de invalidación, y consecuencias operativas— vive en P-0015, sección "Limitaciones conocidas del principio de identidad única". Cualquier material orientado a operadores o asesores técnicos debe documentar esta limitación para que el alcance real del principio sea correctamente entendido.
 
 ## Integridad verificable
 
@@ -87,3 +76,15 @@ El sistema busca que cualquier manipulación interna resulte detectable mediante
 - consistencia entre acciones y credenciales válidas
 
 Este enfoque sigue el principio de **integridad verificable en lugar de confianza ciega**.
+
+## No sugerir memoria entre sesiones
+
+El modelo de identidad requiere que ninguna aplicación destino sugiera, en su interfaz, que el sistema recuerda la identidad anónima utilizada previamente una vez finalizada una sesión.
+
+Concretamente, una aplicación destino no debe:
+
+- mostrar la última identidad anónima utilizada en la pantalla de login
+- precargar identidades anteriores
+- ofrecer opciones tipo "continuar como [identidad anónima]"
+
+Este principio refuerza el modelo de anonimato persistente: si la aplicación "recuerda" al ciudadano entre sesiones, contradice la percepción de que cada sesión es una interacción independiente. Cada aplicación destino lo concreta en su propia política de gestión de sesiones; en la aplicación de participación ciudadana, esa concreción es P-0005.
