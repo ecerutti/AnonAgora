@@ -22,9 +22,9 @@ Estas se abordan después de cerrar las decisiones de plataforma. Incluye una de
 2. Alcance funcional del MVP (qué features entran y cuáles no).
 3. Persistencia y deployment.
 4. Datos de prueba o seed inicial.
-5. Manejo de la identidad anónima en la demo (simulación de la verificación de unicidad). La demo no usa AUTENTICAR real ni implementa ZK; ambas omisiones deben quedar documentadas en un ADR de demo (DP-XXXX) que explique por qué no aplican en ese contexto.
-6. Revisor de lenguaje en la demo: ¿API real de OpenAI o mock local?
-7. Autenticación administrativa para gestión técnica de la demo.
+5. Simulación de AUTENTICAR en la demo. La demo no tiene acceso a credenciales reales de AUTENTICAR, lo cual exige algún mecanismo de simulación de la verificación de identidad. Decidir el alcance y la mecánica (lista de identidades ficticias, generación al vuelo u otra opción) y documentar la simulación en un ADR de demo (DP-XXXX).
+6. Implementación de ZK en la demo. Decisión abierta. Implementarla cubre en la demo una parte sustantiva del sistema (verificación criptográfica de la legitimidad del `anon_id`) pero agrega complejidad significativa (trusted setup, integración con la simulación de AUTENTICAR, generación de pruebas en cada emisión). No implementarla simplifica la demo pero deja fuera una parte central del diseño. Si se decide no implementarla, la omisión debe documentarse en un DP-XXXX.
+7. Revisor de lenguaje en la demo: ¿API real de OpenAI o mock local?
 8. Look and feel, guía visual.
 
 ## Recordatorios activos
@@ -36,6 +36,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **`design/glosario.md` — Glosario del proyecto.** Entregable de la pre-demo checklist. Congela el vocabulario del proyecto con las decisiones de diseño de plataforma cerradas. Organizado en ocho categorías temáticas con referencias a los ADRs correspondientes y notas que distinguen términos confundibles. Normaliza la distinción "el sistema" (capa + aplicación destino del despliegue) vs "la plataforma" (forma abreviada de la aplicación de participación ciudadana), reconociendo el uso histórico ambiguo previo a P-0021. Aclara las relaciones entre `anon_seed`, `anon_id`, "identidad anónima" y "pseudónimo".
 
 - **P-0023 — Moderación de contenido y retiro de propuestas.** ADR de la aplicación de participación ciudadana que formaliza tres cosas: (a) la ausencia de moderación humana de contenido más allá del revisor de lenguaje (P-0011); (b) la inmutabilidad del contenido de las propuestas publicadas, distinguida del retiro como operación distinta; (c) un mecanismo excepcional de retiro de propuestas activable solo por causales legales (catálogo configurable acotado a obligaciones legales del despliegue), ejecutable por autoridad judicial o por el operador ante contenido manifiestamente ilegal. La propuesta retirada conserva únicamente su `id`; el resto se reescribe a un tombstone con motivo categorizado. Los apoyos se eliminan, los vínculos salientes se eliminan, los vínculos entrantes se mantienen. La aplicación no admite retiro a pedido del autor (consecuencia de P-0001/P-0018/P-0015). El ADR deja registradas las capacidades y limitaciones del operador frente a requerimientos legales.
 
