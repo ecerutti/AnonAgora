@@ -20,6 +20,8 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 - **Formalizar el rol del operador.** Crear un documento en `design/` (propuesta: `modelo_operativo.md` o `roles_y_responsabilidades.md`) que describa los actores institucionales del sistema y sus relaciones: qué es un "operador", si puede haber más de uno, qué separación de poderes hay entre ellos, qué diferencia hay entre quien hosta la plataforma y quien la administra. La distinción entre **operador de capa** y **operador de aplicación destino** debe ser uno de los puntos abordados (consecuencia de P-0021). No es ADR, es diseño descriptivo.
 
+- **Formalizar la no existencia de perfil administrativo** No existirá un usuario o perfil administrativo. Todas las configuracione que puede realizar un operador, deberá hacerlas a través de archivos de configuración o usando herramientas de línea de comando que alteren la base de datos. Al no existir un perfil o usuario con privilegios administrativos, limita la superficie de ataques, debiendo el atacante conseguir una shell del sistema o acceso de lectura-escritura sobre la tablas críticas (configuración o parámetros) de la base de datos.
+
 ## Luego de desarrollar la plataforma
 
 - **Guía de instalación y operación.** Desarrollar una guía para administradores que incluya buenas prácticas, cuidados, recomendaciones y advertencias para minimizar los riesgos de revelar la identidad real del participante (por ejemplo: correlacionando logs, persistiendo información sensible, etc.). El material en gestación para esta guía vive en `notas/propuesta_guia_de_instalacion.md`.
