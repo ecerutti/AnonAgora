@@ -4,8 +4,6 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 ## Antes de iniciar el desarrollo de la demo
 
-- **Crear un glosario.** Generar `design/glosario.md` con los términos propios del proyecto (identidad anónima, pseudónimo, frase secreta, apoyo, propuesta derivada, termómetro social, vinculación, identidad activa, capa de identidad, aplicación destino, etc.). El glosario se pospone hasta este momento porque a medida que avanzan las decisiones de diseño pueden surgir términos nuevos o matices en los existentes, y conviene congelarlo cuando el vocabulario esté estable.
-
 - **Revisión final de la documentación conceptual.** Revisar `docs/propuesta/` completo para evaluar si las nuevas decisiones surgidas durante el diseño requieren ajustes, aclaraciones o referencias cruzadas. Posibles puntos: enmarcar la propuesta como descripción de una aplicación destino específica construida sobre la capa de identidad reutilizable (consigna de P-0021), coherencia con los ADRs nuevos, actualización del SVG de arquitectura conceptual si corresponde.
 
 - **Revisión final de documentación de diseño.** Revisar `design/` completo con todas sus subcarpetas para evaluar si la documentación de diseño quedó coherente, si no se contradice, y si las posibles contradicciones fueron subsanadas en documentos posteriores. Por ejemplo, el ADR P-0006 decide aceptar un riesgo de amenaza intermedio el cual no justifica el uso de ZK pero luego en P-0014 se decide usar ZK; debe quedar documentado el cambio de decisión y existir una referencia al documento que supersede o redefine.
