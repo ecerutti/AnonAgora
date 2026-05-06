@@ -6,13 +6,13 @@ Se mantiene con apoyo de los agentes pero la autoría final es del humano.
 
 ## Etapa actual
 
-Diseño del sistema: cierre de decisiones de diseño previas al desarrollo de la demo con Claude Code. El objetivo de esta etapa es dejar cerradas todas las decisiones importantes para que el desarrollo posterior necesite preguntar lo menos posible.
+Cierre de la pre-demo checklist y arranque del diseño específico de la demo. Las decisiones de diseño de plataforma están cerradas. Lo que queda antes de empezar a desarrollar es: ejecutar la pre-demo checklist (`notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo") y resolver las ocho decisiones de diseño específicas de la demo listadas más abajo.
 
 ## Decisiones de diseño pendientes
 
-1. **P-0022 — Comportamiento ante fallos de servicios externos.** ADR que defina el comportamiento del sistema ante fallos o indisponibilidad de servicios externos: verificador de identidad caído, token vencido en tránsito, componente de proving ZK con demoras o error, API del revisor de lenguaje caída o con error. Debe cubrir principios generales de degradación, reintentos y comunicación al ciudadano.
-
-2. **P-0023 — Moderación de contenido y retiro de propuestas.** ADR que formalice la ausencia de moderación de contenido más allá del revisor de lenguaje (P-0011), y que defina cómo se maneja el caso de propuestas que deben retirarse por orden judicial, contenido ilegal, o solicitudes de ciudadanos con implicancias legales (derecho al olvido). Debe dejar explícitas las limitaciones derivadas del diseño actual y las implicancias legales para el operador que despliega el sistema.
+## Decisiones de diseño pendientes
+ 
+No hay decisiones de diseño de plataforma pendientes. La etapa de cierre de decisiones de diseño previas al desarrollo de la demo queda completa salvo por la pre-demo checklist (ver `notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo").
 
 ## Decisiones de diseño específicas de la demo
 
@@ -36,6 +36,10 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **P-0023 — Moderación de contenido y retiro de propuestas.** ADR de la aplicación de participación ciudadana que formaliza tres cosas: (a) la ausencia de moderación humana de contenido más allá del revisor de lenguaje (P-0011); (b) la inmutabilidad del contenido de las propuestas publicadas, distinguida del retiro como operación distinta; (c) un mecanismo excepcional de retiro de propuestas activable solo por causales legales (catálogo configurable acotado a obligaciones legales del despliegue), ejecutable por autoridad judicial o por el operador ante contenido manifiestamente ilegal. La propuesta retirada conserva únicamente su `id`; el resto se reescribe a un tombstone con motivo categorizado. Los apoyos se eliminan, los vínculos salientes se eliminan, los vínculos entrantes se mantienen. La aplicación no admite retiro a pedido del autor (consecuencia de P-0001/P-0018/P-0015). El ADR deja registradas las capacidades y limitaciones del operador frente a requerimientos legales.
+
+- **P-0022 — Comportamiento ante fallos de servicios externos y componentes críticos.** Define la política de degradación, reintentos y comunicación al ciudadano ante fallos del verificador de identidad, del componente de proving ZK, del JWKS histórico y del revisor de lenguaje. Establece la atomicidad de la emisión respecto del cool-down (la tupla `{anon_seed, fecha_emision}` se persiste solo tras confirmación de la aplicación destino) y la política fail-closed para el revisor de lenguaje (publicación rechazada agotados los reintentos, sin persistencia del draft).
 
 - **Gap 5 — Refactorización por arquitectura modular.** Cerrado completamente. Tres bloques de trabajo:
   - **Bloque 4** — reestructuración física del repositorio en subcarpetas por capa (capa de identidad / aplicaciones destino) y por ámbito (transversales / específicos).
