@@ -1,0 +1,4 @@
+# Claude Code — archivos de herramienta, no forman parte del proyecto
+.claude/
+.claude.json
+CLAUDE.md
