@@ -4,7 +4,7 @@
 
 ## Contexto
 
-La plataforma asigna a cada ciudadano una **identidad anónima persistente** que le permite participar en el sistema sin revelar su identidad real.
+El emisor asigna a cada ciudadano una **identidad anónima persistente** que le permite participar en el sistema sin revelar su identidad real.
 
 Desde el punto de vista interno del sistema, cada identidad anónima puede representarse mediante un identificador técnico único (por ejemplo, un UUID u otro tipo de identificador interno). Sin embargo, surgió la necesidad de definir cómo representar esa identidad frente al propio usuario dentro de la interfaz.
 

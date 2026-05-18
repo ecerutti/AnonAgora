@@ -4,7 +4,7 @@
 
 ## Contexto
 
-La plataforma adopta en P-0014 pruebas de conocimiento cero (ZK) como mecanismo de auditoría criptográfica de legitimidad del emisor, y en P-0013 la integración con AUTENTICAR como proveedor de verificación de identidad. Ambas decisiones aplican al sistema en producción.
+El sistema adopta en P-0014 pruebas de conocimiento cero (ZK) como mecanismo de auditoría criptográfica de legitimidad del emisor, y en P-0013 la integración con AUTENTICAR como proveedor de verificación de identidad. Ambas decisiones aplican al sistema en producción.
 
 La implementación demo tiene como objetivo demostrar el funcionamiento de la plataforma participativa en un entorno controlado. Su alcance es funcional y conceptual, no de seguridad criptográfica. Este ADR documenta las simplificaciones que aplican en ese contexto respecto de P-0013 y P-0014.
 

@@ -1,10 +1,10 @@
 # Propuesta para una futura guía de instalación y operación
 
-Este documento acumula ideas, conceptos y recordatorios sobre qué debería contener una futura guía de instalación y operación de la plataforma dirigida a administradores. No es todavía un entregable del proyecto: es material en gestación para el momento en que corresponda desarrollarlo formalmente.
+Este documento acumula ideas, conceptos y recordatorios sobre qué debería contener una futura guía de instalación y operación del sistema dirigida a administradores. No es todavía un entregable del proyecto: es material en gestación para el momento en que corresponda desarrollarlo formalmente.
 
 ## Propósito de la futura guía
 
-La guía estará dirigida a personas y organizaciones que decidan desplegar la plataforma en su contexto institucional. Su objetivo principal es transmitir las buenas prácticas, cuidados y advertencias necesarias para que el despliegue preserve los principios del sistema, en particular la separación entre identidad real e identidad anónima.
+La guía estará dirigida a personas y organizaciones que decidan desplegar el sistema en su contexto institucional. Su objetivo principal es transmitir las buenas prácticas, cuidados y advertencias necesarias para que el despliegue preserve los principios del sistema, en particular la separación entre identidad real e identidad anónima.
 
 ## Contenido sugerido (acumulado durante el diseño)
 

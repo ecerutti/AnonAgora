@@ -159,7 +159,7 @@ Este tamaño se considera **suficiente para una implementación conceptual o pil
 
 ## Escalabilidad futura
 
-Si la plataforma necesitara soportar un número mayor de ciudadanos, existen dos estrategias simples.
+Si el sistema necesitara soportar un número mayor de ciudadanos, existen dos estrategias simples.
 
 ### 1. Ampliar las listas de palabras
 

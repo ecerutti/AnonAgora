@@ -206,7 +206,7 @@ Las implicaciones de esta decisión temporal son explícitas y conocidas:
 
 ## Justificación
 
-AUTENTICAR permite verificar ciudadanos reales usando infraestructura estatal existente sin que la plataforma gestione credenciales propias. Los tokens firmados criptográficamente limitan la posibilidad de que un administrador genere identidades ficticias, ya que no puede producir tokens válidos sin intervención de AUTENTICAR.
+AUTENTICAR permite verificar ciudadanos reales usando infraestructura estatal existente sin que el sistema gestione credenciales propias. Los tokens firmados criptográficamente limitan la posibilidad de que un administrador genere identidades ficticias, ya que no puede producir tokens válidos sin intervención de AUTENTICAR.
 
 La restricción a ARCA y ANSES resuelve el problema central de unicidad: ambos proveedores entregan CUIT/CUIL, que es el mismo número para una misma persona física. Esto permite que el `anon_seed` sea estable independientemente del proveedor usado en cada autenticación, garantizando que una persona no pueda obtener múltiples identidades anónimas alternando entre proveedores.
 

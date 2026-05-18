@@ -2,13 +2,13 @@
 
 ## Propósito
 
-Este documento describe cómo la demo simula el flujo de verificación de identidad que en la plataforma real se delega a AUTENTICAR, la Plataforma de Autenticación Electrónica Central del Estado argentino.
+Este documento describe cómo la demo simula el flujo de verificación de identidad que en el sistema en producción se delega a AUTENTICAR, la Plataforma de Autenticación Electrónica Central del Estado argentino.
 
 ## Contexto
 
-En la plataforma real, el ciudadano verifica su identidad a través de AUTENTICAR, que actúa como intermediario entre la plataforma y los proveedores de identidad del Estado. AUTENTICAR presenta al ciudadano una pantalla propia donde elegir el proveedor, completa la autenticación contra ese proveedor, y devuelve el resultado a la plataforma.
+En el sistema en producción, el ciudadano verifica su identidad a través de AUTENTICAR, que actúa como intermediario entre el emisor y los proveedores de identidad del Estado. AUTENTICAR presenta al ciudadano una pantalla propia donde elegir el proveedor, completa la autenticación contra ese proveedor, y devuelve el resultado al emisor.
 
-AUTENTICAR ofrece múltiples proveedores de identidad, pero la plataforma acepta únicamente los que comparten el espacio de identificador CUIT/CUIL por razones de unicidad (ver P-0013):
+AUTENTICAR ofrece múltiples proveedores de identidad, pero el emisor acepta únicamente los que comparten el espacio de identificador CUIT/CUIL por razones de unicidad (ver P-0013):
 
 - ANSES (proveedor de CUIL)
 - ARCA / AFIP (proveedor de CUIT)
@@ -22,7 +22,7 @@ La demo presenta directamente una pantalla propia con los botones de selección 
 - ANSES
 - ARCA / AFIP
 
-Esta pantalla reproduce la experiencia que tendría el ciudadano en la plataforma real, donde AUTENTICAR le presentaría estos mismos proveedores.
+Esta pantalla reproduce la experiencia que tendría el ciudadano en el sistema en producción, donde AUTENTICAR le presentaría estos mismos proveedores.
 
 Al seleccionar un proveedor, la demo muestra una pantalla que imita fielmente la interfaz de autenticación de ese proveedor.
 
