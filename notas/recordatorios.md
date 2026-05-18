@@ -8,14 +8,6 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 - **Revisión final de documentación de diseño.** Revisar `design/` completo con todas sus subcarpetas para evaluar si la documentación de diseño quedó coherente, si no se contradice, y si las posibles contradicciones fueron subsanadas en documentos posteriores. Por ejemplo, el ADR P-0006 decide aceptar un riesgo de amenaza intermedio el cual no justifica el uso de ZK pero luego en P-0014 se decide usar ZK; debe quedar documentado el cambio de decisión y existir una referencia al documento que supersede o redefine.
 
-- **Verificación final del uso del nombre "AnonAgora".** Ejecutar `grep -i "anonagora"` sobre todo el repositorio. Los únicos resultados legítimos deben estar en:
-  - `AGENTS.md`, sección "Sobre el nombre del proyecto"
-  - `docs/index.md`
-
-  Cualquier otra ocurrencia es un error a corregir (el proyecto utiliza terminología genérica: "la plataforma", "el sistema", "el proyecto", "la capa de identidad", "la aplicación destino").
-
-- **Verificación final de coherencia de vocabulario por capas.** Ejecutar grep sobre el repositorio para detectar usos residuales de "la plataforma" donde corresponda "la capa de identidad", "la aplicación de participación ciudadana", "la aplicación destino" o "el sistema". La regla: dentro de un ADR o documento específico de la aplicación participativa, "la plataforma" puede referirse legítimamente a esa aplicación; fuera de ese contexto, conviene revisar caso por caso.
-
 - **Formalizar el rol del operador.** Crear un documento en `design/` (propuesta: `modelo_operativo.md` o `roles_y_responsabilidades.md`) que describa los actores institucionales del sistema y sus relaciones: qué es un "operador", si puede haber más de uno, qué separación de poderes hay entre ellos, qué diferencia hay entre quien hostea el sistema y quien lo administra. La distinción entre **operador de capa** y **operador de aplicación destino** debe ser uno de los puntos abordados (consecuencia de P-0021). No es ADR, es diseño descriptivo.
 
 - **Formalizar la no existencia de perfil administrativo.** No existirá un usuario o perfil administrativo. Todas las configuraciones que puede realizar un operador, deberá hacerlas a través de archivos de configuración o usando herramientas de línea de comando que alteren la base de datos. Al no existir un perfil o usuario con privilegios administrativos, se limita la superficie de ataques, debiendo el atacante conseguir una shell del sistema o acceso de lectura-escritura sobre las tablas críticas (configuración o parámetros) de la base de datos. Esta decisión también cubre las operaciones excepcionales introducidas por P-0023 (retiro de propuestas, configuración del catálogo de causales): se ejecutan por línea de comando o configuración, no mediante una interfaz administrativa.
