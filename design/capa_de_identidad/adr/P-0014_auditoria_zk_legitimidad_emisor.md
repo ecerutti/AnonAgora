@@ -151,7 +151,7 @@ La pila circom + snarkjs sobre `zk-email-verify` se elige sobre zkVMs porque el 
 
 ## Referencias
 
-- P-0006 — Modelo de amenazas y supuestos de confianza
+- P-0006 — Modelo de amenazas y supuestos de confianza. La adopción de ZK en este ADR no contradice a P-0006: la mención de ZK en P-0006 es ilustrativa de un modelo de adversario total descartado, mientras que aquí ZK resuelve la auditabilidad de legitimidad del emisor dentro del modelo de amenazas intermedio.
 - P-0013 — Integración con AUTENTICAR (Decisión 4 supersedada por este ADR)
 - P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas
 - `docs/zk_jwt_investigacion.md` — Investigación técnica de referencia
