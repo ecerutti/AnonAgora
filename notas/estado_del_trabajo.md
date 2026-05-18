@@ -10,9 +10,7 @@ Cierre de la pre-demo checklist y arranque del diseño específico de la demo. L
 
 ## Decisiones de diseño pendientes
 
-## Decisiones de diseño pendientes
- 
-No hay decisiones de diseño de plataforma pendientes. La etapa de cierre de decisiones de diseño previas al desarrollo de la demo queda completa salvo por la pre-demo checklist (ver `notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo").
+La etapa de cierre de decisiones de diseño de plataforma estaba completa salvo por la pre-demo checklist. El trabajo de la pre-demo checklist sobre el rol del operador (ver `notas/recordatorios.md`) hizo aflorar una decisión que estaba enunciada en `recordatorios.md` pero nunca formalizada: la ausencia de perfil administrativo. Esa decisión cumple los criterios de ADR y debe formalizarse como ADR transversal de plataforma (`design/adr/`, P-XXXX) antes de cerrar el documento `design/modelo_operativo.md`, que la referenciará. No hay otras decisiones de diseño de plataforma pendientes.
 
 ## Decisiones de diseño específicas de la demo
 
