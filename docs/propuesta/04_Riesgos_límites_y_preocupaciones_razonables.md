@@ -113,6 +113,6 @@ Si un ciudadano pierde su frase secreta o esta es comprometida, no existe un mec
 
 En ese caso, la identidad anterior queda irrecuperable. Las propuestas, votos o participaciones asociadas a ella permanecen en el sistema, pero el ciudadano ya no podrá acceder nuevamente a esa misma identidad.
 
-El ciudadano puede solicitar la creación de una nueva identidad anónima, pero deberá esperar seis meses antes de volver a participar en la plataforma.
+El ciudadano puede solicitar la creación de una nueva identidad anónima, pero deberá esperar, por defecto, **seis meses** antes de volver a participar en la plataforma.
 
 Esta restricción busca evitar abusos del sistema. Sin ese período de espera, un ciudadano podría simular la pérdida de su frase secreta para obtener nuevas identidades y participar repetidamente en votaciones o apoyos, distorsionando el funcionamiento del sistema.
