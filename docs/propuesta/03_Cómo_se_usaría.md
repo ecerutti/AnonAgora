@@ -41,9 +41,9 @@ La plataforma funciona de forma similar.
 
 Después de la verificación inicial, el sistema crea para María una **identidad anónima persistente** que será la que utilizará para participar dentro de la plataforma.
 
-En ese mismo momento, el sistema le pide que defina una **frase secreta de recuperación**.
+En ese mismo momento, el sistema le pide que defina una **frase secreta**.
 
-La plataforma le explica con claridad que esa frase es el único mecanismo que le permitirá recuperar el acceso a su identidad anónima en el futuro. No existirán correos de recuperación, mensajes al teléfono ni intervención manual de administradores.
+La plataforma le explica con claridad que esa frase es el único mecanismo que le permitirá acceder a su identidad anónima en el futuro.
 
 Si María pierde esa frase, también perderá el acceso a esa identidad anónima.
 
@@ -66,7 +66,7 @@ La plataforma permite dos formas principales de participación:
 
 El tutorial también explica que existe un límite anual de propuestas por ciudadano.
 
-Cada persona puede crear **hasta dos propuestas por año**.  
+Cada persona puede crear, por defecto, **hasta dos propuestas por año**.  
 Este límite busca incentivar que las ideas se elaboren con cuidado y evitar que el sistema se llene de propuestas impulsivas o repetidas.
 
 Finalmente, la plataforma recomienda algo simple pero importante:
