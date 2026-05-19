@@ -27,7 +27,7 @@ Esta separación puede implementarse mediante distintos enfoques técnicos, incl
 - Blind signatures  
 - Pruebas de conocimiento cero (Zero-Knowledge Proofs)
 
-Estas tecnologías permiten demostrar que un usuario está habilitado para participar sin revelar su identidad real.
+Estas tecnologías permiten demostrar que un usuario está habilitado para participar sin revelar su identidad real. El diseño adoptado en este proyecto emplea pruebas de conocimiento cero para certificar que cada identidad anónima emitida corresponde a un ciudadano real verificado, sin revelar datos de identificación en ningún punto del proceso.
 
 ## Riesgo de correlación entre sistemas
 
