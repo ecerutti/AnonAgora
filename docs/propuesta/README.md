@@ -4,6 +4,8 @@ Esta carpeta contiene la documentación conceptual del proyecto. Está orientada
 
 Los documentos están organizados en un orden de lectura sugerido que va de la idea general a los detalles técnicos.
 
+Esta carpeta describe una aplicación destino concreta: la plataforma de participación ciudadana. Esa aplicación está construida sobre una infraestructura de identidad anónima verificada reutilizable, que maneja la verificación de cada ciudadano y la emisión de su identidad anónima. Los documentos aquí no describen esa infraestructura; describen lo que el ciudadano puede hacer con ella.
+
 ## Documentos
 
 | # | Documento | Propósito | Destinatario principal | Estilo |
