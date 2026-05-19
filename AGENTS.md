@@ -19,9 +19,13 @@ Este repositorio contiene:
 
 ## Sobre el nombre del proyecto
 
-El proyecto todavía no tiene un nombre definitivo. El repositorio se llama `AnonAgora` y el dominio del despliegue público es `anonagora.cloud`, pero ambos son circunstanciales: surgen de la necesidad de tener un identificador para alojar el repositorio en GitHub y de contar con un dominio para la futura demo.
+El proyecto no tiene nombre de producto, y eso es deliberado. La idea es conceptualmente genérica: el diseño de una capa de identidad anónima verificada y de aplicaciones destino construidas sobre ella. No es, en su concepción, un producto con marca.
 
-Dentro de la documentación del proyecto debe usarse terminología genérica ("la plataforma", "el sistema", "el proyecto"). El nombre `AnonAgora` solo debe aparecer cuando sea inevitable hacer referencia al repositorio o al dominio como tales — principalmente en `docs/index.md`, que es la página de recepción del sitio público.
+`AnonAgora` es un nombre provisorio que existe por razones prácticas: fue necesario nombrar el repositorio de GitHub y contar con un dominio para la demo. Es efímero y puede cambiar; no representa el nombre del producto.
+
+Dentro de la documentación del proyecto debe usarse terminología genérica ("la plataforma", "el sistema", "el proyecto"). El nombre `AnonAgora` solo debe aparecer en dos lugares: esta sección de `AGENTS.md` y `docs/index.md` (la página de recepción del sitio público), que inevitablemente referencian el repositorio o el dominio como tales. Para la demo de la aplicación de participación ciudadana también se usa `AnonAgora` provisionalmente, a falta de otro nombre.
+
+Si en el futuro se decidiera darle al proyecto —o a un despliegue concreto— un nombre formal, esa sería una decisión a tomar en su momento. Hoy no está tomada y no hace falta tomarla.
 
 ---
 
