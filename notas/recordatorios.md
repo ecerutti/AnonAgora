@@ -6,6 +6,8 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 - **Revisión final de la documentación conceptual.** Revisar `docs/propuesta/` completo para evaluar si las nuevas decisiones surgidas durante el diseño requieren ajustes, aclaraciones o referencias cruzadas. Posibles puntos: enmarcar la propuesta como descripción de una aplicación destino específica construida sobre la capa de identidad reutilizable (consigna de P-0021), coherencia con los ADRs nuevos, actualización del SVG de arquitectura conceptual si corresponde.
 
+- **Refinar la entrada "operador" del glosario.** La entrada actual define el operador sobre "una instancia del sistema" sin recoger la distinción operador de capa / operador de aplicación destino que `design/modelo_operativo.md` formaliza. Refactor de vocabulario (permitido sobre el glosario), no cambio de decisión. Verificar de paso que la entrada quede consistente con P-0024 y con el documento nuevo.
+
 - **Revisión final de documentación de diseño.** Revisar `design/` completo con todas sus subcarpetas para evaluar si la documentación de diseño quedó coherente, si no se contradice, y si las posibles contradicciones fueron subsanadas en documentos posteriores.
 
 ## Luego de desarrollar la plataforma
