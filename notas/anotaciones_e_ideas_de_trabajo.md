@@ -11,3 +11,7 @@ Los recordatorios accionables (cosas a hacer en un momento específico) viven en
 La idea sería exigir que un ciudadano haya realizado al menos una votación (apoyo a alguna propuesta) antes de habilitarle la creación de propuestas propias. El razonamiento detrás es doble: (a) asegurar que el ciudadano entendió cómo funciona la plataforma antes de usar sus escasas oportunidades anuales de crear propuestas, y (b) reducir el riesgo de que las primeras propuestas que crea se desperdicien por mala comprensión del sistema.
 
 Pendiente de evaluar: si el beneficio compensa la fricción que introduce en el flujo de registro, o si genera una traba que confunde al usuario. Podría ser parte de un ADR futuro sobre "primera experiencia del ciudadano en la plataforma".
+
+### Facilitar el voto/apoyo de propuestas
+
+Actualmente se requeire visualizar una propuesta para acceder al botón de Apoyar/Votar. Pensar si conviene facilitar el apoyo de propuestas desde el listado principal, o de busqueda/filtro, o cualquiera donde se visualicen propuestas, con un botón que tenga un corazoncito, o un pulgar arriba, o algo similar que con un simple click te permite apoyar/votar una propuesta (o retirar el apoyo). Una posible razón por la cual no se permite actualmente es obligar al ciudadano a entrar a la propuesta y ver el cuerpo de la misma antes de apoyar, para que no apoye a locas con solo leer el título.
