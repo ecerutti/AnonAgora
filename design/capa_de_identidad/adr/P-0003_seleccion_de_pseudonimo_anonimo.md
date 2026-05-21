@@ -102,7 +102,7 @@ Se adopta la **Opción 3 — Pseudónimo generado por el sistema con posibilidad
 
 Durante la creación de la identidad anónima, el sistema genera automáticamente un pseudónimo amigable compuesto por:
 
-*Animal + Color o Adjetivo + Número*
+*Animal + Color o Adjetivo + Número [+ Letra]*
 
 El ciudadano puede solicitar que el sistema genere nuevos pseudónimos antes de aceptar uno.
 

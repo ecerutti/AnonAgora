@@ -38,13 +38,13 @@ En esta opción, la identidad anónima se mostraría mediante un identificador t
 
 En esta opción, el sistema genera automáticamente pseudónimos compuestos por palabras fácilmente reconocibles, por ejemplo mediante la combinación:
 
-*Animal + Color (o adjetivo) + Número*
+*Animal + Color (o adjetivo) + Número [+ Letra]*
 
 Ejemplos posibles:
 
 *Lobo Azul 714*  
 *Puma Silencioso 981*   
-*Tigre Dorado 442*  
+*Tigre Audaz 23A*  
 
 El número garantiza la unicidad del pseudónimo, mientras que el resto del nombre aporta una forma más humana y fácilmente reconocible de representar la identidad.
 
@@ -66,7 +66,7 @@ Se adopta la **Opción 2 — Pseudónimos amigables generados automáticamente**
 
 Las identidades anónimas se representarán mediante pseudónimos compuestos por la combinación de:
 
-*Animal + Color (o adjetivo) + Número*
+*Animal + Color (o adjetivo) + Número [+ Letra]*
 
 El número actúa como elemento de diferenciación que garantiza la unicidad del pseudónimo.
 

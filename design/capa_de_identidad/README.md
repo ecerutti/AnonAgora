@@ -27,6 +27,15 @@ Por cada ciudadano verificado, el emisor entrega a la aplicación destino:
 
 La entrega ocurre una sola vez, en el momento de la emisión. A partir de ese momento la aplicación destino opera de forma independiente del emisor.
 
+### Operaciones del protocolo de emisión
+
+Durante el flujo de emisión, antes de la entrega final, el emisor consume dos operaciones adicionales del protocolo de emisión que la aplicación destino expone (P-0025):
+
+- **Consulta-con-reserva.** El emisor envía un pseudónimo candidato y un identificador efímero del flujo de emisión. La aplicación destino, atómicamente, verifica disponibilidad y registra la reserva con TTL si el pseudónimo está libre. Responde "libre" u "ocupado".
+- **Liberación.** El emisor envía el identificador efímero del flujo de emisión. La aplicación destino libera la reserva asociada. Se invoca cuando el ciudadano regenera el pseudónimo.
+
+La verificación atómica final de unicidad ocurre en el commit de la entrega (P-0022 Dec 3).
+
 ### Qué garantiza la capa
 
 - **Una identidad anónima activa por ciudadano real, por aplicación destino**, sujeta al cool-down configurable (default 6 meses) entre emisiones sucesivas (P-0015 Decisión 1).

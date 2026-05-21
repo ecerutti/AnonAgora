@@ -217,20 +217,19 @@ ZK se concentra en el `anon_id` porque es el único identificador que sale del e
 
 ## Limitaciones conocidas del principio de identidad única
 
-El principio declarado del sistema es "un ciudadano real, una identidad anónima activa por aplicación destino". Las decisiones adoptadas en este ADR y en P-0016 respetan ese principio en el caso esperado: el ciudadano mantiene una única identidad anónima activa y, si la pierde, debe esperar el cool-down antes de obtener una nueva.
+El principio declarado del sistema es "un ciudadano real, una identidad anónima activa por aplicación destino". Las decisiones adoptadas en este ADR respetan ese principio en el caso esperado: el ciudadano mantiene una única identidad anónima activa y, si la pierde, debe esperar el cool-down antes de obtener una nueva.
 
-Sin embargo, el sistema no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esta limitación es una consecuencia directa de dos decisiones del diseño:
+Sin embargo, el sistema no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esta limitación es una consecuencia directa de decisiones del diseño:
 
 - El emisor no almacena ningún vínculo entre el ciudadano y identidad anónima.
-- La aplicación destino no implementa mecanismos de invalidación de identidades anónimas (ver P-0016).
 
 En consecuencia, un ciudadano que conserva acceso a su identidad anónima original y, cumplido el cool-down, solicita una nueva alegando pérdida, puede operar con dos identidades activas de forma simultánea. Esto le permitiría:
 
-- Duplicar su cupo anual de propuestas (ver P-0017).
+- Duplicar su cupo anual de propuestas.
 - Apoyar la misma propuesta desde ambas identidades, inflando el conteo de apoyos.
 - Participar con dos identidades en propuestas vinculadas de forma que parezca apoyo independiente.
 
-Esta limitación es aceptada dentro del modelo de amenazas intermedio de P-0006. El cool-down (default 6 meses) impone un costo temporal significativo que reduce pero no elimina el incentivo de este comportamiento. El diseño del sistema prioriza la no construcción de mecanismos de invalidación (porque introducirían vectores de ataque de denegación de servicio, ver P-0016) por sobre la eliminación completa de esta posibilidad de abuso.
+Esta limitación es aceptada dentro del modelo de amenazas intermedio de P-0006. El cool-down (default 6 meses) impone un costo temporal significativo que reduce pero no elimina el incentivo de este comportamiento.
 
 La limitación debe estar documentada en cualquier material orientado a operadores o asesores técnicos para que el alcance real del principio sea correctamente entendido.
 

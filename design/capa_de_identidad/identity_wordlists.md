@@ -16,7 +16,7 @@ Estas listas deben considerarse **conceptuales**, no exhaustivas.
 Las identidades anónimas se generan automáticamente utilizando el siguiente formato:
 
 ```
-animal + color/adjetivo + número
+animal + color/adjetivo + número [+ letra]
 ```
 
 Ejemplos:
@@ -24,6 +24,7 @@ Ejemplos:
 ```
 Lobo Azul 714
 Puma Sereno 84
+Tigre Audaz 23A
 ```
 
 El número se genera en el rango:
@@ -53,6 +54,10 @@ Lobo Azul 714
 lobo azul 714
 loboazul714
 lobo_azul-714
+Tigre Audaz 23A
+tigre audaz 23a
+tigreaudaz23a
+tigre_audaz-23a
 ```
 
 ## Criterios de curación del vocabulario
@@ -138,48 +143,46 @@ Abeja Sereno
 Con las listas actuales:
 
 ```
-animales: 45
+animales: 60
 colores: 14
-adjetivos: 15
+adjetivos: 17
 ```
 
 El número total de combinaciones posibles es:
 
 ```
-45 × (14 + 15) × 999
+60 × (14 + 17) × 999
 ```
 
 Resultado:
 
 ```
-1.303.695 identidades únicas
+1.858.140 identidades únicas
 ```
 
 Este tamaño se considera **suficiente para una implementación conceptual o piloto**.
 
 ## Escalabilidad futura
 
-Si el sistema necesitara soportar un número mayor de ciudadanos, existen dos estrategias simples.
+## Sufijo opcional de letra mayúscula
 
-### 1. Ampliar las listas de palabras
+Cuando el espacio sin sufijo de letra se satura, el emisor activa empíricamente un sufijo de una letra mayúscula al final del número (`Lobo Azul 714H`, `Tigre Audaz 23A`). La activación es consecuencia del mecanismo de generación: si tras un umbral de intentos consecutivos sin sufijo (configurable, default 10) todos los candidatos resultan ocupados según la consulta-con-reserva a la aplicación destino (P-0025), el emisor genera candidatos con sufijo de letra.
 
-Las listas ubicadas en:
-
-```
-design/wordlists/
-```
-
-pueden ampliarse agregando nuevas palabras que cumplan los criterios de curación.
-
-### 2. Aumentar el rango numérico
-
-El rango podría extenderse fácilmente a:
+Las letras admitidas son 21:
 
 ```
-1..9999
+A C D E F G H J K L M N P Q R T U V W X Y
 ```
 
-lo que multiplicaría el espacio de identidades por 10.
+Se excluyen O, I, S, Z, B por confusión visual con dígitos (0, 1, 5, 2, 8 respectivamente) y la Ñ por no integrar el conjunto base ASCII.
+
+El espacio total con sufijo opcional es:
+
+```
+60 × 31 × 999 × 21 = 39.020.940 combinaciones
+```
+
+El sistema no mantiene estado explícito de agotamiento del espacio sin sufijo. La activación es natural y gradual: con el espacio sin letra mayormente disponible, los ciudadanos reciben pseudónimos sin sufijo; con el espacio sin letra saturado, los reciben con sufijo.
 
 ## Naturaleza conceptual de las listas
 

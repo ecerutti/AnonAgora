@@ -122,6 +122,6 @@ tejonversatil91
 tejon_versatil-91
 ```
 
-La estructura del pseudónimo (`animal + color/adjetivo + número`) está decidida en P-0002. La selección y curaduría de las listas de palabras está documentada en `design/capa_de_identidad/identity_wordlists.md`.
+La estructura del pseudónimo (`animal + color/adjetivo + número [+ letra]`) está decidida en P-0002. La selección y curaduría de las listas de palabras está documentada en `design/capa_de_identidad/identity_wordlists.md`.
 
 Esta decisión simplifica la experiencia de acceso a la aplicación y refuerza la coherencia conceptual entre identidad anónima y autenticación.
