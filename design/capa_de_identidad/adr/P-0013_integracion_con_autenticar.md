@@ -219,7 +219,7 @@ La decisión de no retener metadatos del token es la consecuencia directa de que
 - El emisor debe implementar el flujo OAuth 2.0 / OIDC con AUTENTICAR (Authorization Code Flow).
 - El emisor debe verificar la firma del token offline contra el JWKS del reino correspondiente antes de procesar cualquier solicitud de emisión.
 - El emisor debe extraer el claim `cuit` del token y calcular el `anon_seed` descartando el identificador original inmediatamente después.
-- El emisor no debe almacenar: CUIT, CUIL, DNI, `sub`, `jti`, ni el token completo de AUTENTICAR. Ver P-0006 y `design/identity_model.md`.
+- El emisor no debe almacenar: CUIT, CUIL, DNI, `sub`, `jti`, ni el token completo de AUTENTICAR. Ver P-0006 y `design/capa_de_identidad/identity_model.md`.
 - La auditoría de legitimidad del emisor es procedimental hasta que se evalúe y decida sobre ZK.
 - La auditoría de legitimidad de los `anon_id` emitidos se resuelve de forma independiente en P-0014.
 - Si en el futuro se evalúa incorporar un nuevo proveedor, debe verificarse compatibilidad de espacio de identificadores y nivel mínimo según el criterio definido en la Decisión 2.
@@ -229,6 +229,6 @@ La decisión de no retener metadatos del token es la consecuencia directa de que
 
 - P-0006 — Modelo de amenazas y supuestos de confianza
 - P-0007 — Proveedores de verificación y niveles de garantía de unicidad
-- `design/identity_model.md` — Modelo de identidad
+- `design/capa_de_identidad/identity_model.md` — Modelo de identidad
 - `design/threat_model.md` — Modelo de amenazas
 - `docs/autenticar.md` — Referencia técnica de AUTENTICAR

@@ -33,7 +33,7 @@ Ventajas
 
 Desventajas
 
-- Un ciudadano puede solicitar identidades sucesivas de forma indefinida. Las identidades anteriores siguen siendo funcionales en la plataforma, lo que permite acumular identidades activas simultáneas para inflar apoyos o superar el límite anual de propuestas.
+- Un ciudadano puede solicitar identidades sucesivas de forma indefinida. Las identidades anteriores siguen siendo funcionales en la aplicación destino, lo que permite acumular identidades activas simultáneas para inflar apoyos o superar el límite anual de propuestas.
 
 #### Opción B — Período mínimo configurable con valor por defecto
 
@@ -84,13 +84,13 @@ Desventajas
 
 ### Decisión 3 — Derivación del anon_id y auditoría de legitimidad
 
-El `anon_id` es el identificador que el ciudadano usa dentro de la plataforma. La pregunta es cómo derivarlo de forma que sea auditable —demostrable que corresponde a un ciudadano real— sin que esa demostración permita vincular el `anon_id` con el `anon_seed` ni con el CUIT.
+El `anon_id` es el identificador que el ciudadano usa dentro de la aplicación destino. La pregunta es cómo derivarlo de forma que sea auditable —demostrable que corresponde a un ciudadano real— sin que esa demostración permita vincular el `anon_id` con el `anon_seed` ni con el CUIT.
 
 Durante el diseño se evaluaron cuatro familias de solución.
 
 #### Opción A — anon_id aleatorio sin auditoría criptográfica
 
-El emisor asigna un pseudónimo aleatorio del espacio disponible según P-0002 y P-0003. No existe mecanismo de auditoría de legitimidad autónomo en la plataforma.
+El emisor asigna un pseudónimo aleatorio del espacio disponible según P-0002 y P-0003. No existe mecanismo de auditoría de legitimidad autónomo en la aplicación destino.
 
 Ventajas
 
@@ -98,21 +98,21 @@ Ventajas
 
 Desventajas
 
-- La plataforma no puede verificar de forma autónoma que un `anon_id` fue emitido legítimamente. Un auditor externo con acceso solo a la plataforma no puede detectar identidades fabricadas.
-- Un administrador malicioso con acceso a la plataforma puede insertar `anon_ids` falsos sin que sea detectable.
+- La aplicación destino no puede verificar de forma autónoma que un `anon_id` fue emitido legítimamente. Un auditor externo con acceso solo a la aplicación destino no puede detectar identidades fabricadas.
+- Un administrador malicioso con acceso a la aplicación destino puede insertar `anon_ids` falsos sin que sea detectable.
 
 #### Opción B — anon_id aleatorio con firma independiente del emisor
 
-El emisor asigna un pseudónimo aleatorio y firma cada `anon_id` con una clave privada propia. La plataforma verifica la firma contra la clave pública del emisor. Un auditor con acceso solo a la plataforma puede verificar que cada `anon_id` tiene firma válida del emisor sin cruzar datos con él.
+El emisor asigna un pseudónimo aleatorio y firma cada `anon_id` con una clave privada propia. La aplicación destino verifica la firma contra la clave pública del emisor. Un auditor con acceso solo a la aplicación destino puede verificar que cada `anon_id` tiene firma válida del emisor sin cruzar datos con él.
 
 Ventajas
 
-- Auditoría de legitimidad autónoma en la plataforma: cualquier `anon_id` sin firma válida del emisor es detectable.
+- Auditoría de legitimidad autónoma en la aplicación destino: cualquier `anon_id` sin firma válida del emisor es detectable.
 - Implementación más simple que las opciones criptográficas más avanzadas.
 
 Desventajas
 
-- La raíz de confianza es una clave privada bajo control del operador. En el escenario más probable de despliegue, emisor y plataforma comparten infraestructura y un mismo administrador tiene acceso a ambos. Ese administrador puede usar la clave privada para firmar `anon_ids` fabricados que la plataforma considerará legítimos.
+- La raíz de confianza es una clave privada bajo control del operador. En el escenario más probable de despliegue, emisor y aplicación destino comparten infraestructura y un mismo administrador tiene acceso a ambos. Ese administrador puede usar la clave privada para firmar `anon_ids` fabricados que la aplicación destino considerará legítimos.
 - La firma no resiste el escenario de administrador malicioso con acceso a la infraestructura compartida, que es el escenario operativo habitual del sistema.
 
 #### Opción C — anon_id derivado determinísticamente del CUIT
@@ -121,7 +121,7 @@ El `anon_id` interno se calcula como `HASH(salt_del_sistema + CUIT)`, colapsando
 
 Ventajas
 
-- La prueba ZK cubre directamente el identificador usado en la plataforma.
+- La prueba ZK cubre directamente el identificador usado en la aplicación destino.
 - Sin asociación separada que almacenar.
 
 Desventajas
@@ -139,9 +139,9 @@ La prueba ZK demuestra: "existe un JWT válido de AUTENTICAR cuyo CUIT produce e
 
 Ventajas
 
-- La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el nonce desconocido fuera del momento de emisión. Un atacante con acceso al emisor obtiene `anon_seeds` pero no puede derivar los `anon_ids` correspondientes porque los nonces no se almacenan. Un atacante con acceso a la plataforma obtiene `anon_ids` pero no puede derivar `anon_seeds`.
-- La prueba ZK permite a la plataforma verificar de forma autónoma que cualquier `anon_id` tiene un ciudadano real detrás, sin cruzar datos con el emisor.
-- El emisor no participa del manejo de la frase secreta del ciudadano. La frase secreta es asunto exclusivo de la plataforma, lo que preserva la separación de funciones.
+- La separación entre `anon_seed` y `anon_id` es criptográficamente forzada por el nonce desconocido fuera del momento de emisión. Un atacante con acceso al emisor obtiene `anon_seeds` pero no puede derivar los `anon_ids` correspondientes porque los nonces no se almacenan. Un atacante con acceso a la aplicación destino obtiene `anon_ids` pero no puede derivar `anon_seeds`.
+- La prueba ZK permite a la aplicación destino verificar de forma autónoma que cualquier `anon_id` tiene un ciudadano real detrás, sin cruzar datos con el emisor.
+- El emisor no participa del manejo de la frase secreta del ciudadano. La frase secreta es asunto exclusivo de la aplicación destino, lo que preserva la separación de funciones.
 
 Desventajas
 
@@ -172,7 +172,7 @@ El circuito certifica únicamente que el `anon_id` fue generado a partir de un c
 Ventajas
 
 - Circuito más simple, menor costo de auditoría especializada del circuito.
-- La auditoría criptográfica se concentra donde tiene valor externo: el `anon_id` que la plataforma recibe y verifica.
+- La auditoría criptográfica se concentra donde tiene valor externo: el `anon_id` que la aplicación destino recibe y verifica.
 
 Desventajas
 
@@ -190,7 +190,7 @@ Desventajas
 
 ## Justificación
 
-El cool-down de 6 meses es el mecanismo central de control de abuso. Sin él, un ciudadano podría acumular identidades activas simultáneas aprovechando que las identidades anteriores siguen siendo funcionales en la plataforma una vez emitidas. El valor por defecto de 6 meses es suficientemente largo para desincentivar el abuso y suficientemente corto para no penalizar permanentemente al ciudadano que perdió sus credenciales.
+El cool-down de 6 meses es el mecanismo central de control de abuso. Sin él, un ciudadano podría acumular identidades activas simultáneas aprovechando que las identidades anteriores siguen siendo funcionales en la aplicación destino una vez emitidas. El valor por defecto de 6 meses es suficientemente largo para desincentivar el abuso y suficientemente corto para no penalizar permanentemente al ciudadano que perdió sus credenciales.
 
 La tupla mínima `{anon_seed, fecha_emision}` en el emisor es consecuencia directa del principio de minimización de datos de P-0006: el emisor almacena estrictamente lo necesario para sus dos funciones operativas. No almacenar la asociación `anon_seed → anon_id` reduce la información disponible para un atacante con acceso al emisor y elimina la posibilidad de recuperación de identidad, lo cual es un beneficio de diseño: la irrecuperabilidad refuerza la percepción del ciudadano de que el sistema no puede identificarlo.
 
@@ -198,9 +198,9 @@ La derivación `anon_id = HASH(anon_seed + nonce)` resuelve la tensión central 
 
 Se consideró usar `HASH(frase_secreta)` del ciudadano como segundo componente en lugar de un nonce aleatorio. Esa alternativa quedó descartada porque involucraría al emisor en el manejo de la credencial de acceso del ciudadano, que pertenece al alcance de la aplicación destino y no al del emisor (en la aplicación de participación ciudadana esa credencial es la frase secreta, ver P-0008). La credencial es asunto exclusivo de la aplicación destino; el emisor no necesita conocerla, ni siquiera como hash, para cumplir su función. Un nonce aleatorio generado por el emisor cumple el mismo rol criptográfico en la derivación del `anon_id` sin violar la separación de funciones.
 
-La firma independiente del emisor sobre el `anon_id` fue evaluada como mecanismo de auditoría más simple que ZK. Se descartó porque en el escenario de despliegue habitual del sistema, emisor y plataforma comparten infraestructura y administrador. En ese contexto, la clave privada del emisor es accesible para el mismo actor que podría fabricar identidades falsas, lo que hace que la firma no agregue protección real frente a la amenaza que intenta mitigar.
+La firma independiente del emisor sobre el `anon_id` fue evaluada como mecanismo de auditoría más simple que ZK. Se descartó porque en el escenario de despliegue habitual del sistema, emisor y aplicación destino comparten infraestructura y administrador. En ese contexto, la clave privada del emisor es accesible para el mismo actor que podría fabricar identidades falsas, lo que hace que la firma no agregue protección real frente a la amenaza que intenta mitigar.
 
-ZK se concentra en el `anon_id` porque es el único identificador que sale del emisor y llega a la plataforma. La legitimidad del `anon_seed` no requiere prueba criptográfica porque el `anon_seed` nunca sale del emisor; queda cubierta por los controles de acceso y la auditoría procedimental del código del emisor.
+ZK se concentra en el `anon_id` porque es el único identificador que sale del emisor y llega a la aplicación destino. La legitimidad del `anon_seed` no requiere prueba criptográfica porque el `anon_seed` nunca sale del emisor; queda cubierta por los controles de acceso y la auditoría procedimental del código del emisor.
 
 ## Consecuencias
 
@@ -222,7 +222,7 @@ El principio declarado del sistema es "un ciudadano real, una identidad anónima
 Sin embargo, el sistema no puede distinguir entre un ciudadano que realmente perdió su identidad y uno que simula haberla perdido para obtener otra adicional. Esta limitación es una consecuencia directa de dos decisiones del diseño:
 
 - El emisor no almacena ningún vínculo entre el ciudadano y identidad anónima.
-- La plataforma no implementa mecanismos de invalidación de identidades anónimas (ver P-0016).
+- La aplicación destino no implementa mecanismos de invalidación de identidades anónimas (ver P-0016).
 
 En consecuencia, un ciudadano que conserva acceso a su identidad anónima original y, cumplido el cool-down, solicita una nueva alegando pérdida, puede operar con dos identidades activas de forma simultánea. Esto le permitiría:
 
@@ -244,5 +244,5 @@ La limitación debe estar documentada en cualquier material orientado a operador
 - P-0009 — Algoritmo de almacenamiento de la frase secreta
 - P-0013 — Integración con AUTENTICAR
 - P-0014 — Auditoría criptográfica de legitimidad del emisor mediante pruebas de conocimiento cero (parcialmente supersedado por este ADR en lo relativo al alcance del circuito ZK)
-- `design/identity_model.md` — Modelo de identidad
+- `design/capa_de_identidad/identity_model.md` — Modelo de identidad
 - `design/threat_model.md` — Modelo de amenazas

@@ -46,7 +46,7 @@ Ventajas
 - Auditoría criptográfica verificable matemáticamente por cualquier tercero con información pública.
 - Un admin malicioso no puede fabricar identidades sin un token real de AUTENTICAR, porque no puede producir pruebas válidas sin él.
 - Coherente con el principio de integridad verificable.
-- La prueba cubre la cadena completa hasta el `anon_id`, que es el identificador que la plataforma recibe y verifica.
+- La prueba cubre la cadena completa hasta el `anon_id`, que es el identificador que la aplicación destino recibe y verifica.
 
 Desventajas
 
@@ -66,7 +66,7 @@ Desventajas
 
 - Tiempos de generación estimados de 60-180 segundos en smartphones de gama media-baja, inaceptables para la experiencia del usuario.
 - El archivo `.zkey` (proving key) pesa cientos de MB y debe descargarse al dispositivo antes de poder generar la prueba.
-- Probable fallo por memoria insuficiente en dispositivos con menos de 3-4 GB de RAM libre, segmento de hardware habitual entre usuarios de la plataforma.
+- Probable fallo por memoria insuficiente en dispositivos con menos de 3-4 GB de RAM libre, segmento de hardware habitual entre usuarios de la aplicación destino.
 
 ### Decisión 2 — Stack tecnológico y circuito base
 
@@ -127,7 +127,7 @@ Los witnesses privados del circuito son el CUIT, el `anon_seed` (como valor inte
 
 ## Justificación
 
-La adopción de ZK es coherente con el principio de integridad verificable del sistema definido en `design/identity_model.md`: el sistema debe poder demostrar su correcto funcionamiento sin depender de confianza ciega en los operadores. La auditoría procedimental cumple ese objetivo de forma débil —depende de que alguien revise el código y confíe en que lo que ejecuta en producción coincide con lo auditado. ZK lo cumple de forma fuerte: la prueba es verificable matemáticamente por cualquier tercero con información pública, sin cruzar datos con ningún componente del sistema.
+La adopción de ZK es coherente con el principio de integridad verificable del sistema definido en `design/capa_de_identidad/identity_model.md`: el sistema debe poder demostrar su correcto funcionamiento sin depender de confianza ciega en los operadores. La auditoría procedimental cumple ese objetivo de forma débil —depende de que alguien revise el código y confíe en que lo que ejecuta en producción coincide con lo auditado. ZK lo cumple de forma fuerte: la prueba es verificable matemáticamente por cualquier tercero con información pública, sin cruzar datos con ningún componente del sistema.
 
 El escenario de administrador malicioso con acceso al emisor es plausible en el contexto operativo habitual del sistema, donde emisor y aplicación destino pueden compartir infraestructura física. ZK elimina la capacidad de ese actor de fabricar identidades anónimas sin ciudadanos reales detrás, que es la amenaza específica que P-0013 Decisión 4 dejaba sin cobertura.
 
@@ -156,4 +156,4 @@ La pila circom + snarkjs sobre `zk-email-verify` se elige sobre zkVMs porque el 
 - P-0015 — Modelo de datos del emisor y ciclo de vida de identidades anónimas
 - `docs/zk_jwt_investigacion.md` — Investigación técnica de referencia
 - `docs/autenticar.md` — Referencia técnica de AUTENTICAR (incluye JWKs de producción confirmadas como RS256-2048)
-- `design/identity_model.md` — Modelo de identidad y principio de integridad verificable
+- `design/capa_de_identidad/identity_model.md` — Modelo de identidad y principio de integridad verificable

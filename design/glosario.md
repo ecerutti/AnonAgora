@@ -48,9 +48,13 @@ _Referencia: P-0021._
 
 **operador**
 
-Entidad institucional responsable de desplegar y administrar una instancia del sistema. El operador configura el sistema mediante archivos de configuración y herramientas de línea de comando; no existe un perfil administrativo en la interfaz. Es responsable de las decisiones operativas dentro del marco definido por el diseño: por ejemplo, configurar el catálogo de causales de retiro o ajustar parámetros del ranking.
+Entidad institucional responsable de desplegar y administrar el sistema en un **despliegue** concreto. Es un rol institucional, no una persona ni una cuenta de usuario: puede encarnarlo un organismo público, una universidad, una organización civil o cualquier entidad que decida poner en funcionamiento un despliegue y se haga cargo de sostenerlo.
 
-_Referencia: P-0020, P-0022, P-0023._
+El operador actúa sobre el sistema desde afuera, mediante archivos de configuración y herramientas de línea de comando sobre la infraestructura del despliegue; no existe un perfil administrativo en la aplicación (P-0024). Es responsable de las decisiones operativas dentro del marco definido por el diseño: configurar el catálogo de causales de retiro, ajustar parámetros del ranking, gestionar el modo debug, entre otros.
+
+Dado que el sistema se compone de una capa de identidad y una aplicación destino (P-0021), el rol de operador se proyecta en dos aspectos: el **operador de la capa de identidad** (responsable del emisor, la integración con el verificador externo, el componente de proving ZK y la infraestructura de JWKS histórico) y el **operador de la aplicación destino** (responsable de la aplicación que el ciudadano usa). Ambos aspectos pueden recaer en la misma entidad o en entidades distintas; el diseño soporta todo el continuo sin imponer un punto concreto. La separación entre ambos fortalece las garantías de privacidad del sistema.
+
+_Referencia: P-0020, P-0021, P-0022, P-0023, P-0024, `design/modelo_operativo.md`._
 
 **termómetro social**
 
@@ -98,7 +102,7 @@ _Referencia: P-0008, P-0009, P-0015._
 
 Identidad persistente emitida por la capa de identidad para uso del ciudadano en la aplicación destino. No contiene datos personales. Se representa ante el ciudadano mediante un pseudónimo amigable (ver entrada) y se identifica internamente mediante el `anon_id`.
 
-El sistema garantiza, en el caso esperado, una identidad anónima por ciudadano real por aplicación destino. Una vez emitida, la aplicación destino no puede invalidarla ni el emisor puede revocarla.
+El sistema garantiza, en el caso esperado, una identidad anónima por ciudadano real por aplicación destino. Una vez emitida, el emisor no puede revocarla.
 
 En el uso cotidiano de la documentación, "identidad anónima" es el término preferido para referirse a la identidad que el ciudadano usa en la aplicación. El término "pseudónimo" se reserva para contextos donde es necesario distinguir específicamente la representación legible de otros componentes técnicos de la identidad (ver nota en la entrada de pseudónimo).
 
@@ -162,7 +166,7 @@ Prueba criptográfica de conocimiento cero generada por el emisor en cada emisi�
 
 La aplicación destino la recibe junto con el `anon_id` y el pseudónimo, la verifica al recibirla usando el JWKS histórico, y puede ofrecerla a auditores externos como evidencia de legitimidad del `anon_id`.
 
-_Referencia: P-0014, P-0015 (Decisión 3)._
+_Referencia: P-0014, P-0015 (Decisión 3 y 4)._
 
 **trusted setup**
 
@@ -284,7 +288,7 @@ _Referencia: P-0011, P-0022._
 
 **tombstone**
 
-Estado de una propuesta retirada. La propuesta conserva únicamente su `id` (para preservar la integridad referencial de vínculos entrantes) y los textos derivados del catálogo de causales aplicado. El resto del contenido original (título, cuerpo, fecha de publicación, apoyos, vínculos salientes) se elimina o resetea. Los textos del tombstone quedan congelados al momento del retiro; cambios posteriores al catálogo no los afectan.
+Estado de una propuesta retirada. La propuesta conserva únicamente su `id` (para preservar la integridad referencial de vínculos entrantes) y los textos derivados del catálogo de causales aplicado (título y cuerpo). El resto del contenido original (fecha de publicación, apoyos, vínculos salientes) se actualiza, resetea o elimina. Los textos del tombstone quedan congelados al momento del retiro; cambios posteriores al catálogo no los afectan.
 
 _Referencia: P-0023 (Decisiones 6 y 7)._
 

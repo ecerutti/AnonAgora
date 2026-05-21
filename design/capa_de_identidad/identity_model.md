@@ -22,7 +22,6 @@ Esta propiedad reduce la posibilidad de manipulación mediante múltiples identi
 El ciclo de vida de las identidades contempla eventos como:
 
 - pérdida de frase secreta
-- revocación voluntaria
 - emisión de una nueva identidad
 
 Por este motivo, pueden existir identidades anónimas históricas asociadas a una misma persona, pero solo una puede estar activa al mismo tiempo.
