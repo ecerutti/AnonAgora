@@ -14,16 +14,13 @@ No hay decisiones de diseño de plataforma pendientes. La etapa de cierre de dec
 
 ## Decisiones de diseño específicas de la demo
 
-Estas se abordan después de cerrar las decisiones de plataforma. Incluye una decisión pendiente surgida durante el diseño de P-0014:
+Estas se abordan después de cerrar las decisiones de plataforma.
 
-1. Stack tecnológico (lenguaje, framework, base de datos).
-2. Alcance funcional del MVP (qué features entran y cuáles no).
+1. Alcance funcional del MVP (qué features entran y cuáles no).
+2. Stack tecnológico (lenguaje, framework, base de datos).
 3. Persistencia y deployment.
 4. Datos de prueba o seed inicial.
-5. Simulación de AUTENTICAR en la demo. La demo no tiene acceso a credenciales reales de AUTENTICAR, lo cual exige algún mecanismo de simulación de la verificación de identidad. Decidir el alcance y la mecánica (lista de identidades ficticias, generación al vuelo u otra opción) y documentar la simulación en un ADR de demo (DP-XXXX).
-6. Implementación de ZK en la demo. Decisión abierta. Implementarla cubre en la demo una parte sustantiva del sistema (verificación criptográfica de la legitimidad del `anon_id`) pero agrega complejidad significativa (trusted setup, integración con la simulación de AUTENTICAR, generación de pruebas en cada emisión). No implementarla simplifica la demo pero deja fuera una parte central del diseño. Si se decide no implementarla, la omisión debe documentarse en un DP-XXXX.
-7. Revisor de lenguaje en la demo: ¿API real de OpenAI o mock local?
-8. Look and feel, guía visual.
+5. Look and feel, guía visual.
 
 ## Recordatorios activos
 
