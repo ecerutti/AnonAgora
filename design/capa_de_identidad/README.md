@@ -31,7 +31,7 @@ La entrega ocurre una sola vez, en el momento de la emisión. A partir de ese mo
 
 Durante el flujo de emisión, antes de la entrega final, el emisor consume dos operaciones adicionales del protocolo de emisión que la aplicación destino expone (P-0025):
 
-- **Consulta-con-reserva.** El emisor envía un pseudónimo candidato y un identificador efímero del flujo de emisión. La aplicación destino, atómicamente, verifica disponibilidad y registra la reserva con TTL si el pseudónimo está libre. Responde "libre" u "ocupado".
+- **Consulta-con-reserva.** El emisor envía un pseudónimo candidato y un identificador efímero del flujo de emisión. La aplicación destino, atómicamente, verifica disponibilidad y registra la reserva con TTL si el pseudónimo está libre. Responde "libre" u "ocupado". La verificación opera sobre la forma normalizada del pseudónimo (P-0004).
 - **Liberación.** El emisor envía el identificador efímero del flujo de emisión. La aplicación destino libera la reserva asociada. Se invoca cuando el ciudadano regenera el pseudónimo.
 
 La verificación atómica final de unicidad ocurre en el commit de la entrega (P-0022 Dec 3).
@@ -41,7 +41,7 @@ La verificación atómica final de unicidad ocurre en el commit de la entrega (P
 - **Una identidad anónima activa por ciudadano real, por aplicación destino**, sujeta al cool-down configurable (default 6 meses) entre emisiones sucesivas (P-0015 Decisión 1).
 - **Auditoría criptográfica autónoma**: cualquier auditor externo puede verificar, con información pública, que cada `anon_id` emitido proviene de un ciudadano real verificado por el verificador externo, sin necesidad de cruzar datos con el emisor (P-0014).
 - **Separación criptográfica entre `anon_seed` y `anon_id`**: el `anon_id` se deriva con un nonce aleatorio que se descarta inmediatamente, lo que hace que el vínculo entre ambos identificadores no pueda reconstruirse aunque se acceda al estado del emisor (P-0015 Decisión 3).
-- **El emisor no almacena `anon_ids` ni asociaciones con ciudadanos**: solo retiene la tupla mínima `{anon_seed, fecha_emision}` (P-0015 Decisión 2).
+- **El emisor no almacena `anon_ids` ni asociaciones con ciudadanos**: solo retiene la tupla mínima `{anon_seed, fecha_emision}`, con la fecha a granularidad de día (P-0015 Decisión 2).
 
 ### Qué no es responsabilidad de la capa
 

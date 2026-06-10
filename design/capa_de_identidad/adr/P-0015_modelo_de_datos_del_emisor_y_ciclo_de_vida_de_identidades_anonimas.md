@@ -182,7 +182,7 @@ Desventajas
 
 **Decisión 1:** Se adopta la **Opción B**. El período mínimo entre emisiones es de 6 meses contados desde la `fecha_emision` de la identidad activa. El valor es configurable por el operador; 6 meses es el valor por defecto. No se establece límite a la cantidad de renovaciones de por vida.
 
-**Decisión 2:** Se adopta la **Opción B**. El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena el `anon_id` ni ninguna asociación entre ambos identificadores.
+**Decisión 2:** Se adopta la **Opción B**. El emisor almacena únicamente `{anon_seed, fecha_emision}`. No almacena el `anon_id` ni ninguna asociación entre ambos identificadores. La `fecha_emision` se registra con granularidad de día, suficiente para aplicar el cool-down.
 
 **Decisión 3:** Se adopta la **Opción D**. El `anon_id` se deriva como `HASH(anon_seed + nonce)`, donde `nonce` es un valor aleatorio generado por el emisor para cada emisión. Durante la emisión, el emisor verifica unicidad y cool-down sobre el `anon_seed`; si procede, genera el `nonce`, calcula el `anon_id`, genera la prueba ZK, y descarta el `nonce` inmediatamente. La aplicación destino recibe del emisor el pseudónimo amigable, el `anon_id` y la prueba ZK. La credencial de acceso del ciudadano (frase secreta en el caso de la aplicación de participación ciudadana, ver P-0008) no interviene en este flujo y es asunto exclusivo de la aplicación destino.
 
@@ -192,7 +192,7 @@ Desventajas
 
 El cool-down de 6 meses es el mecanismo central de control de abuso. Sin él, un ciudadano podría acumular identidades activas simultáneas aprovechando que las identidades anteriores siguen siendo funcionales en la aplicación destino una vez emitidas. El valor por defecto de 6 meses es suficientemente largo para desincentivar el abuso y suficientemente corto para no penalizar permanentemente al ciudadano que perdió sus credenciales.
 
-La tupla mínima `{anon_seed, fecha_emision}` en el emisor es consecuencia directa del principio de minimización de datos de P-0006: el emisor almacena estrictamente lo necesario para sus dos funciones operativas. No almacenar la asociación `anon_seed → anon_id` reduce la información disponible para un atacante con acceso al emisor y elimina la posibilidad de recuperación de identidad, lo cual es un beneficio de diseño: la irrecuperabilidad refuerza la percepción del ciudadano de que el sistema no puede identificarlo.
+La tupla mínima `{anon_seed, fecha_emision}` en el emisor es consecuencia directa del principio de minimización de datos de P-0006: el emisor almacena estrictamente lo necesario para sus dos funciones operativas. No almacenar la asociación `anon_seed → anon_id` reduce la información disponible para un atacante con acceso al emisor y elimina la posibilidad de recuperación de identidad, lo cual es un beneficio de diseño: la irrecuperabilidad refuerza la percepción del ciudadano de que el sistema no puede identificarlo. La granularidad de día de la `fecha_emision` responde al mismo principio de minimización: el cool-down se mide en meses y no requiere más precisión, y un timestamp fino sería materia prima de correlación temporal con los eventos de registro de la aplicación destino (P-0006).
 
 La derivación `anon_id = HASH(anon_seed + nonce)` resuelve la tensión central de este ADR. El nonce es generado por el emisor, consumido para calcular el `anon_id` y la prueba ZK, y descartado inmediatamente sin almacenarse. Con el nonce descartado, la separación entre `anon_seed` y `anon_id` deja de ser organizacional y pasa a ser criptográficamente forzada: aunque un atacante obtenga el `anon_seed` desde el emisor, no puede derivar el `anon_id` correspondiente sin el nonce, que ya no existe en ningún lado.
 
@@ -204,7 +204,7 @@ ZK se concentra en el `anon_id` porque es el único identificador que sale del e
 
 ## Consecuencias
 
-- El emisor almacena `{anon_seed, fecha_emision}` por cada ciudadano registrado. No almacena `anon_id`, pseudónimo amigable, nonce, frase secreta ni ningún derivado de ella.
+- El emisor almacena `{anon_seed, fecha_emision}` por cada ciudadano registrado, con la fecha a granularidad de día. No almacena `anon_id`, pseudónimo amigable, nonce, frase secreta ni ningún derivado de ella.
 - El flujo de emisión ocurre en una única interacción. El emisor verifica el JWT de AUTENTICAR, calcula el `anon_seed`, verifica unicidad y cool-down, y si procede genera un `nonce` aleatorio, calcula el `anon_id` y genera la prueba ZK. El `nonce` se descarta inmediatamente; no debe almacenarse ni loguearse en ningún punto.
 - La aplicación destino recibe del emisor en el momento de la emisión: el pseudónimo amigable, el `anon_id` y la prueba ZK. A partir de ese momento opera de forma completamente independiente del emisor.
 - La credencial de acceso del ciudadano no interviene en el flujo de emisión. Su definición, almacenamiento y verificación son responsabilidad exclusiva de la aplicación destino. En la aplicación de participación ciudadana esto se concreta en P-0008 y P-0009.

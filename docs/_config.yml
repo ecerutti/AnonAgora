@@ -1,1 +1,14 @@
 theme: jekyll-theme-slate
+title: Participación ciudadana con identidad anónima
+description: Propuesta conceptual de una plataforma de participación ciudadana con identidad anónima verificada y persistente.
+lang: es
+
+# GitHub Pages publica la carpeta docs/ completa. Esta combinación restringe lo
+# publicado a la portada (index.md) y a la propuesta conceptual (propuesta/),
+# excluyendo automáticamente cualquier .md técnico actual o futuro en docs/.
+# (En Jekyll, include tiene precedencia sobre exclude.)
+exclude:
+  - "*.md"
+include:
+  - index.md
+  - propuesta

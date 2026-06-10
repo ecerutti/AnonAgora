@@ -38,12 +38,13 @@ Desventajas
 
 #### Opción B — `anon_id` desasociado de la propuesta, registro en tabla de eventos separada
 
-La propuesta no almacena ninguna referencia a su autor. Al momento de publicación, el sistema registra en una tabla de eventos independiente `{anon_id, fecha_publicacion}`, utilizada exclusivamente para el control del año móvil de P-0017. La propuesta y ese registro son estructuras independientes y no vinculables entre sí.
+La propuesta no almacena ninguna referencia a su autor. Al momento de publicación, el sistema registra en una tabla de eventos independiente `{anon_id, fecha_publicacion}`, con la fecha registrada a granularidad de día y utilizada exclusivamente para el control del año móvil de P-0017. La propuesta y ese registro son estructuras independientes y no vinculables entre sí.
 
 Ventajas
 
 - Un atacante con acceso a la base de datos de propuestas no puede determinar quién escribió qué.
 - La tabla de eventos de publicación no expone qué propuesta fue publicada, solo que hubo una publicación en una fecha.
+- La granularidad de día impide reasociar el evento con una propuesta concreta cruzándolo contra la fecha de publicación visible de las propuestas: el año móvil no requiere más precisión, y un timestamp fino habilitaría esa correlación.
 - Coherente con P-0001 y con el principio de minimización de datos.
 
 Desventajas
@@ -183,5 +184,6 @@ Los links se permiten como texto plano porque citar fuentes es una práctica leg
 ## Consecuencias
 
 - La base de datos de propuestas no contiene información sobre autoría. No es posible responder consultas del tipo "¿qué propuestas publicó este ciudadano?" a partir de la tabla de propuestas.
+- La tabla de eventos de publicación registra la fecha con granularidad de día. Un timestamp más preciso permitiría reconstruir la autoría por correlación con la `fecha_publicacion` de las propuestas, anulando la desasociación de la Decisión 1.
 - El campo `conteo_apoyos` se mantiene desnormalizado por razones de performance. El registro de apoyos individuales es la fuente de verdad: ante cualquier desfase detectado entre el contador y el registro, el valor correcto es el derivado del registro. La implementación concreta del mantenimiento de la consistencia (transaccionalidad, reconciliación, mecanismo de detección de desfase) se documenta en la carpeta de implementación de la aplicación cuando se aborde esa etapa.
 - Los valores por defecto de longitud máxima de título y cuerpo deben documentarse en la guía de operación junto con los criterios para ajustarlos.

@@ -36,8 +36,8 @@ El operador queda fuera. P-0024 establece que el sistema no tiene perfil adminis
 | F-AP-04 | Exploración del ranking de propuestas | Aplicación destino |
 | F-AP-05 | Búsqueda y filtrado de propuestas | Aplicación destino |
 | F-AP-06 | Visualización de una propuesta y sus vínculos | Aplicación destino |
-| F-AP-08 | Dar / retirar apoyo a propuesta | Aplicación destino |
-| F-AP-09 | Creación de propuesta (original o derivada) | Aplicación destino |
+| F-AP-07 | Dar / retirar apoyo a propuesta | Aplicación destino |
+| F-AP-08 | Creación de propuesta (original o derivada) | Aplicación destino |
 | Expiración de sesión | (comportamiento transversal) | Aplicación destino |
 | M-DEBUG | Modo debug activo (modificador transversal) | Capa + aplicación |
 
@@ -148,7 +148,7 @@ Los pasos 1 a 4 aplican únicamente al camino desde F-CI-01. Los pasos 5 a 8 apl
 
 1. *Recepción y verificación de la prueba ZK*. La aplicación destino recibe la tupla del emisor y verifica la prueba ZK contra el JWKS histórico de la capa de identidad, según P-0014. La verificación es interna y no produce pantalla; si falla, el ciudadano ve un mensaje genérico de error sin detalle operativo (P-0020) y la tupla se descarta sin enviar confirmación al emisor. Caso no esperado en operación normal.
 2. *Definición de la frase secreta*. Pantalla con explicación clara del concepto de passphrase (P-0008 destaca que muchos ciudadanos solo conocen "contraseña" como término), un ejemplo o sugerencia ilustrativa, y los criterios mínimos configurables (default: 4 palabras, 20 caracteres). Advertencia inequívoca sobre irrecuperabilidad: si pierde la frase, pierde la identidad hasta vencido el cool-down. El ciudadano ingresa su frase.
-3. *Persistencia de la frase y registro del ciudadano*. El cliente calcula `HASH(frase_secreta)` con la función hash estándar acordada en P-0009 y la envía a la aplicación destino. El servidor genera salt único, aplica Argon2id con los parámetros configurados, y persiste el registro: `{anon_id, pseudónimo, hash_argon2id, salt, parámetros, fecha_registro, tutorial_completado=false, tc_aceptados=false}`. Los textos exactos de los campos de control y su estructura concreta son decisión de implementación, no de diseño.
+3. *Persistencia de la frase y registro del ciudadano*. El cliente calcula `HASH(frase_secreta)` con la función hash estándar acordada en P-0009 y la envía a la aplicación destino. El servidor genera salt único, aplica Argon2id con los parámetros configurados, y persiste el registro: `{anon_id, pseudónimo, hash_argon2id, salt, parámetros, fecha_registro (granularidad de día), tutorial_completado=false, tc_aceptados=false}`. Los textos exactos de los campos de control y su estructura concreta son decisión de implementación, no de diseño.
 4. *Confirmación al emisor*. Inmediatamente después de persistir el registro, la aplicación destino envía la confirmación de recepción al emisor. A partir de este momento, el emisor persiste `{anon_seed, fecha_emision}` y consume el cool-down (P-0022 Dec 3). El ciudadano no percibe este paso; ocurre transparentemente.
 5. *Tutorial introductorio*. El ciudadano recorre el tutorial explicativo del sistema. El contenido cubre, según `docs/propuesta/03_Cómo_se_usaría.md`: propósito de la plataforma, formas de participación disponibles (apoyar propuestas existentes y crear nuevas), límite anual de propuestas, recomendación de buscar antes de crear. El recorrido es bloqueante: el ciudadano no puede saltearlo ni acceder al resto de la aplicación hasta completarlo. Al finalizar, la aplicación setea `tutorial_completado=true`.
 6. *Presentación de los T&C*. Una vez completado el tutorial, la aplicación muestra los Términos y Condiciones. El ciudadano puede aceptarlos o declinarlos. Aceptarlos setea `tc_aceptados=true` y avanza al paso 7. Declinarlos transita al rechazo de T&C (ver bifurcaciones).
@@ -248,7 +248,7 @@ Adicionalmente, el rechazo de T&C en F-AP-01 produce un cierre de sesión que en
 
 **Condición de entrada**
 
-El ciudadano queda en la página principal con sesión activa. Llega desde el final exitoso de F-AP-01 (primer aterrizaje tras onboarding), desde el final exitoso de F-AP-02 sin pendientes (login), o desde otros flujos que retornan al listado (cierre de F-AP-06 sin acción, finalización de F-AP-09 con publicación exitosa, etc.).
+El ciudadano queda en la página principal con sesión activa. Llega desde el final exitoso de F-AP-01 (primer aterrizaje tras onboarding), desde el final exitoso de F-AP-02 sin pendientes (login), o desde otros flujos que retornan al listado (cierre de F-AP-06 sin acción, finalización de F-AP-08 con publicación exitosa, etc.).
 
 **Condición de salida**
 
@@ -256,7 +256,7 @@ El flujo F-AP-04 no tiene un final propio. Es el centro de operaciones del ciuda
 
 - A F-AP-05 al usar la barra de búsqueda o los controles de filtrado.
 - A F-AP-06 al abrir una propuesta concreta.
-- A F-AP-09 al iniciar la creación de una propuesta.
+- A F-AP-08 al iniciar la creación de una propuesta.
 - A F-AP-03 al cerrar sesión.
 
 **Pasos / pantallas**
@@ -266,7 +266,7 @@ El flujo en sí consiste en una única pantalla persistente con varios elementos
 1. *Listado principal de propuestas*. Cada propuesta se muestra como una fila con las columnas definidas en P-0010: Relevancia (score normalizado 0-100 con tooltip), Apoyos (conteo real sin ponderación), íconos 🔥 Tendencia y 🌱 Emergente cuando aplican (con sus respectivos tooltips). El orden por defecto es por Relevancia descendente.
 2. *Control de ordenamiento*. El ciudadano puede cambiar el criterio de ordenamiento en cualquier momento (P-0010). Los criterios disponibles incluyen al menos los implícitos en las columnas visibles. La lista exacta de opciones es decisión UX.
 3. *Acceso a búsqueda y filtros*. Elementos de UI en la misma pantalla permiten invocar F-AP-05.
-4. *Acceso a creación de propuesta*. Botón o elemento equivalente que invoca F-AP-09. La verificación de cupo de P-0017 ocurre al iniciar F-AP-09, no acá.
+4. *Acceso a creación de propuesta*. Botón o elemento equivalente que invoca F-AP-08. La verificación de cupo de P-0017 ocurre al iniciar F-AP-08, no acá.
 5. *Identidad y menú del ciudadano*. La interfaz muestra el pseudónimo del ciudadano de forma persistente. La forma concreta y el contenido del menú asociado están pendientes (hueco H-6).
 
 **Bifurcaciones, errores y degradación**
@@ -323,18 +323,18 @@ El ciudadano accede a una propuesta concreta. Las vías de entrada son: pulsar u
 **Condición de salida**
 
 - *Salida pasiva*: el ciudadano vuelve al listado, navega a otra propuesta, o cierra la sesión.
-- *Salida hacia acción*: el ciudadano invoca F-AP-08 (apoyar / retirar apoyo) o F-AP-09 con vínculo preseleccionado (crear propuesta derivada que vincula a esta).
+- *Salida hacia acción*: el ciudadano invoca F-AP-07 (apoyar / retirar apoyo) o F-AP-08 con vínculo preseleccionado (crear propuesta derivada que vincula a esta).
 
 **Pasos / pantallas**
 
 1. *Renderizado de la propuesta*. Se muestra el título, el cuerpo en Markdown renderizado, la fecha de publicación, el conteo de apoyos (valor real, P-0012) y eventualmente las señales de ranking si aplican (🔥, 🌱). Los links externos en el cuerpo se renderizan como texto plano no clickeable (P-0018 Dec 4).
 2. *Vínculos salientes*. Las propuestas a las que esta propuesta vincula se muestran con suficiente información para que el ciudadano decida si seguirlas (al menos título; el detalle UX es pendiente).
-3. *Controles de acción*. Botón de apoyar o retirar apoyo según el estado actual del ciudadano respecto a esta propuesta (invoca F-AP-08). Botón de crear propuesta derivada (invoca F-AP-09 con esta propuesta preseleccionada como vínculo).
+3. *Controles de acción*. Botón de apoyar o retirar apoyo según el estado actual del ciudadano respecto a esta propuesta (invoca F-AP-07). Botón de crear propuesta derivada (invoca F-AP-08 con esta propuesta preseleccionada como vínculo).
 
 **Bifurcaciones, errores y degradación**
 
 - *Propuesta retirada (tombstone)*: la propuesta tiene el contenido del tombstone (título "Propuesta removida por <causal>", cuerpo con el texto largo de la causal, conteo de apoyos en cero, sin vínculos salientes propios pero potencialmente con vínculos entrantes desde otras propuestas, P-0023). La aplicación no tiene un flag dedicado para distinguir tombstones; el ciudadano los identifica por contenido.
-- *M-DEBUG*: F-AP-06 en sí no genera eventos logueables (la visualización es una lectura). Los eventos logueables aparecen cuando se invoca F-AP-08 o F-AP-09 desde acá, y la advertencia y confirmación se manejan en esos flujos.
+- *M-DEBUG*: F-AP-06 en sí no genera eventos logueables (la visualización es una lectura). Los eventos logueables aparecen cuando se invoca F-AP-07 o F-AP-08 desde acá, y la advertencia y confirmación se manejan en esos flujos.
 
 **Notas**
 
@@ -343,7 +343,7 @@ El ciudadano accede a una propuesta concreta. Las vías de entrada son: pulsar u
 
 ## Bloque 4 — Participación activa y modificador transversal
 
-### F-AP-08 — Dar / retirar apoyo a propuesta
+### F-AP-07 — Dar / retirar apoyo a propuesta
 
 **Componente**: aplicación destino.
 
@@ -382,7 +382,7 @@ El flujo bifurca en dos ramas según la acción.
 - El sistema no expone en ninguna interfaz el concepto de rechazo, oposición o desaprobación (P-0012). El único estado posible del ciudadano respecto a una propuesta es apoyarla o no apoyarla.
 - Retirar un apoyo no deja registro visible (P-0012). La interfaz simplemente vuelve al estado "no apoyada" y el conteo disminuye.
 
-### F-AP-09 — Creación de propuesta (original o derivada)
+### F-AP-08 — Creación de propuesta (original o derivada)
 
 **Componente**: aplicación destino.
 
@@ -408,13 +408,13 @@ Ambos puntos de entrada llevan al mismo flujo, con la única diferencia de cómo
 
 1. *Chequeo de cupo y eventual mensaje informativo*. Antes de abrir el editor, la aplicación consulta el cupo del ciudadano según P-0017 (año móvil, default 2 propuestas). Si el ciudadano tiene slots disponibles, el flujo avanza al paso 2. Si no tiene slots, la aplicación muestra un mensaje informativo superpuesto con el estado de cupo (slots consumidos y, para cada uno, la fecha en que vuelve a estar disponible). El ciudadano puede cerrar el mensaje y permanece en el contexto desde donde inició el flujo (F-AP-04 o F-AP-06). El editor no se abre. La forma visual concreta del mensaje (modal, banner, otro) es decisión UX.
 2. *Recordatorio de buscar antes de crear (solo desde F-AP-04)*. Antes del editor, y únicamente cuando el flujo se inició desde F-AP-04 sin contexto previo de una propuesta concreta, la aplicación muestra el recordatorio descrito en `docs/propuesta/03_Cómo_se_usaría.md`: invitar al ciudadano a verificar si una propuesta similar ya existe, dado que el cupo es limitado. El ciudadano puede continuar a la redacción o cancelar para volver a buscar (transición a F-AP-05). Cuando el flujo se inició desde F-AP-06 (creación de propuesta derivada), este paso se omite: se asume que el ciudadano ya buscó y encontró la propuesta de la que parte.
-3. *Editor de propuesta*. Pantalla con dos campos principales: título (texto plano, longitud máxima configurable, default 200 caracteres) y cuerpo (Markdown, longitud máxima configurable, default 20.000 caracteres). P-0018 establece estos campos. La pantalla también muestra el control de vínculos, que arranca con la propuesta preseleccionada (si entró desde F-AP-06) o vacío (si entró desde F-AP-04). 3. El ciudadano puede agregar vínculos ingresando el id de las propuestas a vincular (ver H-12 sobre una variante UX alternativa). El máximo de vínculos por propuesta es configurable (default 10, `vinculacion_de_propuestas.md`).
+3. *Editor de propuesta*. Pantalla con dos campos principales: título (texto plano, longitud máxima configurable, default 200 caracteres) y cuerpo (Markdown, longitud máxima configurable, default 20.000 caracteres). P-0018 establece estos campos. La pantalla también muestra el control de vínculos, que arranca con la propuesta preseleccionada (si entró desde F-AP-06) o vacío (si entró desde F-AP-04). El ciudadano puede agregar vínculos ingresando el id de las propuestas a vincular (ver H-12 sobre una variante UX alternativa). El máximo de vínculos por propuesta es configurable (default 10, `vinculacion_de_propuestas.md`).
 4. *Envío al revisor de lenguaje*. Al pulsar publicar, la aplicación envía el contenido al revisor según P-0011 (normalización previa contra ofuscación + texto original al modelo). El ciudadano ve una indicación de que la revisión está en curso. La llamada es server-to-server con reintentos y backoff exponencial según P-0022 Dec 4.
 5. *Resultado del revisor*.
    - *Aprobación*: el flujo avanza al paso 6.
    - *Rechazo*: la aplicación muestra el mensaje de P-0011 con la categoría detectada expresada en términos ciudadanos. El ciudadano vuelve al editor con su texto preservado y puede corregir y reintentar. No hay límite de intentos (P-0011). El draft sigue vivo en memoria.
    - *Fallo de servicio agotados los reintentos*: mensaje de fallo transitorio según P-0022 Dec 4. El ciudadano no pierde el texto en pantalla mientras la sesión esté activa, pero el sistema no garantiza preservación si el navegador se cierra.
-6. *Publicación efectiva*. La aplicación persiste la propuesta con sus campos (id generado, título, cuerpo, fecha de publicación, conteo de apoyos en uno por el autor, score inicial calculado por P-0010, vínculos). Registra también el evento `{anon_id, fecha_publicacion}` en la tabla separada de eventos de publicación que P-0018 establece para el control de cupo, sin asociación con qué propuesta fue publicada.
+6. *Publicación efectiva*. La aplicación persiste la propuesta con sus campos (id generado, título, cuerpo, fecha de publicación, conteo de apoyos en uno por el autor, score inicial calculado por P-0010, vínculos). Registra también el evento `{anon_id, fecha_publicacion}` (granularidad de día) en la tabla separada de eventos de publicación que P-0018 establece para el control de cupo, sin asociación con qué propuesta fue publicada.
 7. *Confirmación al ciudadano*. La aplicación muestra confirmación de publicación exitosa y aterriza al ciudadano en F-AP-06 sobre su propuesta recién publicada, o vuelve a F-AP-04 según decisión UX.
 
 **Bifurcaciones, errores y degradación**
@@ -442,11 +442,11 @@ Cuando el ciudadano pulsa un control que requiere sesión activa y la aplicació
 
 **Flujos afectados**
 
-Aplica a todos los flujos autenticados de la aplicación destino: F-AP-04, F-AP-05, F-AP-06, F-AP-08, F-AP-09. No aplica a F-AP-00 (sin sesión), F-AP-01 (sesión en creación), F-AP-02 (sesión iniciándose), F-AP-03 (sesión cerrándose) ni a F-CI-01 (fuera del alcance de la sesión de la aplicación destino).
+Aplica a todos los flujos autenticados de la aplicación destino: F-AP-04, F-AP-05, F-AP-06, F-AP-07, F-AP-08. No aplica a F-AP-00 (sin sesión), F-AP-01 (sesión en creación), F-AP-02 (sesión iniciándose), F-AP-03 (sesión cerrándose) ni a F-CI-01 (fuera del alcance de la sesión de la aplicación destino).
 
-**Caso particularmente sensible: redacción larga en F-AP-09**
+**Caso particularmente sensible: redacción larga en F-AP-08**
 
-El editor de propuesta de F-AP-09 puede tener al ciudadano más de una hora en pantalla redactando sin interactuar con el servidor. Si la detección de actividad es solo del lado del servidor, una redacción extensa puede perderse al intentar publicar. Este caso está identificado como pendiente de resolver. Existen mecanismos del lado del cliente (detección de actividad local con heartbeats al servidor, re-login transparente, timers locales) que la decisión futura puede adoptar.
+El editor de propuesta de F-AP-08 puede tener al ciudadano más de una hora en pantalla redactando sin interactuar con el servidor. Si la detección de actividad es solo del lado del servidor, una redacción extensa puede perderse al intentar publicar. Este caso está identificado como pendiente de resolver. Existen mecanismos del lado del cliente (detección de actividad local con heartbeats al servidor, re-login transparente, timers locales) que la decisión futura puede adoptar.
 
 ## M-DEBUG — Modo debug activo (modificador transversal)
 
@@ -464,7 +464,7 @@ Cuando el modo debug está activo en un componente:
 
 1. *Advertencia prominente en todas las pantallas*. Toda interfaz del componente muestra una advertencia visible que informa al ciudadano que el modo debug está activo. La advertencia debe ser distinguible y no pasar desapercibida. La forma concreta (banner, ícono, color, ubicación, copy) es decisión UX pendiente.
 2. *Confirmación explícita antes de cada acción logueable*. Cada paso de cada flujo del componente que genera un evento logueable (login, publicar propuesta, dar apoyo, retirar apoyo, emitir identidad anónima, aceptar pseudónimo) requiere una confirmación explícita adicional del ciudadano antes de proceder. La confirmación es por evento, no por flujo: un flujo con múltiples eventos logueables tiene múltiples confirmaciones independientes.
-3. *Evaluación por paso, no por flujo*. La condición "modo debug activo" se evalúa al momento de ejecutar cada paso logueable, no una sola vez al inicio del flujo. Esto cubre el caso del modo debug activado en medio de un flujo en curso: por ejemplo, el operador activa el modo debug entre el envío al revisor de lenguaje (paso 4 de F-AP-09) y la publicación efectiva (paso 6), y la confirmación del paso 6 sí aplica aunque la del paso 4 no haya ocurrido.
+3. *Evaluación por paso, no por flujo*. La condición "modo debug activo" se evalúa al momento de ejecutar cada paso logueable, no una sola vez al inicio del flujo. Esto cubre el caso del modo debug activado en medio de un flujo en curso: por ejemplo, el operador activa el modo debug entre el envío al revisor de lenguaje (paso 4 de F-AP-08) y la publicación efectiva (paso 6), y la confirmación del paso 6 sí aplica aunque la del paso 4 no haya ocurrido.
 
 **Aplicación a los flujos del inventario**
 
@@ -476,9 +476,9 @@ Cuando el modo debug está activo en un componente:
 | F-AP-03 | Logout explícito. La expiración por inactividad no requiere confirmación (no es acción del ciudadano). |
 | F-AP-04 | Ninguno. F-AP-04 no genera eventos logueables propios. |
 | F-AP-05 | Ninguno. F-AP-05 no genera eventos logueables propios. |
-| F-AP-06 | Ninguno propio. Los eventos surgen al transitar a F-AP-08 o F-AP-09. |
-| F-AP-08 | Dar apoyo (rama A paso 1) y retirar apoyo (rama B paso 3). En la rama B, la confirmación de retiro de H-8 y la confirmación del modo debug pueden materializarse como una sola interacción que cumpla ambas funciones. |
-| F-AP-09 | Envío al revisor (paso 4) y publicación efectiva (paso 6), de forma independiente. |
+| F-AP-06 | Ninguno propio. Los eventos surgen al transitar a F-AP-07 o F-AP-08. |
+| F-AP-07 | Dar apoyo (rama A paso 1) y retirar apoyo (rama B paso 3). En la rama B, la confirmación de retiro de H-8 y la confirmación del modo debug pueden materializarse como una sola interacción que cumpla ambas funciones. |
+| F-AP-08 | Envío al revisor (paso 4) y publicación efectiva (paso 6), de forma independiente. |
 
 **Estado de diseño**
 
@@ -495,8 +495,8 @@ A medida que se recorrió el sistema se identificaron las siguientes preguntas d
 - **H-5 (abierto) — Mensaje y formato del rechazo por cool-down vigente en F-CI-01**. El paso de verificación de cool-down en F-CI-01 muestra al ciudadano la fecha del próximo slot. La presentación visual es decisión UX.
 - **H-6 (abierto) — Presencia persistente del pseudónimo y menú asociado**. El pseudónimo es visible para el propio ciudadano (P-0001). La forma concreta (avatar temático, ubicación en la interfaz, menú desplegable con cupo y apoyos, acceso a logout) y el contenido del eventual menú son decisión UX. Aplica especialmente a F-AP-04 y a cualquier pantalla autenticada.
 - **H-7 (abierto) — Redacción y diseño visual de los mensajes de P-0022 al ciudadano**. P-0022 establece tres categorías de mensajes ante fallos del verificador y categorías análogas para otros componentes, pero deja la redacción exacta y la realización visual a la capa de UX.
-- **H-8 (decidido) — Confirmación al retirar apoyo**. Decisión adoptada en F-AP-08: retirar apoyo requiere confirmación explícita; dar apoyo no la requiere. La forma visual de la confirmación es decisión UX, integrable con M-DEBUG cuando aplique.
+- **H-8 (decidido) — Confirmación al retirar apoyo**. Decisión adoptada en F-AP-07: retirar apoyo requiere confirmación explícita; dar apoyo no la requiere. La forma visual de la confirmación es decisión UX, integrable con M-DEBUG cuando aplique.
 - **H-9 (decidido) — Mecánica de aceptación de pseudónimo en F-CI-01**. Decisión adoptada: una sola sugerencia visible por vez, con botón para generar otra. Iteración sin límite hasta que el ciudadano acepta.
-- **H-10 (decidido) — Tratamiento del draft de propuesta durante la corrección iterativa**. Decisión adoptada en F-AP-09: el draft vive en memoria del navegador durante el ciclo de corrección. Se persiste en el backend solo al pasar el revisor. Si el navegador se cierra, el draft se pierde.
+- **H-10 (decidido) — Tratamiento del draft de propuesta durante la corrección iterativa**. Decisión adoptada en F-AP-08: el draft vive en memoria del navegador durante el ciclo de corrección. Se persiste en el backend solo al pasar el revisor. Si el navegador se cierra, el draft se pierde.
 - **H-11 (decidido) — Manejo del anon_id con T&C no aceptados**. Originalmente reservado como hueco separado; resuelto e integrado en H-2.
-- **H-12 (abierto) — UX alternativa para la vinculación en F-AP-09**. La decisión adoptada en F-AP-09 es ingreso del id de la propuesta a vincular. Se mencionó como alternativa una integración con el buscador principal (F-AP-05) que permita "vincular esta propuesta" como acción desde el listado de resultados, retornando al editor de F-AP-09. Esta variante implicaría agregar una condición de salida nueva a F-AP-05 y modificar el editor de F-AP-09. Queda como decisión UX a evaluar en la fase de diseño de interfaces.
+- **H-12 (abierto) — UX alternativa para la vinculación en F-AP-08**. La decisión adoptada en F-AP-08 es ingreso del id de la propuesta a vincular. Se mencionó como alternativa una integración con el buscador principal (F-AP-05) que permita "vincular esta propuesta" como acción desde el listado de resultados, retornando al editor de F-AP-08. Esta variante implicaría agregar una condición de salida nueva a F-AP-05 y modificar el editor de F-AP-08. Queda como decisión UX a evaluar en la fase de diseño de interfaces.

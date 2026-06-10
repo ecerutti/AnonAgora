@@ -54,7 +54,7 @@ El ciudadano define libremente su frase secreta, sujeta a los siguientes criteri
 
 El sistema muestra durante el registro un ejemplo o sugerencia para que el ciudadano comprenda el concepto, dado que muchos usuarios no están familiarizados con el término "frase secreta" y solo conocen el concepto de contraseña o clave.
 
-El sistema normaliza la frase al momento de validarla, ignorando diferencias de mayúsculas, acentos y espacios adicionales, para reducir errores de tipeo.
+La frase se normaliza en el cliente, antes de cualquier derivación criptográfica, ignorando diferencias de mayúsculas, acentos y espacios adicionales, para reducir errores de tipeo. La normalización es determinista e idéntica en registro y login.
 
 ## Justificación
 
@@ -66,5 +66,5 @@ La reutilización de passwords es además un riesgo de correlación: si una cont
 
 - El sistema debe comunicar claramente el concepto de passphrase durante el registro, con un ejemplo o sugerencia.
 - Los criterios mínimos (cantidad de palabras y longitud total) son configurables por el operador de la plataforma.
-- El sistema aplica normalización al validar la frase: ignora mayúsculas, acentos y espacios adicionales.
+- La normalización de la frase (mayúsculas, acentos, espacios adicionales) se aplica en el cliente, antes de cualquier derivación criptográfica, de forma determinista e idéntica en registro y login.
 - No existe control de calidad adicional más allá de los criterios mínimos: el ciudadano es libre de elegir la frase que considere memorable.

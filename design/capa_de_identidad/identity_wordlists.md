@@ -60,6 +60,8 @@ tigreaudaz23a
 tigre_audaz-23a
 ```
 
+La unicidad de pseudónimos (P-0025) se evalúa sobre esta misma forma normalizada. Por eso las listas no deben contener pares de palabras que colisionen al normalizar (por ejemplo, una misma palabra con y sin tilde).
+
 ## Criterios de curación del vocabulario
 
 Las listas de palabras han sido seleccionadas aplicando los siguientes criterios.
@@ -138,31 +140,31 @@ Hormiga Mimoso
 Abeja Sereno
 ```
 
+El mismo criterio aplica a los colores: las listas usan únicamente colores invariantes en género (Azul, Gris, Verde, etc.), evitando combinaciones discordantes como *Abeja Rojo* o *Jirafa Blanco*.
+
 ## Tamaño del espacio de identidades
 
 Con las listas actuales:
 
 ```
-animales: 60
-colores: 14
+animales: 59
+colores: 9
 adjetivos: 17
 ```
 
 El número total de combinaciones posibles es:
 
 ```
-60 × (14 + 17) × 999
+59 × (9 + 17) × 999
 ```
 
 Resultado:
 
 ```
-1.858.140 identidades únicas
+1.532.466 identidades únicas
 ```
 
 Este tamaño se considera **suficiente para una implementación conceptual o piloto**.
-
-## Escalabilidad futura
 
 ## Sufijo opcional de letra mayúscula
 
@@ -176,11 +178,13 @@ A C D E F G H J K L M N P Q R T U V W X Y
 
 Se excluyen O, I, S, Z, B por confusión visual con dígitos (0, 1, 5, 2, 8 respectivamente) y la Ñ por no integrar el conjunto base ASCII.
 
-El espacio total con sufijo opcional es:
+El sufijo agrega:
 
 ```
-60 × 31 × 999 × 21 = 39.020.940 combinaciones
+59 × 26 × 999 × 21 = 32.181.786 combinaciones
 ```
+
+que, sumadas a las combinaciones sin sufijo, llevan el espacio total a **33.714.252** identidades posibles.
 
 El sistema no mantiene estado explícito de agotamiento del espacio sin sufijo. La activación es natural y gradual: con el espacio sin letra mayormente disponible, los ciudadanos reciben pseudónimos sin sufijo; con el espacio sin letra saturado, los reciben con sufijo.
 

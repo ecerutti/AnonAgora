@@ -1,10 +1,3 @@
-# ZK Proofs sobre JWT RS256: Investigación Técnica de Referencia
-
-## `docs/zk_jwt_investigacion.md`
-
----
-
-```markdown
 # Pruebas de Conocimiento Cero (ZK) sobre JWT RS256
 ## Documento de referencia técnica para arquitectura del sistema de participación ciudadana
 

@@ -24,7 +24,7 @@ El ciclo de vida de las identidades contempla eventos como:
 - pérdida de frase secreta
 - emisión de una nueva identidad
 
-Por este motivo, pueden existir identidades anónimas históricas asociadas a una misma persona, pero solo una puede estar activa al mismo tiempo.
+Por este motivo, pueden existir identidades anónimas históricas asociadas a una misma persona; en el caso esperado, solo una está activa al mismo tiempo (ver las limitaciones conocidas más abajo).
 
 ## Proveedores de verificación
 

@@ -103,6 +103,8 @@ Desventajas
 
 La función hash del cliente debe ser una función criptográfica estándar (por ejemplo SHA-256). La función elegida debe ser fija para todo el sistema y conocida por la plataforma, ya que la plataforma necesita que el cliente calcule el mismo hash en registro y en login para que la comparación sea correcta.
 
+Antes de calcular el hash, el cliente aplica la normalización de la frase definida en P-0008 (mayúsculas, acentos y espacios adicionales), incluyendo una forma de normalización Unicode determinista. La normalización debe ocurrir necesariamente en el cliente: la plataforma nunca ve la frase original y no puede normalizarla por sí misma; si el cliente no normalizara antes de hashear, dos tipeos equivalentes de la misma frase producirían hashes distintos y el login fallaría. El algoritmo de normalización, igual que la función hash, es fijo para todo el sistema y forma parte de la especificación del protocolo entre cliente y plataforma.
+
 **Decisión 2:** Se adopta la **Opción 3 — Argon2id**. La plataforma aplica Argon2id al `HASH(frase_secreta)` recibido del cliente, con salt único generado aleatoriamente por registro. El valor almacenado es el hash Argon2id resultante junto con su salt.
 
 Los parámetros de costo (memoria, iteraciones, paralelismo) son configurables por el operador y deben revisarse periódicamente a medida que el hardware disponible evolucione. El `HASH(frase_secreta)` recibido se descarta inmediatamente después de calcular el Argon2id y nunca se persiste.
@@ -119,8 +121,8 @@ Argon2id es la recomendación actual de OWASP para almacenamiento de contraseña
 
 ## Consecuencias
 
-- El cliente debe implementar el cálculo del hash criptográfico estándar sobre la frase antes de enviarla a la plataforma, tanto en registro como en login.
-- La función hash del cliente debe documentarse como parte de la especificación del protocolo entre cliente y plataforma, para que implementaciones alternativas del cliente sean interoperables con la plataforma.
+- El cliente debe normalizar la frase y calcular el hash criptográfico estándar sobre la forma normalizada antes de enviarla a la plataforma, tanto en registro como en login.
+- La función hash y el algoritmo de normalización del cliente deben documentarse como parte de la especificación del protocolo entre cliente y plataforma, para que implementaciones alternativas del cliente sean interoperables con la plataforma.
 - La plataforma recibe `HASH(frase_secreta)` del cliente, le aplica Argon2id con salt único generado aleatoriamente, y almacena el resultado junto con el salt y los parámetros de costo utilizados.
 - La base de datos almacena únicamente el hash Argon2id, el salt, y los parámetros de costo; nunca la frase en texto plano ni el `HASH(frase_secreta)` intermedio.
 - Los parámetros de costo son configurables y deben documentarse en la guía de instalación y operación de la plataforma.

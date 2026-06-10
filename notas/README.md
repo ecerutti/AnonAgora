@@ -15,7 +15,7 @@ El contenido es mantenido por el humano con apoyo de los agentes cuando correspo
 
 ## Qué NO va acá
 
-- Decisiones ya tomadas: van a `design/adr/` (plataforma) o `design/demo/adr/` (demo).
+- Decisiones ya tomadas: van a las carpetas de ADR correspondientes (`design/.../adr/` para el sistema general, `demo/design/.../adr/` y `demo/implementation/.../adr/` para la demo).
 - Descripciones de componentes o modelos del sistema: van a `design/`.
 - Documentación conceptual de la propuesta: va a `docs/propuesta/`.
 - Scratchpads o notas internas que los agentes generan durante una conversación para sí mismos: esos no pertenecen al repo, deben permanecer en el workspace interno del agente.

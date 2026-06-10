@@ -12,7 +12,7 @@ En otras palabras:
 Mostrás tu DNI para entrar
 (como si un guardia en la puerta verificara que sos ciudadano).
 
-Pero una vez adentro recibís una identidad anónima. Nadie sabe quien sos.
+Pero una vez adentro recibís una identidad anónima. Nadie sabe quién sos.
 
 Desde ese momento podés:
 
@@ -44,6 +44,6 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
 
 ## 🚀 Muy pronto: demo interactiva
 
-Estamos construyendo una **demo interactiva** de la propuesta para mostrar como sería la experiencia de participación ciudadana.
+Estamos construyendo una **demo interactiva** de la propuesta para mostrar cómo sería la experiencia de participación ciudadana.
 
 👉 Seguimiento público del avance: **[anonagora.cloud](https://anonagora.cloud)**

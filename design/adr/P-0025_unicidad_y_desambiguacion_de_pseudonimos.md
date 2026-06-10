@@ -10,7 +10,7 @@ La primera función no exige unicidad: que dos ciudadanos vean "Hola Lobo Azul 7
 
 P-0015 Decisión 2 estableció que el emisor almacena exclusivamente `{anon_seed, fecha_emision}`, sin retener ningún registro de los pseudónimos emitidos. Esto deja al emisor sin capacidad de chequear localmente si un pseudónimo candidato ya fue asignado. La aplicación destino, en cambio, sí tiene los pseudónimos en su base como parte del registro de cada ciudadano: es ahí donde se usan como login.
 
-El espacio de pseudónimos sin sufijo (+letra al final del número) con las listas actuales es de 1.858.140 combinaciones (60 animales × 31 colores/adjetivos × 999 números). La probabilidad de colisión por nueva emisión es del orden de n/m, pero la probabilidad acumulada crece cuadráticamente (paradoja del cumpleaños): con ~1.600 ciudadanos registrados ya hay 50% de probabilidad de tener al menos una colisión activa, y con 10.000 ciudadanos las colisiones esperadas son del orden de decenas. Por lo tanto, a escala objetivo del sistema (termómetro social a escala ciudadana), las colisiones naturales son esperables, no excepcionales, si no se amplía el espacio de psuedónimos sin sufijo. Afortunadamente este escenario se contenpló, permitiendo **agregar opcionalmente** un sufijo de una letra mayúscula al final del número para ampliar el espacio de identidades anónimas a 39.020.940 combinaciones (60 animales × 31 colores/adjetivos × 999 números x 21 letras). 
+El espacio de pseudónimos sin sufijo (+letra al final del número) con las listas actuales es de 1.532.466 combinaciones (59 animales × 26 colores/adjetivos × 999 números). La probabilidad de colisión por nueva emisión es del orden de n/m, pero la probabilidad acumulada crece cuadráticamente (paradoja del cumpleaños): con ~1.450 ciudadanos registrados ya hay 50% de probabilidad de tener al menos una colisión activa, y con 10.000 ciudadanos las colisiones esperadas son del orden de decenas. Por lo tanto, a escala objetivo del sistema (termómetro social a escala ciudadana), las colisiones naturales son esperables, no excepcionales, si no se amplía el espacio de pseudónimos sin sufijo. Afortunadamente este escenario se contempló, permitiendo **agregar opcionalmente** un sufijo de una letra mayúscula al final del número para ampliar el espacio total de identidades anónimas a 33.714.252 combinaciones (cada combinación base, sin sufijo o con una de 21 letras).
 
 Adicionalmente, P-0016 establece que la aplicación destino no invalida identidades anónimas: el conjunto de pseudónimos ocupados crece monótonamente. Cualquier estrategia que dependa de "liberar slots con el tiempo" queda descartada por esta propiedad.
 
@@ -19,7 +19,7 @@ Las preguntas de diseño que motivaron este ADR son:
 - ¿Cómo se garantiza unicidad de pseudónimo entre identidades activas, dado que el emisor no almacena el conjunto de pseudónimos emitidos?
 - ¿La verificación de unicidad debe vivir en el emisor o en la aplicación destino?
 - ¿Cómo se evita una condición de carrera durante la deliberación del ciudadano frente al pseudónimo propuesto?
-- ¿Cuando conviene aplicar el sufijo opcional para ampliar el espacio de pseudónimos?
+- ¿Cuándo conviene aplicar el sufijo opcional para ampliar el espacio de pseudónimos?
 
 ## Opciones consideradas
 
@@ -38,7 +38,7 @@ Desventajas
 
 - Eleva el costo del login a O(N) sobre Argon2id, no O(1). Con Argon2id calibrado a los valores recomendados, la latencia se vuelve perceptible para el ciudadano honesto incluso con N=2.
 - Amplifica el costo del brute-force sobre la frase secreta: un atacante que sabe (o sospecha) que dos identidades comparten pseudónimo tantea contra ambas en paralelo, duplicando su probabilidad de éxito por intento.
-- Habilita un ataque de colisión deliberada que interactúa mal con P-0003. La regeneración de pseudónimos durante la creación es sin límite por diseño: un atacante con un objetivo concreto autentica una vez con AUTENTICAR y regenera hasta acertar el pseudónimo de su objetivo. Con el espacio actual, ~650.000 regeneraciones para 50% de éxito sobre un objetivo específico; server-side rápido, es factible. No obtiene la frase secreta de la víctima, pero infla N para esa identidad y habilita la amplificación del brute-force descrita arriba.
+- Habilita un ataque de colisión deliberada que interactúa mal con P-0003. La regeneración de pseudónimos durante la creación es sin límite por diseño: un atacante con un objetivo concreto autentica una vez con AUTENTICAR y regenera hasta acertar el pseudónimo de su objetivo. Con el espacio actual, ~1.060.000 regeneraciones para 50% de éxito sobre un objetivo específico; server-side rápido, es factible. No obtiene la frase secreta de la víctima, pero infla N para esa identidad y habilita la amplificación del brute-force descrita arriba.
 - A escala objetivo, las colisiones naturales no son excepcionales sino esperables.
 
 #### Opción B — Consultar a la aplicación destino al generar
@@ -119,7 +119,7 @@ Desventajas
 
 #### Opción A — Mantener rango numérico 1..999
 
-Espacio: 1.858.140 combinaciones. Válido para entornos chicos a moderados < 1.858.140.
+Espacio: 1.532.466 combinaciones. Válido para entornos chicos a moderados < 1.532.466.
 
 Ventajas
 
@@ -127,19 +127,19 @@ Ventajas
 
 Desventajas
 
-- Espacio total acotado a ~1,8M de identidades, no escala a poblaciones mayores.
+- Espacio total acotado a ~1,5M de identidades, no escala a poblaciones mayores.
 
 #### Opción B — Ampliar usando el sufijo opcional de letra mayúscula
 
-El sistema agrega el sufijo de una letra mayúscula al número (`Lobo Azul 714H`, `Tigre Audaz 23A`). El espacio total con sufijo opcional es: 60 × 31 × 999 x 21 = 39.020.940 combinaciones.
+El sistema agrega el sufijo de una letra mayúscula al número (`Lobo Azul 714H`, `Tigre Audaz 23A`). El sufijo agrega 59 × 26 × 999 × 21 = 32.181.786 combinaciones, llevando el espacio total (con y sin sufijo) a 33.714.252.
 
 Ventajas
 
-- Espacio total del orden de 40M de combinaciones: holgura amplia para escala objetivo.
+- Espacio total del orden de 34M de combinaciones: holgura amplia para escala objetivo.
 
 Desventajas
 
-- Los pseudónimos generados son menos amigables y sufijo es más díficil de recordar que un simple número.
+- Los pseudónimos generados son menos amigables y el sufijo es más difícil de recordar que un simple número.
 
 #### Opción C — Ampliar usando el sufijo opcional de letra mayúscula al agotarse el espacio sin letra
 
@@ -149,7 +149,7 @@ El emisor no mantiene estado explícito de agotamiento. La activación del sufij
 
 Ventajas
 
-- Espacio total del orden de 40M de combinaciones.
+- Espacio total del orden de 34M de combinaciones.
 - Degradación gradual y empírica, sin necesidad de mantener estado de agotamiento en el emisor.
 - Coherente con el patrón de reintentos con backoff de P-0022.
 - Pseudónimos sin sufijo siguen siendo lo normal mientras haya espacio disponible.
@@ -185,6 +185,8 @@ La ampliación del espacio de pseudónimos (Decisión 3) es complementaria a las
 
   - **Consulta-con-reserva.** El emisor envía un pseudónimo candidato y un identificador efímero del flujo de emisión. La aplicación destino, en una operación atómica, verifica disponibilidad, registra la reserva con TTL si está libre, y responde "libre" o "ocupado". Si responde "ocupado", el emisor regenera y reintenta.
   - **Liberación.** El emisor envía el identificador efímero del flujo de emisión y la aplicación destino libera la reserva asociada. Se invoca cuando el ciudadano regenera el pseudónimo.
+
+- Tanto la consulta-con-reserva como la verificación atómica del commit operan sobre la **forma normalizada** del pseudónimo —la misma normalización que aplica el login (P-0004: mayúsculas, acentos, espacios y guiones)—, de modo que la unicidad vale sobre el espacio efectivo de identificadores de login y no sobre variantes tipográficas. Por la misma razón, las listas de palabras no deben contener pares que colisionen al normalizar (ver `design/capa_de_identidad/identity_wordlists.md`).
 
 - La aplicación destino mantiene una tabla de reservas con TTL, separada del registro definitivo de ciudadanos. El detalle del modelo de datos de esa tabla pertenece al diseño de cada aplicación destino que se construya sobre la capa.
 

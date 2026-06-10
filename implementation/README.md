@@ -6,7 +6,7 @@ La estructura interna refleja el modelo definido en P-0021: el sistema se compon
 
 ## Organización
 
-- **Documentos transversales** (en la raíz de `implementation/` y `implementation/adr/`): documentación e decisiones de implementación que aplican al sistema completo o a la relación entre capa y aplicación.
+- **Documentos transversales** (en la raíz de `implementation/` y `implementation/adr/`): documentación y decisiones de implementación que aplican al sistema completo o a la relación entre capa y aplicación.
 - **`implementation/capa_de_identidad/`**: implementación de la capa de identidad.
 - **`implementation/aplicaciones/`**: implementación de las aplicaciones destino. Cada aplicación vive en su propia subcarpeta (actualmente solo `participacion_ciudadana/`).
 

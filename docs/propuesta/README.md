@@ -21,3 +21,5 @@ Esta carpeta describe una aplicación destino concreta: la plataforma de partici
 ## Notas sobre el uso de esta documentación
 
 Estos documentos son conceptuales y tienen cierta licencia narrativa. Cuando algo aquí descrito se diferencia de las decisiones técnicas registradas en `design/` o `implementation/`, prevalecen estas últimas. En caso de contradicción, ver la regla de prioridad de interpretación en `AGENTS.md`.
+
+Las divergencias entre esta carpeta y `design/` son esperables y deliberadas, y **no deben reportarse ni "corregirse" como inconsistencias**: la propuesta describe la idea en términos generales y el diseño la concreta. Ejemplo típico: estos documentos mencionan varios proveedores de verificación de identidad (ANSES, AFIP/ARCA, MiArgentina, ReNaPer) como ilustración de la idea, mientras que P-0013 restringe la integración real a ARCA y ANSES por razones de unicidad. Ambas cosas son correctas en su propio nivel.
