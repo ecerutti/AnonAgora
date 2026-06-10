@@ -33,7 +33,7 @@ Si en el futuro se decidiera darle al proyecto —o a un despliegue concreto— 
 
 Este repositorio es la **fuente de verdad del proyecto**.
 
-Antes de realizar cualquier tarea, el agente debe reconstruir el contexto leyendo la documentación existente en el repositorio.
+Antes de realizar cualquier tarea, el agente debe reconstruir el contexto leyendo la documentación existente en el repositorio. Esa reconstrucción se hace **a demanda**: el agente lee `contexto/mapa_de_contexto.md` y carga solo los documentos que el mapa indica para su tarea. No es necesario (ni deseable) leer el repositorio completo; el conocimiento ya está destilado e indexado en `contexto/` (ver `contexto/README.md`).
 
 Las conversaciones no deben considerarse fuente de verdad permanente.
 
@@ -95,6 +95,7 @@ Dentro de `design/` y `implementation/` (tanto en el sistema general como en la 
 | `implementation/` | Documentos de implementación del sistema general que no requieren ADR. La estructura interna replica la de `design/`. | ADRs, decisiones de implementación entre alternativas, diseño conceptual, material específico de la demo. |
 | `demo/` | Todo lo referente a la versión demo: documentación, decisiones de diseño, decisiones de implementación y código fuente. La estructura interna replica la del sistema general (`demo/design/`, `demo/implementation/` y eventualmente `demo/src/`). La demo hereda las decisiones del sistema general; aquí solo se registran las simplificaciones específicas. | Decisiones del sistema general, documentación conceptual general. |
 | `notas/` | Material de trabajo del proyecto: estado del trabajo en curso, recordatorios, ideas pendientes de evaluación, borradores conceptuales que todavía no son documentos oficiales. Mantenido por el humano con apoyo de los agentes. | Decisiones ya tomadas (van a las carpetas de ADR correspondientes), descripciones de componentes (van a `design/` o `implementation/`), scratchpads del agente durante una conversación. |
+| `contexto/` | Sistema de contexto para agentes: síntesis destilada del proyecto y mapa de carga a demanda, para que las conversaciones nuevas no necesiten leer el repositorio completo. Mantenido por los agentes como paso final de cada tarea, con revisión humana (ver `contexto/README.md`). | Decisiones (van a ADRs), estado del trabajo (va a `notas/`), reglas del repositorio (van en este archivo). |
 
 ## Estructura interna de `design/` (y, simétricamente, de `implementation/` y de `demo/design/` y `demo/implementation/`)
 
@@ -131,6 +132,7 @@ Solo deben guardarse en el repositorio:
 - decisiones de diseño
 - ADR
 - código fuente
+- el sistema de contexto para agentes (`contexto/` y el bootstrap `CLAUDE.md`)
 
 No deben guardarse en el repositorio los archivos de trabajo internos que el agente genera para sí mismo durante una conversación:
 
@@ -151,12 +153,13 @@ Esto es distinto del material de trabajo del proyecto, que vive en `notas/` y s�
 Antes de modificar el repositorio, el agente debe:
 
 1. leer `notas/estado_del_trabajo.md` para conocer el estado actual del trabajo, las decisiones pendientes y los recordatorios activos 
-2. leer la documentación relevante del repositorio
+2. cargar a demanda la documentación relevante usando `contexto/mapa_de_contexto.md` como índice, sin leer el repositorio completo
 3. identificar decisiones de diseño existentes
 4. evitar duplicar decisiones ya registradas
 5. proponer nuevos ADR cuando corresponda
 6. distinguir claramente entre diseño conceptual y simplificaciones de la demo
 7. mantener cambios mínimos, coherentes y trazables
+8. al cerrar la tarea, actualizar el sistema de contexto (`contexto/`) según las reglas de `contexto/README.md`, si la tarea modificó decisiones, documentos o estado del proyecto
 
 ---
 

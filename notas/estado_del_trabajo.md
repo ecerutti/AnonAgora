@@ -6,7 +6,7 @@ Se mantiene con apoyo de los agentes pero la autoría final es del humano.
 
 ## Etapa actual
 
-Cierre de la pre-demo checklist y arranque del diseño específico de la demo. Las decisiones de diseño de plataforma están cerradas. Lo que queda antes de empezar a desarrollar es: ejecutar la pre-demo checklist (`notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo") y resolver las ocho decisiones de diseño específicas de la demo listadas más abajo.
+Cierre de la pre-demo checklist y arranque del diseño específico de la demo. Las decisiones de diseño de plataforma están cerradas. Lo que queda antes de empezar a desarrollar es: ejecutar la pre-demo checklist (`notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo") y resolver las cinco decisiones de diseño específicas de la demo listadas más abajo.
 
 ## Decisiones de diseño pendientes
 

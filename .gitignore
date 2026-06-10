@@ -1,4 +1,4 @@
-# Claude Code — archivos de herramienta, no forman parte del proyecto
+# Claude Code — archivos de herramienta locales, no forman parte del proyecto
+# (CLAUDE.md sí se versiona: es el bootstrap del sistema de contexto, ver contexto/README.md)
 .claude/
 .claude.json
-CLAUDE.md

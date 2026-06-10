@@ -29,15 +29,15 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
 
 *   **[01. El Problema y la Idea](propuesta/01_El_Problema_y_la_Idea.html)**  
     *La idea: escuchar a la sociedad sin exponer a las personas*
-*   **[02. Fundamentos y Lógica de funcionamiento](propuesta/02_Fundamentos_y_Lógica_de_funcionamiento.html)**  
+*   **[02. Fundamentos y Lógica de funcionamiento](propuesta/02_Fundamentos_y_L%C3%B3gica_de_funcionamiento.html)**  
     *Por qué el sistema podría funcionar sin perder anonimato ni orden*
-*   **[03. Cómo se usaría](propuesta/03_Cómo_se_usaría.html)**  
+*   **[03. Cómo se usaría](propuesta/03_C%C3%B3mo_se_usar%C3%ADa.html)**  
     *Una historia cotidiana de participación con identidad anónima*
-*   **[04. Riesgos, límites y preocupaciones razonables](propuesta/04_Riesgos_límites_y_preocupaciones_razonables.html)**  
+*   **[04. Riesgos, límites y preocupaciones razonables](propuesta/04_Riesgos_l%C3%ADmites_y_preocupaciones_razonables.html)**  
     *Alcances reales de la propuesta y sus límites*
-*   **[05. Cómo podría implementarse](propuesta/05_Cómo_podría_implementarse.html)**  
+*   **[05. Cómo podría implementarse](propuesta/05_C%C3%B3mo_podr%C3%ADa_implementarse.html)**  
     *Por qué la idea es técnicamente viable con herramientas actuales*
-*   **[06. Arquitectura técnica y desafíos](propuesta/06_Arquitectura_técnica_y_desafíos.html)**  
+*   **[06. Arquitectura técnica y desafíos](propuesta/06_Arquitectura_t%C3%A9cnica_y_desaf%C3%ADos.html)**  
     *Riesgos, componentes críticos y cuidados de implementación*
 *   **[00. Resumen ejecutivo](propuesta/00_Resumen_ejecutivo.html)**  
     *La propuesta en pocas páginas para decisores públicos*
@@ -46,4 +46,4 @@ Si te da curiosidad ver la idea un poco más desarrollada, a continuación te de
 
 Estamos construyendo una **demo interactiva** de la propuesta para mostrar como sería la experiencia de participación ciudadana.
 
-👉 Seguimiento público del avance: **[anonagora.cloud](http://anonagora.cloud)**
+👉 Seguimiento público del avance: **[anonagora.cloud](https://anonagora.cloud)**
