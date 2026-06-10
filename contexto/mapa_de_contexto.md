@@ -17,7 +17,7 @@ El sistema se compone de una **capa de identidad anónima verificada** reutiliza
 | **Plataforma participativa** (reglas funcionales) | Síntesis §4 → los ADRs del tema según índice de abajo | `vinculacion_de_propuestas.md`, `docs/propuesta/02` |
 | **UX / flujos / interfaces** | `notas/inventario_de_flujos_ui_ux.md` (10 flujos + huecos H-1..H-12) | P-0005, P-0010, P-0020 (modo debug) |
 | **Seguridad / amenazas / operador** | `design/threat_model.md` + `design/modelo_operativo.md` | P-0006, P-0020, P-0024 |
-| **Portal público / GitHub Pages** | `docs/index.md` + `docs/_config.yml` (tema jekyll-theme-slate; Pages sirve `docs/`, pero el `_config.yml` restringe lo publicado a `index.md` + `propuesta/`) | `docs/propuesta/README.md` |
+| **Portal público / GitHub Pages** | `docs/index.md` + `docs/_config.yml` (tema jekyll-theme-slate; Pages sirve `docs/` y el sitio público es solo `index.md` + `propuesta/`). **Regla:** todo nuevo `.md` técnico en `docs/` (fuera de `propuesta/`) debe agregarse al `exclude:` del `_config.yml` — la exclusión es explícita por archivo, no genérica (el `include`/`exclude` con globs del Jekyll de Pages resultó no confiable). | `docs/propuesta/README.md` |
 | Pregunta **conceptual** sobre la propuesta | `contexto/sintesis_del_proyecto.md` | `docs/propuesta/00` y `01` (narrativos, para público no técnico) |
 | Duda de **vocabulario** | `design/glosario.md` | — |
 

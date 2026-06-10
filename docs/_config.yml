@@ -3,15 +3,12 @@ title: Participación ciudadana con identidad anónima
 description: Propuesta conceptual de una plataforma de participación ciudadana con identidad anónima verificada y persistente.
 lang: es
 
-# GitHub Pages publica la carpeta docs/ completa. Esta combinación restringe lo
-# publicado a la portada (index.md) y a la propuesta conceptual (propuesta/),
-# excluyendo automáticamente cualquier .md técnico actual o futuro en docs/.
-# Nota: en el Jekyll de GitHub Pages, include rescata archivos excluidos solo si
-# el patrón los matchea directamente (glob), no por nombre de carpeta; por eso
-# se lista propuesta/*.md además de la carpeta.
+# GitHub Pages publica la carpeta docs/ completa. El sitio público es solo la
+# portada (index.md) y la propuesta conceptual (propuesta/); los documentos
+# técnicos se excluyen explícitamente, uno por uno.
+# REGLA DE MANTENIMIENTO: todo nuevo .md técnico que se agregue a docs/ (fuera
+# de propuesta/) debe sumarse a esta lista de exclusión.
 exclude:
-  - "*.md"
-include:
-  - index.md
-  - propuesta
-  - "propuesta/*.md"
+  - architecture_overview.md
+  - autenticar.md
+  - zk_jwt_investigacion.md
