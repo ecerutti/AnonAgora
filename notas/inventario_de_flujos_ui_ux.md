@@ -152,7 +152,7 @@ Los pasos 1 a 4 aplican únicamente al camino desde F-CI-01. Los pasos 5 a 8 apl
 4. *Confirmación al emisor*. Inmediatamente después de persistir el registro, la aplicación destino envía la confirmación de recepción al emisor, con reintentos (P-0026). A partir de este momento, el emisor persiste `{anon_seed, fecha_emision}` y consume el cool-down (P-0022 Dec 3). El ciudadano no percibe este paso; ocurre transparentemente.
 5. *Tutorial introductorio*. El ciudadano recorre el tutorial explicativo del sistema. El contenido cubre, según `docs/propuesta/03_Cómo_se_usaría.md`: propósito de la plataforma, formas de participación disponibles (apoyar propuestas existentes y crear nuevas), límite anual de propuestas, recomendación de buscar antes de crear. El recorrido es bloqueante: el ciudadano no puede saltearlo ni acceder al resto de la aplicación hasta completarlo. Al finalizar, la aplicación setea `tutorial_completado=true`.
 6. *Presentación de los T&C*. Una vez completado el tutorial, la aplicación muestra los Términos y Condiciones. El ciudadano puede aceptarlos o declinarlos. Aceptarlos setea `tc_aceptados=true` y avanza al paso 7. Declinarlos transita al rechazo de T&C (ver bifurcaciones).
-7. *Aterrizaje en la página principal*. El ciudadano queda con sesión activa y entra en F-AP-04. El pseudónimo es visible a partir de este momento como elemento persistente de la interfaz (forma concreta pendiente, H-6).
+7. *Aterrizaje en la página principal*. El ciudadano queda con sesión activa y entra en F-AP-04. La aplicación muestra un mensaje de bienvenida con el pseudónimo; después queda consultable a pedido desde "Mi identidad" (P-0028, resolución de H-6).
 
 **Bifurcaciones, errores y degradación**
 
@@ -214,7 +214,7 @@ El ciudadano llega desde F-AP-00 eligiendo "ingresar". Posee identidad anónima 
 Dos disparadores:
 
 1. *Logout explícito*: el ciudadano elige cerrar sesión desde la interfaz, desde cualquier pantalla autenticada.
-2. *Expiración por inactividad*: transcurrió el tiempo configurado de inactividad sin acciones del ciudadano (default 1 hora, P-0005).
+2. *Expiración por inactividad*: transcurrió el tiempo configurado sin interacción del ciudadano (default 1 hora, P-0005). Cuenta como actividad la interacción real con la interfaz (teclado, clic o toque, desplazamiento) en cualquier pantalla con sesión (P-0027).
 
 Adicionalmente, el rechazo de T&C en F-AP-01 produce un cierre de sesión que entra por este flujo.
 
@@ -225,7 +225,7 @@ Adicionalmente, el rechazo de T&C en F-AP-01 produce un cierre de sesión que en
 
 **Pasos / pantallas**
 
-1. *Disparo del cierre*. Por logout explícito (botón en la interfaz autenticada) o por expiración detectada por la aplicación.
+1. *Disparo del cierre*. Por logout explícito (botón en la interfaz autenticada) o por expiración. Al vencer el plazo, el navegador limpia la pantalla por iniciativa propia, sin esperar ninguna acción del ciudadano y en todas las pestañas de la aplicación (P-0027).
 2. *Destrucción de sesión*. La aplicación invalida el estado de sesión en servidor y cliente.
 3. *Redirección a F-AP-00*. El ciudadano aterriza en la pantalla pública de ingreso. Si el cierre fue por expiración, la aplicación puede mostrar un mensaje breve informando que la sesión expiró por inactividad (decisión UX); si fue por logout explícito, no se requiere mensaje. Si fue por rechazo de T&C, el mensaje breve previo a la redirección ya se mostró en F-AP-01.
 
@@ -267,7 +267,7 @@ El flujo en sí consiste en una única pantalla persistente con varios elementos
 2. *Control de ordenamiento*. El ciudadano puede cambiar el criterio de ordenamiento en cualquier momento (P-0010). Los criterios disponibles incluyen al menos los implícitos en las columnas visibles. La lista exacta de opciones es decisión UX.
 3. *Acceso a búsqueda y filtros*. Elementos de UI en la misma pantalla permiten invocar F-AP-05.
 4. *Acceso a creación de propuesta*. Botón o elemento equivalente que invoca F-AP-08. La verificación de cupo de P-0017 ocurre al iniciar F-AP-08, no acá.
-5. *Identidad y menú del ciudadano*. La interfaz muestra el pseudónimo del ciudadano de forma persistente. La forma concreta y el contenido del menú asociado están pendientes (hueco H-6).
+5. *Identidad y menú del ciudadano*. Tras el login, un mensaje de bienvenida muestra el pseudónimo; durante el resto de la sesión no permanece en pantalla y se consulta a pedido desde "Mi identidad" (P-0028). La forma concreta y el contenido del menú asociado son decisión UX.
 
 **Bifurcaciones, errores y degradación**
 
@@ -438,7 +438,7 @@ P-0005 establece que la sesión de la aplicación destino expira por inactividad
 
 **Regla general**
 
-Cuando el ciudadano pulsa un control que requiere sesión activa y la aplicación detecta que la sesión expiró, la aplicación transita a F-AP-03 (cierre de sesión) con el comportamiento visible que F-AP-03 define, eventualmente con mensaje breve informando de la expiración (decisión UX).
+Definida en P-0027. La actividad es la interacción real del ciudadano con la interfaz (teclado, clic o toque, desplazamiento) en cualquier pantalla con sesión; mientras la haya, el navegador renueva la sesión con notificaciones acotadas en frecuencia, sin contenido y sin registro en logs. Al vencer el plazo de inactividad, el navegador limpia la pantalla de inmediato y transita a F-AP-03, sin esperar una acción del ciudadano. Si el navegador no limpia la pantalla, la sesión expira igual en el servidor y la próxima acción lleva a F-AP-03. No hay aviso previo a la expiración.
 
 **Flujos afectados**
 
@@ -446,7 +446,7 @@ Aplica a todos los flujos autenticados de la aplicación destino: F-AP-04, F-AP-
 
 **Caso particularmente sensible: redacción larga en F-AP-08**
 
-El editor de propuesta de F-AP-08 puede tener al ciudadano más de una hora en pantalla redactando sin interactuar con el servidor. Si la detección de actividad es solo del lado del servidor, una redacción extensa puede perderse al intentar publicar. Este caso está identificado como pendiente de resolver. Existen mecanismos del lado del cliente (detección de actividad local con heartbeats al servidor, re-login transparente, timers locales) que la decisión futura puede adoptar.
+Resuelto por P-0027: teclear en el editor es actividad, así que una redacción en curso no hace expirar la sesión. El borrador solo se pierde si el ciudadano dejó de interactuar durante todo el plazo de inactividad; no hay preservación del borrador ante la expiración (P-0027 Decisión 4, coherente con H-10 y P-0022).
 
 ## M-DEBUG — Modo debug activo (modificador transversal)
 
@@ -493,7 +493,7 @@ A medida que se recorrió el sistema se identificaron las siguientes preguntas d
 - **H-3 (decidido) — Diseño visual y mecánica concreta de M-DEBUG**. P-0020 establece el comportamiento esperado pero deja la especificación visual y de flujo a la capa de UX. Aplica transversalmente. Decisión adoptada al definir el alcance de la demo (DP-0002), aplicable a cualquier despliegue: (a) banner fijo, no cerrable, en todas las pantallas del componente con modo debug activo, visualmente distinto de cualquier otro banner (por ejemplo, el de simulación de la demo), con un texto del tipo "Modo debug activo: el sistema está registrando información adicional de diagnóstico"; (b) un único diálogo de confirmación genérico antes de cada acción logueable, que en el retiro de apoyo se fusiona con la confirmación de H-8; (c) la evaluación por paso la garantiza el servidor: mientras el modo debug está activo, rechaza con un código específico toda acción logueable que no llegue confirmada, y el cliente muestra la confirmación y reintenta. Así se cubre la activación del modo a mitad de un flujo sin depender del estado que el cliente tenía al cargar la pantalla.
 - **H-4 (abierto) — Pantalla informativa "olvidaste tus credenciales"**. F-AP-02 incluye un link visible a una pantalla informativa que recuerda la irrecuperabilidad y el cool-down. El contenido concreto, tono y eventuales acciones desde esa pantalla son decisión UX.
 - **H-5 (abierto) — Mensaje y formato del rechazo por cool-down vigente en F-CI-01**. El paso de verificación de cool-down en F-CI-01 muestra al ciudadano la fecha del próximo slot. La presentación visual es decisión UX.
-- **H-6 (abierto) — Presencia persistente del pseudónimo y menú asociado**. El pseudónimo es visible para el propio ciudadano (P-0001). La forma concreta (avatar temático, ubicación en la interfaz, menú desplegable con cupo y apoyos, acceso a logout) y el contenido del eventual menú son decisión UX. Aplica especialmente a F-AP-04 y a cualquier pantalla autenticada.
+- **H-6 (decidido) — Presencia persistente del pseudónimo y menú asociado**. El pseudónimo es visible para el propio ciudadano (P-0001). Resuelto por P-0028: mensaje de bienvenida con el pseudónimo al ingresar y consulta a pedido desde "Mi identidad"; el pseudónimo no permanece en pantalla durante la sesión, para no exponer la mitad de la credencial de acceso. La forma visual concreta y el contenido del eventual menú (cupo, atajo a "apoyadas por mí", cierre de sesión) quedan para el diseño de interfaz.
 - **H-7 (abierto) — Redacción y diseño visual de los mensajes de P-0022 al ciudadano**. P-0022 establece tres categorías de mensajes ante fallos del verificador y categorías análogas para otros componentes, pero deja la redacción exacta y la realización visual a la capa de UX.
 - **H-8 (decidido) — Confirmación al retirar apoyo**. Decisión adoptada en F-AP-07: retirar apoyo requiere confirmación explícita; dar apoyo no la requiere. La forma visual de la confirmación es decisión UX, integrable con M-DEBUG cuando aplique.
 - **H-9 (decidido) — Mecánica de aceptación de pseudónimo en F-CI-01**. Decisión adoptada: una sola sugerencia visible por vez, con botón para generar otra. Iteración sin límite hasta que el ciudadano acepta.

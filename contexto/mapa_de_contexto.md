@@ -4,7 +4,7 @@ Este mapa permite que una conversación nueva cargue solo lo que su tarea necesi
 
 ## El proyecto en pocas líneas
 
-El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0026); la etapa actual es el diseño específico de la demo.
+El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0028); la etapa actual es el diseño específico de la demo.
 
 ## Ruteo por tipo de tarea
 
@@ -59,6 +59,8 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - **P-0018** — Modelo de datos de propuestas: **sin autoría almacenada** (evento `{anon_id, fecha}` a granularidad de día en tabla separada, solo para el cupo), cuerpo Markdown (20.000 caracteres), sin imágenes, links como texto plano no clickeable.
 - **P-0019** — Búsqueda full-text en español (morfología + stopwords) sobre título y cuerpo, más filtros estructurados combinables.
 - **P-0023** — Sin moderación editorial humana; contenido inmutable tras publicar; retiro excepcional solo por causales legales (catálogo configurable) → tombstone que conserva solo el `id`; sin retiro a pedido del autor.
+- **P-0027** — Actividad = interacción real (teclado, clic, desplazamiento) en toda pantalla con sesión, con notificaciones acotadas sin contenido ni logs; al expirar, el navegador limpia la pantalla de inmediato; sin aviso previo ni preservación del borrador.
+- **P-0028** — Pseudónimo: bienvenida al ingresar y consulta a pedido ("Mi identidad"); no permanece en pantalla (es la mitad de la credencial).
 
 ### Demo — `demo/design/adr/` (transversales) y `demo/design/capa_de_identidad/adr/`
 
@@ -96,7 +98,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `notas/estado_del_trabajo.md` — **leer antes de modificar el repo**: etapa actual, pendientes, últimas decisiones cerradas.
 - `notas/recordatorios.md` — tareas diferidas por momento de activación (pre-demo, post-plataforma, siempre).
 - `notas/anotaciones_e_ideas_de_trabajo.md` — ideas sin decisión asociada (ej.: exigir apoyo previo a crear propuesta; apoyo desde el listado).
-- `notas/inventario_de_flujos_ui_ux.md` — 10 flujos UI/UX con bifurcaciones y errores + huecos H-1..H-12 (abiertos: H-4..H-7, H-12).
+- `notas/inventario_de_flujos_ui_ux.md` — 10 flujos UI/UX con bifurcaciones y errores + huecos H-1..H-12 (abiertos: H-4, H-5, H-7, H-12).
 - `notas/propuesta_guia_de_instalacion.md` — material en gestación para la futura guía de instalación/operación; incluye semántica de cambio de parámetros en caliente.
 
 ### `demo/` e `implementation/`
