@@ -16,7 +16,7 @@ No hay decisiones de diseño de plataforma pendientes. El ítem de unicidad de p
 
 1. ~~Alcance funcional del MVP~~ — cerrada en DP-0002.
 2. ~~Stack tecnológico~~ — cerrada en DI-0001.
-3. Persistencia y deployment.
+3. ~~Persistencia y deployment~~ — cerrada en DI-0002.
 4. Datos de prueba o seed inicial.
 5. Look and feel, guía visual.
 
@@ -29,6 +29,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **DI-0002 — Persistencia y despliegue de la demo.** Emisor y aplicación destino como dos servicios (Docker Compose), cada uno con su esquema en la base PostgreSQL; logs en archivos diarios dentro de cada contenedor con purga propia (fuera de la base, porque los backups de la base retienen 30 días y romperían P-0020); sesiones en memoria de la aplicación destino; secretos por variables de entorno, cada servicio solo con los suyos. Deja como condición previa al desarrollo el contrato concreto emisor↔aplicación destino.
 
 - **DI-0001 — Stack tecnológico de la demo.** TypeScript sobre Node.js 22, HTML renderizado en el servidor con JavaScript mínimo (Hono con plantillas JSX), PostgreSQL con Kysely, `@node-rs/argon2`, esbuild para el JavaScript del navegador y Vitest. El criterio dominante fue la corrección con mantenimiento a cargo de agentes: un solo lenguaje permite que la normalización de la frase secreta sea el mismo código en cliente y servidor.
 

@@ -67,6 +67,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 ### Demo (implementación) — `demo/implementation/adr/`
 
 - **DI-0001** — Stack: TypeScript/Node 22, HTML en servidor + JS mínimo (Hono JSX), PostgreSQL + Kysely, `@node-rs/argon2`, esbuild, Vitest.
+- **DI-0002** — Emisor y aplicación como dos servicios (Compose, esquemas separados); logs en archivos del contenedor con purga propia (no en la base: backups de 30 días); sesiones en memoria; secretos por env.
 
 ## Índice de documentos no-ADR
 
