@@ -36,6 +36,15 @@ Durante el flujo de emisión, antes de la entrega final, el emisor consume dos o
 
 La verificación atómica final de unicidad ocurre en el commit de la entrega (P-0022 Dec 3).
 
+### Entrega y confirmación
+
+La mecánica de la entrega está definida en P-0026:
+
+- **Entregar.** El emisor envía la tupla y el identificador del flujo de emisión por el canal servidor a servidor. La aplicación destino verifica la prueba ZK, convierte la reserva del pseudónimo en un registro pendiente con plazo de vigencia (default 30 minutos) y responde con un ticket opaco de un solo uso. El emisor descarta de inmediato el `anon_id` y la prueba ZK. El navegador del ciudadano lleva a la aplicación destino solo el ticket, nunca la tupla.
+- **Confirmar.** Cuando la aplicación destino persiste el registro definitivo del ciudadano, confirma al emisor con el identificador del flujo, con reintentos. Recién entonces el emisor persiste `{anon_seed, fecha_emision}` y consume el cool-down (P-0022 Dec 3).
+
+Entre la entrega y la confirmación, el emisor conserva `{anon_seed, identificador del flujo}` **solo en memoria**: ambos nunca coexisten en almacenamiento persistente del emisor. Todas las operaciones del protocolo de emisión se autentican mutuamente con mTLS.
+
 ### Qué garantiza la capa
 
 - **Una identidad anónima activa por ciudadano real, por aplicación destino**, sujeta al cool-down configurable (default 6 meses) entre emisiones sucesivas (P-0015 Decisión 1).
@@ -56,6 +65,7 @@ La verificación atómica final de unicidad ocurre en el commit de la entrega (P
 - La aplicación destino **no debe involucrar al emisor en el manejo de la credencial de acceso del ciudadano**. La credencial es asunto exclusivo de la aplicación; el emisor no la conoce, ni siquiera como hash (P-0015).
 - La aplicación destino **no puede solicitar al emisor la invalidación o revocación de un `anon_id`** porque el emisor no almacena `anon_ids`. Cualquier mecanismo de ciclo de vida posterior a la emisión es responsabilidad de la aplicación destino (decisión que toma cada aplicación; en participación ciudadana, ver P-0016).
 - La aplicación destino **debe verificar la prueba ZK** al recibirla y usar el JWKS histórico para validarla.
+- La aplicación destino **no debe conservar el identificador del flujo de emisión** en el registro definitivo del ciudadano (P-0026).
 
 ## Documentos relacionados
 

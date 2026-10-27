@@ -4,7 +4,7 @@ Este mapa permite que una conversación nueva cargue solo lo que su tarea necesi
 
 ## El proyecto en pocas líneas
 
-El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0025); la etapa actual es el diseño específico de la demo.
+El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0026); la etapa actual es el diseño específico de la demo.
 
 ## Ruteo por tipo de tarea
 
@@ -13,7 +13,7 @@ El sistema se compone de una **capa de identidad anónima verificada** reutiliza
 | Cualquier modificación del repo | `AGENTS.md` + `notas/estado_del_trabajo.md` | — |
 | Diseño/desarrollo de la **demo** (etapa actual) | `notas/estado_del_trabajo.md`, `notas/recordatorios.md`, `demo/README.md`, DP-0001, DP-0002 | `contexto/sintesis_del_proyecto.md`, `demo/design/capa_de_identidad/simulacion_autenticar.md`, notas sueltas en `demo/` |
 | Crear o modificar un **ADR** | `design/adr/README.md` (convención y criterios) + índice de ADRs de abajo → abrir solo los ADRs relacionados | `design/glosario.md` |
-| **Capa de identidad** / criptografía / AUTENTICAR | Síntesis §3 → P-0013, P-0014, P-0015, P-0025 + `design/capa_de_identidad/README.md` (contrato) | `identity_model.md`, `docs/autenticar.md` (referencia OIDC completa), `docs/zk_jwt_investigacion.md` (solo para ZK profundo) |
+| **Capa de identidad** / criptografía / AUTENTICAR | Síntesis §3 → P-0013, P-0014, P-0015, P-0025, P-0026 + `design/capa_de_identidad/README.md` (contrato) | `identity_model.md`, `docs/autenticar.md` (referencia OIDC completa), `docs/zk_jwt_investigacion.md` (solo para ZK profundo) |
 | **Plataforma participativa** (reglas funcionales) | Síntesis §4 → los ADRs del tema según índice de abajo | `vinculacion_de_propuestas.md`, `docs/propuesta/02` |
 | **UX / flujos / interfaces** | `notas/inventario_de_flujos_ui_ux.md` (10 flujos + huecos H-1..H-12) + DP-0002 (alcance del MVP) | P-0005, P-0010, P-0020 (modo debug) |
 | **Seguridad / amenazas / operador** | `design/threat_model.md` + `design/modelo_operativo.md` | P-0006, P-0020, P-0024 |
@@ -33,6 +33,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - **P-0022** — Fallos de servicios externos: reintentos server-to-server con backoff, mensajes al ciudadano por categoría, **emisión atómica respecto del cool-down** (se consume solo tras confirmación de entrega), fail-closed del revisor de lenguaje.
 - **P-0024** — Sin perfil administrativo: el operador actúa solo por archivos de configuración y CLI sobre la infraestructura.
 - **P-0025** — Unicidad de pseudónimos: consulta-con-reserva (TTL 10 min) del emisor a la aplicación destino + verificación atómica en el commit, ambas sobre la **forma normalizada** del pseudónimo; sufijo de letra se activa empíricamente al saturarse el espacio sin sufijo.
+- **P-0026** — Contrato de entrega: tupla servidor a servidor + ticket opaco para el navegador; la aplicación persiste y confirma con reintentos (caso residual aceptado: posible segunda identidad); estado pendiente del emisor `{anon_seed, id_flujo}` solo en memoria; mTLS entre componentes; registro pendiente 30 min.
 
 ### Capa de identidad — `design/capa_de_identidad/adr/`
 
