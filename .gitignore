@@ -2,3 +2,6 @@
 # (CLAUDE.md sí se versiona: es el bootstrap del sistema de contexto, ver contexto/README.md)
 .claude/
 .claude.json
+
+# Dependencias npm (se instalan en cada deploy, no se versionan)
+node_modules/
