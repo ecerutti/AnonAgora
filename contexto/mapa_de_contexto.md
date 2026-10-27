@@ -64,6 +64,10 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - **DP-0001** — La demo simula AUTENTICAR (pantallas con banner "SIMULACIÓN") y omite ZK; ambas omisiones son del entorno demo, no del diseño.
 - **DP-0002** — *(transversal)* Alcance del MVP = diseño completo de plataforma salvo DP-0001 (incluye los 7 filtros, revisor real, modo debug completo, retiro legal por CLI, parámetros de producción); visitantes sin sesión en solo lectura; CUIL ficticio con prefijo `99-`; sin mecanismos anti-abuso propios (limitación aceptada).
 
+### Demo (implementación) — `demo/implementation/adr/`
+
+- **DI-0001** — Stack: TypeScript/Node 22, HTML en servidor + JS mínimo (Hono JSX), PostgreSQL + Kysely, `@node-rs/argon2`, esbuild, Vitest.
+
 ## Índice de documentos no-ADR
 
 ### `docs/` — técnico y propuesta pública

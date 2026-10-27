@@ -15,7 +15,7 @@ No hay decisiones de diseño de plataforma pendientes. El ítem de unicidad de p
 ## Decisiones de diseño específicas de la demo
 
 1. ~~Alcance funcional del MVP~~ — cerrada en DP-0002.
-2. Stack tecnológico (lenguaje, framework, base de datos).
+2. ~~Stack tecnológico~~ — cerrada en DI-0001.
 3. Persistencia y deployment.
 4. Datos de prueba o seed inicial.
 5. Look and feel, guía visual.
@@ -29,6 +29,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **DI-0001 — Stack tecnológico de la demo.** TypeScript sobre Node.js 22, HTML renderizado en el servidor con JavaScript mínimo (Hono con plantillas JSX), PostgreSQL con Kysely, `@node-rs/argon2`, esbuild para el JavaScript del navegador y Vitest. El criterio dominante fue la corrección con mantenimiento a cargo de agentes: un solo lenguaje permite que la normalización de la frase secreta sea el mismo código en cliente y servidor.
 
 - **DP-0002 — Alcance funcional del MVP de la demo.** El MVP implementa el diseño completo de la plataforma, con las únicas omisiones de DP-0001 (AUTENTICAR simulado, sin ZK). Incluye los diez flujos del inventario, la búsqueda con los siete filtros de P-0019, el revisor de lenguaje con la API real, el modo debug completo de P-0020, el retiro legal como CLI de operador con un tombstone en el seed, y los parámetros con sus valores por defecto de producción. Decide además que la verificación simulada usa CUILs ficticios con prefijo `99-`, y que la demo no agrega mecanismos anti-abuso propios (limitación aceptada). En el mismo trabajo se resolvieron los huecos de UX H-1 (visitantes sin sesión en solo lectura, decisión de plataforma) y H-3 (banner, confirmación genérica y evaluación por paso en el servidor para el modo debug), y se actualizó `simulacion_autenticar.md`: el formulario simulado no tiene campo de clave y el selector usa como referencia visual el SSO de la Provincia de Buenos Aires.
 
