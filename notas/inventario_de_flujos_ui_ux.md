@@ -84,7 +84,7 @@ El ciudadano llega al emisor desde F-AP-00 (landing) eligiendo "registrarse", o 
 - *Fallo en la entrega o no llega confirmación de la aplicación destino* (paso 9): el cool-down no se consume (P-0022 Dec 3). El ciudadano puede reintentar el flujo completo. La política de reintentos de la entrega misma queda diferida al ADR posterior que defina el contrato concreto emisor↔aplicación destino (referenciada en P-0022).
 - *Colisión post-TTL en el commit de entrega* (paso 9): la aplicación destino rechaza la persistencia. El flujo retoma en el paso 8 con un pseudónimo nuevo y mensaje informativo. Sin consumo de cool-down (P-0025, P-0022 Dec 3).
 - *Fallo de la consulta-con-reserva o de la liberación a la aplicación destino* (paso 8): reintentos server-to-server con backoff (P-0025, P-0022 Dec 3). Sin consumo de cool-down.
-- *M-DEBUG*: si el modo debug está activo, la pantalla del paso 1 muestra advertencia prominente; el paso 8 (aceptación del pseudónimo, momento que materializa la emisión) requiere confirmación explícita. UX pendiente.
+- *M-DEBUG*: si el modo debug está activo, la pantalla del paso 1 muestra advertencia prominente; el paso 8 (aceptación del pseudónimo, momento que materializa la emisión) requiere confirmación explícita. Forma concreta según la resolución de H-3.
 
 **Notas**
 
@@ -120,7 +120,7 @@ El ciudadano accede a la URL pública del despliegue sin sesión activa. Es el p
 
 **Notas**
 
-- Si los visitantes no autenticados pueden o no ver el listado de propuestas desde esta pantalla, o desde una sección pública adyacente, es una decisión de diseño no tomada por ningún ADR. Está registrada como hueco H-1 al final del documento.
+- Los visitantes no autenticados acceden en modo solo lectura al ranking, la búsqueda y la visualización de propuestas (resolución de H-1).
 
 ### F-AP-01 — Onboarding inicial post-emisión
 
@@ -161,7 +161,7 @@ Los pasos 1 a 4 aplican únicamente al camino desde F-CI-01. Los pasos 5 a 8 apl
 - *Abandono durante paso 2*: nada se persiste, el emisor no recibe confirmación, el cool-down no se consume. El ciudadano puede reintentar el flujo completo desde F-CI-01.
 - *Abandono durante pasos 5 o 6*: el registro queda con los flags pendientes. En el próximo login, F-AP-02 detecta y redirige aquí, mostrando solo lo pendiente. El tutorial se reinicia desde el principio cada vez que se vuelve, hasta completarse.
 - *Rechazo de T&C en paso 6*: la aplicación muestra un mensaje breve invitando a volver cuando cambie de opinión (texto exacto es decisión UX) y cierra la sesión (transición a F-AP-03). El registro del ciudadano permanece con `tc_aceptados=false`. Próximo login vuelve a presentar T&C; el ciudadano nunca queda con acceso a la plataforma hasta aceptarlos.
-- *M-DEBUG*: si el modo debug está activo, la pantalla del paso 2 (que confirma identidad emitida en la base de la aplicación, evento logueable según P-0020) muestra advertencia prominente y requiere confirmación explícita. UX pendiente.
+- *M-DEBUG*: si el modo debug está activo, la pantalla del paso 2 (que confirma identidad emitida en la base de la aplicación, evento logueable según P-0020) muestra advertencia prominente y requiere confirmación explícita. Forma concreta según la resolución de H-3.
 
 **Notas**
 
@@ -276,7 +276,7 @@ El flujo en sí consiste en una única pantalla persistente con varios elementos
 **Notas**
 
 - F-AP-04 es deliberadamente liviano como flujo. La mayor parte del valor del usuario en esta pantalla se realiza al transicionar a otros flujos. El listado en sí es estado, no acción.
-- Si los visitantes no autenticados ven este listado o una variante pública del mismo es decisión no tomada (hueco H-1).
+- Los visitantes no autenticados ven este mismo listado en modo solo lectura, sin el menú del ciudadano y con el acceso a creación reemplazado por una invitación a ingresar o registrarse (resolución de H-1).
 
 ### F-AP-05 — Búsqueda y filtrado de propuestas
 
@@ -286,7 +286,7 @@ El flujo en sí consiste en una única pantalla persistente con varios elementos
 
 **Condición de entrada**
 
-El ciudadano activa un control de búsqueda o un filtro desde F-AP-04, o desde otro flujo que ofrezca estos controles (por ejemplo, podría invocarse desde otras pantallas si la fase de diseño UX lo decide). Tiene sesión activa cuando aplica el filtro de "propuestas apoyadas por mí" (P-0019 lo establece como restricción para ese filtro específico); el resto de la funcionalidad es independiente del estado de autenticación, dependiente de la resolución de H-1.
+El ciudadano activa un control de búsqueda o un filtro desde F-AP-04, o desde otro flujo que ofrezca estos controles (por ejemplo, podría invocarse desde otras pantallas si la fase de diseño UX lo decide). Tiene sesión activa cuando aplica el filtro de "propuestas apoyadas por mí" (P-0019 lo establece como restricción para ese filtro específico); el resto de la funcionalidad está disponible también para visitantes sin sesión (resolución de H-1).
 
 **Condición de salida**
 
@@ -301,7 +301,7 @@ El ciudadano activa un control de búsqueda o un filtro desde F-AP-04, o desde o
 
 **Bifurcaciones, errores y degradación**
 
-- *Filtro "apoyadas por mí" sin sesión activa*: el control no está disponible o muestra explicación de que requiere autenticación. La condición de visibilidad concreta depende de la resolución de H-1.
+- *Filtro "apoyadas por mí" sin sesión activa*: el control no está disponible o muestra explicación de que requiere autenticación (resolución de H-1).
 - *M-DEBUG*: sin requisitos especiales. F-AP-05 no genera eventos logueables propios.
 
 **Notas**
@@ -318,7 +318,7 @@ El ciudadano activa un control de búsqueda o un filtro desde F-AP-04, o desde o
 
 **Condición de entrada**
 
-El ciudadano accede a una propuesta concreta. Las vías de entrada son: pulsar una fila del listado en F-AP-04 o F-AP-05, seguir un vínculo desde otra propuesta abierta (entrante o saliente), o llegar a la URL de la propuesta de forma directa. Hay sesión activa.
+El ciudadano accede a una propuesta concreta. Las vías de entrada son: pulsar una fila del listado en F-AP-04 o F-AP-05, seguir un vínculo desde otra propuesta abierta (entrante o saliente), o llegar a la URL de la propuesta de forma directa. Puede haber sesión activa o no: sin sesión, la propuesta se visualiza en modo solo lectura y los controles de acción invitan a ingresar o registrarse (resolución de H-1).
 
 **Condición de salida**
 
@@ -462,7 +462,7 @@ M-DEBUG no es un flujo. Es una capa transversal de comportamiento de la interfaz
 
 Cuando el modo debug está activo en un componente:
 
-1. *Advertencia prominente en todas las pantallas*. Toda interfaz del componente muestra una advertencia visible que informa al ciudadano que el modo debug está activo. La advertencia debe ser distinguible y no pasar desapercibida. La forma concreta (banner, ícono, color, ubicación, copy) es decisión UX pendiente.
+1. *Advertencia prominente en todas las pantallas*. Toda interfaz del componente muestra una advertencia visible que informa al ciudadano que el modo debug está activo. La advertencia debe ser distinguible y no pasar desapercibida. La forma concreta se define en la resolución de H-3.
 2. *Confirmación explícita antes de cada acción logueable*. Cada paso de cada flujo del componente que genera un evento logueable (login, publicar propuesta, dar apoyo, retirar apoyo, emitir identidad anónima, aceptar pseudónimo) requiere una confirmación explícita adicional del ciudadano antes de proceder. La confirmación es por evento, no por flujo: un flujo con múltiples eventos logueables tiene múltiples confirmaciones independientes.
 3. *Evaluación por paso, no por flujo*. La condición "modo debug activo" se evalúa al momento de ejecutar cada paso logueable, no una sola vez al inicio del flujo. Esto cubre el caso del modo debug activado en medio de un flujo en curso: por ejemplo, el operador activa el modo debug entre el envío al revisor de lenguaje (paso 4 de F-AP-08) y la publicación efectiva (paso 6), y la confirmación del paso 6 sí aplica aunque la del paso 4 no haya ocurrido.
 
@@ -482,15 +482,15 @@ Cuando el modo debug está activo en un componente:
 
 **Estado de diseño**
 
-El diseño visual concreto y el flujo de confirmación de M-DEBUG es decisión UX pendiente, registrada como hueco H-3. La especificación corresponde a la fase de diseño de interfaces y debe implementarse en cualquier despliegue del sistema según P-0020.
+El diseño visual y el flujo de confirmación de M-DEBUG quedan definidos en la resolución del hueco H-3. Deben implementarse en cualquier despliegue del sistema según P-0020.
 
 ## Huecos de UX detectados
 
 A medida que se recorrió el sistema se identificaron las siguientes preguntas de diseño que ningún ADR resolvió. Para cada hueco se indica su estado: *abierto* cuando no se decidió respuesta en el inventario; *decidido* cuando el inventario adoptó una respuesta concreta que conviene formalizar más adelante. Los huecos *decididos* describen la respuesta adoptada para que la fase de diseño de interfaces los implemente; los *abiertos* se elevan para discusión.
 
-- **H-1 (abierto) — Visibilidad pública del listado de propuestas para visitantes no autenticados**. P-0019 implica que el filtro "apoyadas por mí" requiere sesión activa, pero el resto no lo requiere explícitamente. P-0012 dice que el conteo de apoyos es público. La narrativa de `docs/propuesta/03_Cómo_se_usaría.md` muestra al ciudadano accediendo a la página principal después del tutorial, no antes. No hay decisión sobre si un visitante no autenticado ve propuestas o no, ni en qué pantalla. Afecta el alcance de F-AP-00, F-AP-04, F-AP-05 y F-AP-06.
+- **H-1 (decidido) — Visibilidad pública del listado de propuestas para visitantes no autenticados**. P-0019 implica que el filtro "apoyadas por mí" requiere sesión activa, pero el resto no lo requiere explícitamente. P-0012 dice que el conteo de apoyos es público. La narrativa de `docs/propuesta/03_Cómo_se_usaría.md` muestra al ciudadano accediendo a la página principal después del tutorial, no antes. Afecta el alcance de F-AP-00, F-AP-04, F-AP-05 y F-AP-06. Decisión adoptada al definir el alcance de la demo (DP-0002), aplicable a la plataforma en general: los visitantes sin sesión acceden en modo solo lectura al ranking (F-AP-04), a la búsqueda y los filtros (F-AP-05, salvo el filtro "apoyadas / no apoyadas por mí") y a la visualización de propuestas (F-AP-06). Apoyar, crear propuestas y el filtro personal requieren sesión; los controles correspondientes invitan a ingresar o registrarse. No se expone información adicional: las propuestas no tienen autoría (P-0001, P-0018) y el conteo de apoyos ya es público (P-0012). Conviene formalizar esta decisión en un ADR.
 - **H-2 (decidido) — Orden y persistencia de tutorial y T&C en el onboarding**. Decisión adoptada en F-AP-01: tutorial bloqueante hasta completarlo; si el ciudadano abandona y vuelve, se reinicia desde el principio. Una vez completado, presentación de T&C bloqueante hasta aceptarlos. Rechazo de T&C muestra mensaje breve invitando a volver y cierra sesión (transición a F-AP-03); el registro queda con `tc_aceptados=false` y en próximos logins F-AP-02 redirige nuevamente a la presentación de T&C. El ciudadano no accede al resto de la plataforma hasta completar ambos. Conviene formalizar esta lógica en un ADR.
-- **H-3 (abierto) — Diseño visual y mecánica concreta de M-DEBUG**. P-0020 establece el comportamiento esperado pero deja la especificación visual y de flujo a la capa de UX. Aplica transversalmente.
+- **H-3 (decidido) — Diseño visual y mecánica concreta de M-DEBUG**. P-0020 establece el comportamiento esperado pero deja la especificación visual y de flujo a la capa de UX. Aplica transversalmente. Decisión adoptada al definir el alcance de la demo (DP-0002), aplicable a cualquier despliegue: (a) banner fijo, no cerrable, en todas las pantallas del componente con modo debug activo, visualmente distinto de cualquier otro banner (por ejemplo, el de simulación de la demo), con un texto del tipo "Modo debug activo: el sistema está registrando información adicional de diagnóstico"; (b) un único diálogo de confirmación genérico antes de cada acción logueable, que en el retiro de apoyo se fusiona con la confirmación de H-8; (c) la evaluación por paso la garantiza el servidor: mientras el modo debug está activo, rechaza con un código específico toda acción logueable que no llegue confirmada, y el cliente muestra la confirmación y reintenta. Así se cubre la activación del modo a mitad de un flujo sin depender del estado que el cliente tenía al cargar la pantalla.
 - **H-4 (abierto) — Pantalla informativa "olvidaste tus credenciales"**. F-AP-02 incluye un link visible a una pantalla informativa que recuerda la irrecuperabilidad y el cool-down. El contenido concreto, tono y eventuales acciones desde esa pantalla son decisión UX.
 - **H-5 (abierto) — Mensaje y formato del rechazo por cool-down vigente en F-CI-01**. El paso de verificación de cool-down en F-CI-01 muestra al ciudadano la fecha del próximo slot. La presentación visual es decisión UX.
 - **H-6 (abierto) — Presencia persistente del pseudónimo y menú asociado**. El pseudónimo es visible para el propio ciudadano (P-0001). La forma concreta (avatar temático, ubicación en la interfaz, menú desplegable con cupo y apoyos, acceso a logout) y el contenido del eventual menú son decisión UX. Aplica especialmente a F-AP-04 y a cualquier pantalla autenticada.

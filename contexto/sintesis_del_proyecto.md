@@ -1,6 +1,6 @@
 # Síntesis del proyecto
 
-**Última actualización: 2026-06-09.** Este documento destila la comprensión profunda del proyecto a partir de la lectura completa del repositorio. Condensa y conecta; no reemplaza a las fuentes. Ante cualquier contradicción, prevalecen los ADRs y documentos de `design/`. El estado del trabajo vigente vive en `notas/estado_del_trabajo.md`.
+**Última actualización: 2026-10-27.** Este documento destila la comprensión profunda del proyecto a partir de la lectura completa del repositorio. Condensa y conecta; no reemplaza a las fuentes. Ante cualquier contradicción, prevalecen los ADRs y documentos de `design/`. El estado del trabajo vigente vive en `notas/estado_del_trabajo.md`.
 
 ## 1. Propósito e idea central
 
@@ -52,7 +52,7 @@ El modelo de confianza hacia el operador (`design/modelo_operativo.md`) distingu
 
 Fases del proyecto: propuesta conceptual (✅ publicada en `docs/propuesta/` + GitHub Pages) → diseño de plataforma (✅ P-0001..P-0025 cerrados) → **diseño específico de la demo (etapa actual)** → desarrollo de la demo (código vivirá en `demo/src/`) → eventualmente guía de instalación/operación y camino a despliegues reales.
 
-Pendientes de la etapa actual (detalle vigente en `notas/estado_del_trabajo.md` y `notas/recordatorios.md`): alcance funcional del MVP, stack tecnológico, persistencia/deployment, seed de datos, look & feel. La demo simulará AUTENTICAR y omitirá ZK (DP-0001), sin i18n ni telemetría. Para la fase de interfaces existe el inventario de 10 flujos UI/UX con sus huecos abiertos (H-1, H-3..H-7, H-12) en `notas/inventario_de_flujos_ui_ux.md`. Quedan también ADRs diferidos identificados: contrato concreto de entrega emisor↔aplicación, manejo de sesión en redacciones largas, términos y condiciones, formalización del onboarding (H-2).
+El alcance del MVP está cerrado (DP-0002): la demo implementa el diseño completo de la plataforma, salvo que simula AUTENTICAR y omite ZK (DP-0001), sin i18n ni telemetría. Los visitantes sin sesión ven las propuestas en solo lectura, y la verificación simulada usa CUILs ficticios con prefijo `99-`. Como esos CUILs hacen gratuita la creación de identidades, la demo pública no resiste abuso, y esa limitación está aceptada. Pendientes de la etapa actual (detalle vigente en `notas/estado_del_trabajo.md` y `notas/recordatorios.md`): stack tecnológico, persistencia/deployment, seed de datos, look & feel. Para la fase de interfaces existe el inventario de 10 flujos UI/UX con sus huecos abiertos (H-4..H-7, H-12) en `notas/inventario_de_flujos_ui_ux.md`. Quedan también ADRs diferidos identificados: contrato concreto de entrega emisor↔aplicación, manejo de sesión en redacciones largas, términos y condiciones, formalización del onboarding (H-2).
 
 ## 7. Convenciones operativas del repositorio
 

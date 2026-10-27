@@ -6,17 +6,15 @@ Se mantiene con apoyo de los agentes pero la autoría final es del humano.
 
 ## Etapa actual
 
-Cierre de la pre-demo checklist y arranque del diseño específico de la demo. Las decisiones de diseño de plataforma están cerradas. Lo que queda antes de empezar a desarrollar es: ejecutar la pre-demo checklist (`notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo") y resolver las cinco decisiones de diseño específicas de la demo listadas más abajo.
+Diseño específico de la demo. Las decisiones de diseño de plataforma están cerradas. Lo que queda antes de empezar a desarrollar es resolver las decisiones de diseño específicas de la demo listadas más abajo y los pendientes de `notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo".
 
 ## Decisiones de diseño pendientes
 
-No hay decisiones de diseño de plataforma pendientes. La etapa de cierre de decisiones previas al desarrollo de la demo queda completa salvo por lo que reste de la pre-demo checklist (ver `notas/recordatorios.md`, sección "Antes de iniciar el desarrollo de la demo").
+No hay decisiones de diseño de plataforma pendientes. El ítem de unicidad de pseudónimos de la pre-demo checklist quedó resuelto por P-0025.
 
 ## Decisiones de diseño específicas de la demo
 
-Estas se abordan después de cerrar las decisiones de plataforma.
-
-1. Alcance funcional del MVP (qué features entran y cuáles no).
+1. ~~Alcance funcional del MVP~~ — cerrada en DP-0002.
 2. Stack tecnológico (lenguaje, framework, base de datos).
 3. Persistencia y deployment.
 4. Datos de prueba o seed inicial.
@@ -31,6 +29,10 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **DP-0002 — Alcance funcional del MVP de la demo.** El MVP implementa el diseño completo de la plataforma, con las únicas omisiones de DP-0001 (AUTENTICAR simulado, sin ZK). Incluye los diez flujos del inventario, la búsqueda con los siete filtros de P-0019, el revisor de lenguaje con la API real, el modo debug completo de P-0020, el retiro legal como CLI de operador con un tombstone en el seed, y los parámetros con sus valores por defecto de producción. Decide además que la verificación simulada usa CUILs ficticios con prefijo `99-`, y que la demo no agrega mecanismos anti-abuso propios (limitación aceptada). En el mismo trabajo se resolvieron los huecos de UX H-1 (visitantes sin sesión en solo lectura, decisión de plataforma) y H-3 (banner, confirmación genérica y evaluación por paso en el servidor para el modo debug), y se actualizó `simulacion_autenticar.md`: el formulario simulado no tiene campo de clave y el selector usa como referencia visual el SSO de la Provincia de Buenos Aires.
+
+- **P-0025 — Unicidad y desambiguación de pseudónimos.** Consulta-con-reserva del emisor a la aplicación destino y verificación atómica en el commit, sobre la forma normalizada del pseudónimo. Resolvió el recordatorio de unicidad de la pre-demo checklist.
 
 - **Revisión final de documentación de diseño (`design/`).** Auditoría completa de todos los documentos de diseño antes del arranque de la demo. Se produjeron 13 hallazgos (C-1, C-2, R-1 a R-5, V-1 a V-3, A-1 a A-3) más la tarea extra de refactor del glosario. Resultado: 9 hallazgos corregidos, 2 descartados por política de inmutabilidad de ADRs (R-2 y R-3: P-0023 y P-0020 no pueden referenciar el posterior P-0024), 1 descartado como licencia narrativa (A-1: "garantiza" en el contrato capa↔aplicación). Los cambios efectivos fueron: eliminación de "revocación voluntaria" de `identity_model.md`; corrección de la definición de tombstone en el glosario (título y cuerpo se reemplazan, fecha se actualiza, no se "eliminan"); corrección del path `design/identity_model.md` → `design/capa_de_identidad/identity_model.md` en P-0013, P-0014 y P-0015; corrección de referencia P-0015 (Decisión 3) → (Decisiones 3 y 4) en la entrada "prueba ZK" del glosario; adición de P-0021 y P-0024 a las referencias de la entrada "operador"; normalización de "instancia del sistema" → "despliegue" en la entrada "operador"; reemplazo de "la plataforma" por "la aplicación destino" en P-0014 y P-0015 (refactor de vocabulario, sin cambio de decisión); acotamiento de la restricción en glosario "identidad anónima" a la capa de identidad únicamente ("la aplicación destino no puede invalidarla" → removido, queda solo "el emisor no puede revocarla"). Tarea extra completada: entrada "operador" del glosario refactorizada para incorporar la distinción operador de capa / operador de aplicación destino y añadir referencias a P-0021, P-0024 y `design/modelo_operativo.md`.
 

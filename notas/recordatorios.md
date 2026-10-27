@@ -4,8 +4,6 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 ## Antes de iniciar el desarrollo de la demo
 
-- **Unicidad y desambiguación de pseudónimos.** El emisor descarta toda información asociada a la identidad emitida tras recibir confirmación de la aplicación destino, por lo que no puede chequear localmente si un pseudónimo candidato ya fue usado por otro ciudadano. La probabilidad de colisión es baja pero no nula. Pendiente decidir entre varias opciones no mutuamente excluyentes: (1) permitir colisiones y desambiguar en login con la frase secreta (con costo en el motor de login y con consideraciones de seguridad sobre fuerza bruta cuando se conoce que dos identidades comparten pseudónimo); (2) consultar a la aplicación destino al generar cada candidato (rompe parcialmente la independencia operativa post-emisión); (3) mantener en el emisor una tabla disjunta de pseudónimos usados, sin asociación con anon_seed (requiere modificar P-0015 en el alcance de "qué almacena el emisor", agregando una tabla separada); (4) dimensionar los wordlists y el rango numérico para que la colisión sea despreciable a la escala esperada. La combinación natural es 4 como prevención + 1 como red de seguridad. Probablemente amerite un ADR P-0025 o posterior, sobre unicidad y desambiguación de pseudónimos. Identificado al armar el inventario de flujos.
-
 - **Registro de actividad y expiración de sesión durante redacciones largas.** P-0005 establece expiración de sesión por inactividad con default de 1 hora. Si la detección de actividad es solo del lado del servidor, un ciudadano que demore más de una hora redactando una propuesta podría perder todo el trabajo al intentar publicar. Existen mecanismos del lado del cliente para esto: detección de eventos de actividad (tecleo, scroll, mouse) con heartbeats al servidor que renuevan la sesión; re-login transparente al detectar actividad reciente; timers locales que renuevan la sesión cuando hay actividad en formularios abiertos. Decisión real con alternativas, probablemente ADR a futuro. Identificado al armar el inventario de flujos, F-AP-08 (creación de propuesta).
 
 ## Luego de desarrollar la plataforma
@@ -13,6 +11,8 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 - **Guía de instalación y operación.** Desarrollar una guía para administradores que incluya buenas prácticas, cuidados, recomendaciones y advertencias para minimizar los riesgos de revelar la identidad real del participante (por ejemplo: correlacionando logs, persistiendo información sensible, etc.). El material en gestación para esta guía vive en `notas/propuesta_guia_de_instalacion.md`.
 
 ## En cualquier momento del proyecto
+
+- **Formalizar en ADR las decisiones de plataforma tomadas en el inventario de flujos.** H-1 (visitantes sin sesión en solo lectura) y H-2 (tutorial y T&C bloqueantes en el onboarding) son decisiones de plataforma con alternativas reales, registradas por ahora solo en `notas/inventario_de_flujos_ui_ux.md`.
 
 - **Revisar documentos en gestación en `notas/`.** Los documentos de gestación deben revisarse periódicamente para evaluar si ya están maduros para migrar a su lugar definitivo en `design/`, `design/adr/`, `docs/` o `implementation/`. Ver `notas/README.md` y `estado_del_trabajo.md` para la lista actual.
 

@@ -11,11 +11,11 @@ El sistema se compone de una **capa de identidad anónima verificada** reutiliza
 | Tipo de tarea | Leer primero | Profundizar solo si hace falta |
 |---|---|---|
 | Cualquier modificación del repo | `AGENTS.md` + `notas/estado_del_trabajo.md` | — |
-| Diseño/desarrollo de la **demo** (etapa actual) | `notas/estado_del_trabajo.md`, `notas/recordatorios.md`, `demo/README.md`, DP-0001 | `contexto/sintesis_del_proyecto.md`, `demo/design/capa_de_identidad/simulacion_autenticar.md`, notas sueltas en `demo/` |
+| Diseño/desarrollo de la **demo** (etapa actual) | `notas/estado_del_trabajo.md`, `notas/recordatorios.md`, `demo/README.md`, DP-0001, DP-0002 | `contexto/sintesis_del_proyecto.md`, `demo/design/capa_de_identidad/simulacion_autenticar.md`, notas sueltas en `demo/` |
 | Crear o modificar un **ADR** | `design/adr/README.md` (convención y criterios) + índice de ADRs de abajo → abrir solo los ADRs relacionados | `design/glosario.md` |
 | **Capa de identidad** / criptografía / AUTENTICAR | Síntesis §3 → P-0013, P-0014, P-0015, P-0025 + `design/capa_de_identidad/README.md` (contrato) | `identity_model.md`, `docs/autenticar.md` (referencia OIDC completa), `docs/zk_jwt_investigacion.md` (solo para ZK profundo) |
 | **Plataforma participativa** (reglas funcionales) | Síntesis §4 → los ADRs del tema según índice de abajo | `vinculacion_de_propuestas.md`, `docs/propuesta/02` |
-| **UX / flujos / interfaces** | `notas/inventario_de_flujos_ui_ux.md` (10 flujos + huecos H-1..H-12) | P-0005, P-0010, P-0020 (modo debug) |
+| **UX / flujos / interfaces** | `notas/inventario_de_flujos_ui_ux.md` (10 flujos + huecos H-1..H-12) + DP-0002 (alcance del MVP) | P-0005, P-0010, P-0020 (modo debug) |
 | **Seguridad / amenazas / operador** | `design/threat_model.md` + `design/modelo_operativo.md` | P-0006, P-0020, P-0024 |
 | **Portal público / GitHub Pages** | `docs/index.md` + `docs/_config.yml` (tema jekyll-theme-slate; Pages sirve `docs/` y el sitio público es solo `index.md` + `propuesta/`). **Regla:** todo nuevo `.md` técnico en `docs/` (fuera de `propuesta/`) debe agregarse al `exclude:` del `_config.yml` — la exclusión es explícita por archivo, no genérica (el `include`/`exclude` con globs del Jekyll de Pages resultó no confiable). | `docs/propuesta/README.md` |
 | Pregunta **conceptual** sobre la propuesta | `contexto/sintesis_del_proyecto.md` | `docs/propuesta/00` y `01` (narrativos, para público no técnico) |
@@ -59,9 +59,10 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - **P-0019** — Búsqueda full-text en español (morfología + stopwords) sobre título y cuerpo, más filtros estructurados combinables.
 - **P-0023** — Sin moderación editorial humana; contenido inmutable tras publicar; retiro excepcional solo por causales legales (catálogo configurable) → tombstone que conserva solo el `id`; sin retiro a pedido del autor.
 
-### Demo — `demo/design/capa_de_identidad/adr/`
+### Demo — `demo/design/adr/` (transversales) y `demo/design/capa_de_identidad/adr/`
 
 - **DP-0001** — La demo simula AUTENTICAR (pantallas con banner "SIMULACIÓN") y omite ZK; ambas omisiones son del entorno demo, no del diseño.
+- **DP-0002** — *(transversal)* Alcance del MVP = diseño completo de plataforma salvo DP-0001 (incluye los 7 filtros, revisor real, modo debug completo, retiro legal por CLI, parámetros de producción); visitantes sin sesión en solo lectura; CUIL ficticio con prefijo `99-`; sin mecanismos anti-abuso propios (limitación aceptada).
 
 ## Índice de documentos no-ADR
 
@@ -88,13 +89,13 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `notas/estado_del_trabajo.md` — **leer antes de modificar el repo**: etapa actual, pendientes, últimas decisiones cerradas.
 - `notas/recordatorios.md` — tareas diferidas por momento de activación (pre-demo, post-plataforma, siempre).
 - `notas/anotaciones_e_ideas_de_trabajo.md` — ideas sin decisión asociada (ej.: exigir apoyo previo a crear propuesta; apoyo desde el listado).
-- `notas/inventario_de_flujos_ui_ux.md` — 10 flujos UI/UX con bifurcaciones y errores + huecos H-1..H-12 (abiertos: H-1, H-3..H-7, H-12).
+- `notas/inventario_de_flujos_ui_ux.md` — 10 flujos UI/UX con bifurcaciones y errores + huecos H-1..H-12 (abiertos: H-4..H-7, H-12).
 - `notas/propuesta_guia_de_instalacion.md` — material en gestación para la futura guía de instalación/operación; incluye semántica de cambio de parámetros en caliente.
 
 ### `demo/` e `implementation/`
 
 - `demo/README.md` — regla de herencia: la demo hereda todo el diseño general; solo registra sus simplificaciones.
-- `demo/design/capa_de_identidad/simulacion_autenticar.md` — pantallas simuladas de ANSES/ARCA con banner de simulación obligatorio.
+- `demo/design/capa_de_identidad/simulacion_autenticar.md` — pantallas simuladas de ANSES/ARCA con banner de simulación obligatorio; sin campo de clave, solo CUIL ficticio `99-`.
 - `demo/design/aplicaciones/participacion_ciudadana/i18n_y_a11y.md` — demo monolingüe es-AR, accesibilidad WCAG nivel A.
 - `demo/design/aplicaciones/participacion_ciudadana/telemetria.md` — la demo no tiene analytics ni telemetría.
 - `demo/implementation/aplicaciones/participacion_ciudadana/identificador_propuestas.md` — IDs de propuesta: Crockford Base32, 4 caracteres, prefijo `#` (ej. `#8KF2`).
