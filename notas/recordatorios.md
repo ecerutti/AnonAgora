@@ -6,7 +6,6 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 - **Registro de actividad y expiración de sesión durante redacciones largas.** P-0005 establece expiración de sesión por inactividad con default de 1 hora. Si la detección de actividad es solo del lado del servidor, un ciudadano que demore más de una hora redactando una propuesta podría perder todo el trabajo al intentar publicar. Existen mecanismos del lado del cliente para esto: detección de eventos de actividad (tecleo, scroll, mouse) con heartbeats al servidor que renuevan la sesión; re-login transparente al detectar actividad reciente; timers locales que renuevan la sesión cuando hay actividad en formularios abiertos. Decisión real con alternativas, probablemente ADR a futuro. Identificado al armar el inventario de flujos, F-AP-08 (creación de propuesta).
 
-- **Especificar el protocolo de la frase secreta (P-0009).** Fijar la función hash del cliente (P-0009 menciona SHA-256 solo como ejemplo) y el algoritmo exacto de normalización, incluida la forma de normalización Unicode. Es protocolo entre cliente y plataforma: debe quedar documentado antes de escribir el módulo compartido. Identificado al cerrar DI-0001.
 
 ## Luego de desarrollar la plataforma
 

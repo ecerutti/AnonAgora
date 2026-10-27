@@ -88,6 +88,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `design/capa_de_identidad/README.md` — **contrato capa↔aplicación destino**: qué se entrega, qué se garantiza, qué se prohíbe.
 - `design/capa_de_identidad/identity_model.md` — modelo de identidad: real vs. anónima, unicidad, identificadores derivados, no-memoria entre sesiones.
 - `design/capa_de_identidad/identity_wordlists.md` + `wordlists/*.txt` — generación de pseudónimos: curación, normalización, espacio de ≈1,5M → ≈33,7M con sufijo.
+- `design/aplicaciones/participacion_ciudadana/protocolo_frase_secreta.md` — algoritmo exacto de normalización (ñ se conserva, puntuación se ignora) y hash `SHA-256("frase-v1:"+…)` de la frase, con vectores de prueba (P-0008, P-0009).
 - `design/aplicaciones/participacion_ciudadana/vinculacion_de_propuestas.md` — vínculos genéricos sin tipo, inmutables, grafo dirigido; derivadas = propuestas comunes con vínculos.
 
 ### `notas/` — material de trabajo (mantenido por el humano)
