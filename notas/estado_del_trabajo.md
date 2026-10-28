@@ -10,7 +10,7 @@ Diseño específico de la demo. Las decisiones de diseño de plataforma están c
 
 ## Decisiones de diseño pendientes
 
-No hay decisiones de diseño de plataforma pendientes. El ítem de unicidad de pseudónimos de la pre-demo checklist quedó resuelto por P-0025.
+No hay decisiones de diseño de plataforma pendientes. El ítem de unicidad de pseudónimos de la pre-demo checklist quedó resuelto por P-0025. Queda un análisis de plataforma pendiente, que podría derivar en una decisión: la correlación de autoría por el evento de publicación de P-0018 (ver `notas/recordatorios.md`).
 
 ## Decisiones de diseño específicas de la demo
 
@@ -29,6 +29,8 @@ Los recordatorios accionables viven en `notas/recordatorios.md`.
 - `notas/propuesta_guia_de_instalacion.md` — borrador preliminar con ideas sobre qué debería contener una futura guía de instalación y operación para administradores.
 
 ## Últimas decisiones cerradas
+
+- **P-0029 — Registro de apoyos desvinculado de la identidad y señales temporales del ranking.** Surgió como prerrequisito del seed (decisión 4): 🔥 necesita saber cuándo ocurrieron los apoyos, pero ningún documento definía qué guarda el registro de apoyo, y guardarlo con `anon_id` y fecha crea una línea de tiempo por identidad e identifica al autor por su apoyo automático. Decisión: cada apoyo se guarda como `{etiqueta, propuesta_id, hora}`, sin `anon_id`; la etiqueta es un HMAC de la propuesta con una clave de apoyos derivada de la frase secreta (salida extendida del mismo Argon2id del login, vive solo en la sesión), de modo que nadie, ni el operador, puede saber qué apoyó una identidad sin su frase. El re-hasheo de un registro recalcula sus etiquetas. Se descartaron la etiqueta con secreto del servidor (permite reconstruir todo a quien tenga el secreto), la clave envuelta (resuelve un cambio de frase que P-0008 no contempla) y el ruido estadístico (los conteos ya son públicos). Fija además 🔥 en percentil 90 de apoyos nuevos en 48 h y 🌱 por promedio, ambas apagadas mientras la plataforma tenga menos de 20 apoyos nuevos en la ventana. Prohíbe el `anon_id` y el pseudónimo en los logs de la aplicación, con lo que P-0020 queda parcialmente supersedido. Se actualizaron el glosario y el inventario de flujos. El análisis puso de manifiesto una correlación de autoría residual por el evento de publicación de P-0018, registrada en `notas/recordatorios.md` para una sesión con Fable.
 
 - **P-0027 — Actividad y expiración de la sesión** y **P-0028 — Visibilidad del pseudónimo durante la sesión.** Resuelven el recordatorio de redacciones largas, que no estaba decidido en ningún documento ni en el historial del repositorio. P-0027: la actividad es la interacción real del ciudadano (teclado, clic o toque, desplazamiento) en cualquier pantalla con sesión, con notificaciones acotadas (máx. cada 5 min) sin contenido ni logs; al vencer el plazo, el navegador limpia la pantalla de inmediato (la página vieja revelaba apoyos y cupo); sin aviso previo y sin preservación del borrador (el reingreso que conservaba el borrador se descartó por contradecir P-0005, H-10 y P-0022). P-0028: bienvenida con el pseudónimo al ingresar y consulta a pedido desde "Mi identidad", porque el pseudónimo es la mitad de la credencial de acceso; resuelve H-6. Se actualizó el inventario de flujos.
 

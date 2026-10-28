@@ -186,7 +186,9 @@ _Referencia: P-0007, P-0013._
 
 Acción binaria mediante la cual un ciudadano respalda una propuesta. Es retractable: el ciudadano puede retirar su apoyo en cualquier momento, con lo cual el conteo disminuye en uno sin dejar registro visible del retiro. No existe voto negativo ni escala de apoyo. El autor de una propuesta queda automáticamente registrado como un apoyo al momento de publicarla.
 
-_Referencia: P-0012._
+Cada apoyo se almacena desvinculado de la identidad anónima: en lugar del `anon_id` guarda una etiqueta de apoyo (ver entrada), junto con la propuesta y la hora del apoyo.
+
+_Referencia: P-0012, P-0029._
 
 **ciudadano**
 
@@ -200,6 +202,12 @@ En ambos contextos se trata de la misma persona física; la distinción es de ro
 
 _Referencia: P-0013, P-0004, `design/capa_de_identidad/identity_model.md`._
 
+**clave de apoyos**
+
+Clave propia de cada ciudadano con la que se calculan sus etiquetas de apoyo. Se deriva de la frase secreta durante la verificación del login, vive solo en la sesión y nunca se almacena. Sin ella no es posible saber qué propuestas apoya una identidad anónima.
+
+_Referencia: P-0029 (Decisiones 1 y 2)._
+
 **cupo anual**
 
 Límite anual de propuestas publicables por ciudadano en la aplicación destino. Configurable por el operador; el valor por defecto es 2. El valor 0 indica que no existe límite. Las propuestas derivadas consumen cupo en las mismas condiciones que las propuestas originales.
@@ -207,6 +215,12 @@ Límite anual de propuestas publicables por ciudadano en la aplicación destino.
 El conteo usa año móvil (ver entrada).
 
 _Referencia: P-0017._
+
+**etiqueta de apoyo**
+
+Valor que identifica un apoyo en la base en lugar del `anon_id`: un HMAC de la propuesta calculado con la clave de apoyos del ciudadano. Es única por ciudadano y propuesta, lo que impide apoyar dos veces. Sin la clave de apoyos, las etiquetas no pueden vincularse con ninguna identidad ni entre sí.
+
+_Referencia: P-0029 (Decisión 1)._
 
 **login**
 
@@ -296,15 +310,15 @@ _Referencia: P-0023 (Decisiones 6 y 7)._
 
 **🌱 emergente**
 
-Señal visual que indica que una propuesta publicada recientemente muestra un ritmo de crecimiento de apoyos por encima del promedio de la plataforma. La ventana de tiempo para considerar una propuesta como "reciente" es configurable por el operador (valor por defecto: 7 días). El umbral de crecimiento se calcula como percentil de la actividad real de la plataforma, lo que lo hace adaptativo sin ajuste manual.
+Señal visual que indica que una propuesta publicada recientemente muestra un ritmo de crecimiento de apoyos por encima del promedio de la plataforma. La ventana de tiempo para considerar una propuesta como "reciente" es configurable por el operador (valor por defecto: 7 días). El umbral es el promedio del ritmo de todas las propuestas, lo que lo hace adaptativo sin ajuste manual. No se muestra mientras la actividad total de la plataforma esté por debajo del mínimo configurado.
 
-_Referencia: P-0010._
+_Referencia: P-0010, P-0029 (Decisión 3)._
 
 **🔥 tendencia**
 
-Señal visual que indica que una propuesta recibió un crecimiento de apoyos inusualmente alto en las últimas horas. La ventana de tiempo es configurable por el operador (valor por defecto: 48 horas). El umbral se calcula como percentil de la actividad real de la plataforma.
+Señal visual que indica que una propuesta recibió un crecimiento de apoyos inusualmente alto en las últimas horas. La ventana de tiempo es configurable por el operador (valor por defecto: 48 horas). El umbral se calcula como percentil de la actividad real de la plataforma (valor por defecto: percentil 90). No se muestra mientras la actividad total de la plataforma esté por debajo del mínimo configurado (valor por defecto: 20 apoyos nuevos en la ventana).
 
-_Referencia: P-0010._
+_Referencia: P-0010, P-0029 (Decisión 3)._
 
 **decaimiento**
 

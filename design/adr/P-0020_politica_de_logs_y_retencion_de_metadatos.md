@@ -1,6 +1,6 @@
 # P-0020 — Política de logs y retención de metadatos
 
-**Estado:** Activo
+**Estado:** Parcialmente supersedido por P-0029
 
 ## Contexto
 

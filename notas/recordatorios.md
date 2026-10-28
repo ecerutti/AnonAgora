@@ -4,6 +4,8 @@ Cosas a recordar en momentos específicos del desarrollo del proyecto. Cada reco
 
 ## Antes de iniciar el desarrollo de la demo
 
+- **Correlación de autoría por el evento de publicación, y revisión de P-0029.** P-0018 desasocia la propuesta de su autor y registra solo un evento `{anon_id, día}` para el cupo, confiando en que la granularidad de día impida reasociar el evento con una propuesta concreta. Esa protección depende del volumen: si en un día se publica una sola propuesta, el único evento de ese día identifica qué `anon_id` (y por lo tanto qué pseudónimo) la escribió, y con pocas publicaciones diarias el conjunto de candidatos es chico. P-0029 eliminó el cruce que agravaba el problema (eventos de publicación ∩ apoyantes de la propuesta, por el apoyo automático del autor), pero el caso del día con pocas publicaciones sigue abierto. Analizarlo como tema de modelo de amenazas en una sesión con Fable (criterio de `CLAUDE.md`), aprovechando para revisar también el diseño criptográfico de P-0029 (derivación de la clave de apoyos y recálculo de etiquetas al re-hashear). Puede afectar el modelo de datos del cupo, por eso conviene resolverlo antes del desarrollo.
+
 
 ## Luego de desarrollar la plataforma
 

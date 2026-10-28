@@ -306,7 +306,7 @@ El ciudadano activa un control de búsqueda o un filtro desde F-AP-04, o desde o
 
 **Notas**
 
-- "Propuestas apoyadas por mí" funciona técnicamente como cualquier otro filtro estructurado, sobre el historial de apoyos del propio ciudadano que la aplicación ya tiene asociado a su `anon_id`. Su acceso desde un eventual menú del perfil con la opción "Mis apoyos" (parte de H-6) sería simplemente un atajo que llega a este filtro con el control ya activado.
+- "Propuestas apoyadas por mí" funciona técnicamente como cualquier otro filtro estructurado, sobre el historial de apoyos del propio ciudadano, que la aplicación reconoce calculando sus etiquetas de apoyo con la clave de la sesión (P-0029). Su acceso desde un eventual menú del perfil con la opción "Mis apoyos" (parte de H-6) sería simplemente un atajo que llega a este filtro con el control ya activado.
 - Una búsqueda por palabras del texto del tombstone (por ejemplo "removida") puede devolver propuestas retiradas (P-0023). Es ruido aceptado.
 - F-AP-05 puede invocarse desde la página principal o desde otros puntos de entrada de UX. El flujo no cambia según el punto de entrada.
 
@@ -351,7 +351,7 @@ El ciudadano accede a una propuesta concreta. Las vías de entrada son: pulsar u
 
 **Condición de entrada**
 
-El ciudadano está en F-AP-06 visualizando una propuesta concreta, con sesión activa. Pulsa el control de apoyar (si actualmente no apoya esta propuesta) o el control de retirar apoyo (si actualmente la apoya). El estado actual del apoyo del ciudadano respecto a esta propuesta es información que la aplicación ya tiene asociada al `anon_id` autenticado.
+El ciudadano está en F-AP-06 visualizando una propuesta concreta, con sesión activa. Pulsa el control de apoyar (si actualmente no apoya esta propuesta) o el control de retirar apoyo (si actualmente la apoya). El estado actual del apoyo del ciudadano respecto a esta propuesta lo determina la aplicación con la clave de apoyos de la sesión (P-0029).
 
 **Condición de salida**
 
@@ -365,7 +365,7 @@ El flujo bifurca en dos ramas según la acción.
 
 **Rama A — Dar apoyo**:
 
-1. *Pulsación del control "apoyar"*. La aplicación registra el apoyo asociado al `anon_id` autenticado y a la propuesta. El conteo público se actualiza.
+1. *Pulsación del control "apoyar"*. La aplicación registra el apoyo con la etiqueta de apoyo calculada con la clave de la sesión, sin el `anon_id` (P-0029). El conteo público se actualiza.
 
 **Rama B — Retirar apoyo**:
 

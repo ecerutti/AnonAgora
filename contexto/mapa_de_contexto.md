@@ -4,7 +4,7 @@ Este mapa permite que una conversación nueva cargue solo lo que su tarea necesi
 
 ## El proyecto en pocas líneas
 
-El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0028); la etapa actual es el diseño específico de la demo.
+El sistema se compone de una **capa de identidad anónima verificada** reutilizable y una **aplicación destino** construida sobre ella, una por despliegue (P-0021). La primera aplicación diseñada es una **plataforma de participación ciudadana**: un termómetro social no vinculante donde ciudadanos reales proponen y apoyan ideas sin exponer su identidad. La capa verifica que cada participante es una persona real (AUTENTICAR, solo ARCA/ANSES) y emite una identidad anónima persistente; la separación entre identidad real y actividad es criptográficamente forzada (`anon_seed` solo en el emisor, `anon_id` solo en la aplicación, nonce descartado, prueba ZK de legitimidad). No hay código todavía: el repositorio es documental. Las decisiones de diseño de plataforma están **cerradas** (P-0001 a P-0029); la etapa actual es el diseño específico de la demo.
 
 ## Ruteo por tipo de tarea
 
@@ -28,7 +28,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 ### Transversales — `design/adr/`
 
 - **P-0006** — Modelo de amenazas intermedio con separación de funciones; no-objetivos declarados: colusión total, compromiso completo de infraestructura.
-- **P-0020** — Logs: granularidad temporal mínima por tipo de evento, campos prohibidos por componente (`anon_id` nunca en emisor, `anon_seed` nunca en plataforma, IP en ninguno), modo debug visible con autodestrucción, retención 7 días gestionada por cada componente.
+- **P-0020** — *(parcialmente supersedido por P-0029: `anon_id` y pseudónimo también prohibidos en logs de la aplicación)* Logs: granularidad temporal mínima por tipo de evento, campos prohibidos por componente (`anon_id` nunca en emisor, `anon_seed` nunca en plataforma, IP en ninguno), modo debug visible con autodestrucción, retención 7 días gestionada por cada componente.
 - **P-0021** — Arquitectura modular: capa de identidad + exactamente una aplicación destino por despliegue; aplicaciones futuras = despliegues independientes.
 - **P-0022** — Fallos de servicios externos: reintentos server-to-server con backoff, mensajes al ciudadano por categoría, **emisión atómica respecto del cool-down** (se consume solo tras confirmación de entrega), fail-closed del revisor de lenguaje.
 - **P-0024** — Sin perfil administrativo: el operador actúa solo por archivos de configuración y CLI sobre la infraestructura.
@@ -61,6 +61,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - **P-0023** — Sin moderación editorial humana; contenido inmutable tras publicar; retiro excepcional solo por causales legales (catálogo configurable) → tombstone que conserva solo el `id`; sin retiro a pedido del autor.
 - **P-0027** — Actividad = interacción real (teclado, clic, desplazamiento) en toda pantalla con sesión, con notificaciones acotadas sin contenido ni logs; al expirar, el navegador limpia la pantalla de inmediato; sin aviso previo ni preservación del borrador.
 - **P-0028** — Pseudónimo: bienvenida al ingresar y consulta a pedido ("Mi identidad"); no permanece en pantalla (es la mitad de la credencial).
+- **P-0029** — Apoyo guardado como `{etiqueta, propuesta_id, hora}` sin `anon_id`; etiqueta = HMAC con clave de apoyos derivada de la frase (salida extendida del Argon2id del login, solo en sesión; re-hasheo recalcula etiquetas); 🔥 = percentil 90 de apoyos nuevos en 48 h, 🌱 = ritmo sobre el promedio, ambas apagadas bajo 20 apoyos nuevos en la plataforma; `anon_id` y pseudónimo prohibidos en logs de la aplicación.
 
 ### Demo — `demo/design/adr/` (transversales) y `demo/design/capa_de_identidad/adr/`
 

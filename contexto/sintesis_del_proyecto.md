@@ -1,6 +1,6 @@
 # Síntesis del proyecto
 
-**Última actualización: 2026-10-27.** Este documento destila la comprensión profunda del proyecto a partir de la lectura completa del repositorio. Condensa y conecta; no reemplaza a las fuentes. Ante cualquier contradicción, prevalecen los ADRs y documentos de `design/`. El estado del trabajo vigente vive en `notas/estado_del_trabajo.md`.
+**Última actualización: 2026-10-28.** Este documento destila la comprensión profunda del proyecto a partir de la lectura completa del repositorio. Condensa y conecta; no reemplaza a las fuentes. Ante cualquier contradicción, prevalecen los ADRs y documentos de `design/`. El estado del trabajo vigente vive en `notas/estado_del_trabajo.md`.
 
 ## 1. Propósito e idea central
 
@@ -33,11 +33,11 @@ La cadena de identificadores es el corazón del diseño:
 ## 4. La plataforma participativa: reglas funcionales y porqués
 
 - **Acceso**: login = pseudónimo (normalizado: mayúsculas/acentos/espacios/guiones) + frase secreta (P-0004). La credencial es una **passphrase** memorable sin recuperación posible (P-0008); el cliente envía solo su hash y el servidor almacena Argon2id (P-0009). Sesiones que expiran por completo (1 h) sin dejar rastro visible: la interfaz jamás sugiere que recuerda al ciudadano (P-0005). Cuenta como actividad la interacción real (teclear, clic, desplazarse), y al vencer el plazo el navegador limpia la pantalla de inmediato (P-0027). El pseudónimo, que es la mitad de la credencial, se muestra solo en la bienvenida y a pedido (P-0028).
-- **Apoyo binario retractable, sin voto negativo** (P-0012): se mide qué ideas atraen interés, no qué ideas generan rechazo; elimina voto bronca y campañas de descalificación. El autor nace como primer apoyo.
+- **Apoyo binario retractable, sin voto negativo** (P-0012): se mide qué ideas atraen interés, no qué ideas generan rechazo; elimina voto bronca y campañas de descalificación. El autor nace como primer apoyo. Cada apoyo se guarda **sin `anon_id`**: lleva una etiqueta calculada con una clave derivada de la frase secreta que solo existe en la sesión, así que nadie —ni el operador— puede saber qué apoyó una identidad sin su frase (P-0029).
 - **Cupo anual de propuestas** (default 2, año móvil de 365 días, P-0017): costo de oportunidad contra spam y ruido político; las derivadas consumen cupo.
 - **Inmutabilidad + propuestas derivadas** (P-0023, P-0018): el contenido publicado no se edita jamás (los apoyos siempre refieren a un texto fijo); las ideas evolucionan creando derivadas con **vínculos** genéricos, inmutables, en grafo dirigido.
-- **Sin autoría almacenada** (P-0018): la propuesta no guarda referencia al autor; solo existe un evento `{anon_id, fecha}` en tabla separada para el cupo. Nadie —ni el operador— puede listar las propuestas de un ciudadano.
-- **Ranking con decaimiento temporal** (P-0010): termómetro del presente, no del pasado. Señales 🔥 tendencia y 🌱 emergente con umbrales percentiles adaptativos.
+- **Sin autoría almacenada** (P-0018): la propuesta no guarda referencia al autor; solo existe un evento `{anon_id, fecha}` en tabla separada para el cupo. Nadie —ni el operador— puede listar las propuestas de un ciudadano, salvo una correlación residual cuando en un día se publica una sola propuesta (en análisis, ver `notas/recordatorios.md`).
+- **Ranking con decaimiento temporal** (P-0010): termómetro del presente, no del pasado. Señales 🔥 tendencia (percentil 90 de apoyos nuevos en 48 h) y 🌱 emergente (ritmo sobre el promedio), adaptativas y apagadas mientras la actividad total esté bajo un mínimo (P-0029).
 - **Revisor de lenguaje** (P-0011): API de moderación de OpenAI; modera la **forma** (agresión, odio, violencia, ilegalidad), nunca el contenido ideológico. Fail-closed si el servicio cae (P-0022).
 - **Sin moderación editorial ni invalidación de identidades** (P-0023, P-0016): no hay perfiles con poder sobre el contenido ni mecanismo para desactivar identidades (sería un vector de DoS inauditables). Única excepción: **retiro por causales legales** → tombstone que conserva solo el `id`.
 - **Sin perfil administrativo** (P-0024): el operador configura por archivos y CLI; no se agrega ninguna credencial privilegiada expuesta en red.
@@ -50,7 +50,7 @@ El modelo de confianza hacia el operador (`design/modelo_operativo.md`) distingu
 
 ## 6. Hoja de ruta y estado
 
-Fases del proyecto: propuesta conceptual (✅ publicada en `docs/propuesta/` + GitHub Pages) → diseño de plataforma (✅ P-0001..P-0028 cerrados) → **diseño específico de la demo (etapa actual)** → desarrollo de la demo (código vivirá en `demo/src/`) → eventualmente guía de instalación/operación y camino a despliegues reales.
+Fases del proyecto: propuesta conceptual (✅ publicada en `docs/propuesta/` + GitHub Pages) → diseño de plataforma (✅ P-0001..P-0029 cerrados) → **diseño específico de la demo (etapa actual)** → desarrollo de la demo (código vivirá en `demo/src/`) → eventualmente guía de instalación/operación y camino a despliegues reales.
 
 El alcance del MVP está cerrado (DP-0002): la demo implementa el diseño completo de la plataforma, salvo que simula AUTENTICAR y omite ZK (DP-0001), sin i18n ni telemetría. Los visitantes sin sesión ven las propuestas en solo lectura, y la verificación simulada usa CUILs ficticios con prefijo `99-`. Como esos CUILs hacen gratuita la creación de identidades, la demo pública no resiste abuso, y esa limitación está aceptada. El stack también está cerrado (DI-0001): TypeScript/Node con HTML renderizado en el servidor y PostgreSQL. Emisor y aplicación corren como dos servicios, y logs y sesiones quedan fuera de la base, que tiene backups de 30 días (DI-0002). Pendientes de la etapa actual (detalle vigente en `notas/estado_del_trabajo.md` y `notas/recordatorios.md`): seed de datos, look & feel. Para la fase de interfaces existe el inventario de 10 flujos UI/UX con sus huecos abiertos (H-4, H-5, H-7, H-12) en `notas/inventario_de_flujos_ui_ux.md`. Quedan también ADRs diferidos identificados: términos y condiciones, formalización del onboarding (H-2).
 
