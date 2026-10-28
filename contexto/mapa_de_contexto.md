@@ -72,6 +72,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 
 - **DI-0001** — Stack: TypeScript/Node 22, HTML en servidor + JS mínimo (Hono JSX), PostgreSQL + Kysely, `@node-rs/argon2`, esbuild, Vitest.
 - **DI-0002** — Emisor y aplicación como dos servicios (Compose, esquemas separados); logs en archivos del contenedor con purga propia (no en la base: backups de 30 días); sesiones en memoria; secretos por env.
+- **DI-0003** — Seed: apoyantes ficticios efímeros (clave al azar descartada, sin identidades), fechas relativas a la carga + comando de oleada solo sobre propuestas del seed, carga con las reglas de la app y reloj inyectable, tombstone por retiro real, aviso global de contenido ficticio.
 
 ## Índice de documentos no-ADR
 
@@ -109,6 +110,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `demo/design/aplicaciones/participacion_ciudadana/i18n_y_a11y.md` — demo monolingüe es-AR, accesibilidad WCAG nivel A.
 - `demo/design/aplicaciones/participacion_ciudadana/telemetria.md` — la demo no tiene analytics ni telemetría.
 - `demo/implementation/aplicaciones/participacion_ciudadana/identificador_propuestas.md` — IDs de propuesta: Crockford Base32, 4 caracteres, prefijo `#` (ej. `#8KF2`).
+- `demo/implementation/aplicaciones/participacion_ciudadana/datos_iniciales.md` — composición del seed (DI-0003): 40 propuestas con edad, apoyos, vínculos y señales esperadas, tombstone, cobertura de filtros y reserva para oleadas.
 - `implementation/` — vacía de contenido por ahora (solo READMEs de estructura; ADRs futuros `I-XXXX`).
 
 ## Mantenimiento de este mapa
