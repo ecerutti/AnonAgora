@@ -16,6 +16,7 @@ El sistema se compone de una **capa de identidad anónima verificada** reutiliza
 | **Capa de identidad** / criptografía / AUTENTICAR | Síntesis §3 → P-0013, P-0014, P-0015, P-0025, P-0026 + `design/capa_de_identidad/README.md` (contrato) | `identity_model.md`, `docs/autenticar.md` (referencia OIDC completa), `docs/zk_jwt_investigacion.md` (solo para ZK profundo) |
 | **Plataforma participativa** (reglas funcionales) | Síntesis §4 → los ADRs del tema según índice de abajo | `vinculacion_de_propuestas.md`, `docs/propuesta/02` |
 | **UX / flujos / interfaces** | `notas/inventario_de_flujos_ui_ux.md` (10 flujos + huecos H-1..H-12) + DP-0002 (alcance del MVP) | P-0005, P-0010, P-0020 (modo debug) |
+| **Textos que ve el ciudadano** (pantallas, tutorial, T&C, mensajes) | `design/glosario.md` (vocabulario: "identidad anónima", no "pseudónimo") + `AGENTS.md`, "Promesas de anonimato" + `design/aplicaciones/participacion_ciudadana/textos_para_el_ciudadano.md` | Los ADRs que sostienen cada afirmación |
 | **Seguridad / amenazas / operador** | `design/threat_model.md` + `design/modelo_operativo.md` | P-0006, P-0020, P-0024 |
 | **Portal público / GitHub Pages** | `docs/index.md` + `docs/_config.yml` (tema jekyll-theme-slate; Pages sirve `docs/` y el sitio público es solo `index.md` + `propuesta/`). **Regla:** todo nuevo `.md` técnico en `docs/` (fuera de `propuesta/`) debe agregarse al `exclude:` del `_config.yml` — la exclusión es explícita por archivo, no genérica (el `include`/`exclude` con globs del Jekyll de Pages resultó no confiable). | `docs/propuesta/README.md` |
 | Pregunta **conceptual** sobre la propuesta | `contexto/sintesis_del_proyecto.md` | `docs/propuesta/00` y `01` (narrativos, para público no técnico) |
@@ -94,6 +95,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `design/capa_de_identidad/identity_wordlists.md` + `wordlists/*.txt` — generación de pseudónimos: curación, normalización, espacio de ≈1,5M → ≈33,7M con sufijo.
 - `design/aplicaciones/participacion_ciudadana/protocolo_frase_secreta.md` — algoritmo exacto de normalización (ñ se conserva, puntuación se ignora) y hash `SHA-256("frase-v1:"+…)` de la frase, con vectores de prueba (P-0008, P-0009).
 - `design/aplicaciones/participacion_ciudadana/vinculacion_de_propuestas.md` — vínculos genéricos sin tipo, inmutables, grafo dirigido; derivadas = propuestas comunes con vínculos.
+- `design/aplicaciones/participacion_ciudadana/textos_para_el_ciudadano.md` — textos de plataforma para el ciudadano: registro (3 pantallas), tutorial (6), T&C (10 secciones, parametrizados por despliegue), mensajes del onboarding y causales de retiro por defecto; convenciones de vocabulario.
 
 ### `notas/` — material de trabajo (mantenido por el humano)
 
@@ -108,6 +110,7 @@ Estados: todos **Activos** salvo donde se indica. La carpeta indica el ámbito; 
 - `demo/README.md` — regla de herencia: la demo hereda todo el diseño general; solo registra sus simplificaciones.
 - `demo/design/capa_de_identidad/simulacion_autenticar.md` — pantallas simuladas de ANSES/ARCA con banner de simulación obligatorio; sin campo de clave, solo CUIL ficticio `99-`.
 - `demo/design/aplicaciones/participacion_ciudadana/i18n_y_a11y.md` — demo monolingüe es-AR, accesibilidad WCAG nivel A.
+- `demo/design/aplicaciones/participacion_ciudadana/textos_de_la_demo.md` — valores de los parámetros de los textos en la demo, recuadro "esto es un ejemplo" en los T&C, sección "Sobre esta demostración" y aviso global de contenido ficticio (DI-0003).
 - `demo/design/aplicaciones/participacion_ciudadana/telemetria.md` — la demo no tiene analytics ni telemetría.
 - `demo/implementation/aplicaciones/participacion_ciudadana/identificador_propuestas.md` — IDs de propuesta: Crockford Base32, 4 caracteres, prefijo `#` (ej. `#8KF2`).
 - `demo/implementation/aplicaciones/participacion_ciudadana/datos_iniciales.md` — composición del seed (DI-0003): 40 propuestas con edad, apoyos, vínculos y señales esperadas, tombstone, cobertura de filtros y reserva para oleadas.

@@ -124,6 +124,8 @@ El pseudónimo es visible únicamente para el propio ciudadano; no es público f
 
 El término "pseudónimo" se usa cuando es necesario distinguir específicamente esta representación legible de otros componentes de la identidad, por ejemplo en la tupla que el emisor entrega a la aplicación destino `{pseudónimo, anon_id, prueba ZK}`. En todos los demás contextos, el término preferido es "identidad anónima".
 
+Esto vale también para los textos que ve el ciudadano (pantallas, tutorial, términos y condiciones, mensajes): se le habla de su "identidad anónima", para que la asocie con el nombre que recibió (por ejemplo, "Lobo Azul 714"). "Pseudónimo" aparece solo como excepción, cuando hay que distinguir el nombre de la frase secreta como partes de la credencial.
+
 _Referencia: P-0002, P-0003, `design/capa_de_identidad/identity_wordlists.md`._
 
 **salt del sistema**
